@@ -1,0 +1,4 @@
+#Sat Feb 06 14:39:20 EET 2021
+base.0=F\:\\flutterApps\\qimma\\build\\app\\intermediates\\dex\\release\\mergeDexRelease\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
