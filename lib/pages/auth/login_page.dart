@@ -85,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                                   return AppUtils.translate(context, 'required');
                                 }
                               },
+
                               hintText: AppUtils.translate(context, 'email_or_phone'),
                               controller: phoneOrEmailController,
                             ),
@@ -150,11 +151,18 @@ class _LoginPageState extends State<LoginPage> {
       loading = true;
     });
 
+    // var response = await authBloc.login(
+    //   LoginRequest(
+    //       eamilOrPhone: phoneOrEmailController.text,
+    //       fireBaseToken: AppUtils.firebaseToken,
+    //       password: passwordController.text,
+    //   ),
+    // );
     var response = await authBloc.login(
       LoginRequest(
-          eamilOrPhone: phoneOrEmailController.text,
-          fireBaseToken: AppUtils.firebaseToken,
-          password: passwordController.text,
+          eamilOrPhone: "012165955777777",
+          fireBaseToken: "AppUtils.firebaseToken",
+          password: "123456",
       ),
     );
 

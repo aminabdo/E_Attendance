@@ -9,6 +9,8 @@ import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'pages/spalsh/spalsh_page.dart';
+import 'pages/spalsh/spalsh_page.dart';
 import 'utils/app_localization.dart';
 import 'widgets/custom_scroll_behavior.dart';
 
@@ -85,7 +87,7 @@ class _MyAppState extends State<MyApp> {
       home: Builder(
         builder: (context) {
           return Directionality(
-            child: AddOrdersPage(),
+            child: SplashPage(),
             textDirection: Localizations.localeOf(context).languageCode == 'ar'
                 ? TextDirection.rtl
                 : TextDirection.ltr,

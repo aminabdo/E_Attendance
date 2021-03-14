@@ -24,9 +24,9 @@ class SinglepdOrderResponse extends BaseResponse {
 class Order {
   int id;
   String priceType;
-  int totalPrice;
+  dynamic totalPrice;
   int paid;
-  int rest;
+  dynamic rest;
   int shippingPrice;
   String status;
   String email;

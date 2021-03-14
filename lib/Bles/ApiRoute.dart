@@ -229,7 +229,7 @@ class ApiRoutes {
 }
 
 class ApiRoutesUpdate {
-  static String baseUrl = "http://qimmaapi.codecaique.com/api/";
+  static String baseUrl = "https://qimmaapi.codecaique.com/api/";
 
   getLink(String url) {
     print("url ------>>>>   " + baseUrl + url);

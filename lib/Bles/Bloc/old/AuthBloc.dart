@@ -31,6 +31,8 @@ class AuthBloc extends BaseBloc {
     return response;
   }
 
+
+
   BehaviorSubject<LoginResponse> get s_login => _login;
   BehaviorSubject<SignupResponse> get s_signup => _signup;
 }
