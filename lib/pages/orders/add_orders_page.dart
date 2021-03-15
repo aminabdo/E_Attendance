@@ -162,64 +162,64 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                     SizedBox(
                       height: 12,
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      decoration: BoxDecoration(
-                          color: secondColor,
-                          borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        children: [
-                          ListView.separated(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Icon(
-                                    Icons.cancel_outlined,
-                                    color: Colors.grey,
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Image.asset('assets/images/shampo.png'),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "shampoo’s vegan",
-                                        style: TextStyle(color: Colors.black45),
-                                      ),
-                                      Text(
-                                        '250g x2',
-                                        style: TextStyle(color: Colors.grey),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                            itemCount: 3,
-                            separatorBuilder: (BuildContext context, int index) {
-                              return SizedBox(
-                                height: 8,
-                              );
-                            },
-                          ),
-                          SizedBox(
-                            height: 18,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // Container(
+                    //   padding: EdgeInsets.symmetric(horizontal: 8),
+                    //   decoration: BoxDecoration(
+                    //       color: secondColor,
+                    //       borderRadius: BorderRadius.circular(8),
+                    //   ),
+                    //   child: Column(
+                    //     children: [
+                    //       ListView.separated(
+                    //         shrinkWrap: true,
+                    //         physics: NeverScrollableScrollPhysics(),
+                    //         itemBuilder: (context, index) {
+                    //           return Row(
+                    //             children: [
+                    //               Icon(
+                    //                 Icons.cancel_outlined,
+                    //                 color: Colors.grey,
+                    //                 size: 20,
+                    //               ),
+                    //               SizedBox(
+                    //                 width: 8,
+                    //               ),
+                    //               Image.asset('assets/images/shampo.png'),
+                    //               SizedBox(
+                    //                 width: 8,
+                    //               ),
+                    //               Column(
+                    //                 crossAxisAlignment: CrossAxisAlignment.start,
+                    //                 children: [
+                    //                   Text(
+                    //                     "shampoo’s vegan",
+                    //                     style: TextStyle(color: Colors.black45),
+                    //                   ),
+                    //                   Text(
+                    //                     '250g x2',
+                    //                     style: TextStyle(color: Colors.grey),
+                    //                   )
+                    //                 ],
+                    //               ),
+                    //             ],
+                    //           );
+                    //         },
+                    //         itemCount: 3,
+                    //         separatorBuilder: (BuildContext context, int index) {
+                    //           return SizedBox(
+                    //             height: 8,
+                    //           );
+                    //         },
+                    //       ),
+                    //       SizedBox(
+                    //         height: 18,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     DottedLine(
                       direction: Axis.horizontal,
                       lineLength: double.infinity,
