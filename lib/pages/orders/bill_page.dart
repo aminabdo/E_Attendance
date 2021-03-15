@@ -26,6 +26,8 @@ class _BillPageState extends State<BillPage> {
   TextEditingController discountValueController = TextEditingController();
   TextEditingController taxOneController = TextEditingController();
   TextEditingController taxTwoController = TextEditingController();
+  TextEditingController totalPriceController = TextEditingController();
+  TextEditingController paidPriceController = TextEditingController();
 
   String discountType = 'نسبة';
   String selectedTaxOneType = 'نسبة';
@@ -228,10 +230,34 @@ class _BillPageState extends State<BillPage> {
                     ],
                   ),
                   space(context),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: MyTextFormField(
+                          hintText: 'المجموع',
+                          enable: false,
+                          controller: totalPriceController,
+                          keyboardType: TextInputType.number,
+                          radius: 2,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 18,
+                      ),
+                      Expanded(
+                        child: MyTextFormField(
+                          hintText: 'المدفوع',
+                          controller: paidPriceController,
+                          keyboardType: TextInputType.number,
+                          radius: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                  space(context),
                   MyButton(
                     'ارسال',
                     onTap: () async {
-
                       if (discountValueController.text.isNotEmpty &&
                           taxTwoController.text.isNotEmpty &&
                           taxOneController.text.isNotEmpty) {
@@ -244,12 +270,16 @@ class _BillPageState extends State<BillPage> {
                           num.parse(taxOneController.text),
                           selectedTaxTwoType == types[1] ? 1 : 2,
                           num.parse(taxTwoController.text),
-                          paid,
+                          paid
                         );
 
-                        if(response.status == 0) {
-                          AppUtils.showToast(msg: AppUtils.translate(context, 'done'));
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
+                        if (response.status == 0) {
+                          AppUtils.showToast(
+                              msg: AppUtils.translate(context, 'done'));
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (_) => HomePage()),
+                              (route) => false);
                         } else {
                           AppUtils.showToast(msg: response.message);
                         }
