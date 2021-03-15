@@ -1,10 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'package:location/location.dart';
+import 'package:qimma/Bles/Bloc/AuthBloc.dart';
+import 'package:qimma/Bles/Model/Requests/SignupRequest.dart';
+import 'package:qimma/Bles/Model/Responses/old/auth/SignupResponse.dart';
 import 'package:qimma/pages/home/home_page.dart';
+import 'package:qimma/utils/app_patterns.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
+import 'package:qimma/widgets/my_button2.dart';
+import 'package:qimma/widgets/my_loader.dart';
 import 'package:qimma/widgets/my_text_form_field.dart';
+import 'package:qimma/widgets/signup_background_image.dart';
+
 
 class SingupPage extends StatefulWidget {
   @override
@@ -15,174 +27,400 @@ class _SingupPageState extends State<SingupPage> {
   bool hidePassword = true;
   bool hideConfirmPassword = true;
 
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  final ScreenUtil screenUtil = ScreenUtil();
+  final formKey = GlobalKey<FormState>();
+
+  bool loading = false;
+
+  bool pickingLocation = false;
+
+  File profileImage;
+
+  LocationData _locationData;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+    return LoadingOverlay(
+      isLoading: loading,
+      progressIndicator: Loader(),
+      color: Colors.white,
+      opacity: .5,
+      child: Scaffold(
+        body: Container(
           width: size.width,
-          child: Padding(
-            padding: EdgeInsets.all(14.0),
-            child: Column(
-              children: [
-                space(),
-                MyAppBar(
-                  text: AppUtils.translate(context, 'register_new_account'),
-                ),
-                space(),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: secondColor,
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: Image.asset('assets/images/person.png').image,
+          height: size.height,
+          child: Stack(
+            children: [
+              SignupBackgroundImage(),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(screenUtil.setWidth(14.0)),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top * 2,
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -7,
-                      right: -7,
-                      child: Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image:
-                                Image.asset('assets/images/upload.png').image,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            MyAppBar(
+                              text: AppUtils.translate(
+                                  context, 'register_new_account'),
+                            ),
+                            Expanded(
+                              child: Container(
+                                height: screenUtil.setHeight(120),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: Image.asset('assets/images/logo.png')
+                                        .image,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top -
+                              screenUtil.setHeight(20),
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            var permissionGranted = await AppUtils.askPhotosPermission();
+                            if(permissionGranted) {
+                              var image = await AppUtils.getImage(1);
+                              if(image != null) {
+                                setState(() {
+                                  profileImage = image[0];
+                                });
+                              }
+                            } else {
+                              AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+                            }
+                          },
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundImage: profileImage == null
+                                ? Image.asset('assets/images/avatar.jpg').image
+                                : Image.file(profileImage).image,
                           ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
-                space(),
-                myButton(
-                  AppUtils.translate(context, 'upload_photo'),
-                  height: 45,
-                  onTap: () {},
-                  textStyle: TextStyle(
-                    color: mainColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  width: size.width / 2.5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: mainColor),
-                    color: secondColor,
-                  ),
-                ),
-                MyTextFormField(
-                  controller: userNameController,
-                  keyboardType: TextInputType.text,
-                  hintText: AppUtils.translate(context, 'username'),
-                ),
-                MyTextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: AppUtils.translate(context, 'email'),
-                ),
-                MyTextFormField(
-                  controller: phoneController,
-                  keyboardType: TextInputType.phone,
-                  hintText: AppUtils.translate(context, 'phone_number'),
-                ),
-                MyTextFormField(
-                  controller: passwordController,
-                  keyboardType: TextInputType.text,
-                  hintText: AppUtils.translate(context, 'password'),
-                  obscureText: hidePassword,
-                  suffixIcon: GestureDetector(
-                    child: Icon(
-                      hidePassword ? Icons.visibility_off : Icons.visibility,
-                    ),
-                    onTap: () {
-                      hidePassword = !hidePassword;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                MyTextFormField(
-                  keyboardType: TextInputType.text,
-                  hintText: AppUtils.translate(context, 'confirm_password'),
-                  obscureText: hideConfirmPassword,
-                  suffixIcon: GestureDetector(
-                    child: Icon(
-                      hideConfirmPassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                    ),
-                    onTap: () {
-                      hideConfirmPassword = !hideConfirmPassword;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                space(),
-                myButton(
-                  AppUtils.translate(context, 'register').toUpperCase(),
-                  onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
-                  },
-                  // btnColor: enableButton() ? mainColor : secondColor,
-                ),
-                space(),
-                GestureDetector(
-                  onTap: () {},
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: AppUtils.translate(context, 'signup_t1'),
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top,
                         ),
-                        TextSpan(
-                          text:
-                          AppUtils.translate(context, 'signup_t2'),
-                          style: TextStyle(fontSize: 16, color: mainColor, fontWeight: FontWeight.bold),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: MyTextFormField(
+                                validator: (String input) {
+                                  if (input.isEmpty) {
+                                    return AppUtils.translate(context, 'required');
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                controller: firstNameController,
+                                keyboardType: TextInputType.text,
+                                hintText:
+                                    AppUtils.translate(context, 'first_name'),
+                              ),
+                            ),
+                            SizedBox(
+                              width: screenUtil.setWidth(10),
+                            ),
+                            Expanded(
+                              child: MyTextFormField(
+                                validator: (String input) {
+                                  if (input.isEmpty) {
+                                    return AppUtils.translate(context, 'required');
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                controller: lastNameController,
+                                keyboardType: TextInputType.text,
+                                hintText: AppUtils.translate(context, 'last_name'),
+                              ),
+                            ),
+                          ],
                         ),
-                        TextSpan(
-                          text:
-                          AppUtils.translate(context, 'signup_t3'),
-                          style: TextStyle(fontSize: 16, color: Colors.black,),
+                        SizedBox(
+                          height: screenUtil.setHeight(10),
                         ),
+                        MyTextFormField(
+                          validator: (String input) {
+                            if (input.isEmpty) {
+                              return AppUtils.translate(context, 'required');
+                            } else if (!PatternUtils.phoneIsValid(
+                                phone: input)) {
+                              return AppUtils.translate(context, 'invalid_phone_number');
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: phoneController,
+                          keyboardType: TextInputType.phone,
+                          hintText: AppUtils.translate(context, 'phone_number'),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        MyTextFormField(
+                          validator: (String input) {
+                            if (input.isEmpty) {
+                              return AppUtils.translate(context, 'required');
+                            } else if (!PatternUtils.emailIsValid(
+                                email: input)) {
+                              return AppUtils.translate(context, 'invalid_email_address');
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          hintText: AppUtils.translate(context, 'email'),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        MyTextFormField(
+                          validator: (String input) {
+                            if (input.isEmpty) {
+                              return AppUtils.translate(context, 'required');
+                            } else if (input.length < 8) {
+                              return AppUtils.translate(context, 'weak_password');
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: passwordController,
+                          keyboardType: TextInputType.text,
+                          hintText: AppUtils.translate(context, 'password'),
+                          obscureText: hidePassword,
+                          suffixIcon: GestureDetector(
+                            child: Icon(
+                              hidePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            onTap: () {
+                              hidePassword = !hidePassword;
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: screenUtil.setHeight(10),
+                        ),
+                        MyTextFormField(
+                          validator: (String input) {
+                            if (input.isEmpty) {
+                              return AppUtils.translate(context, 'required');
+                            } else if (input != passwordController.text) {
+                              return AppUtils.translate(context, 'not_match');
+                            } else {
+                              return null;
+                            }
+                          },
+                          keyboardType: TextInputType.text,
+                          hintText: AppUtils.translate(context, 'confirm_password'),
+                          controller: confirmPasswordController,
+                          obscureText: hideConfirmPassword,
+                          suffixIcon: GestureDetector(
+                            child: Icon(
+                              hideConfirmPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            onTap: () {
+                              hideConfirmPassword = !hideConfirmPassword;
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        space(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(AppUtils.translate(context, 'location_coordinates'),),
+                                _locationData == null
+                                    ? SizedBox.shrink()
+                                    : Row(
+                                        children: [
+                                          Icon(
+                                            Icons.check_circle,
+                                            color: mainColor,
+                                            size: 10,
+                                          ),
+                                          SizedBox(
+                                            width: screenUtil.setWidth(3),
+                                          ),
+                                          Text(
+                                            AppUtils.translate(context, 'location_picked'),
+                                            style: TextStyle(
+                                                color: mainColor,
+                                                fontSize: screenUtil.setSp(12),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: screenUtil.setWidth(15),
+                            ),
+                            Expanded(
+                              child: MyButton2(
+                                pickingLocation
+                                    ? CircularProgressIndicator()
+                                    : Text(
+                                        AppUtils.translate(context, 'pick_location'),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                btnColor: Colors.blueGrey,
+                                onTap: () async {
+
+                                  setState(() {
+                                    pickingLocation = true;
+                                  });
+
+                                  var locationPermissionGranted = await AppUtils.askLocationPermission();
+                                  if (locationPermissionGranted) {
+                                    Location location = new Location();
+
+                                    bool _serviceEnabled;
+                                    PermissionStatus _permissionGranted;
+
+                                    _serviceEnabled = await location.serviceEnabled();
+                                    if (!_serviceEnabled) {
+                                      _serviceEnabled = await location.requestService();
+                                      if (!_serviceEnabled) {
+                                        AppUtils.showToast(msg: AppUtils.translate(context, 'open_gps'));
+                                        setState(() {
+                                          pickingLocation = false;
+                                        });
+                                        return;
+                                      }
+                                    }
+
+                                    _permissionGranted = await location.hasPermission();
+                                    if (_permissionGranted == PermissionStatus.denied) {
+                                      _permissionGranted = await location.requestPermission();
+                                      if (_permissionGranted != PermissionStatus.granted) {
+                                        AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+                                        setState(() {
+                                          pickingLocation = false;
+                                        });
+                                        return;
+                                      }
+                                    }
+
+                                    _locationData = await location.getLocation();
+                                    setState(() {
+                                      pickingLocation = false;
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        space(),
+                        MyButton(
+                          AppUtils.translate(context, 'register').toUpperCase(),
+                          onTap: () {
+                            validateAndSignup(context);
+                          },
+                        ),
+                        space(),
                       ],
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  bool enableButton() {
-    return userNameController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
-        phoneController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty &&
-        confirmPasswordController.text.isNotEmpty;
-  }
-
   Widget space() {
     return SizedBox(
       height: MediaQuery.of(context).padding.top,
     );
+  }
+
+  void validateAndSignup(BuildContext context) async {
+    if(formKey.currentState.validate()) {
+    if (profileImage == null) {
+      AppUtils.showToast(msg: AppUtils.translate(context, 'choose_an_image'));
+      return;
+    }
+
+    if (_locationData == null) {
+      AppUtils.showToast(msg: AppUtils.translate(context, 'please_provide_the_location_coordinates'));
+      return;
+    }
+
+    setState(() {
+      loading = true;
+    });
+
+    // SignupResponse response = await authBloc.signup(
+    //   SignupRequest(
+    //     fireBaseToken: 'jjjjjjjj', // AppUtils.firebaseToken,
+    //     password: passwordController.text,
+    //     passwordConfirmation: confirmPasswordController.text,
+    //     phone: phoneController.text,
+    //     email: emailController.text,
+    //     firstName: firstNameController.text,
+    //     lastName: lastNameController.text,
+    //     lat: _locationData.latitude.toString(),
+    //     lng: _locationData.longitude.toString(),
+    //     verifyType: '1',
+    //     image: profileImage,
+    //   ),
+    // );
+
+    // if (response.status == 1) {
+    //   setState(() {
+    //     loading = false;
+    //   });
+    //
+    //   AppUtils.userData = response.data;
+    //   await AppUtils.saveUserData(response.data);
+    //
+    //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
+    //       .then((value) {
+    //     passwordController.clear();
+    //     confirmPasswordController.clear();
+    //     emailController.clear();
+    //     phoneController.clear();
+    //     firstNameController.clear();
+    //     lastNameController.clear();
+    //   });
+    // } else {
+    //   AppUtils.showToast(msg: response.message);
+    //   setState(() {
+    //     loading = false;
+    //   });
+    //  }
+    }
   }
 }

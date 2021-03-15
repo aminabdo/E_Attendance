@@ -110,7 +110,7 @@ class _TrackOrderMapPageState extends State<TrackOrderMapPage> {
                                 ),
                               ],
                             ),
-                            myButton(
+                            MyButton(
                               dropOff
                                   ? AppUtils.translate(context, 'drop_off')
                                   : AppUtils.translate(context, 'pickup'),

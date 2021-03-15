@@ -8,15 +8,12 @@ import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:qimma/Bles/Model/Responses/old/auth/SignupResponse.dart';
-import 'package:qimma/utils/app_localization.dart';
+import 'package:qimma/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AppUtils {
-  static String translate(BuildContext context, String key) {
-    return AppLocalization.of(context).translate(key);
-  }
+import 'app_localization.dart';
 
+class AppUtils {
 
   static String firebaseToken;
   static FirebaseMessaging firebaseMesseging = FirebaseMessaging();
@@ -26,6 +23,10 @@ class AppUtils {
 
   static hideKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
+  }
+
+  static String translate(BuildContext context, String key) {
+    return AppLocalization.of(context).translate(key);
   }
 
   // method to save last user login data

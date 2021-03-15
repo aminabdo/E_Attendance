@@ -6,13 +6,14 @@ class MyAppBar extends StatelessWidget {
   final Widget leading;
   final List<Widget> actions;
   final TextStyle textStyle;
+  final Function onBackBtnPressed;
 
   const MyAppBar(
       {Key key,
-      @required this.text,
-      this.leading,
-      this.actions,
-      this.textStyle,
+        @required this.text,
+        this.leading,
+        this.actions,
+        this.textStyle, this.onBackBtnPressed,
       })
       : super(key: key);
 
@@ -22,9 +23,10 @@ class MyAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             leading ?? FloatingActionButton(
-              onPressed: () {
+              onPressed: onBackBtnPressed ?? () {
                 Navigator.pop(context,
                 );
               },
@@ -48,8 +50,8 @@ class MyAppBar extends StatelessWidget {
             ),
           ].where((element) => element != null).toList(),
         ),
-        Row(
-          children: actions ?? [],
+        actions == null ? null : Row(
+          children: actions.where((element) => element != null).toList(),
         )
       ].where((element) => element != null).toList(),
     );

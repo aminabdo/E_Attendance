@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qimma/Bles/Bloc/AuthBloc.dart';
+import 'package:qimma/Bles/Model/Requests/LoginRequest.dart';
 import 'package:qimma/pages/auth/forget_password_page.dart';
-import 'package:qimma/pages/auth/signup_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/clickable_text.dart';
+import 'package:qimma/widgets/login_background_image.dart';
+import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_button2.dart';
+import 'package:qimma/widgets/my_loader.dart';
 import 'package:qimma/widgets/my_text_form_field.dart';
+
+import 'welcome_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,200 +20,163 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  FocusNode phoneFocusNode = FocusNode();
-  FocusNode passwordFocusNode = FocusNode();
+  final ScreenUtil screenUtil = ScreenUtil();
 
-  TextEditingController phoneController = TextEditingController();
+  bool loading = false;
+
+  TextEditingController phoneOrEmailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  bool hideImage = false;
-  bool hidePassword = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    phoneFocusNode.addListener(onPhoneFoucesChangeListener);
-    passwordFocusNode.addListener(onPasswordFoucesChangeListener);
-  }
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+    return LoadingOverlay(
+      isLoading: loading,
+      progressIndicator: Loader(),
+      color: Colors.white,
+      opacity: .5,
+      child: Scaffold(
+        body: Container(
           width: size.width,
-          child: Padding(
-            padding: EdgeInsets.all(14.0),
-            child: Column(
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 500),
-                  width: size.width,
-                  height: hideImage ? size.height * .2 : size.height * .4,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: Image.asset('assets/images/logo.png').image,
-                    ),
-                  ),
-                ),
-                Text(
-                  AppUtils.translate(context, 'welcome'),
-                  style: TextStyle(fontSize: 22),
-                ),
-                Text(
-                  AppUtils.translate(context, 'please_login_to_your_account'),
-                  style: TextStyle(fontSize: 15),
-                ),
-                MyTextFormField(
-                  focusNode: phoneFocusNode,
-                  controller: phoneController,
-                  keyboardType: TextInputType.text,
-                  hintText:
-                      AppUtils.translate(context, 'email_or_phone_number'),
-                ),
-                MyTextFormField(
-                  focusNode: passwordFocusNode,
-                  controller: passwordController,
-                  keyboardType: TextInputType.text,
-                  hintText: AppUtils.translate(context, 'password'),
-                  obscureText: hidePassword,
-                  suffixIcon: GestureDetector(
-                    child: Icon(
-                      hidePassword ? Icons.visibility_off : Icons.visibility,
-                    ),
-                    onTap: () {
-                      hidePassword = !hidePassword;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                space(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ClickableText(
-                      text: AppUtils.translate(context, 'forget_password'),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => ForgetPasswordPage(),
-                          ),
-                        );
-                      },
-                    ),
-                    ClickableText(
-                      text: AppUtils.translate(context, 'register_new'),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => SingupPage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                space(),
-                myButton(
-                  AppUtils.translate(context, 'login').toUpperCase(),
-                  onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (_) => HomePage(),
-                        ),
-                        (route) => false);
-                  },
-                  // btnColor: enableButton() ? secondColor : mainColor,
-                ),
-                space(),
-                Center(
-                  child: Text(
-                    AppUtils.translate(context, 'or'),
-                  ),
-                ),
-                space(),
-                Row(
-                  children: [
-                    Expanded(
-                      child: myButton2(
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+          height: size.height,
+          child: Stack(
+            children: [
+              LoginBackgroundImage(),
+              Wrap(
+                children: [
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(screenUtil.setWidth(8)),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset('assets/images/logo facebook.png'),
                             SizedBox(
-                              width: 10,
+                              height: screenUtil.setHeight(30) * 2,
                             ),
-                            Text(
-                              AppUtils.translate(context, 'facebook'),
-                              style: TextStyle(color: Colors.white),
+                            MyAppBar(
+                              text: AppUtils.translate(context, 'login'),
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenUtil.setSp(18),
+                              ),
+                              onBackBtnPressed: () {
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
+                              },
+                            ),
+                            SizedBox(
+                              height: screenUtil.setHeight(30) + screenUtil.setHeight(20),
+                            ),
+                            Center(
+                              child: Image.asset(
+                                'assets/images/login_image.png',
+                                scale: 1.2,
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenUtil.setHeight(30) * 1.3,
+                            ),
+                            MyTextFormField(
+                              validator: (String input) {
+                                if (input.isEmpty) {
+                                  return AppUtils.translate(context, 'required');
+                                }
+                              },
+                              hintText: AppUtils.translate(context, 'email_or_phone'),
+                              controller: phoneOrEmailController,
+                            ),
+                            SizedBox(
+                              height: screenUtil.setHeight(30) - screenUtil.setHeight(10),
+                            ),
+                            MyTextFormField(
+                              controller: passwordController,
+                              validator: (String input) {
+                                if (input.isEmpty) {
+                                  return AppUtils.translate(context, 'required');
+                                }
+                              },
+                              hintText: AppUtils.translate(context, 'password'),
+                              obscureText: true,
+                            ),
+                            SizedBox(
+                              height: screenUtil.setHeight(30) - screenUtil.setHeight(20),
+                            ),
+                            Center(
+                              child: MyButton(
+                                AppUtils.translate(context, 'login'),
+                                width: size.width * .5,
+                                onTap: () {
+                                  validateAndLogin(context);
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenUtil.setHeight(15),
+                            ),
+                            Center(
+                              child: ClickableText(
+                                text: AppUtils.translate(context, 'forget_password'),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => ForgetPasswordPage()));
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenUtil.setHeight(30) - screenUtil.setHeight(30),
                             ),
                           ],
                         ),
-                        btnColor: facebookColor,
                       ),
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: myButton2(
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/images/google.png'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              AppUtils.translate(context, 'google'),
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        btnColor: googleColor,
-                      ),
-                    ),
-                  ],
-                ),
-                space(),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget space() {
-    return SizedBox(
-      height: MediaQuery.of(context).padding.top,
+  void validateAndLogin(BuildContext context) async {
+    if(formKey.currentState.validate()) {
+
+      AppUtils.hideKeyboard(context);
+
+    setState(() {
+      loading = true;
+    });
+
+    var response = await authBloc.login(
+      LoginRequest(
+          eamilOrPhone: phoneOrEmailController.text,
+          fireBaseToken: AppUtils.firebaseToken,
+          password: passwordController.text,
+      ),
     );
-  }
 
-  void onPhoneFoucesChangeListener() {
-    if (phoneFocusNode.hasFocus) {
-      hideImage = true;
-      setState(() {});
+    if (response.status == 1) {
+      setState(() {
+        loading = false;
+      });
+
+      AppUtils.userData = response.data;
+      await AppUtils.saveUserData(response.data);
+
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false).then((value) {
+        passwordController.clear();
+        phoneOrEmailController.clear();
+      });
+
     } else {
-      hideImage = false;
-      setState(() {});
+      AppUtils.showToast(msg: response.message);
+      setState(() {
+        loading = false;
+       });
+     }
     }
-  }
-
-  void onPasswordFoucesChangeListener() {
-    if (passwordFocusNode.hasFocus) {
-      hideImage = true;
-      setState(() {});
-    } else {
-      hideImage = false;
-      setState(() {});
-    }
-  }
-
-  bool enableButton() {
-    return phoneController.text.isEmpty || passwordController.text.isEmpty;
   }
 }

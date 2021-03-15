@@ -1,6 +1,5 @@
+import 'package:qimma/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:qimma/utils/base/BaseResponse.dart';
-
-import 'SignupResponse.dart';
 
 class LoginResponse extends BaseResponse {
   int status;

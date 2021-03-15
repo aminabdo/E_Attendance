@@ -116,7 +116,7 @@ class _ItemState extends State<Item> {
                   ),
                   Row(
                     children: [
-                      myButton2(
+                      MyButton2(
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -143,7 +143,7 @@ class _ItemState extends State<Item> {
                       SizedBox(
                         width: 8,
                       ),
-                      myButton2(
+                      MyButton2(
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -191,7 +191,7 @@ class _ItemState extends State<Item> {
                 SizedBox(
                   height: 4,
                 ),
-                myButton(
+                MyButton(
                   '${AppUtils.translate(context, 'add')}',
                   onTap: () {},
                   width: 50,

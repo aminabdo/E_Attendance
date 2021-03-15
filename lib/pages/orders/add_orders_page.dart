@@ -121,7 +121,7 @@ class AddOrdersPage extends StatelessWidget {
                             fontSize: 15,
                         ),
                       ),
-                      myButton2(
+                      MyButton2(
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

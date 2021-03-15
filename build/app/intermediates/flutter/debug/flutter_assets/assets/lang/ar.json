@@ -1,4 +1,9 @@
 {
+  "welcome_page" : "============Welcome Page=============",
+  "store_on_internet": "متجر علي الانترنت",
+  "lets_shopping": "دعونا نتسوق معا",
+  "create_account": "انشاء حساب",
+
   "login_page" : "============Login Page=============",
   "welcome": "اهلا بك",
   "please_login_to_your_account": "من فضلك سجل الدخول الي حسابك",
@@ -10,6 +15,7 @@
   "or": "او",
   "facebook": "فيسبوك",
   "google": "جوجل",
+  "email_or_phone": "البريد الالكتروني او رقم الهاتف",
 
   "signup_page" : "============Signup Page=============",
   "username": "اسم المستخدم",
@@ -27,11 +33,16 @@
   "are_you_forget_your_password": "هل نسيت كلمة المرور الخاصة بك",
   "forget_password_msg": "اكتب رقم هاتفك وسنرسل لك رمزًا للتحقق",
   "submit": "تاكيد",
+  "next": "التالي",
+  "verify_code": "رمز التاكيد",
+  "verify_msg": "الرجاء ادخال الرمز المرسل الي رقم هاتفك المحمول عبر الرسائل القصيرة",
 
   "rest_password_page" : "============Reset Password Page=============",
   "create_new_password": "إنشاء كلمة مرور جديدة",
   "rest_password_msg": "لقد أرسلنا رمز تحقق إلى رقم هاتفك",
   "code": "الكود",
+  "new_password": "كلمة المرور الجديدة",
+  "reset_password_msg": "يمكنك الان تعيين كلمه مرور جديدة",
 
   "home_page" : "============Home Page=============",
   "hi": "اهلا ",
@@ -39,7 +50,7 @@
   "new_orders": "الطلبات الجديدة",
   "ongoing_orders": "الطلبات الحاليه",
   "delivery": "توصيل",
-  "online_paid": "الدفع عبر الإنترنت",
+  "online_paid": "الدفع الكتروني",
   "minutes": "دقيقة",
   "id": "الكود",
   "customer_amount": "مبلغ العميل",

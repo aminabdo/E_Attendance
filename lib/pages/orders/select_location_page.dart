@@ -51,7 +51,7 @@ class SelectLocationPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  child:  myButton(
+                  child:  MyButton(
                     AppUtils.translate(context, 'add_location').toUpperCase(),
                     height: 40,
                     btnColor: mainColor,

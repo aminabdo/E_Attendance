@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/pages/auth/reset_password_page.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'package:qimma/pages/auth/verify_code_page.dart';
 import 'package:qimma/utils/app_utils.dart';
+import 'package:qimma/widgets/forget_password_background_image.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
 import 'package:qimma/widgets/my_text_form_field.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
-  TextEditingController phoneController = TextEditingController();
+
+  final ScreenUtil screenUtil = ScreenUtil();
 
   @override
   Widget build(BuildContext context) {
@@ -14,61 +17,62 @@ class ForgetPasswordPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: size.width,
-        child: Padding(
-          padding: EdgeInsets.all(14.0),
-          child: Column(
-            children: [
-              space(context),
-              MyAppBar(
-                text: '',
-              ),
-              space(context),
-              Text(
-                AppUtils.translate(context, 'are_you_forget_your_password'),
-                style: TextStyle(fontSize: 22),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(
-                AppUtils.translate(context, 'forget_password_msg'),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              MyTextFormField(
-                controller: phoneController,
-                keyboardType: TextInputType.phone,
-                hintText: AppUtils.translate(context, 'phone_number'),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: myButton(
-                      AppUtils.translate(context, 'submit'),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ResetPasswordPage(),
-                        ),
-                      );
-                    },
-                  ),
+        height: size.height,
+        child: Stack(
+          children: [
+            ForgetPasswordBackgroundImage(),
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(screenUtil.setWidth(8.0)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top * 2,
+                    ),
+                    MyAppBar(text: ''),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top + screenUtil.setHeight(50),
+                    ),
+                    Text(AppUtils.translate(context, 'are_you_forget_your_password'),
+                      style: TextStyle(fontSize: screenUtil.setSp(24)),
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(screenUtil.setWidth(8.0)),
+                      child: Text(AppUtils.translate(context, 'forget_password_msg'),
+                        style: TextStyle(fontSize: screenUtil.setSp(14),
+                        ), textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top * 2,
+                    ),
+                    MyTextFormField(
+                      hintText: AppUtils.translate(context, 'phone_number'),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top * 2.2,
+                    ),
+                    Center(
+                      child: MyButton(
+                        AppUtils.translate(context, 'next'),
+                        width: size.width * .5,
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (_) => VerfyCodePage(),),);
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(10),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
-  }
-
-  Widget space(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).padding.top,
     );
   }
 }

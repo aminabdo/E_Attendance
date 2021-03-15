@@ -3,14 +3,14 @@ import 'package:qimma/utils/base/BaseResponse.dart';
 class LoginResponse extends BaseResponse{
   int status;
   String message;
-  User data;
+  UserData data;
 
   static LoginResponse fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     LoginResponse loginResponseBean = LoginResponse();
     loginResponseBean.status = map['status'];
     loginResponseBean.message = map['message'];
-    loginResponseBean.data = User.fromMap(map['data']);
+    loginResponseBean.data = UserData.fromMap(map['data']);
     return loginResponseBean;
   }
 
@@ -21,7 +21,7 @@ class LoginResponse extends BaseResponse{
   };
 }
 
-class User {
+class UserData {
   int id;
   String firstName;
   String lastName;
@@ -41,9 +41,9 @@ class User {
   int currencyId;
   String token;
 
-  static User fromMap(Map<String, dynamic> map) {
+  static UserData fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    User dataBean = User();
+    UserData dataBean = UserData();
     dataBean.id = map['id'];
     dataBean.firstName = map['first_name'];
     dataBean.lastName = map['last_name'];

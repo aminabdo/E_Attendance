@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'utils/app_localization.dart';
+import 'widgets/custom_scroll_behavior.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MyApp(
-      languageCode: (await SharedPreferences.getInstance()).getString('langCode') ?? 'ar',
+      languageCode:
+          (await SharedPreferences.getInstance()).getString('langCode') ?? 'ar',
     ),
   );
 }
@@ -58,6 +63,15 @@ class _MyAppState extends State<MyApp> {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
+      builder: (context, child) {
+        ScreenUtil.init(context, designSize: Size(412, 870));
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark.copyWith(
+            statusBarColor: Colors.transparent,
+          ),
+          child: ScrollConfiguration(child: child, behavior: CustomScrollBehavior(),),
+        );
+      },
       supportedLocales: [
         const Locale('en'), // English
         const Locale('ar'), // Arabic
@@ -67,12 +81,14 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Builder(
-        builder: (context) => Directionality(
-          child: SplashPage(),
-          textDirection: Localizations.localeOf(context).languageCode == 'ar'
-              ? TextDirection.rtl
-              : TextDirection.ltr,
-        ),
+        builder: (context) {
+          return Directionality(
+            child: HomePage(),
+            textDirection: Localizations.localeOf(context).languageCode == 'ar'
+                ? TextDirection.rtl
+                : TextDirection.ltr,
+          );
+        },
       ),
     );
   }

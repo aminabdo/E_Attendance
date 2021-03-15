@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:qimma/pages/auth/login_page.dart';
 import 'package:qimma/utils/app_utils.dart';
+import 'package:qimma/widgets/forget_password_background_image.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
 import 'package:qimma/widgets/my_text_form_field.dart';
@@ -11,15 +14,10 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  TextEditingController passwordController = TextEditingController();
-
-  TextEditingController confirmPasswordController = TextEditingController();
-
-  TextEditingController codeController = TextEditingController();
-
   bool hidePassword = true;
 
   bool hideConfirmPassword = true;
+  final ScreenUtil screenUtil = ScreenUtil();
 
   @override
   Widget build(BuildContext context) {
@@ -27,87 +25,97 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return Scaffold(
       body: Container(
         width: size.width,
-        child: Padding(
-          padding: EdgeInsets.all(14.0),
-          child: Column(
-            children: [
-              space(context),
-              MyAppBar(
-                text: '',
-              ),
-              space(context),
-              Text(
-                AppUtils.translate(context, 'create_new_password'),
-                style: TextStyle(fontSize: 22),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(
-                AppUtils.translate(context, 'rest_password_msg'),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              MyTextFormField(
-                controller: codeController,
-                keyboardType: TextInputType.phone,
-                hintText: AppUtils.translate(context, 'code'),
-              ),
-              MyTextFormField(
-                controller: passwordController,
-                keyboardType: TextInputType.text,
-                hintText: AppUtils.translate(context, 'password'),
-                obscureText: hidePassword,
-                suffixIcon: GestureDetector(
-                  child: Icon(
-                    hidePassword ? Icons.visibility_off : Icons.visibility,
-                  ),
-                  onTap: () {
-                    hidePassword = !hidePassword;
-                    setState(() {});
-                  },
+        height: size.height,
+        child: Stack(
+          children: [
+            ForgetPasswordBackgroundImage(),
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top * 2,
+                    ),
+                    MyAppBar(text: ''),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top + screenUtil.setHeight(50),
+                    ),
+                    Text(
+                      AppUtils.translate(context, 'create_new_password'),
+                      style: TextStyle(fontSize: screenUtil.setSp(24)),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      AppUtils.translate(context, 'reset_password_msg'),
+                      style: TextStyle(fontSize: screenUtil.setSp(14)),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top * 2,
+                    ),
+                    MyTextFormField(
+                      hintText: AppUtils.translate(context, 'new_password'),
+                      obscureText: hidePassword,
+                      suffixIcon: GestureDetector(
+                        child: Icon(
+                          hidePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onTap: () {
+                          hidePassword = !hidePassword;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(10),
+                    ),
+                    MyTextFormField(
+                      obscureText: hideConfirmPassword,
+                      hintText: AppUtils.translate(context, 'confirm_password'),
+                      suffixIcon: GestureDetector(
+                        child: Icon(
+                          hideConfirmPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onTap: () {
+                          hideConfirmPassword = !hideConfirmPassword;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top * 2.2,
+                    ),
+                    Center(
+                      child: MyButton(
+                        AppUtils.translate(context, 'submit'),
+                        width: size.width * .5,
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => LoginPage(),
+                              ),
+                              (_) => false,
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(10),
+                    ),
+                  ],
                 ),
               ),
-              MyTextFormField(
-                keyboardType: TextInputType.text,
-                hintText: AppUtils.translate(context, 'confirm_password'),
-                obscureText: hideConfirmPassword,
-                suffixIcon: GestureDetector(
-                  child: Icon(
-                    hideConfirmPassword
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  onTap: () {
-                    hideConfirmPassword = !hideConfirmPassword;
-                    setState(() {});
-                  },
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: myButton(
-                    AppUtils.translate(context, 'submit'),
-                    onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => LoginPage()), (route) => false);
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
-  }
-
-  Widget space(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).padding.top,
     );
   }
 }

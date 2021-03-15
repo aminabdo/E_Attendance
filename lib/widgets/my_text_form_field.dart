@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qimma/utils/consts.dart';
 
 class MyTextFormField extends StatelessWidget {
@@ -18,8 +18,11 @@ class MyTextFormField extends StatelessWidget {
   final FocusNode focusNode;
   final Widget suffixIcon;
   final Widget prefixIcon;
+  final Color bgColor;
+  final String errorMsg;
+  final bool enable;
 
-  const MyTextFormField({
+  MyTextFormField({
     Key key,
     this.hintText = '',
     this.maxLines,
@@ -34,70 +37,78 @@ class MyTextFormField extends StatelessWidget {
     this.borderWidth,
     this.lableStyle,
     this.decoration,
-    this.hintStyle, this.focusNode, this.suffixIcon, this.prefixIcon,
+    this.hintStyle,
+    this.focusNode,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.bgColor,
+    this.errorMsg,
+    this.enable = true,
   }) : super(key: key);
+
+  final double borderRadius = 15;
+  final ScreenUtil screenUtil = ScreenUtil();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
       children: [
-        Text(
-          label,
-          style: lableStyle ??
-              TextStyle(
-                fontSize: 17,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        SizedBox(
-          height: 3,
-        ),
         Container(
-          decoration: decoration ?? BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            color: secondColor,
+          decoration: BoxDecoration(
+            color: bgColor ?? secondColor.withOpacity(.2),
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: TextFormField(
             textAlign: TextAlign.justify,
-            maxLines: obscureText ?? false ? 1 : maxLines,
+            maxLines: maxLines ?? 1,
             keyboardType: keyboardType,
             onFieldSubmitted: onSubmit,
             focusNode: focusNode,
+            enabled: enable,
             decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: hintStyle,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: borderColor ?? mainColor,
-                  width: borderWidth ?? 2.3,
+                hintText: hintText,
+                hintStyle: hintStyle,
+                contentPadding: EdgeInsets.only(
+                  top: screenUtil.setHeight(5),
+                  left: screenUtil.setWidth(10),
+                  right: screenUtil.setWidth(10),
                 ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.red,
-                  width: borderWidth ?? 2.3,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderSide: BorderSide(
+                    color: borderColor ?? mainColor,
+                    width: borderWidth ?? 2.3,
+                  ),
                 ),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.red,
-                  width: borderWidth ?? 2.3,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderSide: BorderSide(
+                    color: borderColor ?? mainColor,
+                    width: borderWidth ?? 2.3,
+                  ),
                 ),
-              ),
-              suffixIcon: suffixIcon,
-              prefixIcon: prefixIcon
-            ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: borderWidth ?? 2.3,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: borderWidth ?? 2.3,
+                  ),
+                ),
+                suffixIcon: suffixIcon,
+                prefixIcon: prefixIcon),
             obscureText: obscureText,
             controller: controller,
             validator: validator,
             onChanged: onChanged,
           ),
-        ),
+        )
       ],
     );
   }
