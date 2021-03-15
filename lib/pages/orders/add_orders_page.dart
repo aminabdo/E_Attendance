@@ -10,6 +10,8 @@ import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
 import 'package:qimma/widgets/my_loader.dart';
 
+import 'products_page.dart';
+
 class AddOrdersPage extends StatefulWidget {
   @override
   _AddOrdersPageState createState() => _AddOrdersPageState();
@@ -21,9 +23,11 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
   bool gotData = false;
 
   List<Users> users;
+  List<Addresses> addresses = [];
   Users selectedUser;
 
   String selectedPriceType;
+  Addresses selectedAddress;
   List<String> priceTypes;
 
   @override
@@ -51,6 +55,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
         gotFirstCategoryProducts = true;
       }
     }
+
     return Scaffold(
       body: LoadingOverlay(
         isLoading: isLoading,
@@ -99,6 +104,9 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                       users = snapshot.data.data;
                       selectedUser = users[0];
                       selectedPriceType = priceTypes[0];
+                      addresses = selectedUser.addresses;
+
+                      selectedAddress = addresses[0];
                       gotData = true;
                     }
                     return Padding(
@@ -122,29 +130,39 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                         '${value.firstName} ${value.lastName}'),
                                   );
                                 }).toList(),
-                                onChanged: (user) {},
+                                onChanged: (user) {
+                                  setState(() {
+                                    selectedUser = user;
+                                    addresses = [];
+                                    addresses = selectedUser.addresses;
+                                    selectedAddress = addresses.isNotEmpty ? addresses[0] : null;
+                                  });
+                                },
                               ),
                             ),
                           ),
                           space(context),
-                          Text(
-                              AppUtils.translate(context, 'customer_location')),
+                          Text(AppUtils.translate(context, 'customer_location')),
                           Container(
+                            width: double.infinity,
                             decoration: BoxDecoration(
                               color: secondColor.withOpacity(.2),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<Users>(
-                                value: selectedUser,
-                                items: users.map((Users value) {
-                                  return new DropdownMenuItem<Users>(
+                              child: DropdownButton<Addresses>(
+                                value: selectedAddress,
+                                items: addresses.map((Addresses value) {
+                                  return new DropdownMenuItem<Addresses>(
                                     value: value,
-                                    child: Text(
-                                        '${value.firstName} ${value.lastName}'),
+                                    child: Text(value.address),
                                   );
                                 }).toList(),
-                                onChanged: (user) {},
+                                onChanged: (address) {
+                                  setState(() {
+                                    selectedAddress = address;
+                                  });
+                                },
                               ),
                             ),
                           ),
@@ -183,7 +201,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
 
                               var request = AddOrderRequest(
                                 userId: selectedUser.id.toString(),
-                                addressId: null,
+                                addressId: selectedAddress.id.toString(),
                                 priceType: getPriceType(),
                               );
 
@@ -194,12 +212,19 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                 setState(() {
                                   isLoading = false;
                                 });
+
+                                AppUtils.showToast(msg: AppUtils.translate(context, 'done'), bgColor: mainColor);
+                                orderBloc.getAllProducts();
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProductsPage()));
+
                               } else {
                                 AppUtils.showToast(msg: response.message);
+                                setState(() {
+                                  isLoading = false;
+                                });
                               }
                             },
                           ),
-                          space(context),
                           space(context),
                         ],
                       ),

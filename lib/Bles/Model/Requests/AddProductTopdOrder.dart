@@ -1,12 +1,17 @@
 class AddProductTopdOrder {
   List<OrdersBean> orders;
 
+  AddProductTopdOrder({this.orders});
+
+  @override
+  String toString() {
+    return 'AddProductTopdOrder{orders: $orders}';
+  }
+
   static AddProductTopdOrder fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     AddProductTopdOrder addProductTopdOrderBean = AddProductTopdOrder();
-    addProductTopdOrderBean.orders = List()..addAll(
-      (map['orders'] as List ?? []).map((o) => OrdersBean.fromMap(o))
-    );
+    addProductTopdOrderBean.orders = List()..addAll((map['orders'] as List ?? []).map((o) => OrdersBean.fromMap(o)));
     return addProductTopdOrderBean;
   }
 
@@ -20,6 +25,14 @@ class OrdersBean {
   int quantity;
   String colorId;
   String sizeId;
+
+  OrdersBean({this.productDetailId, this.quantity, this.colorId, this.sizeId});
+
+
+  @override
+  String toString() {
+    return 'OrdersBean{productDetailId: $productDetailId, quantity: $quantity, colorId: $colorId, sizeId: $sizeId}';
+  }
 
   static OrdersBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;

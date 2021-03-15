@@ -80,7 +80,11 @@
   "accept": "Accept",
   "whole_whole_sale": "Whole whole sale",
   "whole_sale": "Whole sale",
+  "sizes": "Sizes",
+  "colors": "Colors",
   "sale": "Sale",
+  "no_colors_available": "No colors available",
+  "no_sizes_available": "No sizes available",
 
   "order_details_page" : "============Order Details Page=============",
   "customer_number": "Customer number",

@@ -99,6 +99,10 @@ class ApiRoutes {
     return "Order/all_users";
   }
 
+  static String getAllProducts(){
+    return "Order/all_Product_details";
+  }
+
 
   // home
 

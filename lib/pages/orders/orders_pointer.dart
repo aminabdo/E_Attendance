@@ -1,7 +1,9 @@
 
 import 'dart:collection';
 
+import 'package:qimma/Bles/Model/Requests/AddProductTopdOrder.dart';
+
 class OrdersPointer {
   // id, quantity
-  static Map<int, int> selectedProducts = HashMap<int, int>();
+  static List<OrdersBean> selectedProducts = [];
 }

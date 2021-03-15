@@ -4,6 +4,7 @@ import 'package:qimma/Bles/Model/Requests/AddToCartRequest.dart';
 import 'package:qimma/Bles/Model/Requests/AddpdOrderRequest.dart';
 import 'package:qimma/Bles/Model/Responses/add_pd_order/AddpdOrderResponse.dart';
 import 'package:qimma/Bles/Model/Responses/add_pd_order/MakeBillResponse.dart';
+import 'package:qimma/Bles/Model/Responses/order/AllProductsResponse.dart';
 import 'package:qimma/Bles/Model/Responses/order/AllUsersResponse.dart';
 import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
 import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
@@ -18,6 +19,7 @@ class OrderBloc extends BaseBloc {
   BehaviorSubject<AddpdOrderResponse> _add_order = BehaviorSubject<AddpdOrderResponse>();
   BehaviorSubject<BaseResponse> _add_product_to_order = BehaviorSubject<BaseResponse>();
   BehaviorSubject<AllUsersResponse> _allUsers = BehaviorSubject<AllUsersResponse>();
+  BehaviorSubject<AllProductsResponse> _allProducts = BehaviorSubject<AllProductsResponse>();
   BehaviorSubject<MakeBillResponse> _make_bill = BehaviorSubject<MakeBillResponse>();
 
   Future<AllpdOrderResponse> allOrder() async {
@@ -87,6 +89,14 @@ class OrderBloc extends BaseBloc {
     return _allUsers.value;
   }
 
+  Future<AllProductsResponse> getAllProducts() async {
+    _allProducts.value = AllProductsResponse();
+    _allProducts.value.loading = true;
+    _allProducts.value = AllProductsResponse.fromJson((await repository.get(ApiRoutes.getAllProducts() )).data);
+    _allProducts.value.loading = false;
+    return _allProducts.value;
+  }
+
   Future<MakeBillResponse> makeBill(
       int orderID,
       int discount_type,
@@ -106,6 +116,7 @@ class OrderBloc extends BaseBloc {
 
   BehaviorSubject<AllpdOrderResponse> get all_orders => _all_order;
   BehaviorSubject<AllUsersResponse> get all_users => _allUsers;
+  BehaviorSubject<AllProductsResponse> get all_products => _allProducts;
   BehaviorSubject<SinglepdOrderResponse> get s_single_P_d_order => _single_order;
 }
 

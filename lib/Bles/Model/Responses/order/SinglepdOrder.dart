@@ -37,14 +37,13 @@ class Order {
   String date;
   String name;
   String userId;
-  String representativeId;
+  dynamic representativeId;
   String lat;
   String lng;
   String address;
   List<ProductsBean> products;
   String createdAt;
   String updatedAt;
-
 
   static Order fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
