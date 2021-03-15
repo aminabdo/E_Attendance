@@ -95,11 +95,9 @@ class ApiRoutes {
     return "Product/get_products?type=$type";
   }
 
-
-
-
-
-
+  static String getAllUsers(){
+    return "Order/all_users";
+  }
 
 
   // home

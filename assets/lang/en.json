@@ -74,9 +74,13 @@
   "customer_name": "Customer name",
   "shop_location": "Shop location",
   "customer_location": "Customer location",
+  "price_type": "Price type",
   "shop_owner_amount": "Shop owner amount",
   "deny": "Deny",
   "accept": "Accept",
+  "whole_whole_sale": "Whole whole sale",
+  "whole_sale": "Whole sale",
+  "sale": "Sale",
 
   "order_details_page" : "============Order Details Page=============",
   "customer_number": "Customer number",

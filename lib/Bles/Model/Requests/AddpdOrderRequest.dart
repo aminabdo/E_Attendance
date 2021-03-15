@@ -1,10 +1,27 @@
+import 'package:flutter/foundation.dart';
+
 class AddOrderRequest {
   String userId;
   String status;
   String paymentMethod;
   String addressId;
-  String priceType;
+  String priceType; // 1 || 2 || 3
   String shopId;
+
+
+  AddOrderRequest(
+      {@required this.userId,
+      this.status = '1',
+      this.paymentMethod = '1',
+      @required this.addressId,
+      @required this.priceType,
+      this.shopId = '10',
+      });
+
+  @override
+  String toString() {
+    return 'AddOrderRequest{userId: $userId, status: $status, paymentMethod: $paymentMethod, addressId: $addressId, priceType: $priceType, shopId: $shopId}';
+  }
 
   static AddOrderRequest fromMap(Map<String, dynamic> map) {
     if (map == null) return null;

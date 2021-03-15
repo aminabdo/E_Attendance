@@ -1,15 +1,14 @@
-import 'package:dotted_line/dotted_line.dart';
+
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Bloc/OrderBloc.dart';
 import 'package:qimma/Bles/Bloc/old/HomeBloc.dart';
-import 'package:qimma/pages/orders/add_item_page.dart';
-import 'package:qimma/pages/orders/select_location_page.dart';
+import 'package:qimma/Bles/Model/Requests/AddpdOrderRequest.dart';
+import 'package:qimma/Bles/Model/Responses/order/AllUsersResponse.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_button2.dart';
 import 'package:qimma/widgets/my_loader.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
 
 class AddOrdersPage extends StatefulWidget {
   @override
@@ -17,29 +16,44 @@ class AddOrdersPage extends StatefulWidget {
 }
 
 class _AddOrdersPageState extends State<AddOrdersPage> {
-
-  bool adding = false;
+  bool isLoading = false;
   bool gotFirstCategoryProducts = false;
+  bool gotData = false;
+
+  List<Users> users;
+  Users selectedUser;
+
+  String selectedPriceType;
+  List<String> priceTypes;
 
   @override
   void initState() {
     super.initState();
 
+    orderBloc.getAllUsers();
     homeBloc.get_main_cat();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if(!gotFirstCategoryProducts) {
-      if(homeBloc.s_get_main_cat.value != null && homeBloc.s_get_main_cat.value.data != null) {
+
+    priceTypes = [
+      AppUtils.translate(context, 'whole_whole_sale'),
+      AppUtils.translate(context, 'whole_sale'),
+      AppUtils.translate(context, 'sale'),
+    ];
+
+    if (!gotFirstCategoryProducts) {
+      if (homeBloc.s_get_main_cat.value != null &&
+          homeBloc.s_get_main_cat.value.data != null) {
         homeBloc.getProductsByCat(homeBloc.s_get_main_cat.value.data[0].id);
         gotFirstCategoryProducts = true;
       }
     }
     return Scaffold(
       body: LoadingOverlay(
-        isLoading: adding,
+        isLoading: isLoading,
         progressIndicator: Loader(),
         color: Colors.white,
         opacity: .5,
@@ -65,199 +79,133 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(14.0),
-                child: Column(
-                  children: [
-                    MyTextFormField(
-                      hintText: AppUtils.translate(context, 'customer_name',),
-                    ),
-                    space(context),
-                    MyTextFormField(
-                      hintText: AppUtils.translate(context, 'customer_number'),
-                    ),
-                    space(context),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: secondColor,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(18.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => SelectLocationPage(
-                                        title: AppUtils.translate(context, 'add_customer_location'),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Row(
-                                  children: [
-                                    Image.asset('assets/images/location.png'),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Flexible(
-                                      child: Text(
-                                        AppUtils.translate(context, 'add_customer_location'),
-                                        style: TextStyle(
-                                          color: mainColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Icon(
-                              Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded,
-                              size: 16,
-                              color: mainColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              StreamBuilder<AllUsersResponse>(
+                stream: orderBloc.all_users.stream,
+                builder: (context, snapshot) {
+                  if (orderBloc.all_users.value.loading) {
+                    return Column(
                       children: [
-                        Text(
-                          AppUtils.translate(context, 'items'),
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                          ),
+                        SizedBox(
+                          height: size.width / 2,
                         ),
-                        MyButton2(
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                AppUtils.translate(context, 'add_item').toUpperCase(),
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 12),
-                              ),
-                            ],
-                          ),
-                          width: size.width * .4,
-                          height: 40,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => AddItemPage(),
-                              ),
-                            );
-                          },
+                        Loader(),
+                        SizedBox(
+                          height: size.width / 2,
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    DottedLine(
-                      direction: Axis.horizontal,
-                      lineLength: double.infinity,
-                      lineThickness: 1.0,
-                      dashLength: 4.0,
-                      dashColor: Colors.grey,
-                      dashRadius: 0.0,
-                      dashGapLength: 4.0,
-                      dashGapColor: Colors.transparent,
-                      dashGapRadius: 0.0,
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    MyTextFormField(
-                      hintText: AppUtils.translate(context, 'shop_owner_name'),
-                    ),
-                    space(context),
-                    MyTextFormField(
-                      hintText: AppUtils.translate(context, 'owner_number'),
-                    ),
-                    space(context),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: secondColor,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(18.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => SelectLocationPage(
-                                        title: AppUtils.translate(context, 'add_shop_location'),
-                                      ),
-                                    ),
+                    );
+                  } else {
+                    if (!gotData) {
+                      users = snapshot.data.data;
+                      selectedUser = users[0];
+                      selectedPriceType = priceTypes[0];
+                      gotData = true;
+                    }
+                    return Padding(
+                      padding: EdgeInsets.all(14.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(AppUtils.translate(context, 'customer_name')),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: secondColor.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<Users>(
+                                value: selectedUser,
+                                items: users.map((Users value) {
+                                  return new DropdownMenuItem<Users>(
+                                    value: value,
+                                    child: Text(
+                                        '${value.firstName} ${value.lastName}'),
                                   );
-                                },
-                                child: Row(
-                                  children: [
-                                    Image.asset('assets/images/location.png'),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Flexible(
-                                      child: Text(
-                                        AppUtils.translate(context, 'add_shop_location'),
-                                        style: TextStyle(
-                                          color: mainColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                }).toList(),
+                                onChanged: (user) {},
                               ),
                             ),
-                            Icon(
-                              Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded,
-                              size: 16,
-                              color: mainColor,
+                          ),
+                          space(context),
+                          Text(
+                              AppUtils.translate(context, 'customer_location')),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: secondColor.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    space(context),
-                    MyButton(AppUtils.translate(context, 'add'), onTap: () {
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<Users>(
+                                value: selectedUser,
+                                items: users.map((Users value) {
+                                  return new DropdownMenuItem<Users>(
+                                    value: value,
+                                    child: Text(
+                                        '${value.firstName} ${value.lastName}'),
+                                  );
+                                }).toList(),
+                                onChanged: (user) {},
+                              ),
+                            ),
+                          ),
+                          space(context),
+                          Text(AppUtils.translate(context, 'price_type')),
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: secondColor.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: selectedPriceType,
+                                items: priceTypes.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (priceType) {
+                                  setState(() {
+                                    selectedPriceType = priceType;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          space(context),
+                          MyButton(
+                            AppUtils.translate(context, 'next'),
+                            onTap: () async {
+                              setState(() {
+                                isLoading = true;
+                              });
 
-                    }),
-                    space(context),
-                    space(context),
-                  ],
-                ),
+                              var request = AddOrderRequest(
+                                userId: selectedUser.id.toString(),
+                                addressId: null,
+                                priceType: getPriceType(),
+                              );
+
+                              print(request.toString());
+
+                              var response = await orderBloc.addOrder(request);
+                              if(response.status == 1) {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              } else {
+                                AppUtils.showToast(msg: response.message);
+                              }
+                            },
+                          ),
+                          space(context),
+                          space(context),
+                        ],
+                      ),
+                    );
+                  }
+                },
               ),
             ],
           ),
@@ -270,5 +218,15 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
     return SizedBox(
       height: MediaQuery.of(context).padding.top,
     );
+  }
+
+  String getPriceType() {
+    if (selectedPriceType == priceTypes[0]) {
+      return '1';
+    } else if (selectedPriceType == priceTypes[1]) {
+      return '2';
+    } else {
+      return '3';
+    }
   }
 }
