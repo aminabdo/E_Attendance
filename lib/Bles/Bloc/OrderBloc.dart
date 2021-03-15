@@ -18,7 +18,7 @@ class OrderBloc extends BaseBloc {
   BehaviorSubject<BaseResponse> _add_product_to_pd_order = BehaviorSubject<BaseResponse>();
   BehaviorSubject<MakeBillResponse> _make_bill = BehaviorSubject<MakeBillResponse>();
 
-  Future<AllpdOrderResponse> all_p_d_Order() async {
+  Future<AllpdOrderResponse> allOrder() async {
     _all_pd_order.value = AllpdOrderResponse();
     _all_pd_order.value.loading = true ;
     AllpdOrderResponse response = AllpdOrderResponse.fromMap((await repository.get(ApiRoutes.all_p_d_Order())).data);
@@ -27,7 +27,7 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-  Future<AllpdOrderResponse> filter_P_d_orders_by_DMY(int type) async {
+  Future<AllpdOrderResponse> filterByDMY(int type) async {
     _all_pd_order.value = AllpdOrderResponse();
     _all_pd_order.value.loading = true ;
     AllpdOrderResponse response = AllpdOrderResponse.fromMap((await repository.get(ApiRoutes.filter_P_d_orders_by_DM(type))).data);
@@ -36,9 +36,7 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-
-
-  Future<AllpdOrderResponse> filter_P_d_orders_by_date(String from ,String to) async {
+  Future<AllpdOrderResponse> filterOrdersByDate(String from ,String to) async {
     _all_pd_order.value = AllpdOrderResponse();
     _all_pd_order.value.loading = true ;
     AllpdOrderResponse response = AllpdOrderResponse.fromMap((await repository.get(ApiRoutes.filter_P_d_orders_by_date(from,to))).data);
@@ -47,7 +45,7 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-  Future<SinglepdOrderResponse> single_P_d_order(int orderID) async {
+  Future<SinglepdOrderResponse> singleOrder(int orderID) async {
     _single_P_d_order.value = SinglepdOrderResponse();
     _single_P_d_order.value.loading = true ;
     SinglepdOrderResponse response = SinglepdOrderResponse.fromMap((await repository.get(ApiRoutes.single_P_d_order(orderID))).data);
@@ -56,14 +54,12 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-
   /// order scenario
   // 1 -> add_P_d_order
   // 2 -> add_product_to_P_d_order
   // 3 -> make_bill
 
-
-  Future<AddpdOrderResponse> add_P_d_order(AddpdOrderRequest request) async {
+  Future<AddpdOrderResponse> addOrder(AddpdOrderRequest request) async {
     _add_pd_order.value = AddpdOrderResponse();
     _add_pd_order.value.loading = true ;
     AddpdOrderResponse response = AddpdOrderResponse.fromMap((await repository.post(ApiRoutes.add_P_d_order() , request.toJson())).data);
@@ -72,8 +68,7 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-
-  Future<BaseResponse> add_product_to_P_d_order(AddProductTopdOrder request) async {
+  Future<BaseResponse> addProductToOrder(AddProductTopdOrder request) async {
     _add_product_to_pd_order.value = BaseResponse();
     _add_product_to_pd_order.value.loading = true ;
     BaseResponse response = null ;// BaseResponse.fromMap((await repository.post(ApiRoutes.add_P_d_order() , request.toJson())).data);
@@ -81,7 +76,6 @@ class OrderBloc extends BaseBloc {
     _add_product_to_pd_order.value.loading = false ;
     return response;
   }
-
 
   Future<MakeBillResponse> makeBill(int orderID , int discount_type,double discount , int tax1_type , int tax1, int tax2_type , int tax2 , double paid) async {
     _make_bill.value = MakeBillResponse();
@@ -92,18 +86,8 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-
-
-
-
-
-
-
-
-
-
-  BehaviorSubject<AllpdOrderResponse> get s_login => _all_pd_order;
+  BehaviorSubject<AllpdOrderResponse> get all_orders => _all_pd_order;
   BehaviorSubject<SinglepdOrderResponse> get s_single_P_d_order => _single_P_d_order;
 }
 
-final authBloc = OrderBloc();
+final orderBloc = OrderBloc();

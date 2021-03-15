@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/pages/auth/login_page.dart';
-import 'package:qimma/utils/consts.dart';
+import 'package:qimma/pages/auth/welcome_page.dart';
+import 'package:qimma/pages/home/home_page.dart';
+import 'package:qimma/utils/app_utils.dart';
+import 'package:qimma/widgets/welcome_background_image.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -14,12 +16,22 @@ class _SplashPageState extends State<SplashPage> {
 
     Future.delayed(
       Duration(seconds: 3),
-      () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) => LoginPage(),
-          ),
-        );
+      () async {
+        // AppUtils.firebaseToken = await AppUtils.firebaseMesseging.getToken();
+        AppUtils.userData = await AppUtils.getUserData();
+        if(AppUtils.userData == null) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (_) => WelcomePage(),
+            ),
+          );
+        } else {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (_) => HomePage(),
+            ),
+          );
+        }
       },
     );
   }
@@ -32,14 +44,14 @@ class _SplashPageState extends State<SplashPage> {
       body: Container(
         width: size.width,
         height: size.height,
-        decoration: BoxDecoration(
-          color: mainColor,
-        ),
-        child: Center(
-          child: Image.asset(
-            'assets/images/splash.png',
-            scale: 1,
-          ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+           WelcomeBackgroundImage(),
+            Image.asset(
+              'assets/images/logo.png',
+            ),
+          ],
         ),
       ),
     );

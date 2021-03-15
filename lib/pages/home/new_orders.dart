@@ -1,30 +1,65 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Bloc/OrderBloc.dart';
+import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
+import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
 import 'package:qimma/pages/home/order_details.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
+import 'package:qimma/widgets/my_loader.dart';
 
-class NewOrders extends StatelessWidget {
+class NewOrders extends StatefulWidget {
+
+  @override
+  _NewOrdersState createState() => _NewOrdersState();
+}
+
+class _NewOrdersState extends State<NewOrders> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    orderBloc.allOrder();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        return OrderItem();
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          height: 5,
-        );
-      },
-      itemCount: 5,
+    return StreamBuilder<AllpdOrderResponse>(
+      stream: orderBloc.all_orders.stream,
+      builder: (context, snapshot) {
+        if(orderBloc.all_orders.value.loading) {
+          return Loader();
+        } else {
+          return ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return OrderItem(
+                order: snapshot.data.data[index]
+              );
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: 5,
+              );
+            },
+            itemCount: snapshot.data.data.length,
+          );
+        }
+      }
     );
   }
 }
 
 class Item extends StatelessWidget {
+
+  final ProductsBean item;
+
+  const Item({Key key, this.item}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,27 +67,20 @@ class Item extends StatelessWidget {
       children: [
         Row(
           children: [
-            Image.asset('assets/images/shampo.png'),
+            CachedNetworkImage(imageUrl: item.ProductDetail.image, width: 35, height: 35,),
             SizedBox(
               width: 8,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "shampoo’s vegan",
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text(
-                  '250g x2',
-                  style: TextStyle(color: Colors.grey),
-                )
-              ],
+            Flexible(
+              child: Text(
+                item.ProductDetail.differenceAr,
+                style: TextStyle(color: Colors.grey),
+              ),
             ),
           ],
         ),
         Text(
-          '512 ${AppUtils.translate(context, 'eg')}',
+          '${item.ProductDetail.price} ${AppUtils.translate(context, 'eg')}',
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.red),
         ),
@@ -62,12 +90,19 @@ class Item extends StatelessWidget {
 }
 
 class OrderItem extends StatelessWidget {
+
+  final Order order;
+
+  const OrderItem({Key key, this.order}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderDetails(),),);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderDetails(
+          id: order.id,
+        ),),);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -95,8 +130,8 @@ class OrderItem extends StatelessWidget {
                             child: Text(
                               AppUtils.translate(context, 'delivery'),
                               style: TextStyle(
-                                color: Colors.grey,
                                 fontSize: 13,
+                                color: order.paymentMethod == 'online' ? mainColor : secondColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -110,14 +145,14 @@ class OrderItem extends StatelessWidget {
                           width: size.width / 4,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: mainColor),
-                            color: secondColor,
+                            border: Border.all(color: order.paymentMethod == 'online' ? mainColor : secondColor,),
+                            color: order.paymentMethod == 'online' ? mainColor : secondColor,
                           ),
                           child: Center(
                             child: Text(
                               AppUtils.translate(context, 'online_paid'),
                               style: TextStyle(
-                                color: mainColor,
+                                color: order.paymentMethod == 'online' ? mainColor : secondColor,
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -132,7 +167,7 @@ class OrderItem extends StatelessWidget {
                         SizedBox(
                           width: 5,
                         ),
-                        Text('15 ${AppUtils.translate(context, 'minutes')}',  style: TextStyle(color: Colors.black45),),
+                        Text('${order.status} ${AppUtils.translate(context, 'minutes')}',  style: TextStyle(color: Colors.black45),),
                       ],
                     ),
                   ],
@@ -147,7 +182,7 @@ class OrderItem extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      '#298498656458',
+                     order.id.toString(),
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
@@ -176,9 +211,11 @@ class OrderItem extends StatelessWidget {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return Item();
+                    return Item(
+                      item: order.products[index],
+                    );
                   },
-                  itemCount: 3,
+                  itemCount: order.products.length,
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       height: 8,
@@ -189,14 +226,14 @@ class OrderItem extends StatelessWidget {
                   height: 18,
                 ),
                 Text(AppUtils.translate(context, 'customer_name'), style: TextStyle(color: Colors.grey),),
-                Text('Mohamed Ahmed Mahmoud'),
+                Text(order.name),
                 SizedBox(
                   height: 12,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(AppUtils.translate(context, 'shop_location'), style: TextStyle(color: Colors.grey)),
+                    // Text(AppUtils.translate(context, 'shop_location'), style: TextStyle(color: Colors.grey)),
                     Text(AppUtils.translate(context, 'customer_location'), style: TextStyle(color: Colors.grey)),
                   ],
                 ),
@@ -208,22 +245,22 @@ class OrderItem extends StatelessWidget {
                         children: [
                           Image.asset('assets/images/location.png'),
                           SizedBox(width: 4,),
-                          Flexible(child: Text('123 Hoan Kiem, Ha...', style: TextStyle(color: mainColor, fontWeight: FontWeight.bold, fontSize: 12,),),),
+                          Flexible(child: Text(order.address, style: TextStyle(color: mainColor, fontWeight: FontWeight.bold, fontSize: 12,),),),
                           Icon(Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded, size: 16, color: mainColor,),
                         ],
                       ),
                     ),
-                    SizedBox(width: 8,),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/location.png'),
-                          SizedBox(width: 4,),
-                          Flexible(child: Text('123 Hoan Kiem, Ha...', style: TextStyle(color: mainColor, fontWeight: FontWeight.bold, fontSize: 12,),)),
-                          Icon(Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded, size: 16, color: mainColor,),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(width: 8,),
+                    // Expanded(
+                    //   child: Row(
+                    //     children: [
+                    //       Image.asset('assets/images/location.png'),
+                    //       SizedBox(width: 4,),
+                    //       Flexible(child: Text('3 Hoan Kiem, Ha...'12, style: TextStyle(color: mainColor, fontWeight: FontWeight.bold, fontSize: 12,),)),
+                    //       Icon(Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded, size: 16, color: mainColor,),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
                 SizedBox(
@@ -243,60 +280,60 @@ class OrderItem extends StatelessWidget {
                 SizedBox(
                   height: 18,
                 ),
-                Text(AppUtils.translate(context, 'shop_owner_amount'), style: TextStyle(color: Colors.grey)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '512 ${AppUtils.translate(context, 'eg')}',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: size.width / 4,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: secondColor,
-                          ),
-                          child: Center(
-                            child: Text(
-                              AppUtils.translate(context, 'deny'),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Container(
-                          height: 40,
-                          width: size.width / 4,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: mainColor,
-                          ),
-                          child: Center(
-                            child: Text(
-                              AppUtils.translate(context, 'accept'),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                // Text(AppUtils.translate(context, 'shop_owner_amount'), style: TextStyle(color: Colors.grey)),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       '512 ${AppUtils.translate(context, 'eg')}',
+                //       textAlign: TextAlign.right,
+                //       style: TextStyle(color: Colors.red),
+                //     ),
+                //     Row(
+                //       children: [
+                //         Container(
+                //           height: 40,
+                //           width: size.width / 4,
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(5),
+                //             color: secondColor,
+                //           ),
+                //           child: Center(
+                //             child: Text(
+                //               AppUtils.translate(context, 'deny'),
+                //               style: TextStyle(
+                //                 color: Colors.grey,
+                //                 fontSize: 13,
+                //                 fontWeight: FontWeight.bold,
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //         SizedBox(
+                //           width: 8,
+                //         ),
+                //         Container(
+                //           height: 40,
+                //           width: size.width / 4,
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(5),
+                //             color: mainColor,
+                //           ),
+                //           child: Center(
+                //             child: Text(
+                //               AppUtils.translate(context, 'accept'),
+                //               style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontSize: 13,
+                //                 fontWeight: FontWeight.bold,
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

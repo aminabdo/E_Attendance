@@ -36,7 +36,6 @@ dependencies:
   cached_network_image:
   shimmer: ^1.1.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

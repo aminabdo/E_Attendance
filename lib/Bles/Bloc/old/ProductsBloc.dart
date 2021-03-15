@@ -28,7 +28,6 @@ class ProductBloc extends BaseBloc {
 
   BehaviorSubject<SingleProductResponse> get single_product => _get_single_product;
   BehaviorSubject<ProductByCatResponse> get productsByCat => _get_products_by_cat;
-
 }
 
 final productBloc = ProductBloc();

@@ -13,6 +13,10 @@ class ApiRoutes {
     return "Auth_general/rep_login";
   }
 
+  static String signup(){
+    return "Auth_general/register";
+  }
+
   static String login_social(){
     return "Auth_general/login_social";
   }

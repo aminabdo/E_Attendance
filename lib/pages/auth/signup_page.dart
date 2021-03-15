@@ -382,45 +382,45 @@ class _SingupPageState extends State<SingupPage> {
       loading = true;
     });
 
-    // SignupResponse response = await authBloc.signup(
-    //   SignupRequest(
-    //     fireBaseToken: 'jjjjjjjj', // AppUtils.firebaseToken,
-    //     password: passwordController.text,
-    //     passwordConfirmation: confirmPasswordController.text,
-    //     phone: phoneController.text,
-    //     email: emailController.text,
-    //     firstName: firstNameController.text,
-    //     lastName: lastNameController.text,
-    //     lat: _locationData.latitude.toString(),
-    //     lng: _locationData.longitude.toString(),
-    //     verifyType: '1',
-    //     image: profileImage,
-    //   ),
-    // );
+    SignupResponse response = await authBloc.signup(
+      SignupRequest(
+        fireBaseToken: 'jjjjjjjj', // AppUtils.firebaseToken,
+        password: passwordController.text,
+        passwordConfirmation: confirmPasswordController.text,
+        phone: phoneController.text,
+        email: emailController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        lat: _locationData.latitude.toString(),
+        lng: _locationData.longitude.toString(),
+        verifyType: '1',
+        image: profileImage,
+      ),
+    );
 
-    // if (response.status == 1) {
-    //   setState(() {
-    //     loading = false;
-    //   });
-    //
-    //   AppUtils.userData = response.data;
-    //   await AppUtils.saveUserData(response.data);
-    //
-    //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
-    //       .then((value) {
-    //     passwordController.clear();
-    //     confirmPasswordController.clear();
-    //     emailController.clear();
-    //     phoneController.clear();
-    //     firstNameController.clear();
-    //     lastNameController.clear();
-    //   });
-    // } else {
-    //   AppUtils.showToast(msg: response.message);
-    //   setState(() {
-    //     loading = false;
-    //   });
-    //  }
+    if (response.status == 1) {
+      setState(() {
+        loading = false;
+      });
+
+      AppUtils.userData = response.data;
+      await AppUtils.saveUserData(response.data);
+
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
+          .then((value) {
+        passwordController.clear();
+        confirmPasswordController.clear();
+        emailController.clear();
+        phoneController.clear();
+        firstNameController.clear();
+        lastNameController.clear();
+      });
+    } else {
+      AppUtils.showToast(msg: response.message);
+      setState(() {
+        loading = false;
+      });
+     }
     }
   }
 }

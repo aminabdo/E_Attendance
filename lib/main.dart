@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:qimma/pages/auth/login_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
@@ -83,7 +84,7 @@ class _MyAppState extends State<MyApp> {
       home: Builder(
         builder: (context) {
           return Directionality(
-            child: HomePage(),
+            child: SplashPage(),
             textDirection: Localizations.localeOf(context).languageCode == 'ar'
                 ? TextDirection.rtl
                 : TextDirection.ltr,
