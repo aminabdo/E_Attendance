@@ -233,23 +233,35 @@ class _BillPageState extends State<BillPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: MyTextFormField(
-                          hintText: 'المجموع',
-                          enable: false,
-                          controller: totalPriceController,
-                          keyboardType: TextInputType.number,
-                          radius: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('المجموع'),
+                            MyTextFormField(
+                              hintText: '',
+                              enable: false,
+                              controller: totalPriceController,
+                              keyboardType: TextInputType.number,
+                              radius: 2,
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
                         width: 18,
                       ),
                       Expanded(
-                        child: MyTextFormField(
-                          hintText: 'المدفوع',
-                          controller: paidPriceController,
-                          keyboardType: TextInputType.number,
-                          radius: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('المدفوع'),
+                            MyTextFormField(
+                              hintText: '',
+                              controller: paidPriceController,
+                              keyboardType: TextInputType.number,
+                              radius: 2,
+                            ),
+                          ],
                         ),
                       ),
                     ],
