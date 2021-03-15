@@ -1,17 +1,17 @@
 import 'package:qimma/utils/base/BaseResponse.dart';
 
-class SinglepdOrderResponse extends BaseResponse {
+class MakeBillResponse  extends BaseResponse{
   int status;
-  Order data;
+  DataBean data;
   String message;
 
-  static SinglepdOrderResponse fromMap(Map<String, dynamic> map) {
+  static MakeBillResponse fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    SinglepdOrderResponse singlepdOrderBean = SinglepdOrderResponse();
-    singlepdOrderBean.status = map['status'];
-    singlepdOrderBean.data = Order.fromMap(map['data']);
-    singlepdOrderBean.message = map['message'];
-    return singlepdOrderBean;
+    MakeBillResponse makeBillResponseBean = MakeBillResponse();
+    makeBillResponseBean.status = map['status'];
+    makeBillResponseBean.data = DataBean.fromMap(map['data']);
+    makeBillResponseBean.message = map['message'];
+    return makeBillResponseBean;
   }
 
   Map toJson() => {
@@ -21,12 +21,12 @@ class SinglepdOrderResponse extends BaseResponse {
   };
 }
 
-class Order {
+class DataBean {
   int id;
   String priceType;
-  int totalPrice;
+  double totalPrice;
   int paid;
-  int rest;
+  double rest;
   int shippingPrice;
   String status;
   String email;
@@ -45,10 +45,9 @@ class Order {
   String createdAt;
   String updatedAt;
 
-
-  static Order fromMap(Map<String, dynamic> map) {
+  static DataBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    Order dataBean = Order();
+    DataBean dataBean = DataBean();
     dataBean.id = map['id'];
     dataBean.priceType = map['price_type'];
     dataBean.totalPrice = map['total_price'];
