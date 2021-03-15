@@ -59,7 +59,7 @@ class OrderBloc extends BaseBloc {
   // 2 -> add_product_to_P_d_order
   // 3 -> make_bill
 
-  Future<AddpdOrderResponse> addOrder(AddpdOrderRequest request) async {
+  Future<AddpdOrderResponse> addOrder(AddOrderRequest request) async {
     _add_pd_order.value = AddpdOrderResponse();
     _add_pd_order.value.loading = true ;
     AddpdOrderResponse response = AddpdOrderResponse.fromMap((await repository.post(ApiRoutes.add_P_d_order() , request.toJson())).data);

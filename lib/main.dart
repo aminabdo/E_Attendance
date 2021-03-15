@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:qimma/pages/auth/login_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
+import 'package:qimma/pages/orders/add_orders_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,7 +85,7 @@ class _MyAppState extends State<MyApp> {
       home: Builder(
         builder: (context) {
           return Directionality(
-            child: SplashPage(),
+            child: AddOrdersPage(),
             textDirection: Localizations.localeOf(context).languageCode == 'ar'
                 ? TextDirection.rtl
                 : TextDirection.ltr,

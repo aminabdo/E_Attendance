@@ -1,4 +1,4 @@
-class AddpdOrderRequest {
+class AddOrderRequest {
   String userId;
   String status;
   String paymentMethod;
@@ -6,9 +6,9 @@ class AddpdOrderRequest {
   String priceType;
   String shopId;
 
-  static AddpdOrderRequest fromMap(Map<String, dynamic> map) {
+  static AddOrderRequest fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    AddpdOrderRequest addpdOrderRequestBean = AddpdOrderRequest();
+    AddOrderRequest addpdOrderRequestBean = AddOrderRequest();
     addpdOrderRequestBean.userId = map['user_id'];
     addpdOrderRequestBean.status = map['status'];
     addpdOrderRequestBean.paymentMethod = map['payment_method'];
