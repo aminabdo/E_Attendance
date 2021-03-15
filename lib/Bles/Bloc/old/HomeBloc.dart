@@ -28,12 +28,13 @@ class HomeBloc extends BaseBloc {
 
   }
 
-  filter_website(int cat_id) async {
+  getProductsByCat(int cat_id) async {
     _filter_website.value = FilterWebSiteResponse();
     _filter_website.value.loading = true ;
     FilterWebSiteResponse response = FilterWebSiteResponse.fromMap((await repository.get(ApiRoutes.filter_website(cat_id))).data);
     _filter_website.value = response;
     _filter_website.value.loading = false ;
+    _filter_website.value = _filter_website.value;
   }
 
   search_by_name(String name) async {

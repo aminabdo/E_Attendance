@@ -13,6 +13,8 @@
   "register_new": "Register new?",
   "login": "Login",
   "or": "Or",
+  "first_name": "First name",
+  "last_name": "Last name",
   "facebook": "Facebook",
   "google": "Google",
   "email_or_phone": "Email or phone",

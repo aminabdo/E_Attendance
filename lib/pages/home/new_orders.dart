@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +8,14 @@ import 'package:qimma/pages/home/order_details.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_loader.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewOrders extends StatefulWidget {
-
   @override
   _NewOrdersState createState() => _NewOrdersState();
 }
 
 class _NewOrdersState extends State<NewOrders> {
-
   @override
   void initState() {
     super.initState();
@@ -28,34 +26,37 @@ class _NewOrdersState extends State<NewOrders> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<AllpdOrderResponse>(
-      stream: orderBloc.all_orders.stream,
-      builder: (context, snapshot) {
-        if(orderBloc.all_orders.value.loading) {
-          return Loader();
-        } else {
-          return ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return OrderItem(
-                order: snapshot.data.data[index]
-              );
-            },
-            separatorBuilder: (context, index) {
-              return SizedBox(
-                height: 5,
-              );
-            },
-            itemCount: snapshot.data.data.length,
-          );
-        }
-      }
+        stream: orderBloc.all_orders.stream,
+        builder: (context, snapshot) {
+          if (orderBloc.all_orders.value.loading) {
+            return Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.width / 2,),
+                Loader(),
+                SizedBox(height: MediaQuery.of(context).size.width / 2,),
+              ],
+            );
+          } else {
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return OrderItem(order: snapshot.data.data[index]);
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(
+                  height: 5,
+                );
+              },
+              itemCount: snapshot.data.data.length,
+            );
+          }
+        },
     );
   }
 }
 
 class Item extends StatelessWidget {
-
   final ProductsBean item;
 
   const Item({Key key, this.item}) : super(key: key);
@@ -63,21 +64,29 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            CachedNetworkImage(imageUrl: item.ProductDetail.image, width: 35, height: 35,),
-            SizedBox(
-              width: 8,
-            ),
-            Flexible(
-              child: Text(
-                item.ProductDetail.differenceAr,
-                style: TextStyle(color: Colors.grey),
+        Expanded(
+          child: Row(
+            children: [
+              CachedNetworkImage(
+                imageUrl: item.ProductDetail.image,
+                width: 35,
+                errorWidget: (_, __, ___) {
+                  return Image.asset('assets/images/no_image.png');
+                },
+                height: 35,
               ),
-            ),
-          ],
+              SizedBox(
+                width: 8,
+              ),
+              Flexible(
+                child: Text(
+                  '${item.ProductDetail.descAr}',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ],
+          ),
         ),
         Text(
           '${item.ProductDetail.price} ${AppUtils.translate(context, 'eg')}',
@@ -90,7 +99,6 @@ class Item extends StatelessWidget {
 }
 
 class OrderItem extends StatelessWidget {
-
   final Order order;
 
   const OrderItem({Key key, this.order}) : super(key: key);
@@ -100,9 +108,13 @@ class OrderItem extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => OrderDetails(
-          id: order.id,
-        ),),);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => OrderDetails(
+              id: order.id,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -117,58 +129,71 @@ class OrderItem extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          height: 35,
-                          width: size.width / 4,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: secondColor,
-                          ),
-                          child: Center(
-                            child: Text(
-                              AppUtils.translate(context, 'delivery'),
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: order.paymentMethod == 'online' ? mainColor : secondColor,
-                                fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: secondColor,
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  AppUtils.translate(context, 'delivery'),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: order.paymentMethod == 'online'
+                                        ? mainColor
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Container(
-                          height: 35,
-                          width: size.width / 4,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: order.paymentMethod == 'online' ? mainColor : secondColor,),
-                            color: order.paymentMethod == 'online' ? mainColor : secondColor,
+                          SizedBox(
+                            width: 8,
                           ),
-                          child: Center(
-                            child: Text(
-                              AppUtils.translate(context, 'online_paid'),
-                              style: TextStyle(
-                                color: order.paymentMethod == 'online' ? mainColor : secondColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
+                          Container(
+                            height: 35,
+                            width: size.width / 4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color:  mainColor
+                              ),
+                              color:  mainColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                order.paymentMethod,
+                                style: TextStyle(
+                                  color: secondColor,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Image.asset('assets/images/time.png'),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text('${order.status} ${AppUtils.translate(context, 'minutes')}',  style: TextStyle(color: Colors.black45),),
-                      ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Image.asset('assets/images/time.png'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '${order.status} ${AppUtils.translate(context, 'minutes')}',
+                            style: TextStyle(color: Colors.black45),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -182,15 +207,15 @@ class OrderItem extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                     order.id.toString(),
+                      order.id.toString(),
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
-                SizedBox(
+                order.products.isEmpty ? SizedBox.shrink() : SizedBox(
                   height: 10,
                 ),
-                Row(
+                order.products.isEmpty ? SizedBox.shrink() : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -207,7 +232,7 @@ class OrderItem extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                ListView.separated(
+                  order.products.isEmpty ? SizedBox.shrink() : ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
@@ -225,7 +250,10 @@ class OrderItem extends StatelessWidget {
                 SizedBox(
                   height: 18,
                 ),
-                Text(AppUtils.translate(context, 'customer_name'), style: TextStyle(color: Colors.grey),),
+                Text(
+                  AppUtils.translate(context, 'customer_name'),
+                  style: TextStyle(color: Colors.grey),
+                ),
                 Text(order.name),
                 SizedBox(
                   height: 12,
@@ -234,20 +262,51 @@ class OrderItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Text(AppUtils.translate(context, 'shop_location'), style: TextStyle(color: Colors.grey)),
-                    Text(AppUtils.translate(context, 'customer_location'), style: TextStyle(color: Colors.grey)),
+                    Text(AppUtils.translate(context, 'customer_location'),
+                        style: TextStyle(color: Colors.grey),
+                    ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/location.png'),
-                          SizedBox(width: 4,),
-                          Flexible(child: Text(order.address, style: TextStyle(color: mainColor, fontWeight: FontWeight.bold, fontSize: 12,),),),
-                          Icon(Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded, size: 16, color: mainColor,),
-                        ],
+                      child: GestureDetector(
+                        onTap: () async {
+                          String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
+                          if (await canLaunch(googleUrl)) {
+                            await launch(googleUrl);
+                          } else {
+                            print('https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
+                            AppUtils.showToast(msg: 'Could not open the map.');
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset('assets/images/location.png'),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Flexible(
+                              child: Text(
+                                order.address,
+                                style: TextStyle(
+                                  color: mainColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            Icon(
+                              Localizations.localeOf(context).languageCode ==
+                                      'en'
+                                  ? Icons.arrow_forward_ios_rounded
+                                  : Icons.arrow_back_ios_rounded,
+                              size: 16,
+                              color: mainColor,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     // SizedBox(width: 8,),
@@ -342,4 +401,3 @@ class OrderItem extends StatelessWidget {
     );
   }
 }
-

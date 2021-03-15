@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:qimma/pages/auth/login_page.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/pages/orders/add_orders_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'pages/spalsh/spalsh_page.dart';
 import 'pages/spalsh/spalsh_page.dart';
 import 'utils/app_localization.dart';
 import 'widgets/custom_scroll_behavior.dart';

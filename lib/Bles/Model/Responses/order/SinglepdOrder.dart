@@ -185,13 +185,13 @@ class Product_detailBean {
   String descAr;
   String descEn;
   String image;
-  String isOffer;
+  dynamic isOffer;
   String offerAmount;
   dynamic rate;
   String status;
   String price;
-  String lat;
-  String lng;
+  dynamic lat;
+  dynamic lng;
   String barcode;
   String createdAt;
   String updatedAt;

@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Bloc/old/HomeBloc.dart';
 import 'package:qimma/pages/orders/add_item_page.dart';
 import 'package:qimma/pages/orders/select_location_page.dart';
 import 'package:qimma/utils/app_utils.dart';
@@ -18,10 +19,24 @@ class AddOrdersPage extends StatefulWidget {
 class _AddOrdersPageState extends State<AddOrdersPage> {
 
   bool adding = false;
+  bool gotFirstCategoryProducts = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    homeBloc.get_main_cat();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    if(!gotFirstCategoryProducts) {
+      if(homeBloc.s_get_main_cat.value != null && homeBloc.s_get_main_cat.value.data != null) {
+        homeBloc.getProductsByCat(homeBloc.s_get_main_cat.value.data[0].id);
+        gotFirstCategoryProducts = true;
+      }
+    }
     return Scaffold(
       body: LoadingOverlay(
         isLoading: adding,
@@ -162,64 +177,6 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                     SizedBox(
                       height: 12,
                     ),
-                    // Container(
-                    //   padding: EdgeInsets.symmetric(horizontal: 8),
-                    //   decoration: BoxDecoration(
-                    //       color: secondColor,
-                    //       borderRadius: BorderRadius.circular(8),
-                    //   ),
-                    //   child: Column(
-                    //     children: [
-                    //       ListView.separated(
-                    //         shrinkWrap: true,
-                    //         physics: NeverScrollableScrollPhysics(),
-                    //         itemBuilder: (context, index) {
-                    //           return Row(
-                    //             children: [
-                    //               Icon(
-                    //                 Icons.cancel_outlined,
-                    //                 color: Colors.grey,
-                    //                 size: 20,
-                    //               ),
-                    //               SizedBox(
-                    //                 width: 8,
-                    //               ),
-                    //               Image.asset('assets/images/shampo.png'),
-                    //               SizedBox(
-                    //                 width: 8,
-                    //               ),
-                    //               Column(
-                    //                 crossAxisAlignment: CrossAxisAlignment.start,
-                    //                 children: [
-                    //                   Text(
-                    //                     "shampoo’s vegan",
-                    //                     style: TextStyle(color: Colors.black45),
-                    //                   ),
-                    //                   Text(
-                    //                     '250g x2',
-                    //                     style: TextStyle(color: Colors.grey),
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //             ],
-                    //           );
-                    //         },
-                    //         itemCount: 3,
-                    //         separatorBuilder: (BuildContext context, int index) {
-                    //           return SizedBox(
-                    //             height: 8,
-                    //           );
-                    //         },
-                    //       ),
-                    //       SizedBox(
-                    //         height: 18,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     DottedLine(
                       direction: Axis.horizontal,
                       lineLength: double.infinity,
@@ -230,6 +187,9 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                       dashGapLength: 4.0,
                       dashGapColor: Colors.transparent,
                       dashGapRadius: 0.0,
+                    ),
+                    SizedBox(
+                      height: 12,
                     ),
                     MyTextFormField(
                       hintText: AppUtils.translate(context, 'shop_owner_name'),
@@ -293,7 +253,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                     space(context),
                     MyButton(AppUtils.translate(context, 'add'), onTap: () {
 
-                    },),
+                    }),
                     space(context),
                     space(context),
                   ],

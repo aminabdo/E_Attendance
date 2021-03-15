@@ -7,6 +7,7 @@ import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_loader.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'new_orders.dart';
 
@@ -52,13 +53,20 @@ class _OrderDetailsState extends State<OrderDetails> {
                      actions: [
                        GestureDetector(
                          child: Image.asset('assets/images/location2.png'),
-                         onTap: () {
-                           Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                               builder: (_) => TrackOrderMapPage(),
-                             ),
-                           );
+                         onTap: () async {
+                           String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
+                           if (await canLaunch(googleUrl)) {
+                           await launch(googleUrl);
+                           } else {
+                           print('https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
+                           AppUtils.showToast(msg: 'Could not open the map.');
+                           }
+                           // Navigator.push(
+                           //   context,
+                           //   MaterialPageRoute(
+                           //     builder: (_) => TrackOrderMapPage(),
+                           //   ),
+                           // );
                          },
                        ),
                      ],
@@ -82,44 +90,49 @@ class _OrderDetailsState extends State<OrderDetails> {
                          ),
                        ),
                        Expanded(
-                         child: Row(
-                           children: [
-                             Expanded(
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.end,
+                         child: GestureDetector(
+                           onTap: () async {
+                             await launch("tel://${order.phone}");
+                           },
+                           child: Row(
+                             children: [
+                               Expanded(
+                                 child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.end,
+                                   children: [
+                                     Text(
+                                       AppUtils.translate(context, 'customer_number'),
+                                       style: TextStyle(color: Colors.grey),
+                                     ),
+                                     Text(
+                                       order.phone,
+                                       style: TextStyle(fontSize: 12),
+                                     ),
+                                   ],
+                                 ),
+                               ),
+                               Row(
                                  children: [
-                                   Text(
-                                     AppUtils.translate(context, 'customer_number'),
-                                     style: TextStyle(color: Colors.grey),
+                                   SizedBox(
+                                     width: 6,
                                    ),
-                                   Text(
-                                     order.phone,
-                                     style: TextStyle(fontSize: 12),
+                                   Image.asset(
+                                     'assets/images/phone.png',
+                                     width: 15,
+                                     height: 15,
                                    ),
+                                   SizedBox(
+                                     width: 6,
+                                   ),
+                                   Icon(
+                                     Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded,
+                                     color: Colors.black,
+                                     size: 15,
+                                   )
                                  ],
                                ),
-                             ),
-                             Row(
-                               children: [
-                                 SizedBox(
-                                   width: 6,
-                                 ),
-                                 Image.asset(
-                                   'assets/images/phone.png',
-                                   width: 15,
-                                   height: 15,
-                                 ),
-                                 SizedBox(
-                                   width: 6,
-                                 ),
-                                 Icon(
-                                   Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded,
-                                   color: Colors.black,
-                                   size: 15,
-                                 )
-                               ],
-                             ),
-                           ],
+                             ],
+                           ),
                          ),
                        ),
                      ],
@@ -128,50 +141,58 @@ class _OrderDetailsState extends State<OrderDetails> {
                    Row(
                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
-                       Row(
-                         children: [
-                           Container(
-                             height: 35,
-                             width: size.width / 4,
-                             decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(5),
-                               border: Border.all(color: order.paymentMethod == 'online' ? mainColor : secondColor,),
-                               color: order.paymentMethod == 'online' ? mainColor : secondColor,
-                             ),
-                             child: Center(
-                               child: Text(
-                                 AppUtils.translate(context, 'delivery'),
-                                 style: TextStyle(
-                                   color: Colors.grey,
-                                   fontSize: 13,
-                                   fontWeight: FontWeight.bold,
+                       Expanded(
+                         flex: 3,
+                         child: Row(
+                           children: [
+                             Container(
+                               height: 35,
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(5),
+                                 color: secondColor,
+                               ),
+                               child: Center(
+                                 child: Padding(
+                                   padding: EdgeInsets.symmetric(horizontal: 5),
+                                   child: Text(
+                                     AppUtils.translate(context, 'delivery'),
+                                     style: TextStyle(
+                                       fontSize: 13,
+                                       color: order.paymentMethod == 'online'
+                                           ? mainColor
+                                           : Colors.black,
+                                       fontWeight: FontWeight.bold,
+                                     ),
+                                   ),
                                  ),
                                ),
                              ),
-                           ),
-                           SizedBox(
-                             width: 8,
-                           ),
-                           Container(
-                             height: 35,
-                             width: size.width / 4,
-                             decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(5),
-                               border: Border.all(color: order.paymentMethod == 'online' ? mainColor : secondColor,),
-                               color: secondColor,
+                             SizedBox(
+                               width: 8,
                              ),
-                             child: Center(
-                               child: Text(
-                                 AppUtils.translate(context, 'online_paid'),
-                                 style: TextStyle(
-                                   color: order.paymentMethod == 'online' ? mainColor : secondColor,
-                                   fontSize: 13,
-                                   fontWeight: FontWeight.bold,
+                             Container(
+                               height: 35,
+                               width: size.width / 4,
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(5),
+                                 border: Border.all(
+                                     color:  mainColor
+                                 ),
+                                 color:  mainColor,
+                               ),
+                               child: Center(
+                                 child: Text(
+                                   order.paymentMethod,
+                                   style: TextStyle(
+                                     color: secondColor,
+                                     fontSize: 13,
+                                     fontWeight: FontWeight.bold,
+                                   ),
                                  ),
                                ),
                              ),
-                           ),
-                         ],
+                           ],
+                         ),
                        ),
                        Row(
                          children: [
@@ -180,7 +201,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                              width: 5,
                            ),
                            Text(
-                             '${order.status}',
+                             '${order.status} ${AppUtils.translate(context, 'minutes')}',
                              style: TextStyle(color: Colors.black45),
                            ),
                          ],
@@ -253,12 +274,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                      children: [
                        Expanded(
                          child: GestureDetector(
-                           onTap: () {
-                             // Navigator.of(context).push(
-                             //   MaterialPageRoute(
-                             //     builder: (_) => TrackOrderMapPage(),
-                             //   ),
-                             // );
+                           onTap: () async {
+                             String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
+                             if (await canLaunch(googleUrl)) {
+                               await launch(googleUrl);
+                             } else {
+                               print('https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
+                               AppUtils.showToast(msg: 'Could not open the map.');
+                             }
                            },
                            child: Row(
                              children: [

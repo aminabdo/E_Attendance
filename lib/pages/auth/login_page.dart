@@ -38,104 +38,106 @@ class _LoginPageState extends State<LoginPage> {
       color: Colors.white,
       opacity: .5,
       child: Scaffold(
-        body: Container(
-          width: size.width,
-          height: size.height,
-          child: Stack(
-            children: [
-              LoginBackgroundImage(),
-              Wrap(
-                children: [
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.all(screenUtil.setWidth(8)),
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: screenUtil.setHeight(30) * 2,
-                            ),
-                            MyAppBar(
-                              text: AppUtils.translate(context, 'login'),
-                              textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: screenUtil.setSp(18),
+        body: SingleChildScrollView(
+          child: Container(
+            width: size.width,
+            height: size.height,
+            child: Stack(
+              children: [
+                LoginBackgroundImage(),
+                Wrap(
+                  children: [
+                    SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.all(screenUtil.setWidth(8)),
+                        child: Form(
+                          key: formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: screenUtil.setHeight(30) * 2,
                               ),
-                              onBackBtnPressed: () {
-                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
-                              },
-                            ),
-                            SizedBox(
-                              height: screenUtil.setHeight(30) + screenUtil.setHeight(20),
-                            ),
-                            Center(
-                              child: Image.asset(
-                                'assets/images/login_image.png',
-                                scale: 1.2,
+                              MyAppBar(
+                                text: AppUtils.translate(context, 'login'),
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: screenUtil.setSp(18),
+                                ),
+                                onBackBtnPressed: () {
+                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
+                                },
                               ),
-                            ),
-                            SizedBox(
-                              height: screenUtil.setHeight(30) * 1.3,
-                            ),
-                            MyTextFormField(
-                              validator: (String input) {
-                                if (input.isEmpty) {
-                                  return AppUtils.translate(context, 'required');
-                                }
-                              },
+                              SizedBox(
+                                height: screenUtil.setHeight(30) + screenUtil.setHeight(20),
+                              ),
+                              Center(
+                                child: Image.asset(
+                                  'assets/images/login_image.png',
+                                  scale: 1.2,
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenUtil.setHeight(30) * 1.3,
+                              ),
+                              MyTextFormField(
+                                validator: (String input) {
+                                  if (input.isEmpty) {
+                                    return AppUtils.translate(context, 'required');
+                                  }
+                                },
 
-                              hintText: AppUtils.translate(context, 'email_or_phone'),
-                              controller: phoneOrEmailController,
-                            ),
-                            SizedBox(
-                              height: screenUtil.setHeight(30) - screenUtil.setHeight(10),
-                            ),
-                            MyTextFormField(
-                              controller: passwordController,
-                              validator: (String input) {
-                                if (input.isEmpty) {
-                                  return AppUtils.translate(context, 'required');
-                                }
-                              },
-                              hintText: AppUtils.translate(context, 'password'),
-                              obscureText: true,
-                            ),
-                            SizedBox(
-                              height: screenUtil.setHeight(30) - screenUtil.setHeight(20),
-                            ),
-                            Center(
-                              child: MyButton(
-                                AppUtils.translate(context, 'login'),
-                                width: size.width * .5,
-                                onTap: () {
-                                  validateAndLogin(context);
-                                },
+                                hintText: AppUtils.translate(context, 'email_or_phone'),
+                                controller: phoneOrEmailController,
                               ),
-                            ),
-                            SizedBox(
-                              height: screenUtil.setHeight(15),
-                            ),
-                            Center(
-                              child: ClickableText(
-                                text: AppUtils.translate(context, 'forget_password'),
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => ForgetPasswordPage()));
-                                },
+                              SizedBox(
+                                height: screenUtil.setHeight(30) - screenUtil.setHeight(10),
                               ),
-                            ),
-                            SizedBox(
-                              height: screenUtil.setHeight(30) - screenUtil.setHeight(30),
-                            ),
-                          ],
+                              MyTextFormField(
+                                controller: passwordController,
+                                validator: (String input) {
+                                  if (input.isEmpty) {
+                                    return AppUtils.translate(context, 'required');
+                                  }
+                                },
+                                hintText: AppUtils.translate(context, 'password'),
+                                obscureText: true,
+                              ),
+                              SizedBox(
+                                height: screenUtil.setHeight(30) - screenUtil.setHeight(20),
+                              ),
+                              Center(
+                                child: MyButton(
+                                  AppUtils.translate(context, 'login'),
+                                  width: size.width * .5,
+                                  onTap: () {
+                                    validateAndLogin(context);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenUtil.setHeight(15),
+                              ),
+                              Center(
+                                child: ClickableText(
+                                  text: AppUtils.translate(context, 'forget_password'),
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => ForgetPasswordPage()));
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenUtil.setHeight(30) - screenUtil.setHeight(30),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
