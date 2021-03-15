@@ -21,6 +21,7 @@ class OrderBloc extends BaseBloc {
   BehaviorSubject<AllUsersResponse> _allUsers = BehaviorSubject<AllUsersResponse>();
   BehaviorSubject<AllProductsResponse> _allProducts = BehaviorSubject<AllProductsResponse>();
   BehaviorSubject<MakeBillResponse> _make_bill = BehaviorSubject<MakeBillResponse>();
+  BehaviorSubject<double> paid = BehaviorSubject<double>();
 
   Future<AllpdOrderResponse> allOrder() async {
     _all_order.value = AllpdOrderResponse();
