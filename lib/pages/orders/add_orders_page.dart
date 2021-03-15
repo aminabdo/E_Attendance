@@ -215,7 +215,9 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
 
                                 AppUtils.showToast(msg: AppUtils.translate(context, 'done'), bgColor: mainColor);
                                 orderBloc.getAllProducts();
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProductsPage()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProductsPage(
+                                  orderId: response.data.id,
+                                ),),);
 
                               } else {
                                 AppUtils.showToast(msg: response.message);

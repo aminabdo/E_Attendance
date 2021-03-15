@@ -50,15 +50,18 @@ class ApiRoutes {
 
   // add order
 
-  static String add_P_d_order(){
+  static String add_P_d_order() {
     return "Order/add_P_d_order";
   }
+
   static String edit_P_d_order(int orderID){
     return "Order/edit_P_d_order/$orderID";
   }
+
   static String delete_P_d_order(int orderID){
     return "Order/delete_P_d_order/$orderID";
   }
+
   static String add_product_to_P_d_order(int orderID){
     return "Order/add_product_to_P_d_order/$orderID";
   }

@@ -28,12 +28,6 @@ class OrdersBean {
 
   OrdersBean({this.productDetailId, this.quantity, this.colorId, this.sizeId});
 
-
-  @override
-  String toString() {
-    return 'OrdersBean{productDetailId: $productDetailId, quantity: $quantity, colorId: $colorId, sizeId: $sizeId}';
-  }
-
   static OrdersBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     OrdersBean ordersBean = OrdersBean();

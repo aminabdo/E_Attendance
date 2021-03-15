@@ -5,12 +5,19 @@ import 'package:qimma/Bles/Model/Requests/AddProductTopdOrder.dart';
 import 'package:qimma/Bles/Model/Responses/order/AllProductsResponse.dart';
 import 'package:qimma/pages/orders/orders_pointer.dart';
 import 'package:qimma/utils/app_utils.dart';
+import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
 import 'package:qimma/widgets/my_button2.dart';
 import 'package:qimma/widgets/my_loader.dart';
 
+import 'bill_page.dart';
+
 class ProductsPage extends StatefulWidget {
+  final dynamic orderId;
+
+  const ProductsPage({Key key, @required this.orderId}) : super(key: key);
+
   @override
   _ProductsPageState createState() => _ProductsPageState();
 }
@@ -54,6 +61,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 )
               ],
             ),
+            btnColor: OrdersPointer.selectedProducts.isEmpty ? mat.Colors.grey : mainColor,
             onTap: OrdersPointer.selectedProducts.isEmpty
                 ? null
                 : () async {
@@ -61,11 +69,16 @@ class _ProductsPageState extends State<ProductsPage> {
                       isLoading = true;
                     });
 
-                    var request = AddProductTopdOrder(
-                        orders: OrdersPointer.selectedProducts);
+                    var request = AddProductTopdOrder(orders: OrdersPointer.selectedProducts);
                     print(request);
 
-                    orderBloc.addProductToOrder(request);
+                    var response = await orderBloc.addProductToOrder(widget.orderId, request);
+                    if(response['status'] == 0) {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => BillPage(orderId: widget.orderId,)));
+                      AppUtils.showToast(msg: AppUtils.translate(context, 'done'));
+                    } else {
+                      AppUtils.showToast(msg: response.message);
+                    }
                   },
           ),
         ),
@@ -285,32 +298,23 @@ class _ProductItemState extends State<ProductItem> {
                         ),
                         onTap: () {
                           if (counter > 1) {
-                            print('-----------------  0');
                             counter--;
-                            price =
-                                (double.parse(widget.product.purchasingPrice) *
-                                    counter);
+                            price = (double.parse(widget.product.purchasingPrice) * counter);
                             if (counter <= 1) {
                               OrdersPointer.selectedProducts.forEach((element) {
-                                if (element.productDetailId.toString() ==
-                                    widget.product.id.toString()) {
-                                  OrdersPointer.selectedProducts
-                                      .remove(element);
+                                if (element.productDetailId.toString() == widget.product.id.toString()) {OrdersPointer.selectedProducts.remove(element);
                                 }
                               });
                             } else {
                               OrdersPointer.selectedProducts.forEach((element) {
-                                if (element.productDetailId.toString() ==
-                                    widget.product.id.toString()) {
+                                if (element.productDetailId.toString() == widget.product.id.toString()) {
                                   element.quantity = counter;
                                 }
                               });
                             }
                             setState(() {});
                           } else {
-                            print('-----------------  2');
-                            price =
-                                double.parse(widget.product.purchasingPrice);
+                            price = double.parse(widget.product.purchasingPrice);
                             setState(() {});
                           }
 

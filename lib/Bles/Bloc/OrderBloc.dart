@@ -72,12 +72,9 @@ class OrderBloc extends BaseBloc {
     return response;
   }
 
-  Future<BaseResponse> addProductToOrder(AddProductTopdOrder request) async {
+  Future addProductToOrder(dynamic orderId, AddProductTopdOrder request) async {
     _add_product_to_order.value = BaseResponse();
-    _add_product_to_order.value.loading = true ;
-    BaseResponse response = null ;// BaseResponse.fromMap((await repository.post(ApiRoutes.add_P_d_order() , request.toJson())).data);
-    _add_product_to_order.value = response;
-    _add_product_to_order.value.loading = false ;
+    var response = await (await repository.post(ApiRoutes.add_product_to_P_d_order(orderId) , request.toJson())).data;
     return response;
   }
 
@@ -106,6 +103,7 @@ class OrderBloc extends BaseBloc {
       int tax2_type,
       int tax2,
       double paid) async {
+
     _make_bill.value = MakeBillResponse();
     _make_bill.value.loading = true ;
     MakeBillResponse response = MakeBillResponse.fromMap((await repository.get(ApiRoutes.make_bill(orderID, discount_type, discount, tax1_type, tax1, tax2_type, tax2, paid))).data);

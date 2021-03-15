@@ -21,6 +21,7 @@ class MyTextFormField extends StatelessWidget {
   final Color bgColor;
   final String errorMsg;
   final bool enable;
+  final double radius;
 
   MyTextFormField({
     Key key,
@@ -43,7 +44,7 @@ class MyTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.bgColor,
     this.errorMsg,
-    this.enable = true,
+    this.enable = true, this.radius,
   }) : super(key: key);
 
   final double borderRadius = 15;
@@ -56,7 +57,7 @@ class MyTextFormField extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: bgColor ?? secondColor.withOpacity(.2),
-            borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: BorderRadius.circular(radius ?? borderRadius),
           ),
           child: TextFormField(
             textAlign: TextAlign.justify,
@@ -74,28 +75,28 @@ class MyTextFormField extends StatelessWidget {
                   right: screenUtil.setWidth(10),
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: BorderRadius.circular(radius ?? borderRadius),
                   borderSide: BorderSide(
                     color: borderColor ?? mainColor,
                     width: borderWidth ?? 2.3,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: BorderRadius.circular(radius ?? borderRadius),
                   borderSide: BorderSide(
                     color: borderColor ?? mainColor,
                     width: borderWidth ?? 2.3,
                   ),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: BorderRadius.circular(radius ?? borderRadius),
                   borderSide: BorderSide(
                     color: Colors.red,
                     width: borderWidth ?? 2.3,
                   ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius),
+                  borderRadius: BorderRadius.circular(radius ?? borderRadius),
                   borderSide: BorderSide(
                     color: Colors.red,
                     width: borderWidth ?? 2.3,
