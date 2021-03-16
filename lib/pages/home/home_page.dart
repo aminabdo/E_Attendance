@@ -65,6 +65,7 @@ class _HomePageState extends State<HomePage> {
                         GestureDetector(
                           child: Image.asset('assets/images/logout.png'),
                           onTap: () {
+                            AppUtils.removeUserData();
                             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => LoginPage()), (route) => false);
                           },
                         ),

@@ -50,6 +50,11 @@ class AppUtils {
     return currentUser;
   }
 
+  static removeUserData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.remove('currentUser');
+  }
+
   static showToast({@required msg, Color bgColor}) {
     Fluttertoast.showToast(
       msg: msg,
