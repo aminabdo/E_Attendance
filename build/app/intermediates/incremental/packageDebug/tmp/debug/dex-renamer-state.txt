@@ -1,7 +1,7 @@
-#Wed Mar 17 01:33:05 EET 2021
-base.0=/Users/amin/Documents/work/codecaique/flutter/qimma-mandob/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+#Wed Mar 17 16:41:16 EET 2021
+base.0=F\:\\Work\\CodeCaique Projects\\Qimma\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/amin/Documents/work/codecaique/flutter/qimma-mandob/build/app/intermediates/dex/debug/mergeDexDebug/out/classes2.dex
+base.1=F\:\\Work\\CodeCaique Projects\\Qimma\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes2.dex
