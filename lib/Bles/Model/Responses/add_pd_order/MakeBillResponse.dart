@@ -24,7 +24,7 @@ class MakeBillResponse  extends BaseResponse{
 class DataBean {
   int id;
   String priceType;
-  double totalPrice;
+  dynamic totalPrice;
   int paid;
   double rest;
   int shippingPrice;

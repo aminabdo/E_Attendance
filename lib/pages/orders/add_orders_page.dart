@@ -201,7 +201,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
 
                               var request = AddOrderRequest(
                                 userId: selectedUser.id.toString(),
-                                addressId: selectedAddress.id.toString(),
+                                addressId: selectedAddress.id.toString() ?? null,
                                 priceType: getPriceType(),
                               );
 

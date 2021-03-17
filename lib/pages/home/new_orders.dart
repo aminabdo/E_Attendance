@@ -81,7 +81,7 @@ class Item extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  '${item.ProductDetail.descAr}',
+                  '${item.ProductDetail.main_Product_name}',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -89,7 +89,7 @@ class Item extends StatelessWidget {
           ),
         ),
         Text(
-          '${item.ProductDetail.price} ${AppUtils.translate(context, 'eg')}',
+          '${item.ProductDetail.Selling_price} ${AppUtils.translate(context, 'eg')}',
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.red),
         ),
@@ -189,7 +189,7 @@ class OrderItem extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '${order.status} ${AppUtils.translate(context, 'minutes')}',
+                            '${order.createdAt} ${AppUtils.translate(context, 'minutes')}',
                             style: TextStyle(color: Colors.black45),
                           ),
                         ],

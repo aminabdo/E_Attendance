@@ -71,6 +71,7 @@ class Order {
       (map['products'] as List ?? []).map((o) => ProductsBean.fromMap(o))
     );
     dataBean.createdAt = map['created_at'];
+
     dataBean.updatedAt = map['updated_at'];
     return dataBean;
   }
@@ -191,9 +192,17 @@ class Product_detailBean {
   String price;
   dynamic lat;
   dynamic lng;
-  String barcode;
   String createdAt;
   String updatedAt;
+  dynamic main_product_id;
+  dynamic main_Product_name;
+  dynamic desc;
+  dynamic Difference;
+  dynamic Purchasing_price;
+  dynamic Wholesale_wholesale_price;
+  dynamic Wholesale_price;
+  dynamic Selling_price;
+  dynamic barcode;
 
   static Product_detailBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -215,6 +224,15 @@ class Product_detailBean {
     product_detailBean.barcode = map['barcode'];
     product_detailBean.createdAt = map['created_at'];
     product_detailBean.updatedAt = map['updated_at'];
+    product_detailBean.main_product_id = map['main_product_id'];
+    product_detailBean.main_Product_name = map['main_Product_name'];
+    product_detailBean.desc = map['desc'];
+    product_detailBean.Difference = map['Difference'];
+    product_detailBean.Purchasing_price = map['Purchasing_price'];
+    product_detailBean.Wholesale_wholesale_price = map['Wholesale_wholesale_price'];
+    product_detailBean.Wholesale_price = map['Wholesale_price'];
+    product_detailBean.Selling_price = map['Selling_price'];
+    product_detailBean.barcode = map['barcode'];
     return product_detailBean;
   }
 
@@ -236,5 +254,14 @@ class Product_detailBean {
     "barcode": barcode,
     "created_at": createdAt,
     "updated_at": updatedAt,
+    "main_product_id": main_product_id,
+    "main_Product_name": main_Product_name,
+    "desc": desc,
+    "Difference": Difference,
+    "Purchasing_price": Purchasing_price,
+    "Wholesale_wholesale_price": Wholesale_wholesale_price,
+    "Wholesale_price": Wholesale_price,
+    "Selling_price": Selling_price,
+    "barcode": barcode,
   };
 }
