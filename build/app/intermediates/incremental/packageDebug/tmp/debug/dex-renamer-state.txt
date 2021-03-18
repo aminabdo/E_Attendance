@@ -1,4 +1,4 @@
-#Wed Mar 17 16:41:16 EET 2021
+#Thu Mar 18 14:17:39 EET 2021
 base.0=F\:\\Work\\CodeCaique Projects\\Qimma\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex

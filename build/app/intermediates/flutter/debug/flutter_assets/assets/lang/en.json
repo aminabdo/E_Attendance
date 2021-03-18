@@ -103,5 +103,11 @@
   "add_location": "Add Location",
   "add_new_order": "Add new order",
   "search_for_product": "Search for product",
-  "add": "Add"
+  "add": "Add",
+
+
+  "drawer_page" : "============Drawer=============",
+  "edit_profile": "Edit Profile",
+  "change_language": "Change Language",
+  "clients_info": "Clients Information"
 }

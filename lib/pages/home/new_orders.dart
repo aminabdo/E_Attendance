@@ -189,7 +189,8 @@ class OrderItem extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '${order.createdAt} ${AppUtils.translate(context, 'minutes')}',
+                            '${order.createdAt.length} ${AppUtils.translate(context, 'minutes')}',
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.black45),
                           ),
                         ],

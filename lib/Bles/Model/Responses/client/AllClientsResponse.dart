@@ -1,34 +1,46 @@
+import 'package:qimma/utils/base/BaseResponse.dart';
 
-class Client {
+class AllClientsResponse extends BaseResponse {
   int status;
-  List<Data> data;
+  List<Client> data;
   String message;
 
-  Client({this.status, this.data, this.message});
-
-  Client.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    if (json['data'] != null) {
-      data = new List<Data>();
-      json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
-      });
-    }
-    message = json['message'];
+  static AllClientsResponse fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    AllClientsResponse allClientsResponseBean = AllClientsResponse();
+    allClientsResponseBean.status = map['status'];
+    allClientsResponseBean.data = List()
+      ..addAll((map['data'] as List ?? []).map((o) => Client.fromMap(o)));
+    allClientsResponseBean.message = map['message'];
+    return allClientsResponseBean;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
-    }
-    data['message'] = this.message;
-    return data;
-  }
+  Map toJson() => {
+        "status": status,
+        "data": data,
+        "message": message,
+      };
 }
 
-class Data {
+/// id : 342
+/// first_name : "Abanoub"
+/// last_name : "Fakhery"
+/// image : "https://qimmaapi.codecaique.com/public/images/users/11645252291615464694.png"
+/// fire_base_token : "jjjjjjjj"
+/// phone : "01023798556"
+/// email : "abanoub728@gmail.com"
+/// status : 0
+/// social : 0
+/// notification : 1
+/// message : 1
+/// lang : null
+/// lat : "37.4220014"
+/// lng : "-122.084013"
+/// debt : 140646.68
+/// currency_id : 0
+/// addresses : [{"id":180,"user_id":"342","lat":"29.076321","lng":"31.09693","address":"Beni Suef","created_at":"2021-03-11 12:32:20","updated_at":"2021-03-11 12:32:20"}]
+
+class Client {
   int id;
   String firstName;
   String lastName;
@@ -40,83 +52,68 @@ class Data {
   int social;
   int notification;
   int message;
-  Null lang;
+  dynamic lang;
   String lat;
   String lng;
-  double debt;
+  dynamic debt;
   int currencyId;
-  List<Addresses> addresses;
+  List<AddressesBean> addresses;
 
-  Data(
-      {this.id,
-        this.firstName,
-        this.lastName,
-        this.image,
-        this.fireBaseToken,
-        this.phone,
-        this.email,
-        this.status,
-        this.social,
-        this.notification,
-        this.message,
-        this.lang,
-        this.lat,
-        this.lng,
-        this.debt,
-        this.currencyId,
-        this.addresses});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    image = json['image'];
-    fireBaseToken = json['fire_base_token'];
-    phone = json['phone'];
-    email = json['email'];
-    status = json['status'];
-    social = json['social'];
-    notification = json['notification'];
-    message = json['message'];
-    lang = json['lang'];
-    lat = json['lat'];
-    lng = json['lng'];
-    debt = json['debt'];
-    currencyId = json['currency_id'];
-    if (json['addresses'] != null) {
-      addresses = new List<Addresses>();
-      json['addresses'].forEach((v) {
-        addresses.add(new Addresses.fromJson(v));
-      });
-    }
+  static Client fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    Client dataBean = Client();
+    dataBean.id = map['id'];
+    dataBean.firstName = map['first_name'];
+    dataBean.lastName = map['last_name'];
+    dataBean.image = map['image'];
+    dataBean.fireBaseToken = map['fire_base_token'];
+    dataBean.phone = map['phone'];
+    dataBean.email = map['email'];
+    dataBean.status = map['status'];
+    dataBean.social = map['social'];
+    dataBean.notification = map['notification'];
+    dataBean.message = map['message'];
+    dataBean.lang = map['lang'];
+    dataBean.lat = map['lat'];
+    dataBean.lng = map['lng'];
+    dataBean.debt = map['debt'];
+    dataBean.currencyId = map['currency_id'];
+    dataBean.addresses = List()
+      ..addAll((map['addresses'] as List ?? [])
+          .map((o) => AddressesBean.fromMap(o)));
+    return dataBean;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['image'] = this.image;
-    data['fire_base_token'] = this.fireBaseToken;
-    data['phone'] = this.phone;
-    data['email'] = this.email;
-    data['status'] = this.status;
-    data['social'] = this.social;
-    data['notification'] = this.notification;
-    data['message'] = this.message;
-    data['lang'] = this.lang;
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
-    data['debt'] = this.debt;
-    data['currency_id'] = this.currencyId;
-    if (this.addresses != null) {
-      data['addresses'] = this.addresses.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map toJson() => {
+        "id": id,
+        "first_name": firstName,
+        "last_name": lastName,
+        "image": image,
+        "fire_base_token": fireBaseToken,
+        "phone": phone,
+        "email": email,
+        "status": status,
+        "social": social,
+        "notification": notification,
+        "message": message,
+        "lang": lang,
+        "lat": lat,
+        "lng": lng,
+        "debt": debt,
+        "currency_id": currencyId,
+        "addresses": addresses,
+      };
 }
 
-class Addresses {
+/// id : 180
+/// user_id : "342"
+/// lat : "29.076321"
+/// lng : "31.09693"
+/// address : "Beni Suef"
+/// created_at : "2021-03-11 12:32:20"
+/// updated_at : "2021-03-11 12:32:20"
+
+class AddressesBean {
   int id;
   String userId;
   String lat;
@@ -125,34 +122,26 @@ class Addresses {
   String createdAt;
   String updatedAt;
 
-  Addresses(
-      {this.id,
-        this.userId,
-        this.lat,
-        this.lng,
-        this.address,
-        this.createdAt,
-        this.updatedAt});
-
-  Addresses.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    lat = json['lat'];
-    lng = json['lng'];
-    address = json['address'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+  static AddressesBean fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    AddressesBean addressesBean = AddressesBean();
+    addressesBean.id = map['id'];
+    addressesBean.userId = map['user_id'];
+    addressesBean.lat = map['lat'];
+    addressesBean.lng = map['lng'];
+    addressesBean.address = map['address'];
+    addressesBean.createdAt = map['created_at'];
+    addressesBean.updatedAt = map['updated_at'];
+    return addressesBean;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
-    data['address'] = this.address;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
+  Map toJson() => {
+        "id": id,
+        "user_id": userId,
+        "lat": lat,
+        "lng": lng,
+        "address": address,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+      };
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:qimma/Bles/Bloc/ClientsBloc/client_bloc.dart';
 import 'package:qimma/pages/client/client_info_page.dart';
+import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,7 +73,10 @@ class _MyAppState extends State<MyApp> {
           value: SystemUiOverlayStyle.dark.copyWith(
             statusBarColor: Colors.transparent,
           ),
-          child: ScrollConfiguration(child: child, behavior: CustomScrollBehavior(),),
+          child: ScrollConfiguration(
+            child: child,
+            behavior: CustomScrollBehavior(),
+          ),
         );
       },
       supportedLocales: [
@@ -84,8 +90,8 @@ class _MyAppState extends State<MyApp> {
       home: Builder(
         builder: (context) {
           return Directionality(
-            //child: SplashPage(),
-            child: ClientInfoPage(),
+            child: SplashPage(),
+           //  child: ClientInfoPage(),
             textDirection: Localizations.localeOf(context).languageCode == 'ar'
                 ? TextDirection.rtl
                 : TextDirection.ltr,

@@ -231,6 +231,11 @@ class ApiRoutes {
   }
 
 
+  // rep_users
+
+  static String all_users(){
+    return "Order/all_users";
+  }
 }
 
 class ApiRoutesUpdate {

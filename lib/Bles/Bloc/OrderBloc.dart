@@ -13,49 +13,60 @@ import 'package:qimma/utils/base/BaseResponse.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OrderBloc extends BaseBloc {
-
-  BehaviorSubject<AllpdOrderResponse> _all_order = BehaviorSubject<AllpdOrderResponse>();
-  BehaviorSubject<SinglepdOrderResponse> _single_order = BehaviorSubject<SinglepdOrderResponse>();
-  BehaviorSubject<AddpdOrderResponse> _add_order = BehaviorSubject<AddpdOrderResponse>();
-  BehaviorSubject<BaseResponse> _add_product_to_order = BehaviorSubject<BaseResponse>();
-  BehaviorSubject<AllUsersResponse> _allUsers = BehaviorSubject<AllUsersResponse>();
-  BehaviorSubject<AllProductsResponse> _allProducts = BehaviorSubject<AllProductsResponse>();
-  BehaviorSubject<MakeBillResponse> _make_bill = BehaviorSubject<MakeBillResponse>();
+  BehaviorSubject<AllpdOrderResponse> _all_order =
+      BehaviorSubject<AllpdOrderResponse>();
+  BehaviorSubject<SinglepdOrderResponse> _single_order =
+      BehaviorSubject<SinglepdOrderResponse>();
+  BehaviorSubject<AddpdOrderResponse> _add_order =
+      BehaviorSubject<AddpdOrderResponse>();
+  BehaviorSubject<BaseResponse> _add_product_to_order =
+      BehaviorSubject<BaseResponse>();
+  BehaviorSubject<AllUsersResponse> _allUsers =
+      BehaviorSubject<AllUsersResponse>();
+  BehaviorSubject<AllProductsResponse> _allProducts =
+      BehaviorSubject<AllProductsResponse>();
+  BehaviorSubject<MakeBillResponse> _make_bill =
+      BehaviorSubject<MakeBillResponse>();
   BehaviorSubject<double> amount = BehaviorSubject<double>();
 
   Future<AllpdOrderResponse> allOrder() async {
     _all_order.value = AllpdOrderResponse();
-    _all_order.value.loading = true ;
-    AllpdOrderResponse response = AllpdOrderResponse.fromMap((await repository.get(ApiRoutes.all_p_d_Order())).data);
+    _all_order.value.loading = true;
+    AllpdOrderResponse response = AllpdOrderResponse.fromMap(
+        (await repository.get(ApiRoutes.all_p_d_Order())).data);
     _all_order.value = response;
-    _all_order.value.loading = false ;
+    _all_order.value.loading = false;
     return response;
   }
 
   Future<AllpdOrderResponse> filterByDMY(int type) async {
     _all_order.value = AllpdOrderResponse();
-    _all_order.value.loading = true ;
-    AllpdOrderResponse response = AllpdOrderResponse.fromMap((await repository.get(ApiRoutes.filter_P_d_orders_by_DM(type))).data);
+    _all_order.value.loading = true;
+    AllpdOrderResponse response = AllpdOrderResponse.fromMap(
+        (await repository.get(ApiRoutes.filter_P_d_orders_by_DM(type))).data);
     _all_order.value = response;
-    _all_order.value.loading = false ;
+    _all_order.value.loading = false;
     return response;
   }
 
-  Future<AllpdOrderResponse> filterOrdersByDate(String from ,String to) async {
+  Future<AllpdOrderResponse> filterOrdersByDate(String from, String to) async {
     _all_order.value = AllpdOrderResponse();
-    _all_order.value.loading = true ;
-    AllpdOrderResponse response = AllpdOrderResponse.fromMap((await repository.get(ApiRoutes.filter_P_d_orders_by_date(from,to))).data);
+    _all_order.value.loading = true;
+    AllpdOrderResponse response = AllpdOrderResponse.fromMap(
+        (await repository.get(ApiRoutes.filter_P_d_orders_by_date(from, to)))
+            .data);
     _all_order.value = response;
-    _all_order.value.loading = false ;
+    _all_order.value.loading = false;
     return response;
   }
 
   Future<SinglepdOrderResponse> singleOrder(int orderID) async {
     _single_order.value = SinglepdOrderResponse();
-    _single_order.value.loading = true ;
-    SinglepdOrderResponse response = SinglepdOrderResponse.fromMap((await repository.get(ApiRoutes.single_P_d_order(orderID))).data);
+    _single_order.value.loading = true;
+    SinglepdOrderResponse response = SinglepdOrderResponse.fromMap(
+        (await repository.get(ApiRoutes.single_P_d_order(orderID))).data);
     _single_order.value = response;
-    _single_order.value.loading = false ;
+    _single_order.value.loading = false;
     return response;
   }
 
@@ -66,23 +77,28 @@ class OrderBloc extends BaseBloc {
 
   Future<AddpdOrderResponse> addOrder(AddOrderRequest request) async {
     _add_order.value = AddpdOrderResponse();
-    _add_order.value.loading = true ;
-    AddpdOrderResponse response = AddpdOrderResponse.fromMap((await repository.post(ApiRoutes.add_P_d_order() , request.toJson())).data);
+    _add_order.value.loading = true;
+    AddpdOrderResponse response = AddpdOrderResponse.fromMap(
+        (await repository.post(ApiRoutes.add_P_d_order(), request.toJson()))
+            .data);
     _add_order.value = response;
-    _add_order.value.loading = false ;
+    _add_order.value.loading = false;
     return response;
   }
 
   Future addProductToOrder(dynamic orderId, AddProductTopdOrder request) async {
     _add_product_to_order.value = BaseResponse();
-    var response = await (await repository.post(ApiRoutes.add_product_to_P_d_order(orderId) , request.toJson())).data;
+    var response = await (await repository.post(
+            ApiRoutes.add_product_to_P_d_order(orderId), request.toJson()))
+        .data;
     return response;
   }
 
   Future<AllUsersResponse> getAllUsers() async {
     _allUsers.value = AllUsersResponse();
     _allUsers.value.loading = true;
-    _allUsers.value = AllUsersResponse.fromJson((await repository.get(ApiRoutes.getAllUsers() )).data);
+    _allUsers.value = AllUsersResponse.fromJson(
+        (await repository.get(ApiRoutes.getAllUsers())).data);
     _allUsers.value.loading = false;
     return _allUsers.value;
   }
@@ -90,7 +106,8 @@ class OrderBloc extends BaseBloc {
   Future<AllProductsResponse> getAllProducts() async {
     _allProducts.value = AllProductsResponse();
     _allProducts.value.loading = true;
-    _allProducts.value = AllProductsResponse.fromJson((await repository.get(ApiRoutes.getAllProducts() )).data);
+    _allProducts.value = AllProductsResponse.fromJson(
+        (await repository.get(ApiRoutes.getAllProducts())).data);
     _allProducts.value.loading = false;
     return _allProducts.value;
   }
@@ -104,19 +121,22 @@ class OrderBloc extends BaseBloc {
       int tax2_type,
       int tax2,
       double paid) async {
-
     _make_bill.value = MakeBillResponse();
-    _make_bill.value.loading = true ;
-    MakeBillResponse response = MakeBillResponse.fromMap((await repository.get(ApiRoutes.make_bill(orderID, discount_type, discount, tax1_type, tax1, tax2_type, tax2, paid))).data);
+    _make_bill.value.loading = true;
+    MakeBillResponse response = MakeBillResponse.fromMap((await repository.get(
+            ApiRoutes.make_bill(orderID, discount_type, discount, tax1_type,
+                tax1, tax2_type, tax2, paid)))
+        .data);
     _make_bill.value = response;
-    _make_bill.value.loading = false ;
+    _make_bill.value.loading = false;
     return response;
   }
 
   BehaviorSubject<AllpdOrderResponse> get all_orders => _all_order;
   BehaviorSubject<AllUsersResponse> get all_users => _allUsers;
   BehaviorSubject<AllProductsResponse> get all_products => _allProducts;
-  BehaviorSubject<SinglepdOrderResponse> get s_single_P_d_order => _single_order;
+  BehaviorSubject<SinglepdOrderResponse> get s_single_P_d_order =>
+      _single_order;
 }
 
 final orderBloc = OrderBloc();

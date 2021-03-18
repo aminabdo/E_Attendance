@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Bloc/ClientsBloc/client_bloc.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/Bles/Model/Requests/ClientRequests.dart';
+import 'package:qimma/widgets/my_loader.dart';
 
 class ClientInfoPage extends StatefulWidget {
   @override
@@ -11,12 +11,13 @@ class ClientInfoPage extends StatefulWidget {
 }
 
 class _ClientInfoPageState extends State<ClientInfoPage> {
-  AllClientsRepository allClientsRepository;
-  List<Data> clientsData;
+
+
   @override
   void initState() {
-    //allClientsRepository.getAllClients().then((value) => clientsData = value);
     super.initState();
+
+    clientBloc.getAllClients();
   }
 
   @override
@@ -46,8 +47,22 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                     "بيانات العملاء",
                     style: TextStyle(fontSize: 20),
                   ),
-                  Container(
-                    width: 10,
+                  FloatingActionButton(
+                    onPressed: () {
+                      Navigator.pop(
+                        context,
+                      );
+                    },
+                    elevation: 0,
+                    focusElevation: 0,
+                    highlightElevation: 0,
+                    backgroundColor: secondColor,
+                    mini: true,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.black,
+                      size: 18,
+                    ),
                   ),
                 ],
               ),
@@ -56,65 +71,78 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
           SizedBox(
             height: 50,
           ),
-          clientsData == null ?Container() :Flexible(
-            child: Container(
-              // height: 100,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30))),
-              child: ListView.separated(
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.only(right: 10, left: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(clientsData[index].firstName),
-                            Text(clientsData[index].id.toString()),
-                            Text(clientsData[index].debt.toString())
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: googleColor,
-                                ),
-                                onPressed: () {}),
-                            IconButton(
-                              icon: Icon(
-                                Icons.money,
-                                color: mainColor,
-                              ),
-                              onPressed: () {},
-                            )
-                          ],
-                        )
-                      ],
+              Flexible(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30))),
+                    child: StreamBuilder<AllClientsResponse>(
+                      stream: clientBloc.all_clents.stream,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (clientBloc.all_clents.value.loading) {
+                          return Loader();
+                        } else {
+                          AllClientsResponse client = snapshot.data;
+                          return ListView.separated(
+                                  itemCount: 20,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      padding:
+                                          EdgeInsets.only(right: 10, left: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(client.data[index].firstName ?? ''),
+                                              Text(client.data[index].id.toString() ?? ''),
+                                              Text(client.data[index].debt.toString() ?? '')
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              IconButton(
+                                                  icon: Icon(
+                                                    Icons.delete,
+                                                    color: googleColor,
+                                                  ),
+                                                  onPressed: () {}),
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.money,
+                                                  color: mainColor,
+                                                ),
+                                                onPressed: () {},
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      thickness: 1.5,
+                                      endIndent: 5,
+                                      indent: 5,
+                                    );
+                                  },
+                                );
+                        }
+                      },
                     ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 1.5,
-                    endIndent: 5,
-                    indent: 5,
-                  );
-                },
-              ),
-            ),
-          )
+                  ),
+                )
         ],
       ),
     );
