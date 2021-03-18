@@ -109,5 +109,6 @@
   "drawer_page" : "============Drawer=============",
   "edit_profile": "Edit Profile",
   "change_language": "Change Language",
-  "clients_info": "Clients Information"
+  "clients_info": "Clients Information",
+  "home_page_title": "Home Page"
 }

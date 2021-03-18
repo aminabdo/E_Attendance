@@ -4,7 +4,7 @@ import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../ApiRoute.dart';
+import '../ApiRoute.dart';
 
 class ClientBloc extends BaseBloc {
   BehaviorSubject<AllClientsResponse> _all_clents =

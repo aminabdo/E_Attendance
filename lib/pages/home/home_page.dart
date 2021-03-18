@@ -1,8 +1,8 @@
-
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Model/Requests/EditProfileRequest.dart';
 import 'package:qimma/main.dart';
 import 'package:qimma/pages/auth/login_page.dart';
 import 'package:qimma/pages/client/client_info_page.dart';
@@ -29,7 +29,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xffF0F0F0),
@@ -67,25 +68,25 @@ class _HomePageState extends State<HomePage> {
                           '${AppUtils.translate(context, 'hi')}, ${AppUtils.userData?.firstName ?? ''}',
                       leading: AppUtils.userData?.image != null
                           ? GestureDetector(
-                        onTap: (){
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                            child: CircleAvatar(
+                              onTap: () {
+                                _scaffoldKey.currentState.openDrawer();
+                              },
+                              child: CircleAvatar(
                                 radius: 25,
                                 backgroundImage: CachedNetworkImageProvider(
                                     AppUtils.userData?.image),
                               ),
-                          )
+                            )
                           : GestureDetector(
-                        onTap: (){
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                            child: Image.asset(
+                              onTap: () {
+                                _scaffoldKey.currentState.openDrawer();
+                              },
+                              child: Image.asset(
                                 'assets/images/avatar.jpg',
                                 width: 20,
                                 height: 20,
                               ),
-                          ),
+                            ),
                       actions: [
                         GestureDetector(
                           onTap: () async {
@@ -140,85 +141,179 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: Padding(
-          padding: EdgeInsets.only(  left: 5, right: 5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height*0.3,),
-              Padding(
-                padding: const EdgeInsets.only(top: 10 , bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('${AppUtils.translate(context, 'change_language')}' , style: TextStyle(
-                      color: mainColor, fontSize: 16
-                    ),),
-                    Switch(
-                        value: switchValue,
-                        onChanged: (val){
-                          setState(() {
-                            switchValue = val;
-                          });
+      drawer: buildDrawer(context, _scaffoldKey),
+    );
+  }
+
+  Drawer buildDrawer(
+      BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey) {
+    return Drawer(
+      child: Padding(
+        padding: EdgeInsets.only(left: 5, right: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+            ),
+            AppUtils.userData?.image != null
+                ? Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => EditProfile(),
+                          ),
+                        );
+                      },
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => EditProfile(),
+                            ),
+                          );
                         },
-                      activeColor: mainColor,
-                    )
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: CachedNetworkImageProvider(
+                              AppUtils.userData?.image),
+                        ),
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      child: Image.asset(
+                        'assets/images/avatar.jpg',
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
+                  ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => EditProfile(),
+                      builder: (_) => HomePage(),
                     ),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: Text('${AppUtils.translate(context, 'edit_profile')}', style: TextStyle(
-                      color: mainColor, fontSize: 16
-                  ),),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10 , bottom: 10),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => ClientInfoPage(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    child: Text('${AppUtils.translate(context, 'clients_info')}', style: TextStyle(
-                        color: mainColor, fontSize: 16
-                    ),),
+                child: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      textDirection: TextDirection.ltr,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.home_sharp),
+                        Text(
+                          '${AppUtils.translate(context, 'home_page_title')}',
+                          style: TextStyle(color: mainColor, fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10 , bottom: 10),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => HomePage(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${AppUtils.translate(context, 'change_language')}',
+                    style: TextStyle(color: mainColor, fontSize: 16),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: mainColor),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              "عربي",
+                              style: TextStyle(
+                                color: mainColor,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    child: Text('${AppUtils.translate(context, 'home_page')}', style: TextStyle(
-                        color: mainColor, fontSize: 16
-                    ),),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: mainColor),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              "English",
+                              style: TextStyle(
+                                color: mainColor,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ClientInfoPage(),
+                    ),
+                  );
+                },
+                child: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      textDirection: TextDirection.ltr,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.notes),
+                        Text(
+                          '${AppUtils.translate(context, 'clients_info')}',
+                          style: TextStyle(color: mainColor, fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );

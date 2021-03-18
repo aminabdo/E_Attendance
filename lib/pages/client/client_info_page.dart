@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/ClientsBloc/client_bloc.dart';
+import 'file:///F:/Work/CodeCaique%20Projects/Qimma/lib/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_loader.dart';
@@ -40,13 +40,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 10,
-                  ),
-                  Text(
-                    "بيانات العملاء",
-                    style: TextStyle(fontSize: 20),
-                  ),
                   FloatingActionButton(
                     onPressed: () {
                       Navigator.pop(
@@ -63,6 +56,13 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                       color: Colors.black,
                       size: 18,
                     ),
+                  ),
+                  Text(
+                    "بيانات العملاء",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Container(
+                    width: 10,
                   ),
                 ],
               ),

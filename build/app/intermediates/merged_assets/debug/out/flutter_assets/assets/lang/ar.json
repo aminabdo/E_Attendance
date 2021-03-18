@@ -108,5 +108,6 @@
   "drawer_page" : "============Drawer=============",
   "edit_profile": "تعديل البروفايل",
   "change_language": "تغيير اللغة",
-  "clients_info": "بيانات العملاء"
+  "clients_info": "بيانات العملاء",
+  "home_page_title": "الصفحة الرئيسية"
 }
