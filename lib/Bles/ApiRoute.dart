@@ -102,8 +102,20 @@ class ApiRoutes {
     return "Order/all_users";
   }
 
+  static String getClientsOfRepresentative(){
+    return "Representative/users_of_representative";
+  }
+
   static String getAllProducts(){
     return "Order/all_Product_details";
+  }
+
+  static String getAllProductsByRating(){
+    return "Product/get_products?type=1";
+  }
+
+  static String getAllProductsWithoutRating(){
+    return "Product/get_products?type=4";
   }
 
 

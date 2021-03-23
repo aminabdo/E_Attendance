@@ -19,8 +19,19 @@ class ClientBloc extends BaseBloc {
     _all_clents.value.loading = false;
     return response;
   }
+/*
+  Future<AllClientsResponse> getClientsOfRepresentative() async {
+    _all_clents.value = AllClientsResponse();
+    _all_clents.value.loading = true;
+    AllClientsResponse response = AllClientsResponse.fromMap(
+        (await repository.get(ApiRoutes.getClientsOfRepresentative())).data);
+    _all_clents.value = response;
+    _all_clents.value.loading = false;
+    return response;
+  }
+  */
 
-  BehaviorSubject<AllClientsResponse> get all_clents => _all_clents;
+  BehaviorSubject<AllClientsResponse> get all_clients => _all_clents;
 }
 
 final clientBloc = ClientBloc();

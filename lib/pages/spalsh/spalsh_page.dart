@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qimma/pages/auth/welcome_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
+import 'package:qimma/pages/home/home_test.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/widgets/welcome_background_image.dart';
 

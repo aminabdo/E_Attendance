@@ -58,7 +58,7 @@
   "hi": "اهلا ",
   "search_by_id": "بحث بكود الطلب",
   "new_orders": "الطلبات الجديدة",
-  "ongoing_orders": "الطلبات الحاليه",
+  "ongoing_orders": "الطلبات المنتهية",
   "delivery": "توصيل",
   "online_paid": "الدفع الكتروني",
   "minutes": "دقيقة",
@@ -108,6 +108,27 @@
   "drawer_page" : "============Drawer=============",
   "edit_profile": "تعديل البروفايل",
   "change_language": "تغيير اللغة",
-  "clients_info": "بيانات العملاء",
-  "home_page_title": "الصفحة الرئيسية"
+  "clients_info": "العملاء",
+  "home_page_title": "الصفحة الرئيسية",
+  "show_all_products": "عرض جميع المنتجات",
+
+
+  "edit_profile_page" : "============Edit Profile Page=============",
+  "edit_profile_page_title": "تعديل الصفحة الشخصية",
+
+
+  "all_clients_page" : "============All Clients Page=============",
+  "all_clients_page_title": "العملاء",
+  "all_clients_page_name": "الاسم",
+  "all_clients_page_dept": "المديونية",
+
+
+  "all_clients_of_representative_page" : "============All Clients of Representative Page=============",
+  "all_clients_of_representative_page_title": "قائمة عملائك",
+
+
+  "show_products_page" : "============Products Page=============",
+  "show_products_page_title": "المنتجات",
+  "show_products_by_rating": "أعلى تقييم",
+  "show_products_without_rating": "بدون تقييم"
 }

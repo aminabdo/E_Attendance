@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
 import 'package:qimma/Bles/Bloc/old/HomeBloc.dart';
@@ -135,14 +134,17 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                     selectedUser = user;
                                     addresses = [];
                                     addresses = selectedUser.addresses;
-                                    selectedAddress = addresses.isNotEmpty ? addresses[0] : null;
+                                    selectedAddress = addresses.isNotEmpty
+                                        ? addresses[0]
+                                        : null;
                                   });
                                 },
                               ),
                             ),
                           ),
                           space(context),
-                          Text(AppUtils.translate(context, 'customer_location')),
+                          Text(
+                              AppUtils.translate(context, 'customer_location')),
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -201,24 +203,30 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
 
                               var request = AddOrderRequest(
                                 userId: selectedUser.id.toString(),
-                                addressId: selectedAddress.id.toString() ?? null,
+                                addressId:
+                                    selectedAddress.id.toString() ?? null,
                                 priceType: getPriceType(),
                               );
 
                               print(request.toString());
 
                               var response = await orderBloc.addOrder(request);
-                              if(response.status == 1) {
+                              if (response.status == 1) {
                                 setState(() {
                                   isLoading = false;
                                 });
 
-                                AppUtils.showToast(msg: AppUtils.translate(context, 'done'), bgColor: mainColor);
+                                AppUtils.showToast(
+                                    msg: AppUtils.translate(context, 'done'),
+                                    bgColor: mainColor);
                                 orderBloc.getAllProducts();
-                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProductsPage(
-                                  orderId: response.data.id,
-                                ),),);
-
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => ProductsPage(
+                                      orderId: response.data.id,
+                                    ),
+                                  ),
+                                );
                               } else {
                                 AppUtils.showToast(msg: response.message);
                                 setState(() {

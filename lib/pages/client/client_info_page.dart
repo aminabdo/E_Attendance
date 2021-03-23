@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'file:///F:/Work/CodeCaique%20Projects/Qimma/lib/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
+import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
+import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_loader.dart';
 
 class ClientInfoPage extends StatefulWidget {
@@ -11,8 +13,6 @@ class ClientInfoPage extends StatefulWidget {
 }
 
 class _ClientInfoPageState extends State<ClientInfoPage> {
-
-
   @override
   void initState() {
     super.initState();
@@ -36,113 +36,89 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                     bottomRight: Radius.circular(30))),
             child: Padding(
               padding: EdgeInsets.only(top: statusBarHeight),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                      );
-                    },
-                    elevation: 0,
-                    focusElevation: 0,
-                    highlightElevation: 0,
-                    backgroundColor: secondColor,
-                    mini: true,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.black,
-                      size: 18,
-                    ),
-                  ),
-                  Text(
-                    "بيانات العملاء",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
+              child: MyAppBar(
+                text: "${AppUtils.translate(context, 'all_clients_page_title')}",
               ),
             ),
           ),
           SizedBox(
             height: 50,
           ),
-              Flexible(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30))),
-                    child: StreamBuilder<AllClientsResponse>(
-                      stream: clientBloc.all_clents.stream,
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (clientBloc.all_clents.value.loading) {
-                          return Loader();
-                        } else {
-                          AllClientsResponse client = snapshot.data;
-                          return ListView.separated(
-                                  itemCount: 20,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      padding:
-                                          EdgeInsets.only(right: 10, left: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(client.data[index].firstName ?? ''),
-                                              Text(client.data[index].id.toString() ?? ''),
-                                              Text(client.data[index].debt.toString() ?? '')
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              IconButton(
-                                                  icon: Icon(
-                                                    Icons.delete,
-                                                    color: googleColor,
-                                                  ),
-                                                  onPressed: () {}),
-                                              IconButton(
-                                                icon: Icon(
-                                                  Icons.money,
-                                                  color: mainColor,
-                                                ),
-                                                onPressed: () {},
-                                              )
-                                            ],
-                                          )
-                                        ],
+          Flexible(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
+              child: StreamBuilder<AllClientsResponse>(
+                stream: clientBloc.all_clients.stream,
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (clientBloc.all_clients.value.loading) {
+                    return Loader();
+                  } else {
+                    AllClientsResponse client = snapshot.data;
+                    return ListView.separated(
+                      itemCount: client.data.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.only(right: 10, left: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(client.data[index].firstName +
+                                          ' ' +
+                                          client.data[index].lastName ??
+                                      ''),
+                                  SizedBox(height: 10,),
+
+                                  // Text(client.data[index].id.toString() ?? ''),
+                                  Text(client.data[index].debt.toString() ?? '')
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: googleColor,
                                       ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return Divider(
-                                      thickness: 1.5,
-                                      endIndent: 5,
-                                      indent: 5,
-                                    );
-                                  },
-                                );
-                        }
+                                      onPressed: () {}),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.money,
+                                      color: mainColor,
+                                    ),
+                                    onPressed: () {},
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        );
                       },
-                    ),
-                  ),
-                )
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          thickness: 1.5,
+                          endIndent: 5,
+                          indent: 5,
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          )
         ],
       ),
     );

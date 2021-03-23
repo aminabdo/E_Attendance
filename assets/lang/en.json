@@ -109,10 +109,26 @@
   "drawer_page" : "============Drawer=============",
   "edit_profile": "Edit Profile",
   "change_language": "Change Language",
-  "clients_info": "Clients Information",
+  "clients_info": "Clients",
   "home_page_title": "Home Page",
+  "show_all_products": "Show All Products",
 
   "edit_profile_page" : "============Edit Profile Page=============",
   "edit_profile_page_title": "Edit Profile",
+
+
+  "all_clients_page" : "============All Clients Page=============",
+  "all_clients_page_title": "Clients",
+  "all_clients_page_name": "Name",
+  "all_clients_page_dept": "Dept",
+
+
+  "all_clients_of_representative_page" : "============All Clients of Representative Page=============",
+  "all_clients_of_representative_page_title": "Your Clients",
+
+  "show_products_page" : "============Products Page=============",
+  "show_products_page_title": "Products",
+  "show_products_by_rating": "By Rating",
+  "show_products_without_rating": "Without Rating"
 
 }
