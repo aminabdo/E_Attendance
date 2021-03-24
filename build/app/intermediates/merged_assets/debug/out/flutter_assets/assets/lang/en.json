@@ -94,6 +94,7 @@
   "distance": "Distance",
   "estimate": "Estimate",
   "drop_off": "Drop off",
+  "delivered": "Delivered",
 
   "add_new_order_page" : "============Add New Order Page=============",
   "add_customer_location": "Add customer location",
@@ -112,6 +113,8 @@
   "clients_info": "Clients",
   "home_page_title": "Home Page",
   "show_all_products": "Show All Products",
+  "attend_and_leave": "Attend and leave",
+
 
   "edit_profile_page" : "============Edit Profile Page=============",
   "edit_profile_page_title": "Edit Profile",
@@ -121,14 +124,33 @@
   "all_clients_page_title": "Clients",
   "all_clients_page_name": "Name",
   "all_clients_page_dept": "Dept",
+  "all_clients_page_add": "Add",
+
+
+  "attendance_page" : "============Attendance Page=============",
+  "attendance_page_attend": "Attend",
+  "attendance_page_leave": "Leave",
+  "attendance_page_note": "Note",
+  "attendance_page_register": "Register",
+  "attendance_page_msg": "Please Select Attend or Leave",
+
+
 
 
   "all_clients_of_representative_page" : "============All Clients of Representative Page=============",
   "all_clients_of_representative_page_title": "Your Clients",
+  "all_clients_of_representative_page_add_client": "Add Client",
 
   "show_products_page" : "============Products Page=============",
   "show_products_page_title": "Products",
   "show_products_by_rating": "By Rating",
-  "show_products_without_rating": "Without Rating"
+  "show_products_without_rating": "Without Rating",
+  "show_products_filtering": "Filter",
 
+
+  "set_dept_page" : "============Set Dept Page=============",
+  "set_dept_page_title": "Debt settlement",
+  "set_dept_page_subtraction": "Subtraction",
+  "set_dept_page_addition": "Addition",
+  "set_dept_page_amount": "Amount"
 }

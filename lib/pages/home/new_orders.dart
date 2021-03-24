@@ -19,39 +19,43 @@ class _NewOrdersState extends State<NewOrders> {
   @override
   void initState() {
     super.initState();
-
     orderBloc.allOrder();
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<AllpdOrderResponse>(
-        stream: orderBloc.all_orders.stream,
-        builder: (context, snapshot) {
-          if (orderBloc.all_orders.value.loading) {
-            return Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).size.width / 2,),
-                Loader(),
-                SizedBox(height: MediaQuery.of(context).size.width / 2,),
-              ],
-            );
-          } else {
-            return ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return OrderItem(order: snapshot.data.data[index]);
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox(
-                  height: 5,
-                );
-              },
-              itemCount: snapshot.data.data.length,
-            );
-          }
-        },
+      stream: orderBloc.all_orders.stream,
+      builder: (context, snapshot) {
+        if (orderBloc.all_orders.value.loading) {
+          return Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 2,
+              ),
+              Loader(),
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 2,
+              ),
+            ],
+          );
+        } else {
+          return ListView.separated(
+            shrinkWrap: true,
+              physics: const AlwaysScrollableScrollPhysics(),
+           // physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return OrderItem(order: snapshot.data.data[index]);
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: 5,
+              );
+            },
+            itemCount: snapshot.data.data.length,
+          );
+        }
+      },
     );
   }
 }
@@ -162,10 +166,8 @@ class OrderItem extends StatelessWidget {
                             width: size.width / 4,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color:  mainColor
-                              ),
-                              color:  mainColor,
+                              border: Border.all(color: mainColor),
+                              color: mainColor,
                             ),
                             child: Center(
                               child: Text(
@@ -213,41 +215,47 @@ class OrderItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                order.products.isEmpty ? SizedBox.shrink() : SizedBox(
-                  height: 10,
-                ),
-                order.products.isEmpty ? SizedBox.shrink() : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${AppUtils.translate(context, 'items')}: ',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Text(
-                      AppUtils.translate(context, 'customer_amount'),
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
+                order.products.isEmpty
+                    ? SizedBox.shrink()
+                    : SizedBox(
+                        height: 10,
+                      ),
+                order.products.isEmpty
+                    ? SizedBox.shrink()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${AppUtils.translate(context, 'items')}: ',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            AppUtils.translate(context, 'customer_amount'),
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
                 SizedBox(
                   height: 10,
                 ),
-                  order.products.isEmpty ? SizedBox.shrink() : ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Item(
-                      item: order.products[index],
-                    );
-                  },
-                  itemCount: order.products.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 8,
-                    );
-                  },
-                ),
+                order.products.isEmpty
+                    ? SizedBox.shrink()
+                    : ListView.separated(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Item(
+                            item: order.products[index],
+                          );
+                        },
+                        itemCount: order.products.length,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: 8,
+                          );
+                        },
+                      ),
                 SizedBox(
                   height: 18,
                 ),
@@ -263,8 +271,9 @@ class OrderItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Text(AppUtils.translate(context, 'shop_location'), style: TextStyle(color: Colors.grey)),
-                    Text(AppUtils.translate(context, 'customer_location'),
-                        style: TextStyle(color: Colors.grey),
+                    Text(
+                      AppUtils.translate(context, 'customer_location'),
+                      style: TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
@@ -274,11 +283,13 @@ class OrderItem extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () async {
-                          String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
+                          String googleUrl =
+                              'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
                           if (await canLaunch(googleUrl)) {
                             await launch(googleUrl);
                           } else {
-                            print('https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
+                            print(
+                                'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
                             AppUtils.showToast(msg: 'Could not open the map.');
                           }
                         },

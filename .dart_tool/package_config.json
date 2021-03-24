@@ -188,6 +188,12 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "flutter_image_slideshow",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image_slideshow-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "flutter_launcher_icons",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.8.1",
       "packageUri": "lib/",
@@ -602,7 +608,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-03-18T08:03:36.504623Z",
+  "generated": "2021-03-24T10:01:51.410719Z",
   "generator": "pub",
   "generatorVersion": "2.12.0"
 }

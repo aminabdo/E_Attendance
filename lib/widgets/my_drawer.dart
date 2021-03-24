@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/pages/attendance/attendance_page.dart';
 import 'package:qimma/pages/client/client_info_page.dart';
+import 'package:qimma/pages/client/clients_of_representative.dart';
 import 'package:qimma/pages/editProfile/edit_profile.dart';
 import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/products/products_page.dart';
@@ -186,6 +188,37 @@ Drawer buildDrawer(
                 Navigator.pop(context);
                 Navigator.of(context).push(
                   MaterialPageRoute(
+                    builder: (_) => ClientsOfRepresentativePage(),
+                  ),
+                );
+              },
+              child: Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      textDirection: TextDirection.ltr,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.notes),
+                        Text(
+                          '${AppUtils.translate(context, 'all_clients_of_representative_page_title')}',
+                          style: TextStyle(color: mainColor, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
                     builder: (_) => ShowAllProducts(),
                   ),
                 );
@@ -201,6 +234,37 @@ Drawer buildDrawer(
                         Icon(Icons.show_chart),
                         Text(
                           '${AppUtils.translate(context, 'show_all_products')}',
+                          style: TextStyle(color: mainColor, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AttendancePage(),
+                  ),
+                );
+              },
+              child: Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      textDirection: TextDirection.ltr,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.notes),
+                        Text(
+                          '${AppUtils.translate(context, 'attend_and_leave')}',
                           style: TextStyle(color: mainColor, fontSize: 16),
                         ),
                       ],

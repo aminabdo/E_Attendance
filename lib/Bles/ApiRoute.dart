@@ -33,6 +33,14 @@ class ApiRoutes {
     return "Order/all_p_d_Order";
   }
 
+  static String finishedOrders(){
+    return "Order/finished_orders";
+  }
+
+  static String editStatus(){
+    return "Order/edit_status/78";
+  }
+
   static String filter_P_d_orders_by_DM(int type){
     return "filter_P_d_orders_by_DMY?type=$type";
   }
@@ -70,6 +78,12 @@ class ApiRoutes {
     return "Order/make_bill/$orderID?discount_type=$discount_type&discount=$discount&tax1_type=$tax1_type&tax1=$tax1&tax2_type=$tax2_type&tax2=$tax2&paid=$paid";
   }
 
+  // attendance
+
+  static String addAttendance(){
+    return "Attendence/add_attendence";
+  }
+
 
 
 
@@ -99,6 +113,10 @@ class ApiRoutes {
   }
 
   static String getAllUsers(){
+    return "Order/all_users";
+  }
+
+  static String deleteClient(){
     return "Order/all_users";
   }
 
@@ -248,6 +266,12 @@ class ApiRoutes {
   static String all_users(){
     return "Order/all_users";
   }
+
+  static String addClientToRepresentative(){
+    return "Representative/add_user_representative";
+  }
+
+
 }
 
 class ApiRoutesUpdate {

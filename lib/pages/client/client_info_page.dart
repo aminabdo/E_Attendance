@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
 import 'file:///F:/Work/CodeCaique%20Projects/Qimma/lib/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/utils/app_utils.dart';
@@ -16,7 +17,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
   @override
   void initState() {
     super.initState();
-
     clientBloc.getAllClients();
   }
 
@@ -37,7 +37,8 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
             child: Padding(
               padding: EdgeInsets.only(top: statusBarHeight),
               child: MyAppBar(
-                text: "${AppUtils.translate(context, 'all_clients_page_title')}",
+                text:
+                    "${AppUtils.translate(context, 'all_clients_page_title')}",
               ),
             ),
           ),
@@ -46,6 +47,8 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
           ),
           Flexible(
             child: Container(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -68,13 +71,16 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(client.data[index].firstName +
                                           ' ' +
                                           client.data[index].lastName ??
                                       ''),
-                                  SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
 
                                   // Text(client.data[index].id.toString() ?? ''),
                                   Text(client.data[index].debt.toString() ?? '')
@@ -83,24 +89,29 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconButton(
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: googleColor,
-                                      ),
-                                      onPressed: () {}),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.money,
+                              GestureDetector(
+                                onTap: () {
+                                  clientBloc
+                                      .addClientToRepresentative(
+                                          AddClientToRepresentativeRequest(
+                                              userId: client.data[index].id))
+                                      .then((value) {
+                                    AppUtils.showToast(msg: value.message , bgColor: mainColor);
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
                                       color: mainColor,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                    child: Text(
+                                      "${AppUtils.translate(context, 'all_clients_page_add')}",
+                                      style: TextStyle(color: Colors.white),
                                     ),
-                                    onPressed: () {},
-                                  )
-                                ],
+                                  ),
+                                ),
                               )
                             ],
                           ),

@@ -69,6 +69,7 @@ class MyTextFormField extends StatelessWidget {
             decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: hintStyle,
+                labelText: label,
                 contentPadding: EdgeInsets.only(
                   top: screenUtil.setHeight(5),
                   left: screenUtil.setWidth(10),

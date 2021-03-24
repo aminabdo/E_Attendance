@@ -61,7 +61,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 )
               ],
             ),
-            btnColor: OrdersPointer.selectedProducts.isEmpty ? mat.Colors.grey : mainColor,
+            btnColor: OrdersPointer.selectedProducts.isEmpty
+                ? mat.Colors.grey
+                : mainColor,
             onTap: OrdersPointer.selectedProducts.isEmpty
                 ? null
                 : () async {
@@ -69,13 +71,19 @@ class _ProductsPageState extends State<ProductsPage> {
                       isLoading = true;
                     });
 
-                    var request = AddProductTopdOrder(orders: OrdersPointer.selectedProducts);
+                    var request = AddProductTopdOrder(
+                        orders: OrdersPointer.selectedProducts);
                     print(request);
 
-                    var response = await orderBloc.addProductToOrder(widget.orderId, request);
-                    if(response['status'] == 0) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => BillPage(orderId: widget.orderId,)));
-                      AppUtils.showToast(msg: AppUtils.translate(context, 'done'));
+                    var response = await orderBloc.addProductToOrder(
+                        widget.orderId, request);
+                    if (response['status'] == 0) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => BillPage(
+                                orderId: widget.orderId,
+                              )));
+                      AppUtils.showToast(
+                          msg: AppUtils.translate(context, 'done'));
                     } else {
                       AppUtils.showToast(msg: response.message);
                     }
@@ -299,22 +307,29 @@ class _ProductItemState extends State<ProductItem> {
                         onTap: () {
                           if (counter > 1) {
                             counter--;
-                            price = (double.parse(widget.product.purchasingPrice) * counter);
+                            price =
+                                (double.parse(widget.product.purchasingPrice) *
+                                    counter);
                             if (counter <= 1) {
                               OrdersPointer.selectedProducts.forEach((element) {
-                                if (element.productDetailId.toString() == widget.product.id.toString()) {OrdersPointer.selectedProducts.remove(element);
+                                if (element.productDetailId.toString() ==
+                                    widget.product.id.toString()) {
+                                  OrdersPointer.selectedProducts
+                                      .remove(element);
                                 }
                               });
                             } else {
                               OrdersPointer.selectedProducts.forEach((element) {
-                                if (element.productDetailId.toString() == widget.product.id.toString()) {
+                                if (element.productDetailId.toString() ==
+                                    widget.product.id.toString()) {
                                   element.quantity = counter;
                                 }
                               });
                             }
                             setState(() {});
                           } else {
-                            price = double.parse(widget.product.purchasingPrice);
+                            price =
+                                double.parse(widget.product.purchasingPrice);
                             setState(() {});
                           }
 
@@ -344,7 +359,9 @@ class _ProductItemState extends State<ProductItem> {
                         onTap: () {
                           setState(() {
                             counter++;
-                            price = (double.parse(widget.product.purchasingPrice) * counter);
+                            price =
+                                (double.parse(widget.product.purchasingPrice) *
+                                    counter);
                           });
                         },
                         width: 40,
@@ -360,8 +377,14 @@ class _ProductItemState extends State<ProductItem> {
                         OrdersPointer.selectedProducts.add(
                           OrdersBean(
                             quantity: counter,
-                            colorId: widget.product.colors.isEmpty ? null : widget.product.colors[selectedColor].id.toString(),
-                            sizeId: widget.product.sizes.isEmpty ? null : widget.product.sizes[selectedSize].id.toString(),
+                            colorId: widget.product.colors.isEmpty
+                                ? null
+                                : widget.product.colors[selectedColor].id
+                                    .toString(),
+                            sizeId: widget.product.sizes.isEmpty
+                                ? null
+                                : widget.product.sizes[selectedSize].id
+                                    .toString(),
                             productDetailId: widget.product.id.toString(),
                           ),
                         );
@@ -369,23 +392,37 @@ class _ProductItemState extends State<ProductItem> {
                         bool isExist = false;
                         int index = -1;
 
-                       for(int i = 0; i < OrdersPointer.selectedProducts.length; i++) {
-                         if (OrdersPointer.selectedProducts[i].productDetailId.toString() == widget.product.id.toString()) {
-                           isExist = true;
-                           index = i;
-                         }
-                       }
+                        for (int i = 0;
+                            i < OrdersPointer.selectedProducts.length;
+                            i++) {
+                          if (OrdersPointer.selectedProducts[i].productDetailId
+                                  .toString() ==
+                              widget.product.id.toString()) {
+                            isExist = true;
+                            index = i;
+                          }
+                        }
 
-                        if(isExist) {
-                          OrdersPointer.selectedProducts[index].quantity = counter;
-                          OrdersPointer.selectedProducts[index].colorId = widget.product.colors[selectedColor].id.toString();
-                          OrdersPointer.selectedProducts[index].sizeId = widget.product.sizes[selectedSize].id.toString();
+                        if (isExist) {
+                          OrdersPointer.selectedProducts[index].quantity =
+                              counter;
+                          OrdersPointer.selectedProducts[index].colorId = widget
+                              .product.colors[selectedColor].id
+                              .toString();
+                          OrdersPointer.selectedProducts[index].sizeId =
+                              widget.product.sizes[selectedSize].id.toString();
                         } else {
                           OrdersPointer.selectedProducts.add(
                             OrdersBean(
                               quantity: counter,
-                              colorId: widget.product.colors.isEmpty ? null : widget.product.colors[selectedColor].id.toString(),
-                              sizeId: widget.product.sizes.isEmpty ? null : widget.product.sizes[selectedSize].id.toString(),
+                              colorId: widget.product.colors.isEmpty
+                                  ? null
+                                  : widget.product.colors[selectedColor].id
+                                      .toString(),
+                              sizeId: widget.product.sizes.isEmpty
+                                  ? null
+                                  : widget.product.sizes[selectedSize].id
+                                      .toString(),
                               productDetailId: widget.product.id.toString(),
                             ),
                           );

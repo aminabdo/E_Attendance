@@ -1,6 +1,7 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
+import 'package:qimma/Bles/Model/Requests/EditStatusRequest.dart';
 import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
 import 'package:qimma/pages/track_order_map/track_order_map_page.dart';
 import 'package:qimma/utils/app_utils.dart';
@@ -337,6 +338,25 @@ class _OrderDetailsState extends State<OrderDetails> {
                    SizedBox(
                      height: 18,
                    ),
+                   Center(
+                     child: GestureDetector(
+                       onTap: (){
+                         orderBloc.editStatus(EditStatusRequest(status: 2)).then((value) {
+                           AppUtils.showToast(msg: value.message , bgColor: mainColor);
+                         });
+                       },
+                       child: Container(
+                         decoration: BoxDecoration(
+                             color: mainColor,
+                             borderRadius: BorderRadius.circular(15)
+                         ),
+                         child: Padding(
+                           padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                           child: Text('${AppUtils.translate(context, 'delivered')}' , style: TextStyle(color: Colors.white),),
+                         ),
+                       ),
+                     ),
+                   )
                  ],
                ),
              ),

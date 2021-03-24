@@ -94,6 +94,7 @@
   "distance": "المسافه",
   "estimate": "الوقت",
   "drop_off": "اسقاط",
+  "delivered": "تم التسليم",
 
   "add_new_order_page" : "============Add New Order Page=============",
   "add_customer_location": "أضف موقع العميل",
@@ -111,6 +112,7 @@
   "clients_info": "العملاء",
   "home_page_title": "الصفحة الرئيسية",
   "show_all_products": "عرض جميع المنتجات",
+  "attend_and_leave": "حضور وانصراف",
 
 
   "edit_profile_page" : "============Edit Profile Page=============",
@@ -121,14 +123,31 @@
   "all_clients_page_title": "العملاء",
   "all_clients_page_name": "الاسم",
   "all_clients_page_dept": "المديونية",
+  "all_clients_page_add": "اضافة",
 
+
+  "attendance_page" : "============Attendance Page=============",
+  "attendance_page_attend": "حضور",
+  "attendance_page_leave": "انصراف",
+  "attendance_page_note": "ملاحظة",
+  "attendance_page_register": "تسجيل",
+  "attendance_page_msg": "من فضلك اختر حضور أو انصراف",
 
   "all_clients_of_representative_page" : "============All Clients of Representative Page=============",
   "all_clients_of_representative_page_title": "قائمة عملائك",
+  "all_clients_of_representative_page_add_client": "اضافة عميل",
 
 
   "show_products_page" : "============Products Page=============",
   "show_products_page_title": "المنتجات",
   "show_products_by_rating": "أعلى تقييم",
-  "show_products_without_rating": "بدون تقييم"
+  "show_products_without_rating": "بدون تقييم",
+  "show_products_filtering": "فلترة",
+
+
+  "set_dept_page" : "============Set Dept Page=============",
+  "set_dept_page_title": "تسوية المديونية",
+  "set_dept_page_subtraction": "طرح",
+  "set_dept_page_addition": "اضافة",
+  "set_dept_page_amount": "المبلغ"
 }

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'file:///F:/Work/CodeCaique%20Projects/Qimma/lib/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/pages/client/client_info_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
