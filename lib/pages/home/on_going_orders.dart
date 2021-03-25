@@ -44,7 +44,7 @@ class _OnGoingOrdersPageState extends State<OnGoingOrdersPage> {
             physics: const AlwaysScrollableScrollPhysics(),
             //physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return OrderItem(order: snapshot.data.data[index]);
+              return OrderItem(finishedOrder: snapshot.data.data[index]);
             },
             separatorBuilder: (context, index) {
               return SizedBox(
@@ -92,7 +92,7 @@ class Item extends StatelessWidget {
           ),
         ),
         Text(
-          '${item.ProductDetail.Quantity} ${AppUtils.translate(context, 'eg')}',
+          '${item.ProductDetail.SellingPrice} ${AppUtils.translate(context, 'eg')}',
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.red),
         ),
@@ -102,9 +102,9 @@ class Item extends StatelessWidget {
 }
 
 class OrderItem extends StatelessWidget {
-  final DataBean order;
+  final DataBean finishedOrder;
 
-  const OrderItem({Key key, this.order}) : super(key: key);
+  const OrderItem({Key key, this.finishedOrder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class OrderItem extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => OrderDetails(
-              id: order.id,
+              id: finishedOrder.id,
             ),
           ),
         );
@@ -148,7 +148,7 @@ class OrderItem extends StatelessWidget {
                                   AppUtils.translate(context, 'delivery'),
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: order.paymentMethod == 'online'
+                                    color: finishedOrder.paymentMethod == 'online'
                                         ? mainColor
                                         : Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -170,7 +170,7 @@ class OrderItem extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                order.paymentMethod,
+                                finishedOrder.paymentMethod,
                                 style: TextStyle(
                                   color: secondColor,
                                   fontSize: 13,
@@ -190,7 +190,7 @@ class OrderItem extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '${order.createdAt.length} ${AppUtils.translate(context, 'minutes')}',
+                            '${finishedOrder.createdAt.length} ${AppUtils.translate(context, 'minutes')}',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.black45),
                           ),
@@ -209,17 +209,17 @@ class OrderItem extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      order.id.toString(),
+                      finishedOrder.id.toString(),
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
-                order.products.isEmpty
+                finishedOrder.products.isEmpty
                     ? SizedBox.shrink()
                     : SizedBox(
                         height: 10,
                       ),
-                order.products.isEmpty
+                finishedOrder.products.isEmpty
                     ? SizedBox.shrink()
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -238,17 +238,17 @@ class OrderItem extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                order.products.isEmpty
+                finishedOrder.products.isEmpty
                     ? SizedBox.shrink()
                     : ListView.separated(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return Item(
-                            item: order.products[index],
+                            item: finishedOrder.products[index],
                           );
                         },
-                        itemCount: order.products.length,
+                        itemCount: finishedOrder.products.length,
                         separatorBuilder: (BuildContext context, int index) {
                           return SizedBox(
                             height: 8,
@@ -262,7 +262,7 @@ class OrderItem extends StatelessWidget {
                   AppUtils.translate(context, 'customer_name'),
                   style: TextStyle(color: Colors.grey),
                 ),
-                Text(order.name),
+                Text(finishedOrder.name),
                 SizedBox(
                   height: 12,
                 ),
@@ -283,12 +283,12 @@ class OrderItem extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           String googleUrl =
-                              'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
+                              'https://www.google.com/maps/search/?api=1&query=${finishedOrder.lat},${finishedOrder.lng}';
                           if (await canLaunch(googleUrl)) {
                             await launch(googleUrl);
                           } else {
                             print(
-                                'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
+                                'https://www.google.com/maps/search/?api=1&query=${finishedOrder.lat},${finishedOrder.lng}');
                             AppUtils.showToast(msg: 'Could not open the map.');
                           }
                         },
@@ -300,7 +300,7 @@ class OrderItem extends StatelessWidget {
                             ),
                             Flexible(
                               child: Text(
-                                order.address,
+                                finishedOrder.address,
                                 style: TextStyle(
                                   color: mainColor,
                                   fontWeight: FontWeight.bold,

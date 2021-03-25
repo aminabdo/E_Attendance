@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:qimma/Bles/Model/Responses/products/AllProductsResponse.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
+import 'package:qimma/widgets/hex_color.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
+
 class ProductPage extends StatefulWidget {
   final DataBean productsResponse;
 
@@ -33,8 +36,7 @@ class _ProductPageState extends State<ProductPage> {
             child: Padding(
                 padding: EdgeInsets.only(top: statusBarHeight),
                 child: MyAppBar(
-                  text:
-                  widget.productsResponse.mainProductName.toString(),
+                  text: widget.productsResponse.mainProductName.toString(),
                 )),
           ),
           SizedBox(
@@ -42,39 +44,85 @@ class _ProductPageState extends State<ProductPage> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ImageSlideshow(
-                    height: 120,
+                    height: 140,
                     indicatorColor: mainColor,
-                    children: widget.productsResponse.images.map((e){
-                      return Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: CachedNetworkImageProvider(e.toString())
-                          ),),
-                        clipBehavior: Clip.hardEdge,
+                    children: widget.productsResponse.images.map((e) {
+                      return CachedNetworkImage(
+                        imageUrl: e.toString(),
+                        errorWidget: (_, __, ___) {
+                          return Image.asset('assets/images/no_image.png');
+                        },
+                        height: 35,
                       );
                     }).toList(),
                   ),
-                  Text(widget.productsResponse.Quantity.toString()),
-                  Text(widget.productsResponse.mainProductId.toString()),
-                  Text("Sizes : "),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('${AppUtils.translate(context, 'product_page_desc')}' +
+                      ' : ' +
+                      '\n' +
+                      widget.productsResponse.desc.toString() , style: TextStyle(fontSize: 16),),
+                  Divider(),
+                  Text(
+                      '${AppUtils.translate(context, 'product_page_quantity')}' +
+                          ' : ' +
+                          widget.productsResponse.Quantity.toString(), style: TextStyle(fontSize: 16),),
+                  Divider(),
+                  Text('${AppUtils.translate(context, 'product_page_sizes')}' + ' : ', style: TextStyle(fontSize: 16), ),
                   ListView.builder(
-                    shrinkWrap: true,
+                    padding: EdgeInsets.all(0),
+                      shrinkWrap: true,
+                      //scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: widget.productsResponse.sizes.length,
-                      itemBuilder: (context , index){
-                        return Text(widget.productsResponse.sizes[index]['name'].toString());
+                      itemBuilder: (context, index) {
+                        return Text(widget.productsResponse.sizes[index]['name']
+                            .toString());
                       }),
-                  Text("Colors : "),
+                  Divider(),
+                  Text('${AppUtils.translate(context, 'product_page_colors')}' + ' : ' , style: TextStyle(fontSize: 16),),
                   ListView.builder(
+                      padding: EdgeInsets.all(0),
                       shrinkWrap: true,
                       itemCount: widget.productsResponse.colors.length,
-                      itemBuilder: (context , index){
-                        return Text(widget.productsResponse.colors[index]['color_code'].toString());
-                      })
+                      //scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(100, 8, 100, 0),
+                          child: Container(
+                            decoration: BoxDecoration(color: HexColor(widget
+                                .productsResponse.colors[index]['color_code']) , borderRadius: BorderRadius.circular(30)),
+                            height: 22 , width: 10, ),
+                        );
+                      }),
+                  Divider(),
+                  Text(
+                      '${AppUtils.translate(context, 'product_barcode')}' +
+                          ' : ' +
+                          widget.productsResponse.barcode, style: TextStyle(fontSize: 16),),
+                  Divider(),
+                  Text(
+                      '${AppUtils.translate(context, 'product_Selling_price')}' +
+                          ' : ' +
+                          widget.productsResponse.SellingPrice.toString(), style: TextStyle(fontSize: 16),),
+                  Divider(),
+                  Text(
+                      '${AppUtils.translate(context, 'product_page_Wholesale_price')}' +
+                          ' : ' +
+                          widget.productsResponse.WholesalePrice, style: TextStyle(fontSize: 16),),
+                  Divider(),
+                  Text(
+                      '${AppUtils.translate(context, 'product_page_Wholesale_wholesale_price')}' +
+                          ' : ' +
+                          widget.productsResponse.WholesaleWholesalePrice, style: TextStyle(fontSize: 16),),
                 ],
               ),
             ),

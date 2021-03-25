@@ -57,6 +57,7 @@
   "home_page" : "============Home Page=============",
   "hi": "اهلا ",
   "search_by_id": "بحث بكود الطلب",
+  "search_by_name": "بحث بالاسم",
   "new_orders": "الطلبات الجديدة",
   "ongoing_orders": "الطلبات المنتهية",
   "delivery": "توصيل",
@@ -149,6 +150,18 @@
   "show_products_by_rating": "أعلى تقييم",
   "show_products_without_rating": "بدون تقييم",
   "show_products_filtering": "فلترة",
+  "show_products_quantity": "الكمية",
+
+
+  "product_page" : "============Product Page=============",
+  "product_page_desc": "الوصف",
+  "product_page_sizes": "المقاسات",
+  "product_page_colors": "الألوان",
+  "product_page_Wholesale_wholesale_price": "سعر جملة الجملة",
+  "product_page_quantity": "الكمية",
+  "product_page_Wholesale_price": "سعر الجملة",
+  "product_Selling_price": "سعر البيع",
+  "product_barcode": "باركود",
 
 
   "set_dept_page" : "============Set Dept Page=============",

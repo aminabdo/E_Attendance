@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:qimma/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
 import 'package:qimma/Bles/Model/Requests/SetDeptRequest.dart';
+import 'package:qimma/Bles/Model/Responses/DeleteClientResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/AddClientToRepresentativeResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
@@ -16,6 +17,8 @@ class ClientBloc extends BaseBloc {
       BehaviorSubject<AllClientsResponse>();
   BehaviorSubject<SetDeptResponse> _setDept =
       BehaviorSubject<SetDeptResponse>();
+  BehaviorSubject<DeleteClientResponse> _delete_client =
+      BehaviorSubject<DeleteClientResponse>();
   BehaviorSubject<ClientOfRepresentativeResponse>
       _all_clients_of_representative =
       BehaviorSubject<ClientOfRepresentativeResponse>();
@@ -33,11 +36,12 @@ class ClientBloc extends BaseBloc {
     return response;
   }
 
-  Future<SetDeptResponse> setDept({int clientId, SetDeptRequest request}) async {
+  Future<SetDeptResponse> setDept(
+      {int clientId, SetDeptRequest request}) async {
     _setDept.value = SetDeptResponse();
     _setDept.value.loading = true;
-    SetDeptResponse response = SetDeptResponse.fromMap((await repository
-            .post(ApiRoutes.setDept(clientId: clientId) , request.toJson()))
+    SetDeptResponse response = SetDeptResponse.fromMap((await repository.post(
+            ApiRoutes.setDept(clientId: clientId), request.toJson()))
         .data);
     _setDept.value = response;
     _setDept.value.loading = false;
@@ -53,6 +57,16 @@ class ClientBloc extends BaseBloc {
                 .data);
     _all_clients_of_representative.value = response;
     _all_clients_of_representative.value.loading = false;
+    return response;
+  }
+
+  Future<DeleteClientResponse> deleteClient({String clientId}) async {
+    _delete_client.value = DeleteClientResponse();
+    _delete_client.value.loading = true;
+    DeleteClientResponse response = DeleteClientResponse.fromMap(
+        (await repository.get(ApiRoutes.deleteClient(clientId))).data);
+    _delete_client.value = response;
+    _delete_client.value.loading = false;
     return response;
   }
 
@@ -75,6 +89,7 @@ class ClientBloc extends BaseBloc {
       get all_clients_of_representative => _all_clients_of_representative;
   BehaviorSubject<AddClientToRepresentativeResponse>
       get add_client_to_representative => _add_client_to_representative;
+  BehaviorSubject<DeleteClientResponse> get delete_client => _delete_client;
 }
 
 final clientBloc = ClientBloc();

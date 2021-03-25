@@ -16,6 +16,7 @@ class SetDeptPage extends StatefulWidget {
 
 class _SetDeptPageState extends State<SetDeptPage> {
   TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -110,6 +111,7 @@ class _SetDeptPageState extends State<SetDeptPage> {
                           ),
                         ),
                         onTap: () {
+
                           clientBloc
                               .setDept(
                                   clientId: widget.clientId,

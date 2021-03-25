@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/pages/client/set_dept_page.dart';
 import 'client_info_page.dart';
-import 'file:///F:/Work/CodeCaique%20Projects/Qimma/lib/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
 import 'package:qimma/utils/app_utils.dart';
@@ -30,16 +30,16 @@ class _ClientsOfRepresentativePageState
     double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       backgroundColor: Color(0xffF0F0F0),
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => ClientInfoPage(),
-          ),
-        );
-      },
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ClientInfoPage(),
+              ),
+            );
+          },
           label: Text(
-            '${AppUtils.translate(context, 'all_clients_of_representative_page_add_client')}'
-      )),
+              '${AppUtils.translate(context, 'all_clients_of_representative_page_add_client')}')),
       body: Column(
         children: [
           Container(
@@ -53,7 +53,7 @@ class _ClientsOfRepresentativePageState
                 padding: EdgeInsets.only(top: statusBarHeight),
                 child: MyAppBar(
                   text:
-                  "${AppUtils.translate(context, 'all_clients_of_representative_page_title')}",
+                      "${AppUtils.translate(context, 'all_clients_of_representative_page_title')}",
                 )),
           ),
           SizedBox(
@@ -78,7 +78,7 @@ class _ClientsOfRepresentativePageState
                       itemCount: client.data.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          padding: EdgeInsets.only(right: 10, left: 10),
+                          padding: EdgeInsets.only(right: 10, left: 10 , bottom: 10 ,top: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -89,7 +89,9 @@ class _ClientsOfRepresentativePageState
                                           ' ' +
                                           client.data[index].lastName ??
                                       ''),
-                                  SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
                                   // Text(client.data[index].id.toString() ?? ''),
                                   Text(client.data[index].debt.toString() ?? '')
                                 ],
@@ -101,12 +103,21 @@ class _ClientsOfRepresentativePageState
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  IconButton(
+                                 /* IconButton(
                                       icon: Icon(
                                         Icons.delete,
                                         color: googleColor,
                                       ),
-                                      onPressed: () {}),
+                                      onPressed: () {
+                                        clientBloc
+                                            .deleteClient(
+                                                clientId: client.data[index].id.toString())
+                                            .then((value) {
+                                          AppUtils.showToast(
+                                              msg: value.message,
+                                              bgColor: mainColor);
+                                        });
+                                      }),*/
                                   IconButton(
                                     icon: Icon(
                                       Icons.money,
@@ -118,7 +129,6 @@ class _ClientsOfRepresentativePageState
                                           builder: (_) => SetDeptPage(),
                                         ),
                                       );
-
                                     },
                                   )
                                 ],

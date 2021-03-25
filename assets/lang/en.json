@@ -63,6 +63,7 @@
   "home_page" : "============Home Page=============",
   "hi": "Hi ",
   "search_by_id": "Search by ID",
+  "search_by_name": "Search by Name",
   "new_orders": "New orders",
   "ongoing_orders": "Ongoing orders",
   "delivery": "Delivery",
@@ -152,6 +153,18 @@
   "show_products_by_rating": "By Rating",
   "show_products_without_rating": "Without Rating",
   "show_products_filtering": "Filter",
+  "show_products_quantity": "Quantity",
+
+
+  "product_page" : "============Product Page=============",
+  "product_page_desc": "Description",
+  "product_page_sizes": "Sizes",
+  "product_page_colors": "Colors",
+  "product_page_Wholesale_wholesale_price": "Wholesale wholesale price",
+  "product_page_quantity": "Quantity",
+  "product_page_Wholesale_price": "Wholesale price",
+  "product_Selling_price": "Selling price",
+  "product_barcode": "Barcode",
 
 
   "set_dept_page" : "============Set Dept Page=============",

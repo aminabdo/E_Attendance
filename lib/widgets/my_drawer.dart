@@ -262,7 +262,7 @@ Drawer buildDrawer(
                       textDirection: TextDirection.ltr,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.notes),
+                        Icon(Icons.location_history_outlined),
                         Text(
                           '${AppUtils.translate(context, 'attend_and_leave')}',
                           style: TextStyle(color: mainColor, fontSize: 16),

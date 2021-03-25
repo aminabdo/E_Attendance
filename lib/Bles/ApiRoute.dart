@@ -114,8 +114,8 @@ class ApiRoutes {
     return "Order/all_users";
   }
 
-  static String deleteClient() {
-    return "Order/all_users";
+  static String deleteClient(String clientId) {
+    return "delete_user_representative/$clientId";
   }
 
   static String getClientsOfRepresentative() {

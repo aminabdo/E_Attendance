@@ -65,30 +65,44 @@ class _MyHistoryState extends State<MyHistory> {
                           padding: EdgeInsets.only(right: 10, left: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    myAttendance.data[index].status.toUpperCase() ?? '',
+                                    myAttendance.data[index].status
+                                            .toUpperCase() ??
+                                        '',
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
                                         color:
-                                        myAttendance.data[index].status ==
-                                            'attend'
-                                            ? mainColor
-                                            : googleColor),
+                                            myAttendance.data[index].status ==
+                                                    'attend'
+                                                ? mainColor
+                                                : googleColor),
                                   ),
-                                  Text(myAttendance.data[index].createdAt),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        myAttendance.data[index].createdAt
+                                            .trim(),
+                                        softWrap: true,
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Icon(Icons.access_time_outlined),
+                                    ],
+                                  ),
                                 ],
                               ),
                               SizedBox(
                                 height: 8,
                               ),
                               Text(myAttendance.data[index].notes ?? ''),
-
                             ],
                           ),
                         );
