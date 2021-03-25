@@ -125,6 +125,12 @@
   "all_clients_page_dept": "المديونية",
   "all_clients_page_add": "اضافة",
 
+  "my_History_page" : "============My History Page=============",
+  "my_History_page_title": "السجل الخاص بك",
+  "my_History_page_date": "التاريخ",
+  "my_History_page_status": "الحالة",
+  "my_History_page_notes": "ملاحظات",
+
 
   "attendance_page" : "============Attendance Page=============",
   "attendance_page_attend": "حضور",

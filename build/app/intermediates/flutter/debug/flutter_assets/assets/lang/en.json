@@ -141,6 +141,12 @@
   "all_clients_of_representative_page_title": "Your Clients",
   "all_clients_of_representative_page_add_client": "Add Client",
 
+  "my_History_page" : "============My History Page=============",
+  "my_History_page_title": "My History",
+  "my_History_page_date": "Date",
+  "my_History_page_status": "Status",
+  "my_History_page_notes": "Notes",
+
   "show_products_page" : "============Products Page=============",
   "show_products_page_title": "Products",
   "show_products_by_rating": "By Rating",

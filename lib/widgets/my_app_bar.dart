@@ -48,6 +48,7 @@ class MyAppBar extends StatelessWidget {
               text,
               style: textStyle ?? TextStyle(fontSize: 18),
             ),
+            //trailing ?? Container()
           ].where((element) => element != null).toList(),
         ),
         actions == null ? null : Row(

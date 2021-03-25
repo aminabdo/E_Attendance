@@ -1,4 +1,6 @@
-class DeptSetResponse {
+import 'package:qimma/utils/base/BaseResponse.dart';
+
+class DeptSetResponse extends BaseResponse {
   int status;
   DataBean data;
   String message;

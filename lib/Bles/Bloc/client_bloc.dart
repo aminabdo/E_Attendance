@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:qimma/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
+import 'package:qimma/Bles/Model/Requests/SetDeptRequest.dart';
 import 'package:qimma/Bles/Model/Responses/client/AddClientToRepresentativeResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
+import 'package:qimma/Bles/Model/Responses/client/SetDeptResponse.dart';
 import 'package:qimma/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -12,6 +14,8 @@ import '../ApiRoute.dart';
 class ClientBloc extends BaseBloc {
   BehaviorSubject<AllClientsResponse> _all_clients =
       BehaviorSubject<AllClientsResponse>();
+  BehaviorSubject<SetDeptResponse> _setDept =
+      BehaviorSubject<SetDeptResponse>();
   BehaviorSubject<ClientOfRepresentativeResponse>
       _all_clients_of_representative =
       BehaviorSubject<ClientOfRepresentativeResponse>();
@@ -26,6 +30,17 @@ class ClientBloc extends BaseBloc {
         (await repository.get(ApiRoutes.all_users())).data);
     _all_clients.value = response;
     _all_clients.value.loading = false;
+    return response;
+  }
+
+  Future<SetDeptResponse> setDept({int clientId, SetDeptRequest request}) async {
+    _setDept.value = SetDeptResponse();
+    _setDept.value.loading = true;
+    SetDeptResponse response = SetDeptResponse.fromMap((await repository
+            .post(ApiRoutes.setDept(clientId: clientId) , request.toJson()))
+        .data);
+    _setDept.value = response;
+    _setDept.value.loading = false;
     return response;
   }
 
@@ -55,6 +70,7 @@ class ClientBloc extends BaseBloc {
   }
 
   BehaviorSubject<AllClientsResponse> get all_clients => _all_clients;
+  BehaviorSubject<SetDeptResponse> get set_dept => _setDept;
   BehaviorSubject<ClientOfRepresentativeResponse>
       get all_clients_of_representative => _all_clients_of_representative;
   BehaviorSubject<AddClientToRepresentativeResponse>

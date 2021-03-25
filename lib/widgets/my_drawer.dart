@@ -152,7 +152,7 @@ Drawer buildDrawer(
             SizedBox(
               height: 5,
             ),
-            InkWell(
+            /*InkWell(
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(
@@ -182,7 +182,7 @@ Drawer buildDrawer(
             ),
             SizedBox(
               height: 5,
-            ),
+            ),*/
             InkWell(
               onTap: () {
                 Navigator.pop(context);

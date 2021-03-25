@@ -6,6 +6,8 @@ import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_text_form_field.dart';
 
+import 'my_history.dart';
+
 class AttendancePage extends StatefulWidget {
   @override
   _AttendancePageState createState() => _AttendancePageState();
@@ -42,6 +44,27 @@ class _AttendancePageState extends State<AttendancePage> {
                   padding: EdgeInsets.only(top: statusBarHeight),
                   child: MyAppBar(
                     text: "${AppUtils.translate(context, 'attend_and_leave')}",
+                      actions: [
+                        FloatingActionButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => MyHistory(),
+                              ),
+                            );
+                          },
+                          elevation: 0,
+                          focusElevation: 0,
+                          highlightElevation: 0,
+                          backgroundColor: secondColor,
+                          mini: true,
+                          child: Icon(
+                            Icons.history,
+                            color: Colors.black,
+                            size: 18,
+                          ),
+                        )
+                      ],
                   ),
                 ),
               ),
@@ -155,7 +178,7 @@ class _AttendancePageState extends State<AttendancePage> {
                         bgColor: mainColor);
                   } else {
                     attendanceBloc
-                        .addAttendance(AddAttendanceRequest(
+                        .addAttendance(AttendanceRequest(
                             status: attendanceStatus ==
                                     "${AppUtils.translate(context, 'attendance_page_attend')}"
                                 ? 1

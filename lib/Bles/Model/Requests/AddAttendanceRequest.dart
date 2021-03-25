@@ -1,14 +1,14 @@
 import 'package:qimma/utils/base/BaseRequest.dart';
 
-class AddAttendanceRequest extends BaseRequest {
+class AttendanceRequest extends BaseRequest {
   int status;
   String note;
 
-  AddAttendanceRequest({this.status, this.note});
+  AttendanceRequest({this.status, this.note});
 
-  static AddAttendanceRequest fromMap(Map<int, dynamic> map) {
+  static AttendanceRequest fromMap(Map<int, dynamic> map) {
     if (map == null) return null;
-    AddAttendanceRequest addAttendance = AddAttendanceRequest();
+    AttendanceRequest addAttendance = AttendanceRequest();
     addAttendance.status = map['status'];
     addAttendance.note = map['note'];
     return addAttendance;
