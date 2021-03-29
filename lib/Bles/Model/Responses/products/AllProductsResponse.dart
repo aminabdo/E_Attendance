@@ -62,8 +62,8 @@ class DataBean {
   dynamic rate;
   int isOffer;
   String offerAmount;
-  double lat;
-  double lng;
+  dynamic lat;
+  dynamic lng;
   String distance;
   bool isFavorite;
   int InventoryId;

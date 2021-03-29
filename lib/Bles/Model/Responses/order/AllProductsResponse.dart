@@ -56,7 +56,7 @@ class Products {
   bool _isFavorite;
   int _inventoryId;
   String _inventoryName;
-  String _quantity;
+  dynamic _quantity;
   List<Colors> _colors;
   List<Sizes> _sizes;
   List<Images> _images;

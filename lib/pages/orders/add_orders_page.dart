@@ -104,8 +104,10 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                       selectedUser = users[0];
                       selectedPriceType = priceTypes[0];
                       addresses = selectedUser.addresses;
-
-                      selectedAddress = addresses[0];
+                      print("addresses ----- >>> "+addresses.toString());
+                      if(addresses.isNotEmpty) {
+                        selectedAddress = addresses[0];
+                      }
                       gotData = true;
                     }
                     return Padding(

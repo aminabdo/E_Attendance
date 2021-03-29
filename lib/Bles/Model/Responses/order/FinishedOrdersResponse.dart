@@ -127,7 +127,10 @@ class ProductsBean {
     if (map == null) return null;
     ProductsBean productsBean = ProductsBean();
     productsBean.id = map['id'];
+
     productsBean.ProductDetail = Product_detailBean.fromMap(map['Product_detail']);
+    productsBean.ProductDetail = (productsBean.ProductDetail == null) ?
+    Product_detailBean() : productsBean.ProductDetail ;
     productsBean.pDOrderId = map['p_d_order_id'];
     productsBean.productDetailId = map['product_detail_id'];
     productsBean.quantity = map['quantity'];
@@ -186,6 +189,9 @@ class Product_detailBean {
     product_detailBean.desc = map['desc'];
     product_detailBean.Difference = map['Difference'];
     product_detailBean.image = map['image'];
+    if(product_detailBean.image == null || product_detailBean.image == "null" ){
+      product_detailBean.image = "";
+    }
     product_detailBean.rate = map['rate'];
     product_detailBean.isOffer = map['is_offer'];
     product_detailBean.offerAmount = map['offer_amount'];

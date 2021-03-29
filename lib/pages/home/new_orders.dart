@@ -72,8 +72,15 @@ class Item extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              CachedNetworkImage(
-                imageUrl: item.ProductDetail.image,
+              if (item.ProductDetail?.image == null) CachedNetworkImage(
+                imageUrl: "",
+                width: 35,
+                errorWidget: (_, __, ___) {
+                  return Image.asset('assets/images/no_image.png');
+                },
+                height: 35,
+              ) else CachedNetworkImage(
+                imageUrl: item.ProductDetail?.image,
                 width: 35,
                 errorWidget: (_, __, ___) {
                   return Image.asset('assets/images/no_image.png');
@@ -85,7 +92,7 @@ class Item extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  '${item.ProductDetail.main_Product_name}',
+                  '${item.ProductDetail?.main_Product_name}',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -93,7 +100,7 @@ class Item extends StatelessWidget {
           ),
         ),
         Text(
-          '${item.ProductDetail.Selling_price} ${AppUtils.translate(context, 'eg')}',
+          '${item.ProductDetail?.Selling_price} ${AppUtils.translate(context, 'eg')}',
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.red),
         ),

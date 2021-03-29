@@ -59,7 +59,7 @@ class ProductsBean {
   bool isFavorite;
   int InventoryId;
   String InventoryName;
-  String Quantity;
+  dynamic Quantity;
   List<ColorsBean> colors;
   List<SizesBean> sizes;
   List<ImagesBean> images;

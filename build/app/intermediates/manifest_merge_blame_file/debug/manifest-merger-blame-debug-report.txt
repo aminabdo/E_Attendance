@@ -12,51 +12,51 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:9:5-67
-14-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:9:22-64
+14-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:9:5-67
+14-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:9:22-64
 15    <uses-permission android:name="android.permission.WAKE_LOCK" />
-15-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-68
-15-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-65
+15-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-68
+15-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:8:22-65
 16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-16-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-79
-16-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-76
+16-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-79
+16-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:9:22-76
 17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-17-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
-17-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-78
+17-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-81
+17-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:22-78
 18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-18-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-79
-18-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-76
+18-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-79
+18-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:8:22-76
 19    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-19-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:26:5-82
-19-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:26:22-79
+19-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:26:5-82
+19-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:26:22-79
 20
 21    <application
-21-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:10:5-49:19
+21-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:10:5-49:19
 22        android:name="io.flutter.app.FlutterApplication"
-22-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:11:9-57
+22-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:11:9-57
 23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-23-->[androidx.core:core:1.3.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\acf999d338d007d1e88d450cb8e478ac\core-1.3.2\AndroidManifest.xml:24:18-86
+23-->[androidx.core:core:1.3.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/acf999d338d007d1e88d450cb8e478ac/core-1.3.2/AndroidManifest.xml:24:18-86
 24        android:debuggable="true"
 25        android:icon="@mipmap/launcher_icon"
-25-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:14:9-45
+25-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:14:9-45
 26        android:label="qimma"
-26-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:12:9-30
+26-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:12:9-30
 27        android:usesCleartextTraffic="true" >
-27-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:13:9-44
+27-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:13:9-44
 28        <activity
-28-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:15:9-43:20
+28-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:15:9-43:20
 29            android:name="com.qimma.MainActivity"
-29-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:16:13-41
+29-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:16:13-41
 30            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-30-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:19:13-163
+30-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:19:13-163
 31            android:hardwareAccelerated="true"
-31-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:20:13-47
+31-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:20:13-47
 32            android:launchMode="singleTop"
-32-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:17:13-43
+32-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:17:13-43
 33            android:theme="@style/LaunchTheme"
-33-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:18:13-47
+33-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:18:13-47
 34            android:windowSoftInputMode="adjustResize" >
-34-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:21:13-55
+34-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:21:13-55
 35
 36            <!--
 37                 Specifies an Android theme to apply to this Activity as soon as
@@ -65,11 +65,11 @@
 40                 to determine the Window background behind the Flutter UI.
 41            -->
 42            <meta-data
-42-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:26:13-29:17
+42-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:26:13-29:17
 43                android:name="io.flutter.embedding.android.NormalTheme"
-43-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:27:15-70
+43-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:27:15-70
 44                android:resource="@style/NormalTheme" />
-44-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:28:15-52
+44-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:28:15-52
 45            <!--
 46                 Displays an Android View that continues showing the launch screen
 47                 Drawable until Flutter paints its first frame, then this splash
@@ -78,21 +78,21 @@
 50                 Flutter's first frame.
 51            -->
 52            <meta-data
-52-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:35:13-38:17
+52-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:35:13-38:17
 53                android:name="io.flutter.embedding.android.SplashScreenDrawable"
-53-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:36:15-79
+53-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:36:15-79
 54                android:resource="@drawable/launch_background" />
-54-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:37:15-61
+54-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:37:15-61
 55
 56            <intent-filter>
-56-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:39:13-42:29
+56-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:39:13-42:29
 57                <action android:name="android.intent.action.MAIN" />
-57-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:40:17-68
-57-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:40:25-66
+57-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:40:17-68
+57-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:40:25-66
 58
 59                <category android:name="android.intent.category.LAUNCHER" />
-59-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:41:17-76
-59-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:41:27-74
+59-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:41:17-76
+59-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:41:27-74
 60            </intent-filter>
 61        </activity>
 62        <!--
@@ -100,269 +100,269 @@
 64             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 65        -->
 66        <meta-data
-66-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:46:9-48:33
+66-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:46:9-48:33
 67            android:name="flutterEmbedding"
-67-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:47:13-44
+67-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:47:13-44
 68            android:value="2" />
-68-->F:\Work\CodeCaique Projects\Qimma\android\app\src\main\AndroidManifest.xml:48:13-30
+68-->/Users/amin/Documents/work/codecaique/flutter/qimma_delivery/android/app/src/main/AndroidManifest.xml:48:13-30
 69
 70        <service
-70-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-15:72
+70-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:12:9-15:72
 71            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
-71-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-107
+71-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-107
 72            android:exported="false"
-72-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+72-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-37
 73            android:permission="android.permission.BIND_JOB_SERVICE" />
-73-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-69
+73-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-69
 74        <service
-74-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-22:19
+74-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:16:9-22:19
 75            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
-75-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-97
+75-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:17:13-97
 76            android:exported="false" >
-76-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+76-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:18:13-37
 77            <intent-filter>
-77-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-21:29
+77-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:19:13-21:29
 78                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-78-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-78
-78-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:20:25-75
+78-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:20:17-78
+78-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:20:25-75
 79            </intent-filter>
 80        </service>
 81
 82        <receiver
-82-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:24:9-31:20
+82-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:24:9-31:20
 83            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
-83-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-98
+83-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:25:13-98
 84            android:exported="true"
-84-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-36
+84-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:26:13-36
 85            android:permission="com.google.android.c2dm.permission.SEND" >
-85-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-73
+85-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:27:13-73
 86            <intent-filter>
-86-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:28:13-30:29
+86-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-30:29
 87                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-87-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:29:17-81
-87-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:29:25-78
+87-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:29:17-81
+87-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:29:25-78
 88            </intent-filter>
 89        </receiver>
 90
 91        <service
-91-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-37:19
+91-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:33:9-37:19
 92            android:name="com.google.firebase.components.ComponentDiscoveryService"
-92-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:33:18-89
+92-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:33:18-89
 93            android:directBootAware="true"
-93-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:35:13-43
+93-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:35:13-43
 94            android:exported="false" >
-94-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:38:13-37
+94-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:38:13-37
 95            <meta-data
-95-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-36:85
+95-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:34:13-36:85
 96                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
-96-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:35:17-128
+96-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:35:17-128
 97                android:value="com.google.firebase.components.ComponentRegistrar" />
-97-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:36:17-82
+97-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:36:17-82
 98            <meta-data
-98-->[:firebase_core] F:\Work\CodeCaique Projects\Qimma\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+98-->[:firebase_core] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
 99                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-99-->[:firebase_core] F:\Work\CodeCaique Projects\Qimma\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+99-->[:firebase_core] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-124
 100                android:value="com.google.firebase.components.ComponentRegistrar" />
-100-->[:firebase_core] F:\Work\CodeCaique Projects\Qimma\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+100-->[:firebase_core] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
 101            <meta-data
-101-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:39:13-41:85
+101-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:39:13-41:85
 102                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
-102-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:40:17-119
+102-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:40:17-119
 103                android:value="com.google.firebase.components.ComponentRegistrar" />
-103-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:41:17-82
+103-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:41:17-82
 104            <meta-data
-104-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:32:13-34:85
+104-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:32:13-34:85
 105                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
-105-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:33:17-96
+105-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:33:17-96
 106                android:value="com.google.firebase.components.ComponentRegistrar" />
-106-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:34:17-82
+106-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:34:17-82
 107            <meta-data
-107-->[com.google.firebase:firebase-datatransport:17.0.10] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\137391c8702d7944b286f950c17af4e3\firebase-datatransport-17.0.10\AndroidManifest.xml:28:13-30:85
+107-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/amin/.gradle/caches/transforms-2/files-2.1/137391c8702d7944b286f950c17af4e3/firebase-datatransport-17.0.10/AndroidManifest.xml:28:13-30:85
 108                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
-108-->[com.google.firebase:firebase-datatransport:17.0.10] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\137391c8702d7944b286f950c17af4e3\firebase-datatransport-17.0.10\AndroidManifest.xml:29:17-115
+108-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/amin/.gradle/caches/transforms-2/files-2.1/137391c8702d7944b286f950c17af4e3/firebase-datatransport-17.0.10/AndroidManifest.xml:29:17-115
 109                android:value="com.google.firebase.components.ComponentRegistrar" />
-109-->[com.google.firebase:firebase-datatransport:17.0.10] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\137391c8702d7944b286f950c17af4e3\firebase-datatransport-17.0.10\AndroidManifest.xml:30:17-82
+109-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/amin/.gradle/caches/transforms-2/files-2.1/137391c8702d7944b286f950c17af4e3/firebase-datatransport-17.0.10/AndroidManifest.xml:30:17-82
 110            <meta-data
-110-->[com.google.firebase:firebase-installations:16.3.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\be35a20d14c94611e8a044dd23a85b99\firebase-installations-16.3.5\AndroidManifest.xml:18:13-20:85
+110-->[com.google.firebase:firebase-installations:16.3.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/be35a20d14c94611e8a044dd23a85b99/firebase-installations-16.3.5/AndroidManifest.xml:18:13-20:85
 111                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
-111-->[com.google.firebase:firebase-installations:16.3.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\be35a20d14c94611e8a044dd23a85b99\firebase-installations-16.3.5\AndroidManifest.xml:19:17-127
+111-->[com.google.firebase:firebase-installations:16.3.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/be35a20d14c94611e8a044dd23a85b99/firebase-installations-16.3.5/AndroidManifest.xml:19:17-127
 112                android:value="com.google.firebase.components.ComponentRegistrar" />
-112-->[com.google.firebase:firebase-installations:16.3.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\be35a20d14c94611e8a044dd23a85b99\firebase-installations-16.3.5\AndroidManifest.xml:20:17-82
+112-->[com.google.firebase:firebase-installations:16.3.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/be35a20d14c94611e8a044dd23a85b99/firebase-installations-16.3.5/AndroidManifest.xml:20:17-82
 113            <!--
 114                This registrar is not defined in the dynamic-module-support sdk itself to allow non-firebase
 115                clients to use it as well, by defining this registrar in their own core/common library.
 116            -->
 117            <meta-data
-117-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:43:13-45:85
+117-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:43:13-45:85
 118                android:name="com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar"
-118-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:44:17-121
+118-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:44:17-121
 119                android:value="com.google.firebase.components.ComponentRegistrar" />
-119-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:45:17-82
+119-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:45:17-82
 120        </service>
 121
 122        <provider
-122-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:39:9-43:38
+122-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:39:9-43:38
 123            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
-123-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-102
+123-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:40:13-102
 124            android:authorities="com.qimma.flutterfirebasemessaginginitprovider"
-124-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-88
+124-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:41:13-88
 125            android:exported="false"
-125-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-37
+125-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-37
 126            android:initOrder="99" />
-126-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:43:13-35
+126-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:43:13-35
 127
 128        <activity
-128-->[:url_launcher] F:\Work\CodeCaique Projects\Qimma\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+128-->[:url_launcher] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-11:74
 129            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-129-->[:url_launcher] F:\Work\CodeCaique Projects\Qimma\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
+129-->[:url_launcher] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
 130            android:exported="false"
-130-->[:url_launcher] F:\Work\CodeCaique Projects\Qimma\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+130-->[:url_launcher] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
 131            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-131-->[:url_launcher] F:\Work\CodeCaique Projects\Qimma\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+131-->[:url_launcher] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
 132
 133        <service
-133-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-15:56
+133-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:11:9-15:56
 134            android:name="com.lyokone.location.FlutterLocationService"
-134-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-71
+134-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-71
 135            android:enabled="true"
-135-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-35
+135-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-35
 136            android:exported="false"
-136-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+136-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-37
 137            android:foregroundServiceType="location" />
-137-->[:location] F:\Work\CodeCaique Projects\Qimma\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-53
+137-->[:location] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-53
 138
 139        <provider
-139-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:12:9-20:20
+139-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:12:9-20:20
 140            android:name="com.sangcomz.fishbun.FishBunFileProvider"
-140-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:13:13-68
+140-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:13:13-68
 141            android:authorities="com.qimma.fishbunfileprovider"
-141-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:14:13-71
+141-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:14:13-71
 142            android:exported="false"
-142-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:15:13-37
+142-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:15:13-37
 143            android:grantUriPermissions="true" >
-143-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:16:13-47
+143-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:16:13-47
 144            <meta-data
-144-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:17:13-19:58
+144-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:17:13-19:58
 145                android:name="android.support.FILE_PROVIDER_PATHS"
-145-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:18:17-67
+145-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:18:17-67
 146                android:resource="@xml/provider_paths" />
-146-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:19:17-55
+146-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:19:17-55
 147        </provider>
 148
 149        <activity
-149-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:22:9-25:51
+149-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:22:9-25:51
 150            android:name="com.sangcomz.fishbun.ui.album.AlbumActivity"
-150-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:23:13-71
+150-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:23:13-71
 151            android:label="@string/album"
-151-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:24:13-42
+151-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:24:13-42
 152            android:theme="@style/FishBunTheme" />
-152-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:25:13-48
+152-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:25:13-48
 153        <activity
-153-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:26:9-28:51
+153-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:26:9-28:51
 154            android:name="com.sangcomz.fishbun.ui.picker.PickerActivity"
-154-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:27:13-73
+154-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:27:13-73
 155            android:theme="@style/FishBunTheme" />
-155-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:28:13-48
+155-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:28:13-48
 156        <activity
-156-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:29:9-31:54
+156-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:29:9-31:54
 157            android:name="com.sangcomz.fishbun.ui.detail.DetailActivity"
-157-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:30:13-73
+157-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:30:13-73
 158            android:theme="@style/DetailViewTheme" />
-158-->[com.sangcomz:FishBun:0.11.2] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e0b58758bf64f87288ff768dc1ff5651\jetified-FishBun-0.11.2\AndroidManifest.xml:31:13-51
+158-->[com.sangcomz:FishBun:0.11.2] /Users/amin/.gradle/caches/transforms-2/files-2.1/60a09c8fbd8e3dd562c45c7dff5bf0b9/jetified-FishBun-0.11.2/AndroidManifest.xml:31:13-51
 159        <!--
 160             FirebaseMessagingService performs security checks at runtime,
 161             but set to not exported to explicitly avoid allowing another app to call it.
 162        -->
 163        <service
-163-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:28:9-35:19
+163-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:28:9-35:19
 164            android:name="com.google.firebase.messaging.FirebaseMessagingService"
-164-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:29:13-82
+164-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:29:13-82
 165            android:directBootAware="true"
-165-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:30:13-43
+165-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:30:13-43
 166            android:exported="false" >
-166-->[com.google.firebase:firebase-messaging:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\24305aaacd5405c1b7ce77c3f4efb88a\jetified-firebase-messaging-21.0.1\AndroidManifest.xml:31:13-37
+166-->[com.google.firebase:firebase-messaging:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/26c4fdb696008b20a168be01c6572cbe/jetified-firebase-messaging-21.0.1/AndroidManifest.xml:31:13-37
 167            <intent-filter android:priority="-500" >
-167-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-21:29
+167-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:19:13-21:29
 168                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-168-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-78
-168-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:20:25-75
+168-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:20:17-78
+168-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:20:25-75
 169            </intent-filter>
 170        </service>
 171
 172        <receiver
-172-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:37:9-44:20
+172-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:37:9-44:20
 173            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-173-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:38:13-78
+173-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:38:13-78
 174            android:exported="true"
-174-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:39:13-36
+174-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:39:13-36
 175            android:permission="com.google.android.c2dm.permission.SEND" >
-175-->[com.google.firebase:firebase-iid:21.0.1] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\2da48c58b24f7955e2aa50e0c104e146\firebase-iid-21.0.1\AndroidManifest.xml:40:13-73
+175-->[com.google.firebase:firebase-iid:21.0.1] /Users/amin/.gradle/caches/transforms-2/files-2.1/2da48c58b24f7955e2aa50e0c104e146/firebase-iid-21.0.1/AndroidManifest.xml:40:13-73
 176            <intent-filter>
-176-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:28:13-30:29
+176-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-30:29
 177                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-177-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:29:17-81
-177-->[:firebase_messaging] F:\Work\CodeCaique Projects\Qimma\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:29:25-78
+177-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:29:17-81
+177-->[:firebase_messaging] /Users/amin/Documents/work/codecaique/flutter/qimma_delivery/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:29:25-78
 178            </intent-filter>
 179        </receiver>
 180
 181        <provider
-181-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:26:9-31:39
+181-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:26:9-31:39
 182            android:name="com.google.firebase.provider.FirebaseInitProvider"
-182-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:27:13-77
+182-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:27:13-77
 183            android:authorities="com.qimma.firebaseinitprovider"
-183-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:28:13-72
+183-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:28:13-72
 184            android:directBootAware="true"
-184-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:29:13-43
+184-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:29:13-43
 185            android:exported="false"
-185-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:30:13-37
+185-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:30:13-37
 186            android:initOrder="100" />
-186-->[com.google.firebase:firebase-common:19.5.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\c0639faf9a9cec604bfc2a7e0e52eecd\jetified-firebase-common-19.5.0\AndroidManifest.xml:31:13-36
+186-->[com.google.firebase:firebase-common:19.5.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/3c362a5206a4f52c95822e7c9b4ecd46/jetified-firebase-common-19.5.0/AndroidManifest.xml:31:13-36
 187
 188        <activity
-188-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\5ac9ad6f13ea0190a3570ea7a43d9f59\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+188-->[com.google.android.gms:play-services-base:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
 189            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-189-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\5ac9ad6f13ea0190a3570ea7a43d9f59\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+189-->[com.google.android.gms:play-services-base:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
 190            android:exported="false"
-190-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\5ac9ad6f13ea0190a3570ea7a43d9f59\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+190-->[com.google.android.gms:play-services-base:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
 191            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-191-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\5ac9ad6f13ea0190a3570ea7a43d9f59\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+191-->[com.google.android.gms:play-services-base:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
 192
 193        <meta-data
-193-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\111514be4ff4829c2877678b12cd4dd2\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+193-->[com.google.android.gms:play-services-basement:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/8f1710fbb26952b9105e5c8d6385f32c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
 194            android:name="com.google.android.gms.version"
-194-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\111514be4ff4829c2877678b12cd4dd2\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+194-->[com.google.android.gms:play-services-basement:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/8f1710fbb26952b9105e5c8d6385f32c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
 195            android:value="@integer/google_play_services_version" />
-195-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\111514be4ff4829c2877678b12cd4dd2\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+195-->[com.google.android.gms:play-services-basement:17.0.0] /Users/amin/.gradle/caches/transforms-2/files-2.1/8f1710fbb26952b9105e5c8d6385f32c/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
 196
 197        <service
-197-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\ca8c344d8318c4bcf657ba54f3105e77\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
+197-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/amin/.gradle/caches/transforms-2/files-2.1/54b2414ef4d01cd8185dd25d3d5810f4/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
 198            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-198-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\ca8c344d8318c4bcf657ba54f3105e77\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
+198-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/amin/.gradle/caches/transforms-2/files-2.1/54b2414ef4d01cd8185dd25d3d5810f4/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
 199            android:exported="false" >
-199-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\ca8c344d8318c4bcf657ba54f3105e77\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
+199-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/amin/.gradle/caches/transforms-2/files-2.1/54b2414ef4d01cd8185dd25d3d5810f4/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
 200            <meta-data
-200-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\ca8c344d8318c4bcf657ba54f3105e77\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
+200-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/amin/.gradle/caches/transforms-2/files-2.1/54b2414ef4d01cd8185dd25d3d5810f4/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
 201                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-201-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\ca8c344d8318c4bcf657ba54f3105e77\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
+201-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/amin/.gradle/caches/transforms-2/files-2.1/54b2414ef4d01cd8185dd25d3d5810f4/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
 202                android:value="cct" />
-202-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\ca8c344d8318c4bcf657ba54f3105e77\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
+202-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/amin/.gradle/caches/transforms-2/files-2.1/54b2414ef4d01cd8185dd25d3d5810f4/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
 203        </service>
 204        <service
-204-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:26:9-30:19
+204-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:26:9-30:19
 205            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-205-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:27:13-117
+205-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:27:13-117
 206            android:exported="false"
-206-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:28:13-37
+206-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:28:13-37
 207            android:permission="android.permission.BIND_JOB_SERVICE" >
-207-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:29:13-69
+207-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:29:13-69
 208        </service>
 209
 210        <receiver
-210-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:32:9-34:40
+210-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:32:9-34:40
 211            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-211-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:33:13-132
+211-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:33:13-132
 212            android:exported="false" />
-212-->[com.google.android.datatransport:transport-runtime:2.2.5] C:\Users\moham\.gradle\caches\transforms-2\files-2.1\e5b04cf2500a8c0379174210738c1cf7\jetified-transport-runtime-2.2.5\AndroidManifest.xml:34:13-37
+212-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/amin/.gradle/caches/transforms-2/files-2.1/c1b9c51d50349b4484c718c8750a30de/jetified-transport-runtime-2.2.5/AndroidManifest.xml:34:13-37
 213    </application>
 214
 215</manifest>

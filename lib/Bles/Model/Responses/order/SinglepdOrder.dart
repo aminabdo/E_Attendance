@@ -213,7 +213,12 @@ class Product_detailBean {
     product_detailBean.differenceAr = map['difference_ar'];
     product_detailBean.descAr = map['desc_ar'];
     product_detailBean.descEn = map['desc_en'];
-    product_detailBean.image = map['image'];
+    if(map['image'] == null){
+      product_detailBean.image = "";
+    }
+    else{
+      product_detailBean.image = map['image'];
+    }
     product_detailBean.isOffer = map['is_offer'];
     product_detailBean.offerAmount = map['offer_amount'];
     product_detailBean.rate = map['rate'];

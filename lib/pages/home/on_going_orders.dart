@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
-import 'file:///F:/Work/CodeCaique%20Projects/Qimma/lib/Bles/Model/Responses/order/FinishedOrdersResponse.dart';
+import 'package:qimma/Bles/Model/Responses/order/FinishedOrdersResponse.dart';
 import 'package:qimma/pages/home/order_details.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
@@ -72,7 +72,7 @@ class Item extends StatelessWidget {
           child: Row(
             children: [
               CachedNetworkImage(
-                imageUrl: item.ProductDetail.image,
+                imageUrl: item.ProductDetail.image ?? '' ,
                 width: 35,
                 errorWidget: (_, __, ___) {
                   return Image.asset('assets/images/no_image.png');
