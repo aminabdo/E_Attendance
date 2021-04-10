@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:qimma/main.dart';
 import 'package:qimma/pages/attendance/attendance_page.dart';
 import 'package:qimma/pages/client/client_info_page.dart';
 import 'package:qimma/pages/client/clients_of_representative.dart';
@@ -114,11 +115,17 @@ Drawer buildDrawer(
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                           child: Center(
-                            child: Text(
-                              "عربي",
-                              style: TextStyle(
-                                color: mainColor,
-                                fontSize: 18,
+                            child: GestureDetector(
+                              onTap: (){
+                                MyApp.setLocale(context, Locale("ar"));
+                                AppUtils.saveLanguage("ar");
+                              },
+                              child: Text(
+                                "عربي",
+                                style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ),
@@ -134,11 +141,17 @@ Drawer buildDrawer(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
-                            child: Text(
-                              "English",
-                              style: TextStyle(
-                                color: mainColor,
-                                fontSize: 18,
+                            child: GestureDetector(
+                              onTap: (){
+                                MyApp.setLocale(context, Locale("en"));
+                                AppUtils.saveLanguage("en");
+                              },
+                              child: Text(
+                                "English",
+                                style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ),

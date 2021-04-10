@@ -50,8 +50,8 @@ class Products {
   int _rate;
   int _isOffer;
   String _offerAmount;
-  double _lat;
-  double _lng;
+  dynamic _lat;
+  dynamic _lng;
   String _distance;
   bool _isFavorite;
   int _inventoryId;

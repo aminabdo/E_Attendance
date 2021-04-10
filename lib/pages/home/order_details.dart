@@ -341,7 +341,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                    Center(
                      child: GestureDetector(
                        onTap: (){
-                         orderBloc.editStatus(EditStatusRequest(status: 2)).then((value) {
+                         orderBloc.editStatus(EditStatusRequest(status: 2 ) , snapshot.data.data.id).then((value) {
                            AppUtils.showToast(msg: value.message , bgColor: mainColor);
                          });
                        },

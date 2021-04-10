@@ -60,7 +60,7 @@ class DataBean {
   dynamic lang;
   String lat;
   String lng;
-  int debt;
+  dynamic debt;
   int currencyId;
   List<Dicounts_codesBean> dicountsCodes;
 

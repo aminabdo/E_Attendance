@@ -29,6 +29,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
   Addresses selectedAddress;
   List<String> priceTypes;
 
+  bool isstate = false;
   @override
   void initState() {
     super.initState();
@@ -41,11 +42,14 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    priceTypes = [
-      AppUtils.translate(context, 'whole_whole_sale'),
-      AppUtils.translate(context, 'whole_sale'),
-      AppUtils.translate(context, 'sale'),
-    ];
+    if(!isstate) {
+      priceTypes = [
+        AppUtils.translate(context, 'whole_whole_sale'),
+        AppUtils.translate(context, 'whole_sale'),
+        AppUtils.translate(context, 'sale'),
+      ];
+      isstate = true;
+    }
 
     if (!gotFirstCategoryProducts) {
       if (homeBloc.s_get_main_cat.value != null &&
@@ -139,6 +143,35 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                     selectedAddress = addresses.isNotEmpty
                                         ? addresses[0]
                                         : null;
+
+
+                                    setState(() {
+
+                                    });
+                                    print("status -------> ${selectedUser.status}");
+                                    if(selectedUser.status == 1){
+                                      print("statues 111111111111111");
+                                      selectedPriceType = AppUtils.translate(context, 'sale');
+                                      priceTypes = [AppUtils.translate(context, 'sale')];
+                                    }
+                                    else if(selectedUser.status == 2){
+                                      print("statues 22222222222222");
+                                      selectedPriceType = AppUtils.translate(context, 'whole_sale');
+                                      priceTypes = [AppUtils.translate(context, 'whole_sale')];
+                                    }
+                                    else if(selectedUser.status == 4){
+                                      print("statues 44444444444444");
+                                      selectedPriceType = AppUtils.translate(context, 'whole_whole_sale');
+                                      priceTypes = [AppUtils.translate(context, 'whole_whole_sale')];
+                                    }
+                                    else{
+                                      priceTypes = [] ;
+                                    }
+
+
+                                    setState(() {
+
+                                    });
                                   });
                                 },
                               ),
@@ -207,7 +240,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                 userId: selectedUser.id.toString(),
                                 addressId:
                                     selectedAddress.id.toString() ?? null,
-                                priceType: getPriceType(),
+                                priceType: selectedUser.status.toString(),
                               );
 
                               print(request.toString());

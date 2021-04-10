@@ -69,7 +69,7 @@ class _ClientsOfRepresentativePageState
                       topRight: Radius.circular(30))),
               child: StreamBuilder<ClientOfRepresentativeResponse>(
                 stream: clientBloc.all_clients_of_representative.stream,
-                builder: (context, AsyncSnapshot snapshot) {
+                builder: (context, AsyncSnapshot<ClientOfRepresentativeResponse> snapshot) {
                   if (clientBloc.all_clients_of_representative.value.loading) {
                     return Loader();
                   } else {
@@ -126,7 +126,7 @@ class _ClientsOfRepresentativePageState
                                     onPressed: () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (_) => SetDeptPage(),
+                                          builder: (_) => SetDeptPage(clientId: snapshot.data.data[index].id,),
                                         ),
                                       );
                                     },

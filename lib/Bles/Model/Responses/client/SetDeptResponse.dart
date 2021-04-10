@@ -26,7 +26,7 @@ class DataBean {
   RepresentativeBean representative;
   UserBean user;
   String type;
-  String value;
+  dynamic value;
   String date;
 
   static DataBean fromMap(Map<String, dynamic> map) {

@@ -22,12 +22,12 @@ class SinglepdOrderResponse extends BaseResponse {
 }
 
 class Order {
-  int id;
+  dynamic id;
   String priceType;
   dynamic totalPrice;
-  int paid;
+  dynamic paid;
   dynamic rest;
-  int shippingPrice;
+  dynamic shippingPrice;
   String status;
   String email;
   String phone;
@@ -103,11 +103,11 @@ class Order {
 }
 
 class ProductsBean {
-  int id;
+  dynamic id;
   Product_detailBean ProductDetail;
   String pDOrderId;
   String productDetailId;
-  int quantity;
+  dynamic quantity;
   String colorId;
   String sizeId;
   ColorBean color;
@@ -142,7 +142,7 @@ class ProductsBean {
 }
 
 class SizeBean {
-  int id;
+  dynamic id;
   String name;
 
   static SizeBean fromMap(Map<String, dynamic> map) {
@@ -160,7 +160,7 @@ class SizeBean {
 }
 
 class ColorBean {
-  int id;
+  dynamic id;
   String colorCode;
 
   static ColorBean fromMap(Map<String, dynamic> map) {
@@ -178,7 +178,7 @@ class ColorBean {
 }
 
 class Product_detailBean {
-  int id;
+  dynamic id;
   String productId;
   String differenceEn;
   String differenceAr;

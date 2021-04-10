@@ -17,6 +17,7 @@ class SetDeptPage extends StatefulWidget {
 class _SetDeptPageState extends State<SetDeptPage> {
   TextEditingController _controller = TextEditingController();
 
+  bool load = false ;
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -84,8 +85,13 @@ class _SetDeptPageState extends State<SetDeptPage> {
                                 style: TextStyle(color: Colors.white)),
                           ),
                         ),
-                        onTap: () {
-                          clientBloc
+                        onTap: () async {
+                          load = true;
+                          setState(() {
+
+                          });
+                          print("onTap --- >  client id ----->>>> ${widget.clientId}");
+                          await clientBloc
                               .setDept(
                                   clientId: widget.clientId,
                                   request: SetDeptRequest(
@@ -94,6 +100,13 @@ class _SetDeptPageState extends State<SetDeptPage> {
                               .then((value) {
                             AppUtils.showToast(
                                 msg: value.message, bgColor: mainColor);
+                          });
+
+                          _controller.clear();
+
+                          load = false;
+                          setState(() {
+
                           });
                         },
                       ),
@@ -110,9 +123,13 @@ class _SetDeptPageState extends State<SetDeptPage> {
                             ),
                           ),
                         ),
-                        onTap: () {
+                        onTap: () async{
+                          load = true;
+                          setState(() {
 
-                          clientBloc
+                          });
+                          print("onTap --- >  client id ----->>>> ${widget.clientId}");
+                          await clientBloc
                               .setDept(
                                   clientId: widget.clientId,
                                   request: SetDeptRequest(
@@ -122,10 +139,18 @@ class _SetDeptPageState extends State<SetDeptPage> {
                             AppUtils.showToast(
                                 msg: value.message, bgColor: mainColor);
                           });
+
+                          _controller.clear();
+
+                          load = false;
+                          setState(() {
+
+                          });
                         },
                       )
                     ],
                   ),
+                  load ? CircularProgressIndicator() : SizedBox.shrink(),
                   SizedBox(
                     height: 50,
                   ),

@@ -29,16 +29,16 @@ class UserData {
   dynamic fireBaseToken;
   String phone;
   String email;
-  int status;
-  int social;
-  int notification;
-  int message;
+  dynamic status;
+  dynamic social;
+  dynamic notification;
+  dynamic message;
   String lang;
   String lat;
   String lng;
   String carNum;
-  int debt;
-  int currencyId;
+  dynamic debt;
+  dynamic currencyId;
   String token;
 
   static UserData fromMap(Map<String, dynamic> map) {

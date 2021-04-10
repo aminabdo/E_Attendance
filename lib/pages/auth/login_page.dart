@@ -162,9 +162,9 @@ class _LoginPageState extends State<LoginPage> {
     // );
     var response = await authBloc.login(
       LoginRequest(
-          eamilOrPhone: "012165955777777",
+          eamilOrPhone: phoneOrEmailController.text.toString(),
           fireBaseToken: "AppUtils.firebaseToken",
-          password: "123456",
+          password: passwordController.text.toString(),
       ),
     );
 

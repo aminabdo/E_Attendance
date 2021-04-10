@@ -24,31 +24,31 @@ class FinishedOrdersResponse extends BaseResponse{
 }
 
 class DataBean {
-  int id;
-  String priceType;
-  int discount;
-  int tax1;
-  int tax2;
-  int totalPrice;
-  int paid;
-  int rest;
-  int shippingPrice;
-  String status;
-  String email;
-  String phone;
-  String paymentMethod;
+  dynamic id;
+  dynamic priceType;
+  dynamic discount;
+  dynamic tax1;
+  dynamic tax2;
+  dynamic totalPrice;
+  dynamic paid;
+  dynamic rest;
+  dynamic shippingPrice;
+  dynamic status;
+  dynamic email;
+  dynamic phone;
+  dynamic paymentMethod;
   dynamic rate;
   dynamic report;
-  String date;
-  String name;
-  String userId;
-  String representativeId;
-  String lat;
-  String lng;
-  String address;
+  dynamic date;
+  dynamic name;
+  dynamic userId;
+  dynamic representativeId;
+  dynamic lat;
+  dynamic lng;
+  dynamic address;
   List<ProductsBean> products;
-  String createdAt;
-  String updatedAt;
+  dynamic createdAt;
+  dynamic updatedAt;
 
   static DataBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -113,7 +113,7 @@ class DataBean {
 }
 
 class ProductsBean {
-  int id;
+  dynamic id;
   Product_detailBean ProductDetail;
   String pDOrderId;
   String productDetailId;
@@ -155,22 +155,22 @@ class ProductsBean {
 }
 
 class Product_detailBean {
-  int id;
+  dynamic id;
   String mainProductId;
   String mainProductName;
   String desc;
   String Difference;
   String image;
-  int rate;
-  int isOffer;
+  dynamic rate;
+  dynamic isOffer;
   String offerAmount;
-  double lat;
-  double lng;
+  dynamic lat;
+  dynamic lng;
   String distance;
   bool isFavorite;
-  int InventoryId;
+  dynamic InventoryId;
   String InventoryName;
-  int Quantity;
+  dynamic Quantity;
   List<dynamic> colors;
   List<dynamic> sizes;
   List<dynamic> images;

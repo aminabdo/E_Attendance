@@ -59,6 +59,7 @@ class Users {
   dynamic _debt;
   int _currencyId;
   List<Addresses> _addresses;
+  List<String> _price_types;
 
   int get id => _id;
   String get firstName => _firstName;
@@ -77,6 +78,7 @@ class Users {
   int get debt => _debt;
   int get currencyId => _currencyId;
   List<Addresses> get addresses => _addresses;
+  List<String> get priceType => _price_types;
 
   Users({
       int id, 
@@ -95,7 +97,8 @@ class Users {
       String lng, 
       int debt, 
       int currencyId, 
-      List<Addresses> addresses}){
+      List<Addresses> addresses,
+      List<String> priceTypes}){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -113,6 +116,7 @@ class Users {
     _debt = debt;
     _currencyId = currencyId;
     _addresses = addresses;
+    _price_types = priceTypes;
 }
 
   Users.fromJson(dynamic json) {

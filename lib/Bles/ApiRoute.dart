@@ -32,8 +32,8 @@ class ApiRoutes {
     return "Order/finished_orders";
   }
 
-  static String editStatus() {
-    return "Order/edit_status/78";
+  static String editStatus(int orderID) {
+    return "Order/edit_status/$orderID";
   }
 
   static String filter_P_d_orders_by_DM(int type) {
@@ -282,9 +282,10 @@ class ApiRoutes {
 
 class ApiRoutesUpdate {
   static String baseUrl = "https://qimmaapi.codecaique.com/api/";
+  static String baseUrl_client = "https://qimmajoomlaapi.codecaique.com/api/";
 
   getLink(String url) {
-    print("url ------>>>>   " + baseUrl + url);
-    return baseUrl + url;
+    print("url ------>>>>   " + baseUrl_client + url);
+    return baseUrl_client  + url;
   }
 }

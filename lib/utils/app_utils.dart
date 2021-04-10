@@ -21,6 +21,26 @@ class AppUtils {
   static UserData userData;
 
 
+
+  // language
+  static String language;
+
+  static Future<String> loadSavedLanguage() async {
+    language = (await SharedPreferences.getInstance()).getString('langCode');
+    return language;
+  }
+
+  static saveLanguage(String language) async {
+    (await SharedPreferences.getInstance()).setString('langCode', language);
+  }
+
+  static String getLanguage() {
+    return language;
+  }
+
+
+
+
   static hideKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }

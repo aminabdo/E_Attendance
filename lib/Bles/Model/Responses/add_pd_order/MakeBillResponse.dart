@@ -26,8 +26,8 @@ class DataBean {
   String priceType;
   dynamic totalPrice;
   int paid;
-  double rest;
-  int shippingPrice;
+  dynamic rest;
+  dynamic shippingPrice;
   String status;
   String email;
   String phone;

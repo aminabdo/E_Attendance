@@ -151,12 +151,12 @@ class OrderBloc extends BaseBloc {
   }
 
   Future<EditStatusResponse> editStatus(
-      EditStatusRequest request) async {
+      EditStatusRequest request , int orderID) async {
     _edit_status.value = EditStatusResponse();
     _edit_status.value.loading = true;
     EditStatusResponse response =
     EditStatusResponse.fromMap((await repository.post(
-        ApiRoutes.editStatus(), request.toJson()))
+        ApiRoutes.editStatus(orderID), request.toJson()))
         .data);
     _edit_status.value = response;
     _edit_status.value.loading = false;

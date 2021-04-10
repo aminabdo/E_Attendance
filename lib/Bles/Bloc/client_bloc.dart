@@ -38,13 +38,18 @@ class ClientBloc extends BaseBloc {
 
   Future<SetDeptResponse> setDept(
       {int clientId, SetDeptRequest request}) async {
+
+
+    print("setDept --- >  client id ----->>>> $clientId");
     _setDept.value = SetDeptResponse();
     _setDept.value.loading = true;
+    _setDept.value = _setDept.value;
     SetDeptResponse response = SetDeptResponse.fromMap((await repository.post(
             ApiRoutes.setDept(clientId: clientId), request.toJson()))
         .data);
     _setDept.value = response;
     _setDept.value.loading = false;
+    _setDept.value = _setDept.value;
     return response;
   }
 

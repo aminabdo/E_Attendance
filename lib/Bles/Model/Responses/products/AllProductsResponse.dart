@@ -1,3 +1,4 @@
+import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/base/BaseBloc.dart';
 import 'package:qimma/utils/base/BaseResponse.dart';
 
@@ -26,31 +27,6 @@ class AllProductsResponse extends BaseResponse {
         "message": message,
       };
 }
-
-/// id : 31
-/// main_product_id : "127"
-/// main_Product_name : "Top charger"
-/// desc : "Sportive hot short lickra material"
-/// Difference : "Sportive hot short"
-/// image : "https://qimmaapi.codecaique.com/public/images/Product_image/"
-/// rate : 0
-/// is_offer : 1
-/// offer_amount : "12%"
-/// lat : 135.64
-/// lng : 124.36
-/// distance : "0 km"
-/// is_favorite : false
-/// Inventory_id : 1
-/// Inventory_name : "Main inventory"
-/// Quantity : 1000
-/// colors : []
-/// sizes : []
-/// images : []
-/// Purchasing_price : "200"
-/// Wholesale_wholesale_price : "210"
-/// Wholesale_price : "215"
-/// Selling_price : "225"
-/// barcode : "3531515151"
 
 class DataBean {
   int id;
@@ -105,6 +81,8 @@ class DataBean {
     dataBean.WholesalePrice = map['Wholesale_price'];
     dataBean.SellingPrice = map['Selling_price'];
     dataBean.barcode = map['barcode'];
+
+
     return dataBean;
   }
 

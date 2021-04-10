@@ -22,9 +22,9 @@ class AddClientToRepresentativeResponse extends BaseResponse{
 }
 
 class DataBean {
-  int id;
-  int representativeId;
-  String userId;
+  dynamic id;
+  dynamic representativeId;
+  dynamic userId;
   RepresentativeBean representative;
   UserBean user;
 
