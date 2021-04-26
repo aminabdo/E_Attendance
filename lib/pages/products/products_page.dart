@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,9 @@ class _ShowAllProductsState extends State<ShowAllProducts> {
     byRatingSelected = false;
     productBloc.getAllProductsWithoutRating();
     productBloc.getAllProductsByRating();
+
+
+
     super.initState();
   }
 
@@ -63,6 +67,16 @@ class _ShowAllProductsState extends State<ShowAllProducts> {
                     borderWidth: 1,
                     hintText: AppUtils.translate(context, 'search_by_name'),
                     prefixIcon: Image.asset('assets/images/search.png'),
+                    onChanged: (txt) async{
+                      ////////
+                      log(txt);
+                      var res1 = await productBloc.search_by_name(txt);
+                      var res2 = await productBloc.search_by_name2(txt);
+
+                      setState(() {
+
+                      });
+                    },
                   ),
                 ),
                 SizedBox(
@@ -119,9 +133,9 @@ class _ShowAllProductsState extends State<ShowAllProducts> {
                       topRight: Radius.circular(30))),
               child: !byRatingSelected
                   ? StreamBuilder<AllProductsResponse>(
-                      stream: productBloc.all_products_by_rating.stream,
+                      stream: productBloc.search_all_products_by_rating.stream,
                       builder: (context, AsyncSnapshot snapshot) {
-                        if (productBloc.all_products_by_rating.value.loading) {
+                        if (productBloc.search_all_products_by_rating.value.loading) {
                           return Loader();
                         } else {
                           AllProductsResponse product = snapshot.data;
@@ -190,7 +204,7 @@ class _ShowAllProductsState extends State<ShowAllProducts> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(product.data[index]
-                                                  .mainProductName ??
+                                                  .Difference ??
                                               ''),
                                           SizedBox(
                                             height: 2,
@@ -237,10 +251,10 @@ class _ShowAllProductsState extends State<ShowAllProducts> {
                       },
                     )
                   : StreamBuilder<AllProductsResponse>(
-                      stream: productBloc.all_products_without_rating.stream,
+                      stream: productBloc.search_all_products_without_rating.stream,
                       builder: (context, AsyncSnapshot snapshot) {
                         if (productBloc
-                            .all_products_without_rating.value.loading) {
+                            .search_all_products_without_rating.value.loading) {
                           return Loader();
                         } else {
                           AllProductsResponse product = snapshot.data;
@@ -310,7 +324,7 @@ class _ShowAllProductsState extends State<ShowAllProducts> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(product.data[index]
-                                                  .mainProductName ??
+                                                  .Difference ??
                                               ''),
                                           SizedBox(
                                             height: 2,

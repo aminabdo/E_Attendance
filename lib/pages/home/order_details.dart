@@ -106,7 +106,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                        style: TextStyle(color: Colors.grey),
                                      ),
                                      Text(
-                                       order.phone,
+                                       order.phone ?? '',
                                        style: TextStyle(fontSize: 12),
                                      ),
                                    ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
+import 'package:qimma/Bles/Bloc/client_bloc.dart';
 import 'package:qimma/Bles/Bloc/old/HomeBloc.dart';
 import 'package:qimma/Bles/Model/Requests/AddpdOrderRequest.dart';
-import 'package:qimma/Bles/Model/Responses/order/AllUsersResponse.dart';
+import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
@@ -21,12 +22,12 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
   bool gotFirstCategoryProducts = false;
   bool gotData = false;
 
-  List<Users> users;
-  List<Addresses> addresses = [];
-  Users selectedUser;
+  List<ClientBean> users;
+  List<AddressesBean> addresses = [];
+  ClientBean selectedUser;
 
   String selectedPriceType;
-  Addresses selectedAddress;
+  AddressesBean selectedAddress;
   List<String> priceTypes;
 
   bool isstate = false;
@@ -34,8 +35,9 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
   void initState() {
     super.initState();
 
-    orderBloc.getAllUsers();
+    //orderBloc.getAllUsers();
     homeBloc.get_main_cat();
+    clientBloc.getClientsOfRepresentative();
   }
 
   @override
@@ -87,10 +89,10 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                   ),
                 ),
               ),
-              StreamBuilder<AllUsersResponse>(
-                stream: orderBloc.all_users.stream,
+              StreamBuilder<ClientOfRepresentativeResponse>(
+                stream: clientBloc.all_clients_of_representative.stream,
                 builder: (context, snapshot) {
-                  if (orderBloc.all_users.value.loading) {
+                  if (clientBloc.all_clients_of_representative.value.loading) {
                     return Column(
                       children: [
                         SizedBox(
@@ -105,12 +107,17 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                   } else {
                     if (!gotData) {
                       users = snapshot.data.data;
-                      selectedUser = users[0];
-                      selectedPriceType = priceTypes[0];
-                      addresses = selectedUser.addresses;
-                      print("addresses ----- >>> "+addresses.toString());
-                      if(addresses.isNotEmpty) {
-                        selectedAddress = addresses[0];
+                      if(users.isEmpty || users == null){
+
+                      }
+                      else{
+                        selectedUser = users[0];
+                        selectedPriceType = priceTypes[0];
+                        addresses = selectedUser.addresses;
+                        print("addresses ----- >>> "+addresses.toString());
+                        if(addresses.isNotEmpty) {
+                          selectedAddress = addresses[0];
+                        }
                       }
                       gotData = true;
                     }
@@ -126,10 +133,10 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<Users>(
+                              child: DropdownButton<ClientBean>(
                                 value: selectedUser,
-                                items: users.map((Users value) {
-                                  return new DropdownMenuItem<Users>(
+                                items: users.map((ClientBean value) {
+                                  return new DropdownMenuItem<ClientBean>(
                                     value: value,
                                     child: Text(
                                         '${value.firstName} ${value.lastName}'),
@@ -154,7 +161,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                       selectedPriceType = AppUtils.translate(context, 'sale');
                                       priceTypes = [AppUtils.translate(context, 'sale')];
                                     }
-                                    else if(selectedUser.status == 2){
+                                    else if(selectedUser.status == 3){
                                       print("statues 22222222222222");
                                       selectedPriceType = AppUtils.translate(context, 'whole_sale');
                                       priceTypes = [AppUtils.translate(context, 'whole_sale')];
@@ -187,10 +194,10 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<Addresses>(
+                              child: DropdownButton<AddressesBean>(
                                 value: selectedAddress,
-                                items: addresses.map((Addresses value) {
-                                  return new DropdownMenuItem<Addresses>(
+                                items: addresses.map((AddressesBean value) {
+                                  return new DropdownMenuItem<AddressesBean>(
                                     value: value,
                                     child: Text(value.address),
                                   );
@@ -235,35 +242,63 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                               setState(() {
                                 isLoading = true;
                               });
-
-                              var request = AddOrderRequest(
-                                userId: selectedUser.id.toString(),
-                                addressId:
-                                    selectedAddress.id.toString() ?? null,
-                                priceType: selectedUser.status.toString(),
-                              );
-
-                              print(request.toString());
-
-                              var response = await orderBloc.addOrder(request);
-                              if (response.status == 1) {
+                              if(selectedUser == null ){
                                 setState(() {
                                   isLoading = false;
                                 });
-
                                 AppUtils.showToast(
-                                    msg: AppUtils.translate(context, 'done'),
+                                    msg: AppUtils.translate(context, 'يرجي اختيار عميل'),
                                     bgColor: mainColor);
-                                orderBloc.getAllProducts();
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => ProductsPage(
-                                      orderId: response.data.id,
+                                return;
+                              }
+                              var price_type = 3 ;
+                              if(selectedUser.status == 1){
+                                price_type =3 ;
+                              }else if(selectedUser.status ==3){
+                                price_type = 2 ;
+                              }else if(selectedUser.status == 4 ){
+                                price_type = 1 ;
+                              }
+                              var request = AddOrderRequest(
+                                userId: selectedUser.id.toString(),
+                                addressId:
+                                    selectedAddress?.id.toString() ?? null,
+                                priceType: price_type.toString(),
+                              );
+
+                              print(request.toString());
+                              try {
+                                var response = await orderBloc.addOrder(
+                                    request);
+                                if (response.status == 1) {
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+
+                                  AppUtils.showToast(
+                                      msg: AppUtils.translate(context, 'done'),
+                                      bgColor: mainColor);
+                                  orderBloc.getAllProducts();
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          ProductsPage(
+                                            orderId: response.data.id,
+                                          ),
                                     ),
-                                  ),
-                                );
-                              } else {
-                                AppUtils.showToast(msg: response.message);
+                                  );
+                                } else {
+                                  AppUtils.showToast(msg: response.message);
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                }
+                              }catch(e){
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              }
+                              finally{
                                 setState(() {
                                   isLoading = false;
                                 });

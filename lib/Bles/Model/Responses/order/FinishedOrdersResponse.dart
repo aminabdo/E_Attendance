@@ -2,18 +2,18 @@ import 'package:qimma/utils/base/BaseResponse.dart';
 
 class FinishedOrdersResponse extends BaseResponse{
   int status;
-  List<DataBean> data;
+  List<FinshedOrderBean> data;
   String message;
 
   static FinishedOrdersResponse fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    FinishedOrdersResponse finishedOrdersResponse = FinishedOrdersResponse();
-    finishedOrdersResponse.status = map['status'];
-    finishedOrdersResponse.data = List()..addAll(
-      (map['data'] as List ?? []).map((o) => DataBean.fromMap(o))
+    FinishedOrdersResponse finishedOrdersResponseBean = FinishedOrdersResponse();
+    finishedOrdersResponseBean.status = map['status'];
+    finishedOrdersResponseBean.data = List()..addAll(
+      (map['data'] as List ?? []).map((o) => FinshedOrderBean.fromMap(o))
     );
-    finishedOrdersResponse.message = map['message'];
-    return finishedOrdersResponse;
+    finishedOrdersResponseBean.message = map['message'];
+    return finishedOrdersResponseBean;
   }
 
   Map toJson() => {
@@ -23,9 +23,9 @@ class FinishedOrdersResponse extends BaseResponse{
   };
 }
 
-class DataBean {
+class FinshedOrderBean {
   dynamic id;
-  dynamic priceType;
+  String priceType;
   dynamic discount;
   dynamic tax1;
   dynamic tax2;
@@ -33,26 +33,28 @@ class DataBean {
   dynamic paid;
   dynamic rest;
   dynamic shippingPrice;
-  dynamic status;
+  String status;
   dynamic email;
   dynamic phone;
-  dynamic paymentMethod;
+  String paymentMethod;
   dynamic rate;
   dynamic report;
-  dynamic date;
-  dynamic name;
-  dynamic userId;
-  dynamic representativeId;
-  dynamic lat;
-  dynamic lng;
-  dynamic address;
-  List<ProductsBean> products;
-  dynamic createdAt;
-  dynamic updatedAt;
+  String date;
+  String name;
+  String userId;
+  String representativeId;
+  String representativeName;
+  String lat;
+  String lng;
+  String address;
+  List<FinshedOrderProductsBean> products;
+  String notes;
+  String createdAt;
+  String updatedAt;
 
-  static DataBean fromMap(Map<String, dynamic> map) {
+  static FinshedOrderBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    DataBean dataBean = DataBean();
+    FinshedOrderBean dataBean = FinshedOrderBean();
     dataBean.id = map['id'];
     dataBean.priceType = map['price_type'];
     dataBean.discount = map['discount'];
@@ -72,12 +74,14 @@ class DataBean {
     dataBean.name = map['name'];
     dataBean.userId = map['user_id'];
     dataBean.representativeId = map['representative_id'];
+    dataBean.representativeName = map['representative_name'];
     dataBean.lat = map['lat'];
     dataBean.lng = map['lng'];
     dataBean.address = map['address'];
     dataBean.products = List()..addAll(
-      (map['products'] as List ?? []).map((o) => ProductsBean.fromMap(o))
+      (map['products'] as List ?? []).map((o) => FinshedOrderProductsBean.fromMap(o))
     );
+    dataBean.notes = map['notes'];
     dataBean.createdAt = map['created_at'];
     dataBean.updatedAt = map['updated_at'];
     return dataBean;
@@ -103,114 +107,43 @@ class DataBean {
     "name": name,
     "user_id": userId,
     "representative_id": representativeId,
+    "representative_name": representativeName,
     "lat": lat,
     "lng": lng,
     "address": address,
     "products": products,
+    "notes": notes,
     "created_at": createdAt,
     "updated_at": updatedAt,
   };
 }
 
-class ProductsBean {
-  dynamic id;
-  Product_detailBean ProductDetail;
-  String pDOrderId;
-  String productDetailId;
-  int quantity;
-  dynamic colorId;
-  dynamic sizeId;
-  dynamic color;
-  dynamic size;
-
-  static ProductsBean fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    ProductsBean productsBean = ProductsBean();
-    productsBean.id = map['id'];
-
-    productsBean.ProductDetail = Product_detailBean.fromMap(map['Product_detail']);
-    productsBean.ProductDetail = (productsBean.ProductDetail == null) ?
-    Product_detailBean() : productsBean.ProductDetail ;
-    productsBean.pDOrderId = map['p_d_order_id'];
-    productsBean.productDetailId = map['product_detail_id'];
-    productsBean.quantity = map['quantity'];
-    productsBean.colorId = map['color_id'];
-    productsBean.sizeId = map['size_id'];
-    productsBean.color = map['color'];
-    productsBean.size = map['size'];
-    return productsBean;
-  }
-
-  Map toJson() => {
-    "id": id,
-    "Product_detail": ProductDetail,
-    "p_d_order_id": pDOrderId,
-    "product_detail_id": productDetailId,
-    "quantity": quantity,
-    "color_id": colorId,
-    "size_id": sizeId,
-    "color": color,
-    "size": size,
-  };
-}
-
-class Product_detailBean {
+class FinshedOrderProductsBean {
   dynamic id;
   String mainProductId;
   String mainProductName;
   String desc;
   String Difference;
   String image;
-  dynamic rate;
-  dynamic isOffer;
-  String offerAmount;
-  dynamic lat;
-  dynamic lng;
-  String distance;
-  bool isFavorite;
-  dynamic InventoryId;
-  String InventoryName;
-  dynamic Quantity;
-  List<dynamic> colors;
-  List<dynamic> sizes;
-  List<dynamic> images;
-  String PurchasingPrice;
-  String WholesaleWholesalePrice;
-  String WholesalePrice;
-  String SellingPrice;
-  String barcode;
+  dynamic quantity;
+  dynamic price;
+  dynamic color;
+  dynamic size;
 
-  static Product_detailBean fromMap(Map<String, dynamic> map) {
+  static FinshedOrderProductsBean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-    Product_detailBean product_detailBean = Product_detailBean();
-    product_detailBean.id = map['id'];
-    product_detailBean.mainProductId = map['main_product_id'];
-    product_detailBean.mainProductName = map['main_Product_name'];
-    product_detailBean.desc = map['desc'];
-    product_detailBean.Difference = map['Difference'];
-    product_detailBean.image = map['image'];
-    if(product_detailBean.image == null || product_detailBean.image == "null" ){
-      product_detailBean.image = "";
-    }
-    product_detailBean.rate = map['rate'];
-    product_detailBean.isOffer = map['is_offer'];
-    product_detailBean.offerAmount = map['offer_amount'];
-    product_detailBean.lat = map['lat'];
-    product_detailBean.lng = map['lng'];
-    product_detailBean.distance = map['distance'];
-    product_detailBean.isFavorite = map['is_favorite'];
-    product_detailBean.InventoryId = map['Inventory_id'];
-    product_detailBean.InventoryName = map['Inventory_name'];
-    product_detailBean.Quantity = map['Quantity'];
-    product_detailBean.colors = map['colors'];
-    product_detailBean.sizes = map['sizes'];
-    product_detailBean.images = map['images'];
-    product_detailBean.PurchasingPrice = map['Purchasing_price'];
-    product_detailBean.WholesaleWholesalePrice = map['Wholesale_wholesale_price'];
-    product_detailBean.WholesalePrice = map['Wholesale_price'];
-    product_detailBean.SellingPrice = map['Selling_price'];
-    product_detailBean.barcode = map['barcode'];
-    return product_detailBean;
+    FinshedOrderProductsBean productsBean = FinshedOrderProductsBean();
+    productsBean.id = map['id'];
+    productsBean.mainProductId = map['main_product_id'];
+    productsBean.mainProductName = map['main_Product_name'];
+    productsBean.desc = map['desc'];
+    productsBean.Difference = map['Difference'];
+    productsBean.image = map['image'];
+    productsBean.quantity = map['quantity'];
+    productsBean.price = map['price'];
+    productsBean.color = map['color'];
+    productsBean.size = map['size'];
+    return productsBean;
   }
 
   Map toJson() => {
@@ -220,23 +153,9 @@ class Product_detailBean {
     "desc": desc,
     "Difference": Difference,
     "image": image,
-    "rate": rate,
-    "is_offer": isOffer,
-    "offer_amount": offerAmount,
-    "lat": lat,
-    "lng": lng,
-    "distance": distance,
-    "is_favorite": isFavorite,
-    "Inventory_id": InventoryId,
-    "Inventory_name": InventoryName,
-    "Quantity": Quantity,
-    "colors": colors,
-    "sizes": sizes,
-    "images": images,
-    "Purchasing_price": PurchasingPrice,
-    "Wholesale_wholesale_price": WholesaleWholesalePrice,
-    "Wholesale_price": WholesalePrice,
-    "Selling_price": SellingPrice,
-    "barcode": barcode,
+    "quantity": quantity,
+    "price": price,
+    "color": color,
+    "size": size,
   };
 }

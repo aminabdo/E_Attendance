@@ -53,8 +53,8 @@ class ProductsBean {
   int rate;
   int isOffer;
   String offerAmount;
-  double lat;
-  double lng;
+  dynamic lat;
+  dynamic lng;
   String distance;
   bool isFavorite;
   int InventoryId;
@@ -102,6 +102,7 @@ class ProductsBean {
     productsBean.WholesalePrice = map['Wholesale_price'];
     productsBean.SellingPrice = map['Selling_price'];
     productsBean.barcode = map['barcode'];
+
     return productsBean;
   }
 

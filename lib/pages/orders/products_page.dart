@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
@@ -10,6 +12,7 @@ import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_button.dart';
 import 'package:qimma/widgets/my_button2.dart';
 import 'package:qimma/widgets/my_loader.dart';
+import 'package:qimma/widgets/my_text_form_field.dart';
 
 import 'bill_page.dart';
 
@@ -53,6 +56,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 SizedBox(
                   width: 5,
                 ),
+
                 Text(
                   OrdersPointer.selectedProducts.isEmpty
                       ? ''
@@ -77,7 +81,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
                     var response = await orderBloc.addProductToOrder(
                         widget.orderId, request);
-                    if (response['status'] == 0) {
+                    if (response.status == 1) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => BillPage(
                                 orderId: widget.orderId,
@@ -108,10 +112,34 @@ class _ProductsPageState extends State<ProductsPage> {
                       MyAppBar(
                         text: AppUtils.translate(context, 'add_new_order'),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: MyTextFormField(
+                                borderWidth: 1,
+                                hintText: AppUtils.translate(context, 'search_by_name'),
+                                prefixIcon: Image.asset('assets/images/search.png'),
+                                onChanged: (txt) async{
+                                  ////////
+                                  log(txt);
+                                  orderBloc.search_by_name(txt);
+                                  setState(() {
+
+                                  });
+                                },
+                              ),
+                            ),
+
+                          ],
+                        ),
+
+                      ),
                       StreamBuilder<AllProductsResponse>(
-                        stream: orderBloc.all_products.stream,
+                        stream: orderBloc.search_products.stream,
                         builder: (context, snapshot) {
-                          if (orderBloc.all_products.value.loading) {
+                          if (orderBloc.search_products.value.loading) {
                             return Column(
                               children: [
                                 SizedBox(
@@ -123,21 +151,22 @@ class _ProductsPageState extends State<ProductsPage> {
                                 ),
                               ],
                             );
-                          } else {
+                          }
+                          else {
                             return ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return ProductItem(
                                   product:
-                                      orderBloc.all_products.value.data[index],
+                                      orderBloc.search_products.value.data[index],
                                   onCounterChange: () {
                                     setState(() {});
                                   },
                                 );
                               },
                               itemCount:
-                                  orderBloc.all_products.value.data.length,
+                                  orderBloc.search_products.value.data.length ?? 0,
                             );
                           }
                         },
@@ -177,7 +206,24 @@ class _ProductItemState extends State<ProductItem> {
   void initState() {
     super.initState();
 
-    price = double.parse(widget.product.purchasingPrice);
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "whole_whole_sale")))
+    {
+      price = double.parse(widget.product.wholesaleWholesalePrice);
+    }
+    else if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "whole_sale")))
+    {
+      price = double.parse(widget.product.wholesalePrice);
+    }
+    else if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "sale")))
+    {
+      price = double.parse(widget.product.sellingPrice);
+    }
+    log("price type ------>    ${orderBloc.add_order.value.data.priceType}");
   }
 
   @override
@@ -194,10 +240,25 @@ class _ProductItemState extends State<ProductItem> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(child: Text(widget.product.mainProductName)),
+                  Flexible(child: Text(widget.product.difference)),
+
                   Flexible(
                     child: Text('$price ${AppUtils.translate(context, 'eg')}'),
                   ),
+                ],
+              ),Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Flexible(child: Text(
+                      "${AppUtils.translate(context, "show_products_quantity")}"
+                  )),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Flexible(child: Text(
+                    "${widget.product.quantity}"
+                  ))
                 ],
               ),
               SizedBox(
@@ -372,8 +433,12 @@ class _ProductItemState extends State<ProductItem> {
                   MyButton(
                     AppUtils.translate(context, 'add'),
                     width: MediaQuery.of(context).size.width / 4,
+
                     onTap: () {
-                      if (OrdersPointer.selectedProducts.isEmpty) {
+                      if(widget.product.quantity == "0"){
+                        AppUtils.showToast(msg: AppUtils.translate(context, "quantity_error"));
+                      }
+                      else if (OrdersPointer.selectedProducts.isEmpty) {
                         OrdersPointer.selectedProducts.add(
                           OrdersBean(
                             quantity: counter,
@@ -388,7 +453,8 @@ class _ProductItemState extends State<ProductItem> {
                             productDetailId: widget.product.id.toString(),
                           ),
                         );
-                      } else {
+                      }
+                      else {
                         bool isExist = false;
                         int index = -1;
 
@@ -428,10 +494,10 @@ class _ProductItemState extends State<ProductItem> {
                           );
                         }
                       }
-
                       widget.onCounterChange();
                     },
                   ),
+
                 ],
               ),
               SizedBox(

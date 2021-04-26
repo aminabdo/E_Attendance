@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/base/BasePostResponse.dart';
 import 'package:qimma/utils/base/BaseRequest.dart';
@@ -15,6 +18,7 @@ Options get options => Options(
   headers: {
     'content-type': 'application/x-www-form-urlencoded',
     'Authorization': AppUtils.userData == null ? '' : 'Bearer ${AppUtils.userData.token}',
+    'lang' : AppUtils.language ?? 'ar'
   },
 );
 
@@ -76,12 +80,15 @@ class BaseApiProvider {
 
   Future<Response> generalGet(String urlExtension) async {
     try {
+      print("options ---> $options");
       Response response = await dio.get(
         ApiRoutesUpdate().getLink(ApiRoutes.generalGet(urlExtension)),
         options: options,
       );
 
-      print(response);
+      //print(response);
+      log("log $urlExtension -> \n $response");
+      log("log $urlExtension -> end ---=====-----=-=-=-=-=--==-");
       return response;
     } catch (error, stacktrace) {
       print("response 000 ");

@@ -1,3 +1,4 @@
+import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/base/BaseResponse.dart';
 
 class MakeBillResponse  extends BaseResponse{
@@ -25,7 +26,7 @@ class DataBean {
   int id;
   String priceType;
   dynamic totalPrice;
-  int paid;
+  dynamic paid;
   dynamic rest;
   dynamic shippingPrice;
   String status;
@@ -215,6 +216,12 @@ class Product_detailBean {
     product_detailBean.barcode = map['barcode'];
     product_detailBean.createdAt = map['created_at'];
     product_detailBean.updatedAt = map['updated_at'];
+
+    if(AppUtils.language == "ar"){
+      product_detailBean.differenceEn = product_detailBean.differenceAr;
+      product_detailBean.descEn = product_detailBean.descAr;
+    }
+    print("lang ------>>>> ${AppUtils.language}");
     return product_detailBean;
   }
 

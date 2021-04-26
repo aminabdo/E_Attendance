@@ -1,5 +1,7 @@
 
 
+import 'dart:developer';
+
 import 'package:qimma/Bles/Model/Responses/old/products/ProductByCat.dart';
 import 'package:qimma/Bles/Model/Responses/old/products/SingleProduct.dart';
 import 'package:qimma/Bles/Model/Responses/products/AllProductsResponse.dart';
@@ -18,6 +20,11 @@ class ProductBloc extends BaseBloc {
   BehaviorSubject<AllProductsResponse>();
 
   BehaviorSubject<AllProductsResponse> _all_products_without_rating =
+  BehaviorSubject<AllProductsResponse>();
+
+  BehaviorSubject<AllProductsResponse> _search_res_by_rating =
+  BehaviorSubject<AllProductsResponse>();
+  BehaviorSubject<AllProductsResponse> _search_res_without_ating =
   BehaviorSubject<AllProductsResponse>();
 
   get_single_product(int productID) async {
@@ -46,6 +53,8 @@ class ProductBloc extends BaseBloc {
         (await repository.get(ApiRoutes.getAllProductsByRating())).data);
     _all_products_by_rating.value = response;
     _all_products_by_rating.value.loading = false;
+    search_by_name2("");
+    search_by_name("");
     return response;
   }
 
@@ -56,14 +65,81 @@ class ProductBloc extends BaseBloc {
         (await repository.get(ApiRoutes.getAllProductsWithoutRating())).data);
     _all_products_without_rating.value = response;
     _all_products_without_rating.value.loading = false;
+
+    search_by_name2("");
+    search_by_name("");
     return response;
   }
+
+  Future<AllProductsResponse> search_by_name(String txt) async {
+
+    _search_res_by_rating.value = AllProductsResponse();
+    _search_res_by_rating.value.loading = true;
+
+    AllProductsResponse response = await search(txt);
+
+
+    _search_res_by_rating.value = response;
+    _search_res_by_rating.value.loading = false;
+
+    print("search response ------->>>> ${response.data.toString()}");
+    return response;
+  }
+  Future<AllProductsResponse> search (String txt) async {
+
+    AllProductsResponse data2 = AllProductsResponse();
+    if(txt == "" || txt == null || txt.length == 0){
+      data2 = _all_products_without_rating.value ;
+      return data2;
+    }
+    _all_products_without_rating.value.data.forEach((element) {
+      log("element -> ${element.Difference}");
+      log("search txt -> ${txt}");
+      if(element.Difference.toLowerCase().contains(txt.toLowerCase())){
+        log("done txt -> ${txt}");
+        data2.data.add(element);
+      }
+    });
+    return data2;
+  }
+
+  Future<AllProductsResponse> search_by_name2(String txt) async {
+
+    _search_res_without_ating.value = AllProductsResponse();
+    _search_res_without_ating.value.loading = true;
+
+    AllProductsResponse response = await search2(txt);
+
+
+    _search_res_without_ating.value = response;
+    _search_res_without_ating.value.loading = false;
+
+    print("search response ------->>>> $response");
+    return response;
+  }
+  Future<AllProductsResponse> search2 (String txt) async {
+    AllProductsResponse data2 = AllProductsResponse();
+    all_products_by_rating.value.data.forEach((element) {
+      if(element.Difference.toLowerCase().contains(txt.toLowerCase())){
+        data2.data.add(element);
+      }
+    });
+    return data2;
+  }
+
+
+
 
 
   BehaviorSubject<AllProductsResponse> get all_products_by_rating =>
       _all_products_by_rating;
   BehaviorSubject<AllProductsResponse> get all_products_without_rating =>
       _all_products_without_rating;
+
+  BehaviorSubject<AllProductsResponse> get search_all_products_by_rating =>
+      _search_res_by_rating;
+  BehaviorSubject<AllProductsResponse> get search_all_products_without_rating =>
+      _search_res_without_ating;
 
   BehaviorSubject<SingleProductResponse> get single_product =>
       _get_single_product;

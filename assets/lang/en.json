@@ -71,7 +71,7 @@
   "minutes": "minutes",
   "id": "ID",
   "customer_amount": "Customer amount",
-  "eg": "EG",
+  "eg": "RAS",
   "customer_name": "Customer name",
   "shop_location": "Shop location",
   "customer_location": "Customer location",
@@ -171,5 +171,8 @@
   "set_dept_page_title": "Debt settlement",
   "set_dept_page_subtraction": "Subtraction",
   "set_dept_page_addition": "Addition",
-  "set_dept_page_amount": "Amount"
+  "set_dept_page_amount": "Amount",
+  "quantity_error": "cannot add this product with 0 quantity",
+  "hours": "hours",
+  "days": "days"
 }

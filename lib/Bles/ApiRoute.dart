@@ -281,11 +281,12 @@ class ApiRoutes {
 }
 
 class ApiRoutesUpdate {
-  static String baseUrl = "https://qimmaapi.codecaique.com/api/";
-  static String baseUrl_client = "https://qimmajoomlaapi.codecaique.com/api/";
+  //static String baseUrl = "https://qimmaapi.codecaique.com/api/";
+  static String baseUrl_client = "https://api.qimmajomla.com/api/";
 
   getLink(String url) {
     print("url ------>>>>   " + baseUrl_client + url);
+    print("lang ------>>>>   ${AppUtils.language}");
     return baseUrl_client  + url;
   }
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
+import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
 import 'package:qimma/Bles/Model/Responses/order/FinishedOrdersResponse.dart';
 import 'package:qimma/pages/home/order_details.dart';
 import 'package:qimma/utils/app_utils.dart';
@@ -60,7 +61,7 @@ class _OnGoingOrdersPageState extends State<OnGoingOrdersPage> {
 }
 
 class Item extends StatelessWidget {
-  final ProductsBean item;
+  final FinshedOrderProductsBean item;
 
   const Item({Key key, this.item}) : super(key: key);
 
@@ -72,7 +73,7 @@ class Item extends StatelessWidget {
           child: Row(
             children: [
               CachedNetworkImage(
-                imageUrl: item.ProductDetail.image ?? '' ,
+                imageUrl: item?.image ?? '' ,
                 width: 35,
                 errorWidget: (_, __, ___) {
                   return Image.asset('assets/images/no_image.png');
@@ -84,7 +85,7 @@ class Item extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  '${item.ProductDetail.mainProductName}',
+                  '${item?.mainProductName}',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -92,7 +93,7 @@ class Item extends StatelessWidget {
           ),
         ),
         Text(
-          '${item.ProductDetail.SellingPrice} ${AppUtils.translate(context, 'eg')}',
+          '${item?.price} ${AppUtils.translate(context, 'eg')}',
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.red),
         ),
@@ -102,7 +103,7 @@ class Item extends StatelessWidget {
 }
 
 class OrderItem extends StatelessWidget {
-  final DataBean finishedOrder;
+  final FinshedOrderBean finishedOrder;
 
   const OrderItem({Key key, this.finishedOrder}) : super(key: key);
 
@@ -170,7 +171,7 @@ class OrderItem extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                finishedOrder.paymentMethod,
+                                finishedOrder.status,
                                 style: TextStyle(
                                   color: secondColor,
                                   fontSize: 13,
@@ -190,7 +191,7 @@ class OrderItem extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '${finishedOrder.createdAt.length} ${AppUtils.translate(context, 'minutes')}',
+                            '${AppUtils.calcDate(context, finishedOrder.createdAt)}',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.black45),
                           ),

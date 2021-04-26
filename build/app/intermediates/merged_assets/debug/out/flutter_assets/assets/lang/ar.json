@@ -65,7 +65,7 @@
   "minutes": "دقيقة",
   "id": "الكود",
   "customer_amount": "اجمالي الفاتورة",
-  "eg": "جنيه",
+  "eg": "ريال",
   "customer_name": "اسم العميل",
   "shop_location": "موقع المتجر",
   "customer_location": "موقع العميل",
@@ -166,7 +166,10 @@
 
   "set_dept_page" : "============Set Dept Page=============",
   "set_dept_page_title": "تسوية المديونية",
-  "set_dept_page_subtraction": "طرح",
+  "set_dept_page_subtraction": "تسوية",
   "set_dept_page_addition": "اضافة",
-  "set_dept_page_amount": "المبلغ"
+  "set_dept_page_amount": "المبلغ",
+  "quantity_error": "لا يمكن إضافة هذا المنتج الكمية 0",
+  "hours": "ساعة",
+  "days": "يوم"
 }

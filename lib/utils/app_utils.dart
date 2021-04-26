@@ -30,7 +30,9 @@ class AppUtils {
     return language;
   }
 
-  static saveLanguage(String language) async {
+  static saveLanguage(String languag) async {
+    print("saveLanguage  ---->>>> ${languag}");
+    language = languag ;
     (await SharedPreferences.getInstance()).setString('langCode', language);
   }
 
@@ -202,6 +204,22 @@ class AppUtils {
       AppUtils.showToast(msg: 'Accept Permission First');
       return null;
     }
+  }
+  static String calcDate(BuildContext context, String date){
+    var res = DateTime.now().difference(DateTime.parse(date)).inMinutes;
+    if(res < 60)
+    {
+      return "${res.toString()}   ${AppUtils.translate(context, 'minutes')}" ;
+    }
+    res = DateTime.now().difference(DateTime.parse(date)).inHours;
+
+    if(res < 24){
+      return "${res.toString()}   ${AppUtils.translate(context, 'hours')}" ;
+    }
+    res = DateTime.now().difference(DateTime.parse(date)).inDays;
+
+    return "${res.toString()}   ${AppUtils.translate(context, 'days')}" ;
+
   }
 
   static void exitFromApp() {

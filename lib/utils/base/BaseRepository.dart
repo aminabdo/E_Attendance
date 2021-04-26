@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qimma/Bles/api_provider/BaseApiProvider.dart';
@@ -22,13 +24,13 @@ class BaseRepository{
 
   Future<Response> post(String urlExtention,Map<dynamic,dynamic> request, {bool isForm = false}) async {
     debugPrint("BaseRepository post request ---->>>>>>   ");
-    debugPrint(request.toString());
+    log(request.toString());
 
 
     Response response = await _apiProvider.generalPost(urlExtention,request, isForm: isForm);
 
     debugPrint("BaseRepository post response ---->>>>>>   ");
-    debugPrint(response.toString());
+    log(response.toString());
 
     return response;
   }

@@ -110,44 +110,44 @@ class _SetDeptPageState extends State<SetDeptPage> {
                           });
                         },
                       ),
-                      GestureDetector(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: mainColor,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                            child: Text(
-                              '${AppUtils.translate(context, 'set_dept_page_addition')}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        onTap: () async{
-                          load = true;
-                          setState(() {
-
-                          });
-                          print("onTap --- >  client id ----->>>> ${widget.clientId}");
-                          await clientBloc
-                              .setDept(
-                                  clientId: widget.clientId,
-                                  request: SetDeptRequest(
-                                      paid: int.parse(_controller.text),
-                                      type: 1))
-                              .then((value) {
-                            AppUtils.showToast(
-                                msg: value.message, bgColor: mainColor);
-                          });
-
-                          _controller.clear();
-
-                          load = false;
-                          setState(() {
-
-                          });
-                        },
-                      )
+                      // GestureDetector(
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         color: mainColor,
+                      //         borderRadius: BorderRadius.circular(15)),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                      //       child: Text(
+                      //         '${AppUtils.translate(context, 'set_dept_page_addition')}',
+                      //         style: TextStyle(color: Colors.white),
+                      //       ),
+                      //     ),
+                      //   ),
+                      //   onTap: () async{
+                      //     load = true;
+                      //     setState(() {
+                      //
+                      //     });
+                      //     print("onTap --- >  client id ----->>>> ${widget.clientId}");
+                      //     await clientBloc
+                      //         .setDept(
+                      //             clientId: widget.clientId,
+                      //             request: SetDeptRequest(
+                      //                 paid: int.parse(_controller.text),
+                      //                 type: 1))
+                      //         .then((value) {
+                      //       AppUtils.showToast(
+                      //           msg: value.message, bgColor: mainColor);
+                      //     });
+                      //
+                      //     _controller.clear();
+                      //
+                      //     load = false;
+                      //     setState(() {
+                      //
+                      //     });
+                      //   },
+                      // )
                     ],
                   ),
                   load ? CircularProgressIndicator() : SizedBox.shrink(),

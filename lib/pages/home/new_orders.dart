@@ -61,7 +61,7 @@ class _NewOrdersState extends State<NewOrders> {
 }
 
 class Item extends StatelessWidget {
-  final ProductsBean item;
+  final Products_Order_Bean item;
 
   const Item({Key key, this.item}) : super(key: key);
 
@@ -72,7 +72,7 @@ class Item extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              if (item.ProductDetail?.image == null) CachedNetworkImage(
+              if (item?.image == null) CachedNetworkImage(
                 imageUrl: "",
                 width: 35,
                 errorWidget: (_, __, ___) {
@@ -80,7 +80,7 @@ class Item extends StatelessWidget {
                 },
                 height: 35,
               ) else CachedNetworkImage(
-                imageUrl: item.ProductDetail?.image,
+                imageUrl: item?.image,
                 width: 35,
                 errorWidget: (_, __, ___) {
                   return Image.asset('assets/images/no_image.png');
@@ -92,7 +92,7 @@ class Item extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  '${item.ProductDetail?.main_Product_name}',
+                  '${item?.mainProductName}',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -100,7 +100,7 @@ class Item extends StatelessWidget {
           ),
         ),
         Text(
-          '${item.ProductDetail?.Selling_price} ${AppUtils.translate(context, 'eg')}',
+          '${item.price} ${AppUtils.translate(context, 'eg')}',
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.red),
         ),
@@ -110,7 +110,7 @@ class Item extends StatelessWidget {
 }
 
 class OrderItem extends StatelessWidget {
-  final Order order;
+  final Order_AllPD order;
 
   const OrderItem({Key key, this.order}) : super(key: key);
 
@@ -178,7 +178,7 @@ class OrderItem extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                order.paymentMethod,
+                                order.status,
                                 style: TextStyle(
                                   color: secondColor,
                                   fontSize: 13,
@@ -198,7 +198,7 @@ class OrderItem extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '${order.createdAt.length} ${AppUtils.translate(context, 'minutes')}',
+                            '${AppUtils.calcDate(context, order.createdAt)}',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.black45),
                           ),

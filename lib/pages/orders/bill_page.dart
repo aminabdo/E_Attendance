@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
 import 'package:qimma/pages/home/home_page.dart';
@@ -11,6 +14,7 @@ import 'package:qimma/widgets/my_text_form_field.dart';
 class BillPage extends StatefulWidget {
   final dynamic orderId;
 
+
   const BillPage({Key key, @required this.orderId}) : super(key: key);
 
   @override
@@ -18,10 +22,23 @@ class BillPage extends StatefulWidget {
 }
 
 class _BillPageState extends State<BillPage> {
+  double totalAll = 0.0  ;
   Widget space(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).padding.top,
     );
+  }
+  @override
+  void initState() {
+    super.initState();
+
+    totalAll = double.parse(orderBloc.add_product_to_order.value.data.totalPrice.toString());
+    totalPriceController.text = totalAll.toString();
+
+    discountValueController.text = "0";
+    taxOneController.text = "0";
+    taxTwoController.text = "0";
+
   }
 
   TextEditingController discountValueController = TextEditingController();
@@ -30,13 +47,21 @@ class _BillPageState extends State<BillPage> {
   TextEditingController totalPriceController = TextEditingController();
   TextEditingController paidPriceController = TextEditingController();
 
+
   String discountType = 'نسبة';
   String selectedTaxOneType = 'نسبة';
   String selectedTaxTwoType = 'نسبة';
 
   int selected = 0;
 
+
   void onChange(int value) {
+    if(value ==1){
+      paidPriceController.text = totalPriceController.text;
+    }
+    else{
+      paidPriceController.text = "0";
+    }
     setState(() {
       selected = value;
     });
@@ -51,6 +76,55 @@ class _BillPageState extends State<BillPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    void calc(){
+      log("start calc ------> ");
+      double discount = 0.0;
+      try{
+        discount = double.parse(discountValueController.text ?? '0');
+        log("discountValueController  ---> ${discountValueController.text}");
+        log("discount value  ---> ${discount}");
+      }catch(e){
+        discount = 0.0;
+      }
+      double tax1 = 0.0;
+      try{
+        tax1 = double.parse(taxOneController.text ?? '0');
+      }catch(e){
+        tax1 = 0.0;
+      }
+      double tax2 = 0.0;
+      try{
+        tax2 = double.parse(taxTwoController.text ?? '0') ;
+      }catch(e){
+        tax2 = 0.0;
+      }
+
+      double total = 0.0 ;
+      try{
+        total = totalAll;
+      }catch(e){
+        total = 0.0;
+      }
+      int discountTy , tax1Type , tax2Type ;
+
+      discountTy = discountType == types[1] ? 1 : 2;
+      log("discountType ---> $discountTy");
+      tax1Type = (selectedTaxOneType == types[1]) ? 1 : 2;
+      log("selectedTaxOneType ---> $tax1Type");
+      tax2Type = selectedTaxTwoType == types[1] ? 1 : 2;
+      log("selectedTaxTwoType ---> $tax2Type");
+
+
+      discount = (discountTy == 1) ?  discount :((discount/100) * total)  ;
+      tax1 = (tax1Type == 1) ? tax1:((tax1/100) * total);
+      tax2 = (tax2Type == 1) ? tax2 : ((tax2/100) * total);
+
+      total = total - discount + tax1 + tax2;
+      totalPriceController.text = total.toString();
+      setState(() {
+      });
+    }
     return Scaffold(
       body: LoadingOverlay(
         progressIndicator: CircularProgressIndicator(),
@@ -144,6 +218,9 @@ class _BillPageState extends State<BillPage> {
                             child: MyTextFormField(
                           keyboardType: TextInputType.number,
                           hintText: 'القيمة',
+                              onChanged: (text) {
+                                calc();
+                              },
                           controller: discountValueController,
                           radius: 2,
                         )),
@@ -188,13 +265,16 @@ class _BillPageState extends State<BillPage> {
                             child: MyTextFormField(
                           hintText: 'القيمة',
                           controller: taxOneController,
+                              onChanged: (text) {
+                                calc();
+                              },
                           keyboardType: TextInputType.number,
                           radius: 2,
                         )),
                       ],
                     ),
                     space(context),
-                    Text('الضريبة الثانية'),
+                    Text('رسوم اخرى'),
                     Row(
                       children: [
                         Expanded(
@@ -233,6 +313,9 @@ class _BillPageState extends State<BillPage> {
                           hintText: 'القيمة',
                           controller: taxTwoController,
                           keyboardType: TextInputType.number,
+                              onChanged: (text) {
+                                calc();
+                              },
                           radius: 2,
                         )),
                       ],
@@ -289,6 +372,15 @@ class _BillPageState extends State<BillPage> {
                           isLoading = true;
                         });
 
+                        if(discountValueController.text.length <= 0){
+                          discountValueController.text ="0";
+                        }
+                        if(taxOneController.text.length <= 0){
+                          taxOneController.text = "0";
+                        }
+                        if(taxTwoController.text.length <= 0){
+                          taxTwoController.text = "0";
+                        }
                           var response = await orderBloc.makeBill(
                             widget.orderId,
                             discountType == types[1] ? 1 : 2,

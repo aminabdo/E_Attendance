@@ -1,3 +1,5 @@
+import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
+import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/base/BaseResponse.dart';
 
 class SinglepdOrderResponse extends BaseResponse {
@@ -41,7 +43,7 @@ class Order {
   String lat;
   String lng;
   String address;
-  List<ProductsBean> products;
+  List<Products_Order_Bean> products;
   String createdAt;
   String updatedAt;
 
@@ -68,11 +70,14 @@ class Order {
     dataBean.lng = map['lng'];
     dataBean.address = map['address'];
     dataBean.products = List()..addAll(
-      (map['products'] as List ?? []).map((o) => ProductsBean.fromMap(o))
+      (map['products'] as List ?? []).map((o) => Products_Order_Bean.fromMap(o))
     );
     dataBean.createdAt = map['created_at'];
 
     dataBean.updatedAt = map['updated_at'];
+
+
+    //dataBean.createdAt = AppUtils.calcDate(dataBean.createdAt);
     return dataBean;
   }
 
@@ -213,6 +218,7 @@ class Product_detailBean {
     product_detailBean.differenceAr = map['difference_ar'];
     product_detailBean.descAr = map['desc_ar'];
     product_detailBean.descEn = map['desc_en'];
+
     if(map['image'] == null){
       product_detailBean.image = "";
     }
@@ -238,6 +244,10 @@ class Product_detailBean {
     product_detailBean.Wholesale_price = map['Wholesale_price'];
     product_detailBean.Selling_price = map['Selling_price'];
     product_detailBean.barcode = map['barcode'];
+    if(AppUtils.language == "ar"){
+      product_detailBean.differenceEn = product_detailBean.differenceAr;
+      product_detailBean.descEn = product_detailBean.descAr;
+    }
     return product_detailBean;
   }
 
