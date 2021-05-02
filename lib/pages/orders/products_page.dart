@@ -23,10 +23,25 @@ class ProductsPage extends StatefulWidget {
 
   @override
   _ProductsPageState createState() => _ProductsPageState();
+
+
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    OrdersPointer.selectedProducts = List<OrdersBean>();
+    OrdersPointer.selectedProducts.clear();
+
+    log("order pointer ---->  ${OrdersPointer.selectedProducts.length}");
+  }
+
   bool isLoading = false;
+
 
   Widget space(BuildContext context) {
     return SizedBox(
@@ -91,6 +106,9 @@ class _ProductsPageState extends State<ProductsPage> {
                     } else {
                       AppUtils.showToast(msg: response.message);
                     }
+                    setState(() {
+                      isLoading = false;
+                    });
                   },
           ),
         ),
@@ -200,12 +218,18 @@ class _ProductItemState extends State<ProductItem> {
 
   int counter = 1;
 
-  double price;
+  double price , totalPrice = 0.0;
+
 
   @override
   void initState() {
     super.initState();
 
+
+    OrdersPointer.selectedProducts = List<OrdersBean>();
+    OrdersPointer.selectedProducts.clear();
+
+    log("order pointer ---->  ${OrdersPointer.selectedProducts.length}");
   }
   @override
   void didChangeDependencies() {
@@ -223,6 +247,7 @@ class _ProductItemState extends State<ProductItem> {
     {
       price = double.parse(widget.product.sellingPrice);
     }
+    totalPrice = price;
     log("price type ------>    ${orderBloc.add_order.value.data.priceType}");
   }
 
@@ -243,7 +268,7 @@ class _ProductItemState extends State<ProductItem> {
                   Flexible(child: Text(widget.product.difference)),
 
                   Flexible(
-                    child: Text('$price ${AppUtils.translate(context, 'eg')}'),
+                    child: Text('$totalPrice ${AppUtils.translate(context, 'eg')}'),
                   ),
                 ],
               ),Row(
@@ -368,9 +393,9 @@ class _ProductItemState extends State<ProductItem> {
                         onTap: () {
                           if (counter > 1) {
                             counter--;
-                            price =
-                                (double.parse(widget.product.purchasingPrice) *
-                                    counter);
+                            totalPrice = price *counter;
+
+
                             if (counter <= 1) {
                               OrdersPointer.selectedProducts.forEach((element) {
                                 if (element.productDetailId.toString() ==
@@ -389,8 +414,19 @@ class _ProductItemState extends State<ProductItem> {
                             }
                             setState(() {});
                           } else {
-                            price =
-                                double.parse(widget.product.purchasingPrice);
+                            if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "whole_whole_sale")))
+                            {
+                              price = double.parse(widget.product.wholesaleWholesalePrice);
+                            }
+                            else if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "whole_sale")))
+                            {
+                              price = double.parse(widget.product.wholesalePrice);
+                            }
+                            else if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "sale")))
+                            {
+                              price = double.parse(widget.product.sellingPrice);
+                            }
+
                             setState(() {});
                           }
 
@@ -420,9 +456,7 @@ class _ProductItemState extends State<ProductItem> {
                         onTap: () {
                           setState(() {
                             counter++;
-                            price =
-                                (double.parse(widget.product.purchasingPrice) *
-                                    counter);
+                            totalPrice = price * counter;
                           });
                         },
                         width: 40,

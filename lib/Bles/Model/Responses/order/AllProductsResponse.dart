@@ -60,7 +60,7 @@ class Products {
   List<Colors> _colors;
   List<Sizes> _sizes;
   List<Images> _images;
-  String _purchasingPrice;
+  //String _purchasingPrice;
   String _wholesaleWholesalePrice;
   String _wholesalePrice;
   String _sellingPrice;
@@ -110,7 +110,7 @@ class Products {
     this._colors = colors;
     this._sizes = sizes;
     this._images = images;
-    this._purchasingPrice = purchasingPrice;
+    //this._purchasingPrice = purchasingPrice;
     this._wholesaleWholesalePrice = wholesaleWholesalePrice;
     this._wholesalePrice = wholesalePrice;
     this._sellingPrice = sellingPrice;
@@ -156,9 +156,9 @@ class Products {
   set sizes(List<Sizes> sizes) => _sizes = sizes;
   List<Images> get images => _images;
   set images(List<Images> images) => _images = images;
-  String get purchasingPrice => _purchasingPrice;
-  set purchasingPrice(String purchasingPrice) =>
-      _purchasingPrice = purchasingPrice;
+  // String get purchasingPrice => _purchasingPrice;
+  // set purchasingPrice(String purchasingPrice) =>
+  //     _purchasingPrice = purchasingPrice;
   String get wholesaleWholesalePrice => _wholesaleWholesalePrice;
   set wholesaleWholesalePrice(String wholesaleWholesalePrice) =>
       _wholesaleWholesalePrice = wholesaleWholesalePrice;
@@ -204,7 +204,7 @@ class Products {
         _images.add(new Images.fromJson(v));
       });
     }
-    _purchasingPrice = json['Purchasing_price'];
+    //_purchasingPrice = json['Purchasing_price'];
     _wholesaleWholesalePrice = json['Wholesale_wholesale_price'];
     _wholesalePrice = json['Wholesale_price'];
     _sellingPrice = json['Selling_price'];
@@ -238,7 +238,7 @@ class Products {
     if (this._images != null) {
       data['images'] = this._images.map((v) => v.toJson()).toList();
     }
-    data['Purchasing_price'] = this._purchasingPrice;
+    //data['Purchasing_price'] = this._purchasingPrice;
     data['Wholesale_wholesale_price'] = this._wholesaleWholesalePrice;
     data['Wholesale_price'] = this._wholesalePrice;
     data['Selling_price'] = this._sellingPrice;

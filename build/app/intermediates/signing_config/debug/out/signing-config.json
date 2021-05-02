@@ -1,1 +1,1 @@
-{"mName":"externalOverride","mStoreFile":"/Users/amin/Documents/work/codecaique/flutter/qimma_delivery_key","mStorePassword":"123456789","mKeyAlias":"key0","mKeyPassword":"123456789","mStoreType":"jks","mV1SigningEnabled":true,"mV2SigningEnabled":true}
+{"mName":"debug","mStoreFile":"/Users/amin/.android/debug.keystore","mStorePassword":"android","mKeyAlias":"AndroidDebugKey","mKeyPassword":"android","mStoreType":"jks","mV1SigningEnabled":true,"mV2SigningEnabled":true}

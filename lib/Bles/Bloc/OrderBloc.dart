@@ -99,6 +99,9 @@ class OrderBloc extends BaseBloc {
   // 3 -> make_bill
 
   Future<AddpdOrderResponse> addOrder(AddOrderRequest request) async {
+
+    _add_product_to_order.value = AddProductsToPDOrder();
+
     add_order.value = AddpdOrderResponse();
     add_order.value.loading = true;
     AddpdOrderResponse response = AddpdOrderResponse.fromMap(
@@ -106,6 +109,9 @@ class OrderBloc extends BaseBloc {
             .data);
     add_order.value = response;
     add_order.value.loading = false;
+
+
+
     return response;
   }
 

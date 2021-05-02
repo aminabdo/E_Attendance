@@ -39,7 +39,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         applicationId "com.qimma"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

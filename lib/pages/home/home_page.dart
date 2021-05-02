@@ -11,6 +11,7 @@ import 'package:qimma/pages/notifications/notifications_page.dart';
 import 'package:qimma/pages/orders/add_orders_page.dart';
 import 'package:qimma/pages/editProfile/edit_profile.dart';
 import 'package:qimma/pages/products/products_page.dart';
+import 'package:qimma/pages/test/test3_page.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => AddOrdersPage(),
+              builder: (_) => Test3Page(),
             ),
           );
         },

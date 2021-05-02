@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/base/BasePostResponse.dart';
 import 'package:qimma/utils/base/BaseRequest.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../ApiRoute.dart';
+
 
 
 Options get options => Options(
@@ -18,7 +20,7 @@ Options get options => Options(
   headers: {
     'content-type': 'application/x-www-form-urlencoded',
     'Authorization': AppUtils.userData == null ? '' : 'Bearer ${AppUtils.userData.token}',
-    'lang' : AppUtils.language ?? 'ar'
+    'lang' : AppUtils.getLanguage() ?? 'ar'
   },
 );
 

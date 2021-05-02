@@ -31,15 +31,15 @@ class ClientBean {
   dynamic fireBaseToken;
   String phone;
   String email;
-  int status;
-  int social;
-  int notification;
-  int message;
-  String lang;
-  String lat;
-  String lng;
-  double debt;
-  int currencyId;
+  dynamic status;
+  dynamic social;
+  dynamic notification;
+  dynamic message;
+  dynamic lang;
+  dynamic lat;
+  dynamic lng;
+  dynamic debt;
+  dynamic currencyId;
   List<AddressesBean> addresses;
 
   static ClientBean fromMap(Map<String, dynamic> map) {
