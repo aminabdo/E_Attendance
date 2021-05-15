@@ -2,23 +2,14 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Model/Requests/EditProfileRequest.dart';
-import 'package:qimma/main.dart';
 import 'package:qimma/pages/auth/login_page.dart';
-import 'package:qimma/pages/client/client_info_page.dart';
 import 'package:qimma/pages/home/on_going_orders.dart';
 import 'package:qimma/pages/notifications/notifications_page.dart';
 import 'package:qimma/pages/orders/add_orders_page.dart';
-import 'package:qimma/pages/editProfile/edit_profile.dart';
-import 'package:qimma/pages/products/products_page.dart';
-import 'package:qimma/pages/test/test3_page.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
 import 'package:qimma/widgets/my_drawer.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'new_orders.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => Test3Page(),
+              builder: (_) => AddOrdersPage(),
             ),
           );
         },

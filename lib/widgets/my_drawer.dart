@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/main.dart';
 import 'package:qimma/pages/attendance/attendance_page.dart';
-import 'package:qimma/pages/client/client_info_page.dart';
 import 'package:qimma/pages/client/clients_of_representative.dart';
 import 'package:qimma/pages/editProfile/edit_profile.dart';
 import 'package:qimma/pages/home/home_page.dart';
@@ -10,8 +9,8 @@ import 'package:qimma/pages/products/products_page.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 
-Drawer buildDrawer(
-    BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey) {
+Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
+
   return Drawer(
     child: Padding(
       padding: EdgeInsets.only(left: 10, right: 10 , bottom: 10),
@@ -286,9 +285,41 @@ Drawer buildDrawer(
                 ),
               ),
             ),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => null,
+                  ),
+                );
+              },
+              child: Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      textDirection: TextDirection.ltr,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.location_history_outlined),
+                        Text(
+                          '${AppUtils.translate(context, 'printer_settings')}',
+                          style: TextStyle(color: mainColor, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     ),
   );
 }
+

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
+import 'package:qimma/Bles/Bloc/print/PrintBloc.dart';
 import 'package:qimma/Bles/Model/Requests/EditStatusRequest.dart';
 import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
+import 'package:qimma/pages/home/edit_order.dart';
 import 'package:qimma/pages/track_order_map/track_order_map_page.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
@@ -15,7 +19,6 @@ import 'new_orders.dart';
 class OrderDetails extends StatefulWidget {
 
   final int id;
-
   const OrderDetails({Key key, @required this.id}) : super(key: key);
 
   @override
@@ -41,7 +44,10 @@ class _OrderDetailsState extends State<OrderDetails> {
          if(orderBloc.s_single_P_d_order.value.loading) {
            return Loader();
          } else {
-           var order = snapshot.data.data;
+           log("1 ---- > ${snapshot.data.AllpdOrder}");
+           log("2 ---- > ${orderBloc.s_single_P_d_order.value}");
+           var order = snapshot.data.AllpdOrder;
+           order = orderBloc.s_single_P_d_order.value.AllpdOrder;
            return SingleChildScrollView(
              child: Padding(
                padding: EdgeInsets.all(14.0),
@@ -84,7 +90,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                style: TextStyle(color: Colors.grey),
                              ),
                              Text(
-                               order.name,
+                               order.name ??'',
                                style: TextStyle(fontSize: 12),
                              ),
                            ],
@@ -183,7 +189,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                ),
                                child: Center(
                                  child: Text(
-                                   order.paymentMethod,
+                                   order.paymentMethod ??'',
                                    style: TextStyle(
                                      color: secondColor,
                                      fontSize: 13,
@@ -247,7 +253,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                          item: order.products[index],
                        );
                      },
-                     itemCount: order.products.length,
+                     itemCount: order.products?.length ?? 1,
                      separatorBuilder: (BuildContext context, int index) {
                        return SizedBox(
                          height: 8,
@@ -292,7 +298,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                ),
                                Flexible(
                                  child: Text(
-                                   order.address,
+                                   order.address ??'',
                                    style: TextStyle(
                                      color: mainColor,
                                      fontWeight: FontWeight.bold,
@@ -324,6 +330,39 @@ class _OrderDetailsState extends State<OrderDetails> {
                    SizedBox(
                      height: 18,
                    ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       MaterialButton(
+                         onPressed: (){
+                           //printerBloc.print(bluetoo);
+                           //printerBloc.printOrder(context, snapshot.data.AllpdOrder);
+                         },
+                         color: mainColor,
+                         shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(15.0) ),
+                         textColor: Colors.white,
+                         child: Text('${AppUtils.translate(context, "print_order")}'),
+                       ),
+                       MaterialButton(
+                         onPressed: (){
+                           Navigator.of(context).push(
+                               MaterialPageRoute(
+                                 builder: (_) => EditOrder(
+                                   id: order.id,
+                                 ),
+                               ),
+                           );
+                         },
+                         color: mainColor,
+                         shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(15.0) ),
+                         textColor: Colors.white,
+                         child: Text('${AppUtils.translate(context, "edit_order")}'),
+                       ),
+                     ],
+                   ),
+                   SizedBox(
+                     height: 18,
+                   ),
                    DottedLine(
                      direction: Axis.horizontal,
                      lineLength: double.infinity,
@@ -341,7 +380,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                    Center(
                      child: GestureDetector(
                        onTap: (){
-                         orderBloc.editStatus(EditStatusRequest(status: 2 ) , snapshot.data.data.id).then((value) {
+
+                         orderBloc.editStatus(EditStatusRequest(status: 2 ) , snapshot.data.AllpdOrder.id).then((value) {
                            AppUtils.showToast(msg: value.message , bgColor: mainColor);
                          });
                        },

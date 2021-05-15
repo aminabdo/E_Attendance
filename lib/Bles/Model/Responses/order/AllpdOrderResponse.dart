@@ -1,6 +1,11 @@
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'dart:convert';
+import 'dart:developer';
 
-class AllpdOrderResponse extends BaseResponse{
+import 'package:qimma/utils/base/BaseRequest.dart';
+import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:json_serializable/json_serializable.dart';
+
+class AllpdOrderResponse extends BaseResponse implements BaseRequest{
   int status;
   List<Order_AllPD> data;
   String message;
@@ -23,8 +28,8 @@ class AllpdOrderResponse extends BaseResponse{
   };
 }
 
-class Order_AllPD {
-  int id;
+class Order_AllPD extends BaseRequest {
+  dynamic id;
   String priceType;
   dynamic discount;
   dynamic tax1;
@@ -42,80 +47,177 @@ class Order_AllPD {
   String date;
   String name;
   String userId;
-  String representativeId;
+  dynamic representativeId;
   String representativeName;
-  String lat;
-  String lng;
+  dynamic lat;
+  dynamic lng;
   String address;
   List<Products_Order_Bean> products;
   dynamic notes;
   String createdAt;
   String updatedAt;
 
-  static Order_AllPD fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    Order_AllPD dataBean = Order_AllPD();
-    dataBean.id = map['id'];
-    dataBean.priceType = map['price_type'];
-    dataBean.discount = map['discount'];
-    dataBean.tax1 = map['tax1'];
-    dataBean.tax2 = map['tax2'];
-    dataBean.totalPrice = map['total_price'];
-    dataBean.paid = map['paid'];
-    dataBean.rest = map['rest'];
-    dataBean.shippingPrice = map['shipping_price'];
-    dataBean.status = map['status'];
-    dataBean.email = map['email'];
-    dataBean.phone = map['phone'];
-    dataBean.paymentMethod = map['payment_method'];
-    dataBean.rate = map['rate'];
-    dataBean.report = map['report'];
-    dataBean.date = map['date'];
-    dataBean.name = map['name'];
-    dataBean.userId = map['user_id'];
-    dataBean.representativeId = map['representative_id'];
-    dataBean.representativeName = map['representative_name'];
-    dataBean.lat = map['lat'];
-    dataBean.lng = map['lng'];
-    dataBean.address = map['address'];
-    dataBean.products = List()..addAll(
-      (map['products'] as List ?? []).map((o) => Products_Order_Bean.fromMap(o))
-    );
-    dataBean.notes = map['notes'];
-    dataBean.createdAt = map['created_at'];
-    dataBean.updatedAt = map['updated_at'];
-    return dataBean;
+  String prePrice;
+  String discountType;
+  String tax1Type;
+  String tax2Type;
+  dynamic addressId;
+
+  calctotal(){
+    double total = 0 ;
+    products.forEach((element) {
+      total += (element.quantity * element.price);
+    });
+    // total = total -
+    //     double.parse(discount.toString().replaceAll('%', ''))
+    //     + double.parse(tax1.toString().replaceAll('%', ''))
+    //     + double.parse(tax2.toString().replaceAll('%', ''));
+    totalPrice = total ;
+    log("total model -----> ${totalPrice}");
+
   }
 
-  Map toJson() => {
-    "id": id,
-    "price_type": priceType,
-    "discount": discount,
-    "tax1": tax1,
-    "tax2": tax2,
-    "total_price": totalPrice,
-    "paid": paid,
-    "rest": rest,
-    "shipping_price": shippingPrice,
-    "status": status,
-    "email": email,
-    "phone": phone,
-    "payment_method": paymentMethod,
-    "rate": rate,
-    "report": report,
-    "date": date,
-    "name": name,
-    "user_id": userId,
-    "representative_id": representativeId,
-    "representative_name": representativeName,
-    "lat": lat,
-    "lng": lng,
-    "address": address,
-    "products": products,
-    "notes": notes,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-  };
+  Order_AllPD(
+      {this.id,
+      this.priceType,
+      this.discount,
+      this.tax1,
+      this.tax2,
+      this.totalPrice,
+      this.paid,
+      this.rest,
+      this.shippingPrice,
+      this.status,
+      this.email,
+      this.phone,
+      this.paymentMethod,
+      this.rate,
+      this.report,
+      this.date,
+      this.name,
+      this.userId,
+      this.representativeId,
+      this.representativeName,
+      this.lat,
+      this.lng,
+      this.address,
+      this.products,
+      this.notes,
+      this.createdAt,
+      this.updatedAt,
+      this.prePrice,
+      this.discountType,
+      this.tax1Type,
+      this.tax2Type,
+      this.addressId});
+
+  static Order_AllPD fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    Order_AllPD allpdOrderBean = Order_AllPD();
+    allpdOrderBean.id = map['id'];
+    allpdOrderBean.priceType = map['price_type'];
+    allpdOrderBean.discount = map['discount'];
+    allpdOrderBean.tax1 = map['tax1'];
+    allpdOrderBean.tax2 = map['tax2'];
+    allpdOrderBean.totalPrice = map['total_price'];
+    allpdOrderBean.paid = map['paid'];
+    allpdOrderBean.rest = map['rest'];
+    allpdOrderBean.shippingPrice = map['shipping_price'];
+    allpdOrderBean.status = map['status'];
+    allpdOrderBean.email = map['email'];
+    allpdOrderBean.phone = map['phone'];
+    allpdOrderBean.paymentMethod = map['payment_method'];
+    allpdOrderBean.rate = map['rate'];
+    allpdOrderBean.report = map['report'];
+    allpdOrderBean.date = map['date'];
+    allpdOrderBean.name = map['name'];
+    allpdOrderBean.userId = map['user_id'];
+    allpdOrderBean.representativeId = map['representative_id'];
+    allpdOrderBean.representativeName = map['representative_name'];
+    allpdOrderBean.lat = map['lat'];
+    allpdOrderBean.lng = map['lng'];
+    allpdOrderBean.address = map['address'];
+
+    allpdOrderBean.notes = map['notes'];
+    allpdOrderBean.createdAt = map['created_at'];
+    allpdOrderBean.updatedAt = map['updated_at'];
+
+
+
+    allpdOrderBean.id = map['id'];
+    allpdOrderBean.priceType = map['price_type'];
+    allpdOrderBean.prePrice = map['pre_price'];
+    allpdOrderBean.discountType = map['discount_type'];
+    allpdOrderBean.discount = map['discount'];
+    allpdOrderBean.tax1Type = map['tax1_type'];
+    allpdOrderBean.tax1 = map['tax1'];
+    allpdOrderBean.tax2Type = map['tax2_type'];
+    allpdOrderBean.tax2 = map['tax2'];
+    allpdOrderBean.totalPrice = map['total_price'];
+    allpdOrderBean.paid = map['paid'];
+    allpdOrderBean.rest = map['rest'];
+    allpdOrderBean.shippingPrice = map['shipping_price'];
+    allpdOrderBean.status = map['status'];
+    allpdOrderBean.email = map['email'];
+    allpdOrderBean.phone = map['phone'];
+    allpdOrderBean.paymentMethod = map['payment_method'];
+    allpdOrderBean.rate = map['rate'];
+    allpdOrderBean.report = map['report'];
+    allpdOrderBean.date = map['date'];
+    allpdOrderBean.name = map['name'];
+    allpdOrderBean.userId = map['user_id'];
+    allpdOrderBean.representativeId = map['representative_id'];
+    allpdOrderBean.representativeName = map['representative_name'];
+    allpdOrderBean.lat = map['lat'];
+    allpdOrderBean.lng = map['lng'];
+    allpdOrderBean.addressId = map['address_id'];
+    allpdOrderBean.address = map['address'];
+    allpdOrderBean.products = List()..addAll(
+        (map['products'] as List ?? []).map((o) => Products_Order_Bean.fromMap(o))
+    );
+    allpdOrderBean.notes = map['notes'];
+    allpdOrderBean.createdAt = map['created_at'];
+    allpdOrderBean.updatedAt = map['updated_at'];
+
+    return allpdOrderBean;
+  }
+
+  Map toJson() {
+    return{
+      "id": id,
+      "price_type": priceType,
+      "discount": discount,
+      "tax1": tax1,
+      "tax2": tax2,
+      "total_price": totalPrice,
+      "paid": paid,
+      "rest": rest,
+      "shipping_price": shippingPrice,
+      "status": status,
+      "email": email,
+      "phone": phone,
+      "payment_method": paymentMethod,
+      "rate": rate,
+      "report": report,
+      "date": date,
+      "name": name,
+      "user_id": userId,
+      "representative_id": representativeId,
+      "representative_name": representativeName,
+      "lat": lat,
+      "lng": lng,
+      "address": address,
+      "products": products,
+      "notes": notes,
+      "created_at": createdAt,
+      "updated_at": updatedAt,
+      "pre_price": prePrice,
+      "discount_type": discountType,
+      "tax1_type": tax1Type,
+      "tax2_type": tax2Type,
+      "address_id": addressId,
+    };
+  }
 }
 
 class Products_Order_Bean {
@@ -127,8 +229,19 @@ class Products_Order_Bean {
   String image;
   dynamic quantity;
   dynamic price;
-  dynamic color;
-  dynamic size;
+  ColorBean color;
+  SizeBean size;
+
+  Products_Order_Bean(
+      {this.id,
+      this.mainProductId,
+      this.desc,
+      this.Difference,
+      this.image,
+      this.quantity,
+      this.price,
+      this.color,
+      this.size});
 
   static Products_Order_Bean fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -141,8 +254,8 @@ class Products_Order_Bean {
     productsBean.image = map['image'];
     productsBean.quantity = map['quantity'];
     productsBean.price = map['price'];
-    productsBean.color = map['color'];
-    productsBean.size = map['size'];
+    productsBean.color = ColorBean.fromMap(map['color']);
+    productsBean.size = SizeBean.fromMap(map['size']);
     return productsBean;
   }
 
@@ -155,7 +268,43 @@ class Products_Order_Bean {
     "image": image,
     "quantity": quantity,
     "price": price,
-    "color": color,
-    "size": size,
+    "color_id": color.id,
+    "size_id": size.id,
+  };
+}
+
+class SizeBean {
+  dynamic id;
+  String name;
+
+  static SizeBean fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    SizeBean sizeBean = SizeBean();
+    sizeBean.id = map['id'];
+    sizeBean.name = map['name'];
+    return sizeBean;
+  }
+
+  Map toJson() => {
+    "id": id,
+    "name": name,
+  };
+}
+
+class ColorBean {
+  dynamic id;
+  String colorCode;
+
+  static ColorBean fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    ColorBean colorBean = ColorBean();
+    colorBean.id = map['id'];
+    colorBean.colorCode = map['color_code'];
+    return colorBean;
+  }
+
+  Map toJson() => {
+    "id": id,
+    "color_code": colorCode,
   };
 }

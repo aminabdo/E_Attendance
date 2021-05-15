@@ -319,9 +319,9 @@ class _SingupPageState extends State<SingupPage> {
                                     }
 
                                     _permissionGranted = await location.hasPermission();
-                                    if (_permissionGranted == PermissionStatus.denied) {
+                                    if (_permissionGranted == PermissionStatus.DENIED) {
                                       _permissionGranted = await location.requestPermission();
-                                      if (_permissionGranted != PermissionStatus.granted) {
+                                      if (_permissionGranted != PermissionStatus.GRANTED) {
                                         AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
                                         setState(() {
                                           pickingLocation = false;

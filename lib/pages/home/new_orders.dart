@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
+import 'package:qimma/Bles/Bloc/print/PrintBloc.dart';
 import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
 import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
 import 'package:qimma/pages/home/order_details.dart';
@@ -92,12 +94,16 @@ class Item extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  '${item?.mainProductName}',
+                  '${item?.Difference}',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
             ],
           ),
+        ),
+        Text(
+          '${item.quantity}  X   ',
+          style: TextStyle(color: Colors.deepOrangeAccent),
         ),
         Text(
           '${item.price} ${AppUtils.translate(context, 'eg')}',
@@ -238,7 +244,11 @@ class OrderItem extends StatelessWidget {
                             style: TextStyle(color: Colors.grey),
                           ),
                           Text(
-                            AppUtils.translate(context, 'customer_amount'),
+                            AppUtils.translate(context, 'show_products_quantity'),
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            AppUtils.translate(context, 'price'),
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -358,6 +368,27 @@ class OrderItem extends StatelessWidget {
                 SizedBox(
                   height: 18,
                 ),
+                MaterialButton(onPressed: (){
+                  //printerBloc.print(bluetoo);
+                  //printerBloc.printOrder(context, order);
+                },
+                  color: Colors.green,
+                  child: Text('${AppUtils.translate(context, "print_order")}'),
+                ),
+                DottedLine(
+                  direction: Axis.horizontal,
+                  lineLength: double.infinity,
+                  lineThickness: 1.0,
+                  dashLength: 4.0,
+                  dashColor: Colors.grey,
+                  dashRadius: 0.0,
+                  dashGapLength: 4.0,
+                  dashGapColor: Colors.transparent,
+                  dashGapRadius: 0.0,
+                ),
+                SizedBox(
+                  height: 18,
+                ),
                 // Text(AppUtils.translate(context, 'shop_owner_amount'), style: TextStyle(color: Colors.grey)),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -412,8 +443,10 @@ class OrderItem extends StatelessWidget {
                 //     ),
                 //   ],
                 // ),
+
               ],
             ),
+
           ),
         ),
       ),

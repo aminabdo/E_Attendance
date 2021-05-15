@@ -1,16 +1,17 @@
 import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
 import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
 
 class AddpdOrderResponse extends BaseResponse {
   int status;
-  Order data;
+  Order_AllPD data;
   String message;
 
   static AddpdOrderResponse fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     AddpdOrderResponse addpdOrderResponseBean = AddpdOrderResponse();
     addpdOrderResponseBean.status = map['status'];
-    addpdOrderResponseBean.data = Order.fromMap(map['data']);
+    addpdOrderResponseBean.data = Order_AllPD.fromMap(map['data']);
     addpdOrderResponseBean.message = map['message'];
     return addpdOrderResponseBean;
   }

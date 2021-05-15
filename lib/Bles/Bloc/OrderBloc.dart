@@ -25,8 +25,8 @@ class OrderBloc extends BaseBloc {
       BehaviorSubject<SinglepdOrderResponse>();
   BehaviorSubject<AddpdOrderResponse> add_order =
       BehaviorSubject<AddpdOrderResponse>();
-  BehaviorSubject<FinishedOrdersResponse> _finished_orders =
-  BehaviorSubject<FinishedOrdersResponse>();
+  BehaviorSubject<AllpdOrderResponse> _finished_orders =
+  BehaviorSubject<AllpdOrderResponse>();
   BehaviorSubject<AddProductsToPDOrder> _add_product_to_order =
       BehaviorSubject<AddProductsToPDOrder>();
   BehaviorSubject<AllUsersResponse> _allUsers =
@@ -49,13 +49,13 @@ class OrderBloc extends BaseBloc {
         (await repository.get(ApiRoutes.all_p_d_Order())).data);
     _all_order.value = response;
     _all_order.value.loading = false;
-    return response;
+    return _all_order.value;
   }
 
-  Future<FinishedOrdersResponse> getFinishedOrders() async {
-    _finished_orders.value = FinishedOrdersResponse();
+  Future<AllpdOrderResponse> getFinishedOrders() async {
+    _finished_orders.value = AllpdOrderResponse();
     _finished_orders.value.loading = true;
-    FinishedOrdersResponse response = FinishedOrdersResponse.fromMap(
+    AllpdOrderResponse response = AllpdOrderResponse.fromMap(
         (await repository.get(ApiRoutes.finishedOrders())).data);
     _finished_orders.value = response;
     _finished_orders.value.loading = false;
@@ -178,6 +178,18 @@ class OrderBloc extends BaseBloc {
     _edit_status.value.loading = false;
     return response;
   }
+  Future<SinglepdOrderResponse> editOrder(
+      Order_AllPD request) async {
+    // _single_order.value.loading = true;
+    // SinglepdOrderResponse response = SinglepdOrderResponse.fromMap((await repository.postObject(
+    //     ApiRoutes.editOrder(orderID: request.id), request))
+    //     .data);
+    // _single_order.value = response;
+
+    (await repository.postObject(
+            ApiRoutes.editOrder(orderID: request.id), request));
+    return null;
+  }
   Future<AllProductsResponse> search_by_name(String txt) async {
 
     _search_products.value = AllProductsResponse();
@@ -217,7 +229,7 @@ class OrderBloc extends BaseBloc {
 
 
   BehaviorSubject<AllpdOrderResponse> get all_orders => _all_order;
-  BehaviorSubject<FinishedOrdersResponse> get finished_orders => _finished_orders;
+  BehaviorSubject<AllpdOrderResponse> get finished_orders => _finished_orders;
   BehaviorSubject<AllUsersResponse> get all_users => _allUsers;
   BehaviorSubject<AllProductsResponse> get all_products => _allProducts;
   BehaviorSubject<AllProductsResponse> get search_products => _search_products;

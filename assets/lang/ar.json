@@ -65,6 +65,7 @@
   "minutes": "دقيقة",
   "id": "الكود",
   "customer_amount": "اجمالي الفاتورة",
+  "price": "السعر",
   "eg": "ريال",
   "customer_name": "اسم العميل",
   "shop_location": "موقع المتجر",
@@ -171,5 +172,14 @@
   "set_dept_page_amount": "المبلغ",
   "quantity_error": "لا يمكن إضافة هذا المنتج الكمية 0",
   "hours": "ساعة",
-  "days": "يوم"
+  "days": "يوم",
+  "printer_settings": "اعدادات الطباعة",
+  "print_order": "طباعة الطلب",
+  "invoice": "فاتورة",
+  "tax1": "الضريبة",
+  "tax2": "ضريبة التوصيل",
+  "discount": "الخصم",
+  "total": "الاجمالي",
+  "sub_total": "المجموع الفرعي",
+  "edit_order": "تعديل الطلب"
 }

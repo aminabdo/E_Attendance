@@ -24,7 +24,7 @@ class _OnGoingOrdersPageState extends State<OnGoingOrdersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<FinishedOrdersResponse>(
+    return StreamBuilder<AllpdOrderResponse>(
       stream: orderBloc.finished_orders.stream,
       builder: (context, snapshot) {
         if (orderBloc.finished_orders.value.loading) {
@@ -61,7 +61,7 @@ class _OnGoingOrdersPageState extends State<OnGoingOrdersPage> {
 }
 
 class Item extends StatelessWidget {
-  final FinshedOrderProductsBean item;
+  final Products_Order_Bean item;
 
   const Item({Key key, this.item}) : super(key: key);
 
@@ -85,7 +85,7 @@ class Item extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  '${item?.mainProductName}',
+                  '${item?.Difference}',
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
@@ -103,7 +103,7 @@ class Item extends StatelessWidget {
 }
 
 class OrderItem extends StatelessWidget {
-  final FinshedOrderBean finishedOrder;
+  final Order_AllPD finishedOrder;
 
   const OrderItem({Key key, this.finishedOrder}) : super(key: key);
 

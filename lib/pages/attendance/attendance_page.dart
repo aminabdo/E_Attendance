@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:qimma/Bles/Bloc/AttendanceBloc.dart';
 import 'package:qimma/Bles/Model/Requests/AddAttendanceRequest.dart';
+import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/consts.dart';
 import 'package:qimma/widgets/my_app_bar.dart';
+import 'package:qimma/widgets/my_loader.dart';
 import 'package:qimma/widgets/my_text_form_field.dart';
 
 import 'my_history.dart';
@@ -16,7 +19,8 @@ class AttendancePage extends StatefulWidget {
 class _AttendancePageState extends State<AttendancePage> {
   String attendanceStatus;
   TextEditingController _noteController = TextEditingController();
-
+  LocationData _locationData;
+  bool pickingLocation = false;
   @override
   void initState() {
     attendanceStatus = null;
@@ -170,24 +174,69 @@ class _AttendancePageState extends State<AttendancePage> {
                 height: 60,
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async{
+                  _locationData == null;
+                  
                   if (attendanceStatus == null) {
                     AppUtils.showToast(
                         msg:
                             '${AppUtils.showToast(msg: 'attendance_page_msg')}',
                         bgColor: mainColor);
                   } else {
+
+
+
+                    setState(() {
+                      pickingLocation = true;
+                    });
+
+                    var locationPermissionGranted = await AppUtils.askLocationPermission();
+                    if (locationPermissionGranted) {
+                      Location location = new Location();
+
+                      bool _serviceEnabled;
+                      PermissionStatus _permissionGranted;
+
+                      _serviceEnabled = await location.serviceEnabled();
+                      if (!_serviceEnabled) {
+                        _serviceEnabled = await location.requestService();
+                        if (!_serviceEnabled) {
+                          AppUtils.showToast(msg: AppUtils.translate(context, 'open_gps'));
+                          setState(() {
+                            pickingLocation = false;
+                          });
+                          return;
+                        }
+                      }
+
+                      _permissionGranted = await location.hasPermission();
+                      if (_permissionGranted == PermissionStatus.DENIED) {
+                        _permissionGranted = await location.requestPermission();
+                        if (_permissionGranted != PermissionStatus.GRANTED) {
+                          AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+                          setState(() {
+                            pickingLocation = false;
+                          });
+                          return;
+                        }
+                      }
+
+                      _locationData = await location.getLocation();
+                      setState(() {
+                        pickingLocation = false;
+                      });
+                    }
                     attendanceBloc
                         .addAttendance(AttendanceRequest(
                             status: attendanceStatus ==
                                     "${AppUtils.translate(context, 'attendance_page_attend')}"
                                 ? 1
                                 : 2,
-                            note: _noteController.text))
-                        .then((value) {
-                      AppUtils.showToast(
-                          msg: value.message, bgColor: mainColor);
-                    });
+                            note: _noteController.text,
+                        lon: "${_locationData.longitude.toString()}" ,
+                        lat: "${_locationData.latitude.toString()}"));
+                    _noteController.text= "";
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
                   }
                 },
                 child: Container(

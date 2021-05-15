@@ -3,8 +3,10 @@ import 'package:qimma/utils/base/BaseRequest.dart';
 class AttendanceRequest extends BaseRequest {
   int status;
   String note;
+  String lon;
+  String lat;
 
-  AttendanceRequest({this.status, this.note});
+  AttendanceRequest({this.status, this.note , this.lon , this.lat});
 
   static AttendanceRequest fromMap(Map<int, dynamic> map) {
     if (map == null) return null;
@@ -17,5 +19,7 @@ class AttendanceRequest extends BaseRequest {
   Map toJson() => {
         "status": status,
         "note": note,
+        "lon": lon,
+        "lat": lat,
       };
 }

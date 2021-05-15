@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:qimma/utils/base/BaseRequest.dart';
 
-class BaseResponse  {
+class BaseResponse {
   int status;
   String message;
   bool loading = true ;

@@ -71,6 +71,7 @@
   "minutes": "minutes",
   "id": "ID",
   "customer_amount": "Customer amount",
+  "price": "price",
   "eg": "RAS",
   "customer_name": "Customer name",
   "shop_location": "Shop location",
@@ -174,5 +175,14 @@
   "set_dept_page_amount": "Amount",
   "quantity_error": "cannot add this product with 0 quantity",
   "hours": "hours",
-  "days": "days"
+  "days": "days",
+  "printer_settings": "printer settings",
+  "print_order": "print order",
+  "invoice": "invoice",
+  "tax1": "tax",
+  "tax2": "delivery charges",
+  "discount": "discount",
+  "total": "total",
+  "sub_total": "sub total",
+  "edit_order": "edit order"
 }

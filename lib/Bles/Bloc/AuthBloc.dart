@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:qimma/Bles/Model/Requests/LoginRequest.dart';
 import 'package:qimma/Bles/Model/Requests/SignupRequest.dart';
 import 'package:qimma/Bles/Model/Responses/login/LoginResponse.dart';
@@ -13,8 +15,10 @@ class AuthBloc extends BaseBloc {
   BehaviorSubject<SignupResponse> _signup = BehaviorSubject<SignupResponse>();
 
   Future<LoginResponse> login(LoginRequest request) async {
+
     _login.value = LoginResponse();
     _login.value.loading = true ;
+    log("AuthBloc -> login ");
     LoginResponse response = LoginResponse.fromMap((await repository.post(ApiRoutes.login(),request.toJson())).data);
     _login.value = response;
     _login.value.loading = false ;

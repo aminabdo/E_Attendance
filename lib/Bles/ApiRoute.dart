@@ -278,11 +278,16 @@ class ApiRoutes {
   static String setDept({int clientId}) {
     return "Representative/debt_set/$clientId";
   }
+  // edit order
+  static String editOrder({int orderID}) {
+    return "Order/edit_P_d_order/${orderID}";
+  }
 }
 
 class ApiRoutesUpdate {
-  //static String baseUrl = "https://qimmaapi.codecaique.com/api/";
-  static String baseUrl_client = "https://api.qimmajomla.com/api/";
+  static String baseUrl_client = "https://qimmaapi.codecaique.com/api/";
+  //static String baseUrl_client = "https://api.qimmajomla.com/api/";
+  //static String baseUrl_client = "https://testapi.qimmajomla.com/api/";
 
   getLink(String url) {
     print("url ------>>>>   " + baseUrl_client + url);

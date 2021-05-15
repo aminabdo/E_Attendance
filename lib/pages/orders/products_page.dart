@@ -315,8 +315,8 @@ class _ProductItemState extends State<ProductItem> {
                             duration: Duration(milliseconds: 250),
                             child: CircleAvatar(
                               radius: 13,
-                              backgroundColor: Color(int.parse(
-                                  '0xff${widget.product.colors[index].colorCode}')),
+                              // backgroundColor: Color(int.parse(
+                              //     '${widget.product.colors[index]?.colorCode}'??'0xff000000')),
                               child: index == selectedColor
                                   ? Icon(
                                       Icons.check,

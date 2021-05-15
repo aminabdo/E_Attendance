@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:qimma/Bles/Bloc/OrderBloc.dart';
 import 'package:qimma/Bles/Bloc/client_bloc.dart';
@@ -267,14 +269,11 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                               );
 
                               print(request.toString());
-                              try {
+                              // try {
                                 var response = await orderBloc.addOrder(
                                     request);
                                 if (response.status == 1) {
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-
+                                  log("response -----> ==> ${response.status}");
                                   AppUtils.showToast(
                                       msg: AppUtils.translate(context, 'done'),
                                       bgColor: mainColor);
@@ -287,22 +286,29 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                                           ),
                                     ),
                                   );
+                                  setState(() {
+                                    isLoading = false;
+                                  });
                                 } else {
+                                  log("response else -----> ==> ${response.status}");
                                   AppUtils.showToast(msg: response.message);
                                   setState(() {
                                     isLoading = false;
                                   });
                                 }
-                              }catch(e){
-                                setState(() {
-                                  isLoading = false;
-                                });
-                              }
-                              finally{
-                                setState(() {
-                                  isLoading = false;
-                                });
-                              }
+                              // }
+                              // catch(e){
+                              //   log("catch ${e.toString()}");
+                              //   setState(() {
+                              //     isLoading = false;
+                              //   });
+                              // }
+                              // finally{
+                              //   log("finaly");
+                              //   setState(() {
+                              //     isLoading = false;
+                              //   });
+                              // }
                             },
                           ),
                           space(context),
