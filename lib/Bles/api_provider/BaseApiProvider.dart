@@ -135,7 +135,7 @@ class BaseApiProvider {
   Future<Response> generalPostObject(
       String urlExtention,BaseRequest request) async {
     try {
-      Response response = await dio.post(
+      BasePostResponse response = await dio.post(
           ApiRoutesUpdate().getLink(ApiRoutes.generalGet(urlExtention)),
           options: options,
           data: request);

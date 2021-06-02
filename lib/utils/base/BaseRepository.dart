@@ -61,12 +61,12 @@ class BaseRepository{
     return response;
   }
 
-  Future<Response> postObject(String urlExtention,BaseRequest request) async {
+  Future<BasePostResponse> postObject(String urlExtention,BaseRequest request) async {
     debugPrint("BaseRepository post request ---->>>>>>   ");
     debugPrint(request.toString());
 
 
-    Response response = await _apiProvider.generalPostObject(urlExtention,request);
+    BasePostResponse response = await _apiProvider.generalPostObject(urlExtention,request);
 
     debugPrint("BaseRepository post response ---->>>>>>   ");
     debugPrint(response.toString());

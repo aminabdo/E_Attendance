@@ -142,6 +142,7 @@
   "all_clients_of_representative_page" : "============All Clients of Representative Page=============",
   "all_clients_of_representative_page_title": "Your Clients",
   "all_clients_of_representative_page_add_client": "Add Client",
+  "add_client": "Add Client",
 
   "my_History_page" : "============My History Page=============",
   "my_History_page_title": "My History",
@@ -184,5 +185,6 @@
   "discount": "discount",
   "total": "total",
   "sub_total": "sub total",
-  "edit_order": "edit order"
+  "edit_order": "edit order",
+  "order_updated_succes": "order updated succefully"
 }

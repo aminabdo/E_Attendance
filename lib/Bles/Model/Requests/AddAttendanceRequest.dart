@@ -19,7 +19,7 @@ class AttendanceRequest extends BaseRequest {
   Map toJson() => {
         "status": status,
         "note": note,
-        "lon": lon,
+        "lng": lon,
         "lat": lat,
       };
 }

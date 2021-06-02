@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:qimma/utils/base/BaseRequest.dart';
 import 'package:qimma/utils/base/BaseResponse.dart';
-import 'package:json_serializable/json_serializable.dart';
 
 class AllpdOrderResponse extends BaseResponse implements BaseRequest{
   int status;
@@ -183,39 +182,42 @@ class Order_AllPD extends BaseRequest {
   }
 
   Map toJson() {
-    return{
-      "id": id,
-      "price_type": priceType,
-      "discount": discount,
-      "tax1": tax1,
-      "tax2": tax2,
-      "total_price": totalPrice,
-      "paid": paid,
-      "rest": rest,
-      "shipping_price": shippingPrice,
-      "status": status,
-      "email": email,
-      "phone": phone,
-      "payment_method": paymentMethod,
-      "rate": rate,
-      "report": report,
-      "date": date,
-      "name": name,
-      "user_id": userId,
-      "representative_id": representativeId,
-      "representative_name": representativeName,
-      "lat": lat,
-      "lng": lng,
-      "address": address,
-      "products": products,
-      "notes": notes,
-      "created_at": createdAt,
-      "updated_at": updatedAt,
-      "pre_price": prePrice,
-      "discount_type": discountType,
-      "tax1_type": tax1Type,
-      "tax2_type": tax2Type,
-      "address_id": addressId,
+    var json = jsonEncode(products.map((e) => e.toJson()).toList());
+    return
+    {
+      "id"
+    : id,
+    "price_type": priceType,
+    "discount": discount,
+    "tax1": tax1,
+    "tax2": tax2,
+    "total_price": totalPrice,
+    "paid": paid,
+    "rest": rest,
+    "shipping_price": shippingPrice,
+    "status": status,
+    "email": email,
+    "phone": phone,
+    "payment_method": paymentMethod,
+    "rate": rate,
+    "report": report,
+    "date": date,
+    "name": name,
+    "user_id": userId,
+    "representative_id": representativeId,
+    "representative_name": representativeName,
+    "lat": lat,
+    "lng": lng,
+    "address": address,
+    "products": (products.map((e) => e.toJson()).toList()),
+    "notes": notes,
+    "created_at": createdAt,
+    "updated_at": updatedAt,
+    "pre_price": prePrice,
+    "discount_type": discountType,
+    "tax1_type": tax1Type,
+    "tax2_type": tax2Type,
+    "address_id": addressId,
     };
   }
 }
@@ -259,6 +261,20 @@ class Products_Order_Bean {
     return productsBean;
   }
 
+  @override
+  String toString() {
+    return '{id: $id, '
+        'main_product_id: $mainProductId, '
+        'main_Product_name: $mainProductName, '
+        'desc: $desc, '
+        'Difference: ${Difference ?? ''}, '
+        'image: $image, '
+        'quantity: $quantity,'
+        ' price: $price, '
+        'color_id: ${color?.id ?? ''}, '
+        'size_id: ${size?.id ?? ''}}';
+  }
+
   Map toJson() => {
     "id": id,
     "main_product_id": mainProductId,
@@ -268,8 +284,8 @@ class Products_Order_Bean {
     "image": image,
     "quantity": quantity,
     "price": price,
-    "color_id": color.id,
-    "size_id": size.id,
+    "color_id": color?.id ?? '',
+    "size_id": size?.id ?? '',
   };
 }
 

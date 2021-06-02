@@ -336,7 +336,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                        MaterialButton(
                          onPressed: (){
                            //printerBloc.print(bluetoo);
-                           //printerBloc.printOrder(context, snapshot.data.AllpdOrder);
+                           printerBloc.printOrder(context, snapshot.data.AllpdOrder);
                          },
                          color: mainColor,
                          shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(15.0) ),
@@ -381,7 +381,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                      child: GestureDetector(
                        onTap: (){
 
-                         orderBloc.editStatus(EditStatusRequest(status: 2 ) , snapshot.data.AllpdOrder.id).then((value) {
+                         orderBloc.editStatus(EditStatusRequest(status: 10 ) , snapshot.data.AllpdOrder.id).then((value) {
                            AppUtils.showToast(msg: value.message , bgColor: mainColor);
                          });
                        },

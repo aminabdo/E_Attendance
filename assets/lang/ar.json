@@ -144,6 +144,7 @@
   "all_clients_of_representative_page" : "============All Clients of Representative Page=============",
   "all_clients_of_representative_page_title": "قائمة عملائك",
   "all_clients_of_representative_page_add_client": "اضافة عميل",
+  "add_client": "اضافة عميل",
 
 
   "show_products_page" : "============Products Page=============",
@@ -181,5 +182,6 @@
   "discount": "الخصم",
   "total": "الاجمالي",
   "sub_total": "المجموع الفرعي",
-  "edit_order": "تعديل الطلب"
+  "edit_order": "تعديل الطلب",
+  "order_updated_succes": "تم تعديل الطلب بنجاح"
 }

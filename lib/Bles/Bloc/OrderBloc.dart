@@ -180,15 +180,13 @@ class OrderBloc extends BaseBloc {
   }
   Future<SinglepdOrderResponse> editOrder(
       Order_AllPD request) async {
-    // _single_order.value.loading = true;
-    // SinglepdOrderResponse response = SinglepdOrderResponse.fromMap((await repository.postObject(
-    //     ApiRoutes.editOrder(orderID: request.id), request))
-    //     .data);
-    // _single_order.value = response;
-
-    (await repository.postObject(
-            ApiRoutes.editOrder(orderID: request.id), request));
-    return null;
+    _single_order.value.loading = true;
+    _single_order.value =_single_order.value;
+    (await repository.post(
+            ApiRoutes.editOrder(orderID: request.id), request.toJson()));
+    _single_order.value.loading = false;
+    _single_order.value = _single_order.value;
+    return _single_order.value;
   }
   Future<AllProductsResponse> search_by_name(String txt) async {
 

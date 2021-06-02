@@ -184,7 +184,7 @@ class OrderItem extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                order.status,
+                                order.status ?? '',
                                 style: TextStyle(
                                   color: secondColor,
                                   fontSize: 13,
@@ -371,6 +371,7 @@ class OrderItem extends StatelessWidget {
                 MaterialButton(onPressed: (){
                   //printerBloc.print(bluetoo);
                   //printerBloc.printOrder(context, order);
+                  printerBloc.printOrder(context, order);
                 },
                   color: Colors.green,
                   child: Text('${AppUtils.translate(context, "print_order")}'),

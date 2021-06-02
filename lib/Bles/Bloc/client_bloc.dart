@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:qimma/Bles/Model/Requests/AddClientRequest.dart';
 import 'package:qimma/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
 import 'package:qimma/Bles/Model/Requests/SetDeptRequest.dart';
 import 'package:qimma/Bles/Model/Responses/DeleteClientResponse.dart';
+import 'package:qimma/Bles/Model/Responses/client/AddClientResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/AddClientToRepresentativeResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
 import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
@@ -25,6 +27,9 @@ class ClientBloc extends BaseBloc {
   BehaviorSubject<AddClientToRepresentativeResponse>
       _add_client_to_representative =
       BehaviorSubject<AddClientToRepresentativeResponse>();
+  BehaviorSubject<AddClientResponse>
+      _add_client =
+      BehaviorSubject<AddClientResponse>();
 
   Future<AllClientsResponse> getAllClients() async {
     _all_clients.value = AllClientsResponse();
@@ -88,13 +93,28 @@ class ClientBloc extends BaseBloc {
     return response;
   }
 
+  Future<AddClientResponse> addClient(
+      AddClientRequest request) async {
+    _add_client.value = AddClientResponse();
+    _add_client.value.loading = true;
+    AddClientResponse response =
+            AddClientResponse.fromMap((await repository.post(
+                ApiRoutes.addClient(), request.toJson()))
+            .data);
+    _add_client.value = response;
+    _add_client.value.loading = false;
+    return response;
+  }
+
   BehaviorSubject<AllClientsResponse> get all_clients => _all_clients;
   BehaviorSubject<SetDeptResponse> get set_dept => _setDept;
   BehaviorSubject<ClientOfRepresentativeResponse>
       get all_clients_of_representative => _all_clients_of_representative;
   BehaviorSubject<AddClientToRepresentativeResponse>
       get add_client_to_representative => _add_client_to_representative;
+  BehaviorSubject<AddClientResponse> get add_client => _add_client;
   BehaviorSubject<DeleteClientResponse> get delete_client => _delete_client;
+
 }
 
 final clientBloc = ClientBloc();

@@ -153,22 +153,25 @@ class _LoginPageState extends State<LoginPage> {
       loading = true;
     });
 
-    // var response = await authBloc.login(
-    //   LoginRequest(
-    //       eamilOrPhone: phoneOrEmailController.text,
-    //       fireBaseToken: AppUtils.firebaseToken,
-    //       password: passwordController.text,
-    //   ),
-    // );
-
-      // 0548900632
     var response = await authBloc.login(
       LoginRequest(
-          eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
-          fireBaseToken: "AppUtils.firebaseToken",
-          password: "123456",//passwordController.text.toString(),
+          eamilOrPhone: phoneOrEmailController.text,
+          fireBaseToken: AppUtils.firebaseToken,
+          password: passwordController.text,
+              // eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
+              // fireBaseToken: "AppUtils.firebaseToken",
+              // password: "123456",//passwordController.text.toString(),
       ),
     );
+
+      // 0548900632
+    // var response = await authBloc.login(
+    //   LoginRequest(
+    //       eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
+    //       fireBaseToken: "AppUtils.firebaseToken",
+    //       password: "123456",//passwordController.text.toString(),
+    //   ),
+    // );
 
     if (response.status == 1) {
       setState(() {

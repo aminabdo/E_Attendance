@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:qimma/main.dart';
+import 'package:qimma/pages/add_client/add_client.dart';
 import 'package:qimma/pages/attendance/attendance_page.dart';
 import 'package:qimma/pages/client/clients_of_representative.dart';
 import 'package:qimma/pages/editProfile/edit_profile.dart';
@@ -293,7 +294,7 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                 Navigator.pop(context);
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => null,
+                    builder: (_) => AddClientPage(),
                   ),
                 );
               },
@@ -307,7 +308,7 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                       children: [
                         Icon(Icons.location_history_outlined),
                         Text(
-                          '${AppUtils.translate(context, 'printer_settings')}',
+                          '${AppUtils.translate(context, 'add_client')}',
                           style: TextStyle(color: mainColor, fontSize: 16),
                         ),
                       ],
@@ -316,6 +317,70 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                 ),
               ),
             ),
+
+            // printer settings
+            // SizedBox(
+            //   height: 5,
+            // ),
+            // InkWell(
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (_) => Print1Page(),
+            //       ),
+            //     );
+            //   },
+            //   child: Expanded(
+            //     child: Container(
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Row(
+            //           textDirection: TextDirection.ltr,
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             Icon(Icons.location_history_outlined),
+            //             Text(
+            //               '${AppUtils.translate(context, 'printer_settings')}',
+            //               style: TextStyle(color: mainColor, fontSize: 16),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 5,
+            // ),
+            // InkWell(
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (_) => Print2Page(),
+            //       ),
+            //     );
+            //   },
+            //   child: Expanded(
+            //     child: Container(
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Row(
+            //           textDirection: TextDirection.ltr,
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             Icon(Icons.location_history_outlined),
+            //             Text(
+            //               '${AppUtils.translate(context, 'printer_settings')}',
+            //               style: TextStyle(color: mainColor, fontSize: 16),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

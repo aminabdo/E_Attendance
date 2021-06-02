@@ -282,6 +282,10 @@ class ApiRoutes {
   static String editOrder({int orderID}) {
     return "Order/edit_P_d_order/${orderID}";
   }
+  // add user
+  static String addClient() {
+    return "Auth_general/user_register_inRepApp";
+  }
 }
 
 class ApiRoutesUpdate {

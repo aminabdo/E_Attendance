@@ -16,6 +16,7 @@ import 'package:qimma/widgets/my_loader.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
 import 'new_orders.dart';
 
 class EditOrder extends StatefulWidget {
@@ -283,6 +284,9 @@ class _EditOrderState extends State<EditOrder> {
                             log("${orderBloc.s_single_P_d_order.value.AllpdOrder.toJson()}");
                             log("------->>>>><<<<<-------");
                             orderBloc.editOrder(orderBloc.s_single_P_d_order.value.AllpdOrder);
+                            AppUtils.showToast(msg: "${AppUtils.translate(context, "order_updated_succes")}");
+
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
                           },
                           color: mainColor,
                           shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(15.0) ),
