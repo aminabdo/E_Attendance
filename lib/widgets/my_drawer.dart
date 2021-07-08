@@ -66,34 +66,43 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
+
+
+
             InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => HomePage(),
-                  ),
-                );
-              },
-              child: Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      textDirection: TextDirection.ltr,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.home_sharp),
-                        Text(
-                          '${AppUtils.translate(context, 'home_page_title')}',
-                          style: TextStyle(color: mainColor, fontSize: 16),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => HomePage(),
                         ),
-                      ],
-                    ),
+                      );
+                    },
+
+
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.home_sharp),
+                      Text(
+                        '${AppUtils.translate(context, 'home_page_title')}',
+                        style: TextStyle(color: mainColor, fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+
+
+
+
+
+
             SizedBox(
               height: 5,
             ),
@@ -162,10 +171,133 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                 ],
               ),
             ),
+
+
             SizedBox(
               height: 5,
             ),
-            /*InkWell(
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ClientsOfRepresentativePage(),
+                  ),
+                );
+              },
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.notes),
+                      Text(
+                        '${AppUtils.translate(context, 'all_clients_of_representative_page_title')}',
+                        style: TextStyle(color: mainColor, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ShowAllProducts(),
+                  ),
+                );
+              },
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.show_chart),
+                      Text(
+                        '${AppUtils.translate(context, 'show_all_products')}',
+                        style: TextStyle(color: mainColor, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AttendancePage(),
+                  ),
+                );
+              },
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.location_history_outlined),
+                      Text(
+                        '${AppUtils.translate(context, 'attend_and_leave')}',
+                        style: TextStyle(color: mainColor, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AddClientPage(),
+                  ),
+                );
+              },
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(Icons.location_history_outlined),
+                      Text(
+                        '${AppUtils.translate(context, 'add_client')}',
+                        style: TextStyle(color: mainColor, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+/*InkWell(
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(
@@ -196,195 +328,3 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
             SizedBox(
               height: 5,
             ),*/
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => ClientsOfRepresentativePage(),
-                  ),
-                );
-              },
-              child: Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      textDirection: TextDirection.ltr,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.notes),
-                        Text(
-                          '${AppUtils.translate(context, 'all_clients_of_representative_page_title')}',
-                          style: TextStyle(color: mainColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => ShowAllProducts(),
-                  ),
-                );
-              },
-              child: Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      textDirection: TextDirection.ltr,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.show_chart),
-                        Text(
-                          '${AppUtils.translate(context, 'show_all_products')}',
-                          style: TextStyle(color: mainColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => AttendancePage(),
-                  ),
-                );
-              },
-              child: Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      textDirection: TextDirection.ltr,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.location_history_outlined),
-                        Text(
-                          '${AppUtils.translate(context, 'attend_and_leave')}',
-                          style: TextStyle(color: mainColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => AddClientPage(),
-                  ),
-                );
-              },
-              child: Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      textDirection: TextDirection.ltr,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.location_history_outlined),
-                        Text(
-                          '${AppUtils.translate(context, 'add_client')}',
-                          style: TextStyle(color: mainColor, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // printer settings
-            // SizedBox(
-            //   height: 5,
-            // ),
-            // InkWell(
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     Navigator.of(context).push(
-            //       MaterialPageRoute(
-            //         builder: (_) => Print1Page(),
-            //       ),
-            //     );
-            //   },
-            //   child: Expanded(
-            //     child: Container(
-            //       child: Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Row(
-            //           textDirection: TextDirection.ltr,
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             Icon(Icons.location_history_outlined),
-            //             Text(
-            //               '${AppUtils.translate(context, 'printer_settings')}',
-            //               style: TextStyle(color: mainColor, fontSize: 16),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 5,
-            // ),
-            // InkWell(
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     Navigator.of(context).push(
-            //       MaterialPageRoute(
-            //         builder: (_) => Print2Page(),
-            //       ),
-            //     );
-            //   },
-            //   child: Expanded(
-            //     child: Container(
-            //       child: Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Row(
-            //           textDirection: TextDirection.ltr,
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             Icon(Icons.location_history_outlined),
-            //             Text(
-            //               '${AppUtils.translate(context, 'printer_settings')}',
-            //               style: TextStyle(color: mainColor, fontSize: 16),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-

@@ -58,7 +58,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
     if (!gotFirstCategoryProducts) {
       if (homeBloc.s_get_main_cat.value != null &&
           homeBloc.s_get_main_cat.value.data != null) {
-        homeBloc.getProductsByCat(homeBloc.s_get_main_cat.value.data[0].id);
+        homeBloc.getProductsByCat(homeBloc.s_get_main_cat.value?.data[0]?.id ?? 1);
         gotFirstCategoryProducts = true;
       }
     }
@@ -130,6 +130,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                         children: [
                           Text(AppUtils.translate(context, 'customer_name')),
                           Container(
+                            width: double.infinity,
                             decoration: BoxDecoration(
                               color: secondColor.withOpacity(.2),
                               borderRadius: BorderRadius.circular(15),
@@ -137,6 +138,7 @@ class _AddOrdersPageState extends State<AddOrdersPage> {
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<ClientBean>(
                                 value: selectedUser,
+                                isExpanded: true,
                                 items: users.map((ClientBean value) {
                                   return new DropdownMenuItem<ClientBean>(
                                     value: value,

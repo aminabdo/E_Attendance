@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:qimma/utils/app_utils.dart';
 import 'package:qimma/utils/base/BaseRequest.dart';
 
 class BaseResponse {
@@ -9,9 +10,13 @@ class BaseResponse {
     if (map == null) return null;
     BaseResponse baseResponseBean = BaseResponse();
     baseResponseBean.status = map['status'];
+    if(baseResponseBean.status  == 3){
+      AppUtils.removeUserData();
+    }
     baseResponseBean.message = map['message'];
     return baseResponseBean;
   }
+
 
   Map toJson() => {
     "status": status,

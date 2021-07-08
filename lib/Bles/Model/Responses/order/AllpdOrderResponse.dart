@@ -56,7 +56,7 @@ class Order_AllPD extends BaseRequest {
   String createdAt;
   String updatedAt;
 
-  String prePrice;
+  dynamic prePrice;
   String discountType;
   String tax1Type;
   String tax2Type;

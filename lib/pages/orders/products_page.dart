@@ -157,7 +157,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       StreamBuilder<AllProductsResponse>(
                         stream: orderBloc.search_products.stream,
                         builder: (context, snapshot) {
-                          if (orderBloc.search_products.value.loading) {
+                          if (orderBloc.search_products.value?.loading?? true) {
                             return Column(
                               children: [
                                 SizedBox(

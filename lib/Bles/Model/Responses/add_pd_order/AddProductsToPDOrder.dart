@@ -29,7 +29,7 @@ class DataBean {
   int discount;
   int tax1;
   int tax2;
-  int totalPrice;
+  dynamic totalPrice;
   int paid;
   int rest;
   int shippingPrice;
@@ -123,7 +123,7 @@ class ProductsBean {
   Product_detailBean ProductDetail;
   String pDOrderId;
   String productDetailId;
-  int quantity;
+  dynamic quantity;
   dynamic colorId;
   dynamic sizeId;
   dynamic color;

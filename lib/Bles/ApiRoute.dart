@@ -289,8 +289,8 @@ class ApiRoutes {
 }
 
 class ApiRoutesUpdate {
-  static String baseUrl_client = "https://qimmaapi.codecaique.com/api/";
-  //static String baseUrl_client = "https://api.qimmajomla.com/api/";
+  //static String baseUrl_client = "https://qimmaapi.codecaique.com/api/";
+  static String baseUrl_client = "https://api.qimmajomla.com/api/";
   //static String baseUrl_client = "https://testapi.qimmajomla.com/api/";
 
   getLink(String url) {

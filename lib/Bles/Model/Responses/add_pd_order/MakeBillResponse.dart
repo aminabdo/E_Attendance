@@ -107,7 +107,7 @@ class ProductsBean {
   Product_detailBean ProductDetail;
   String pDOrderId;
   String productDetailId;
-  int quantity;
+  dynamic quantity;
   String colorId;
   String sizeId;
   ColorBean color;
