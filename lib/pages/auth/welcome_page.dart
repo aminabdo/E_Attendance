@@ -35,21 +35,21 @@ class _WelcomePageState extends State<WelcomePage> {
                   SizedBox(
                     height: MediaQuery.of(context).padding.top * 2 + screenUtil.setHeight(25),
                   ),
-                  Text(
-                    AppUtils.translate(context, 'store_on_internet'),
-                    style: TextStyle(color: mainColor, fontSize: screenUtil.setSp(20)),
-                  ),
-                  Text(
-                    AppUtils.translate(context, 'lets_shopping'),
-                    style: TextStyle(color: Colors.black, fontSize: screenUtil.setSp(17)),
-                  ),
+                  // Text(
+                  //   AppUtils.translate(context, 'store_on_internet'),
+                  //   style: TextStyle(color: mainColor, fontSize: screenUtil.setSp(20)),
+                  // ),
+                  // Text(
+                  //   AppUtils.translate(context, 'lets_shopping'),
+                  //   style: TextStyle(color: Colors.black, fontSize: screenUtil.setSp(17)),
+                  // ),
                   SizedBox(
                     height: MediaQuery.of(context).padding.top - screenUtil.setHeight(10),
                   ),
                   Expanded(
                     child: Center(
                       child: Image.asset(
-                        'assets/images/shop_image.png',
+                        'assets/images/logo.jpeg',
                         scale: 1.2,
                       ),
                     ),

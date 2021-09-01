@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +10,7 @@ import 'package:qimma/pages/client/client_info_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
 import 'package:qimma/utils/consts.dart';
+import 'package:qimma/widgets/my_loader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/spalsh/spalsh_page.dart';
@@ -43,10 +47,36 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale;
 
+
+  bool _initialized = false;
+  bool _error = false;
+
+  // Define an async function to initialize FlutterFire
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        log("_initialized = true");
+        _initialized = true;
+      });
+    } catch(e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        log("_error = true;  ${e}");
+        _error = true;
+      });
+    }
+  }
+
+
+
+
+
   @override
   void initState() {
+    initializeFlutterFire();
     super.initState();
-
     setLanguage();
   }
 
@@ -57,6 +87,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: appName,
       debugShowCheckedModeBanner: false,

@@ -62,7 +62,7 @@ class _SingupPageState extends State<SingupPage> {
               SignupBackgroundImage(),
               SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.all(screenUtil.setWidth(14.0)),
+                  padding: EdgeInsets.all(screenUtil.setWidth(30.0)),
                   child: Form(
                     key: formKey,
                     child: Column(

@@ -10,6 +10,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+
   @override
   void initState() {
     super.initState();
@@ -19,6 +20,12 @@ class _SplashPageState extends State<SplashPage> {
       () async {
         // AppUtils.firebaseToken = await AppUtils.firebaseMesseging.getToken();
         AppUtils.userData = await AppUtils.getUserData();
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => WelcomePage(),
+          ),
+        );
         if(AppUtils.userData == null) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
@@ -49,11 +56,12 @@ class _SplashPageState extends State<SplashPage> {
           children: [
            WelcomeBackgroundImage(),
             Image.asset(
-              'assets/images/logo.png',
+              'assets/images/logo.jpeg',
             ),
           ],
         ),
       ),
     );
   }
+
 }

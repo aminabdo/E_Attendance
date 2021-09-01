@@ -48,7 +48,7 @@ class AppUtils {
   }
 
   static String translate(BuildContext context, String key) {
-    return AppLocalization.of(context).translate(key);
+    return AppLocalization?.of(context)?.translate(key) ?? 'no';
   }
 
   // method to save last user login data

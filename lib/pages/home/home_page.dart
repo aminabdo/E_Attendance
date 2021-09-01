@@ -1,161 +1,71 @@
-import 'dart:ui';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/pages/auth/login_page.dart';
-import 'package:qimma/pages/home/on_going_orders.dart';
-import 'package:qimma/pages/notifications/notifications_page.dart';
-import 'package:qimma/pages/orders/add_orders_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_drawer.dart';
-import 'new_orders.dart';
+import 'package:qimma/pages/new/profile_page.dart';
 
-class HomePage extends StatefulWidget {
+//class needs to extend StatefulWidget since we need to make changes to the bottom app bar according to the user clicks
+class HomePage extends StatelessWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(home: MyPages());
+  }
 }
 
-class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
-  bool switchValue = false;
+class MyPages extends StatefulWidget {
+  MyPages({Key key}) : super(key: key);
+
+  @override
+  MyPagesState createState() => MyPagesState();
+}
+
+class MyPagesState extends State<MyPages> {
+  int _selectedIndex = 0;
+  List<Widget> _widgetOptions = <Widget>[
+    Container(
+      color: Colors.green,
+      child: Center(child: Text("put your pages here")),
+      constraints: BoxConstraints.expand(),
+    ),
+    Container(
+      color: Colors.green,
+      child: Center(child: Text("you just have to build them and...")),
+      constraints: BoxConstraints.expand(),
+    ),
+    EditProfile()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Color(0xffF0F0F0),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => AddOrdersPage(),
-            ),
-          );
-        },
-        backgroundColor: mainColor,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
+      appBar: AppBar(
+        title: const Text('BottomNavigationBar Sample'),
       ),
-      body: DefaultTabController(
-        initialIndex: 0,
-        length: 2,
-        child: Column(
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            Material(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-              elevation: 4,
-              child: Padding(
-                padding: EdgeInsets.all(14.0),
-                child: Column(
-                  children: [
-                    space(),
-                    MyAppBar(
-                      text:
-                          '${AppUtils.translate(context, 'hi')}, ${AppUtils.userData?.firstName ?? ''}',
-                      leading: AppUtils.userData?.image != null
-                          ? GestureDetector(
-                              onTap: () {
-                                _scaffoldKey.currentState.openDrawer();
-                              },
-                              child: CircleAvatar(
-                                radius: 25,
-                                backgroundImage: CachedNetworkImageProvider(
-                                    AppUtils.userData?.image),
-                              ),
-                            )
-                          : GestureDetector(
-                              onTap: () {
-                                _scaffoldKey.currentState.openDrawer();
-                              },
-                              child: Image.asset(
-                                'assets/images/avatar.jpg',
-                                width: 20,
-                                height: 20,
-                              ),
-                            ),
-                      actions: [
-                        GestureDetector(
-                          onTap: () async {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => NotificationsPage(),
-                              ),
-                            );
-                          },
-                          child: Image.asset('assets/images/notifications.png'),
-                        ),
-                        SizedBox(
-                          width: 18,
-                        ),
-                        GestureDetector(
-                          child: Image.asset('assets/images/logout.png'),
-                          onTap: () {
-                            AppUtils.removeUserData();
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(builder: (_) => LoginPage()),
-                                (route) => false);
-                          },
-                        ),
-                      ],
-                    ),
-                    // MyTextFormField(
-                    //   hintText: AppUtils.translate(context, 'search_by_id'),
-                    //   prefixIcon: Image.asset('assets/images/search.png'),
-                    // ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 15,),
-            Container(
-              color: Colors.white,
-              child: TabBar(
-                unselectedLabelStyle: TextStyle(color: Colors.black),
-                labelColor: mainColor,
-                unselectedLabelColor: Colors.black,
-                tabs: [
-                  Tab(
-                    text: AppUtils.translate(context, 'new_orders'),
-                  ),
-                  Tab(
-                    text: AppUtils.translate(context, 'ongoing_orders'),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  NewOrders(),
-                  OnGoingOrdersPage(),
-                ],
-              ),
-            ),
-            //currentIndex == 0 ? NewOrders() : OnGoingOrders()
-          ],
-        ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      drawer: buildDrawer(context, _scaffoldKey),
-    );
-  }
-
-
-
-  Widget space() {
-    return SizedBox(
-      height: MediaQuery.of(context).padding.top,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('School'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }

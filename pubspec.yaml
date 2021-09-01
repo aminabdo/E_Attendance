@@ -38,7 +38,7 @@ dependencies:
   location:
   cached_network_image:
   shimmer: ^1.1.2
-  flutter_image_slideshow: ^0.0.3
+  flutter_image_slideshow:
   url_launcher:
   #print1
 #  bluetooth_print: ^2.0.0

@@ -164,6 +164,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+
+
+    response.status = 1 ;
+
       // 0548900632
     // var response = await authBloc.login(
     //   LoginRequest(
