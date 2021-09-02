@@ -120,7 +120,7 @@ class _MyAppState extends State<MyApp> {
       home: Builder(
         builder: (context) {
           return Directionality(
-            child: SplashPage(),
+            child: HomePage(),
            //  child: ClientInfoPage(),
             textDirection: Localizations.localeOf(context).languageCode == 'ar'
                 ? TextDirection.rtl

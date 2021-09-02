@@ -212,6 +212,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///Users/aabdelwahed/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_rating_bar",
       "rootUri": "file:///Users/aabdelwahed/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_rating_bar-3.2.0+1",
       "packageUri": "lib/",
@@ -274,6 +280,12 @@
     {
       "name": "js",
       "rootUri": "file:///Users/aabdelwahed/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "local_auth",
+      "rootUri": "file:///Users/aabdelwahed/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth-1.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -626,7 +638,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-08-24T13:52:44.667448Z",
+  "generated": "2021-09-02T14:16:03.656262Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

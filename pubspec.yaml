@@ -46,6 +46,7 @@ dependencies:
   blue_thermal_printer:
 #  flutter_esc_printer: ^0.1.0
   printing:
+  local_auth: ^1.1.6
 
 
 dev_dependencies:

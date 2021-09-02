@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/pages/new/profile_page.dart';
+import 'package:qimma/pages/auth/signup_page.dart';
+import 'package:qimma/pages/new/attendance_list_page.dart';
+import 'package:qimma/pages/new/fingureScreen.dart';
 
 //class needs to extend StatefulWidget since we need to make changes to the bottom app bar according to the user clicks
 class HomePage extends StatelessWidget {
@@ -21,15 +23,19 @@ class MyPagesState extends State<MyPages> {
   List<Widget> _widgetOptions = <Widget>[
     Container(
       color: Colors.green,
-      child: Center(child: Text("put your pages here")),
+      child: FingPage(),
       constraints: BoxConstraints.expand(),
     ),
     Container(
       color: Colors.green,
-      child: Center(child: Text("you just have to build them and...")),
+      child: AttendanceListPage(),
       constraints: BoxConstraints.expand(),
     ),
-    EditProfile()
+    Container(
+      color: Colors.green,
+      child: SingupPage(),
+      constraints: BoxConstraints.expand(),
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -42,7 +48,7 @@ class MyPagesState extends State<MyPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: const Text('E Attendance System'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -54,12 +60,12 @@ class MyPagesState extends State<MyPages> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
+            icon: Icon(Icons.now_wallpaper_outlined),
+            title: Text('List'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
+            icon: Icon(Icons.person),
+            title: Text('Profile'),
           ),
         ],
         currentIndex: _selectedIndex,
