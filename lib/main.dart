@@ -19,6 +19,8 @@ import 'widgets/custom_scroll_behavior.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(
     MyApp(
       languageCode:

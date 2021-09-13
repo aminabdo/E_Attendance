@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "279097334392",
+    "firebase_url": "https://test-e9dc8-default-rtdb.firebaseio.com",
+    "project_id": "test-e9dc8",
+    "storage_bucket": "test-e9dc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279097334392:android:b0daad157b71240c362b8d",
+        "android_client_info": {
+          "package_name": "com.qimma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279097334392-etlf0k9ae71ihgnr4db5otf7h4tq6706.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-Yf7YU2i-PDXtGpYO9FJ-BsiZMqVDGhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279097334392-etlf0k9ae71ihgnr4db5otf7h4tq6706.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

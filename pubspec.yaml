@@ -29,7 +29,6 @@ dependencies:
   fluttertoast: 4.0.1
   flutter_screenutil: ^3.2.0
   firebase_messaging:
-  firebase_core:
   permission_handler: 4.4.0+hotfix.2
   multi_image_picker: ^4.7.14
   flutter_absolute_path: ^1.0.6
@@ -47,6 +46,10 @@ dependencies:
 #  flutter_esc_printer: ^0.1.0
   printing:
   local_auth: ^1.1.6
+  firebase_core: ^0.4.0+9
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+5
+  firebase_database:
 
 
 dev_dependencies:
