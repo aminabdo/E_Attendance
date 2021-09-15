@@ -5,9 +5,10 @@ class LoginRequest extends BaseRequest {
   String password;
   String fireBaseToken;
 
-  LoginRequest({this.eamilOrPhone, this.password, this.fireBaseToken});
+  LoginRequest({this.eamilOrPhone = "email or phone", this.password = "password",
+    this.fireBaseToken = "token firebase"});
 
-  static LoginRequest fromMap(Map<String, dynamic> map) {
+  static LoginRequest fromMap(Map<dynamic, dynamic> map) {
     if (map == null) return null;
     LoginRequest loginRequestBean = LoginRequest();
     loginRequestBean.eamilOrPhone = map['eamilOrPhone'];

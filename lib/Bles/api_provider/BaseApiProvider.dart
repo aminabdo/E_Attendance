@@ -56,7 +56,6 @@ class BaseApiProvider {
         options: options,
       );
 
-      //print(response);
       log("log $urlExtension -> \n $response");
       log("log $urlExtension -> end ---=====-----=-=-=-=-=--==-");
       return response;

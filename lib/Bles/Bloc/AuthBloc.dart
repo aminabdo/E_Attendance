@@ -19,7 +19,7 @@ class AuthBloc extends BaseBloc {
     _login.value = LoginResponse();
     _login.value.loading = true ;
     log("AuthBloc -> login ");
-    LoginResponse response = LoginResponse.fromMap((await repository.post(ApiRoutes.login(),request.toJson())).data);
+    LoginResponse response = LoginResponse.fromMap((await repository.post(ApiRoutes.login(),request.toJson()))?.data);
     _login.value = response;
     _login.value.loading = false ;
 

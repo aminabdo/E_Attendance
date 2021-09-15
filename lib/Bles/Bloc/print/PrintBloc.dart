@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:printing/printing.dart';
@@ -12,13 +11,13 @@ import 'package:pdf/pdf.dart';
 
 class PrinterBloc{
 
-  BluetoothDevice _device;
+  var _device;
   bool connected = false;
   String pathImage;
-  BluetoothDevice device_main;
-  BlueThermalPrinter base_bluetooth ;
+  var device_main;
+  var base_bluetooth ;
 
-  connect(BluetoothDevice device, BlueThermalPrinter bluetooth){
+  connect(var device, var bluetooth){
     device_main = device;
     if (device_main == null) {
       AppUtils.showToast(msg: "you should select the device");
@@ -36,12 +35,12 @@ class PrinterBloc{
     }
   }
 
-  disconnect(BlueThermalPrinter bluetooth){
+  disconnect(var bluetooth){
     base_bluetooth = bluetooth;
     bluetooth.disconnect();
   }
 
-  print(BlueThermalPrinter bluetooth){
+  print(var bluetooth){
     base_bluetooth = bluetooth;
     base_bluetooth.printCustom("HEADER",3,1);
     base_bluetooth.printNewLine();

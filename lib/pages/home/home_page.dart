@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qimma/E_Attendance_user/attendance_list_page.dart';
+import 'package:qimma/E_Attendance_user/fingureScreen.dart';
 import 'package:qimma/pages/auth/signup_page.dart';
-import 'package:qimma/pages/new/attendance_list_page.dart';
-import 'package:qimma/pages/new/fingureScreen.dart';
 
 //class needs to extend StatefulWidget since we need to make changes to the bottom app bar according to the user clicks
 class HomePage extends StatelessWidget {

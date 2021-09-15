@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:qimma/Bles/Model/Requests/EditStatusRequest.dart';
+import 'package:qimma/Bles/Model/Requests/LoginRequest.dart';
 import 'package:qimma/pages/client/client_info_page.dart';
 import 'package:qimma/pages/home/home_page.dart';
 import 'package:qimma/pages/spalsh/spalsh_page.dart';
@@ -19,8 +22,21 @@ import 'widgets/custom_scroll_behavior.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
+
+  final FirebaseApp app = await Firebase.initializeApp();
+
+  final FirebaseDatabase database = FirebaseDatabase(app: app);
+  database.reference().child('user').push().set(LoginRequest().toJson());
+
+  database.reference().child('user').limitToFirst(1000).onChildAdded.listen((event) {
+    log("1111->${LoginRequest.fromMap(event.snapshot.value).eamilOrPhone}");
+  });
+  database.reference().child('user').once().then((DataSnapshot snapshot) {
+
+    print(
+        'Connected to directly configured database and read ${LoginRequest.fromMap(snapshot.value).eamilOrPhone}');
+  });
   runApp(
     MyApp(
       languageCode:

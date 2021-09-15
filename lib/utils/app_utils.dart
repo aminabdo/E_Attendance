@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -48,7 +49,10 @@ class AppUtils {
   }
 
   static String translate(BuildContext context, String key) {
-    return AppLocalization?.of(context)?.translate(key) ?? 'no translation';
+    if(context == null ){
+      log("nuuuuuuuuuuulll");
+    }
+    return AppLocalization.of(context).translate(key) ?? 'no translation';
   }
 
   // method to save last user login data
