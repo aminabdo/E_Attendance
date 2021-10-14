@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/base/BaseRequest.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/base/BaseRequest.dart';
 
 class BaseResponse {
   int status;

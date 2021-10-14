@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
-import 'package:qimma/Bles/Model/Responses/old/home/FilterWebSiteResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/home/GetMainCat.dart';
-import 'package:qimma/Bles/Model/Responses/old/home/HomeResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/home/SearchByNameResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/home/FilterWebSiteResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/home/GetMainCat.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/home/HomeResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/home/SearchByNameResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../ApiRoute.dart';

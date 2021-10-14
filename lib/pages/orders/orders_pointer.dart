@@ -1,7 +1,7 @@
 
 import 'dart:collection';
 
-import 'package:qimma/Bles/Model/Requests/AddProductTopdOrder.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddProductTopdOrder.dart';
 
 class OrdersPointer {
   // id, quantity

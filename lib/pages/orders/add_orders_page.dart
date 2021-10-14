@@ -1,16 +1,16 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/OrderBloc.dart';
-import 'package:qimma/Bles/Bloc/client_bloc.dart';
-import 'package:qimma/Bles/Bloc/old/HomeBloc.dart';
-import 'package:qimma/Bles/Model/Requests/AddpdOrderRequest.dart';
-import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:E_Attendance/Bles/Bloc/OrderBloc.dart';
+import 'package:E_Attendance/Bles/Bloc/client_bloc.dart';
+import 'package:E_Attendance/Bles/Bloc/old/HomeBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddpdOrderRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 
 import 'products_page.dart';
 

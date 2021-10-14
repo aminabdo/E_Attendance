@@ -1,9 +1,13 @@
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
-class LoginResponse extends BaseResponse{
+class LoginResponse extends BaseResponse {
   int status;
   String message;
   UserData data;
+
+  LoginResponse({this.status, this.message, this.data});
 
   static LoginResponse fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
@@ -15,37 +19,68 @@ class LoginResponse extends BaseResponse{
   }
 
   Map toJson() => {
-    "status": status,
-    "message": message,
-    "data": data,
-  };
+        "status": status,
+        "message": message,
+        "data": data,
+      };
+}
+
+class Attendance {
+  int type;
+  UserData user;
 }
 
 class UserData {
-  int id;
-  String firstName;
-  String lastName;
-  String image;
+  int id = 1;
+  String firstName = "amin";
+  String lastName = "amin";
+  String image = "";
   dynamic fireBaseToken;
-  String phone;
-  String email;
+  String phone = "01099020814";
+  String email = "aminabdo43@gmail.com";
   dynamic status;
   dynamic social;
+  String password;
   dynamic notification;
   dynamic message;
   String lang;
-  String lat;
-  String lng;
+  String lat = "123";
+  String lng = "123";
   String carNum;
   dynamic debt;
   dynamic currencyId;
   String token;
+  DateTime dateTime = DateTime.now();
+  String finger = "";
+
+  UserData(
+      {this.id = 1,
+      this.firstName = "abdo",
+      this.lastName = "amin",
+      this.image = "",
+      this.fireBaseToken,
+      this.phone = "01099020814",
+      this.email = "aminabdo43@gmail.com",
+      this.status,
+      this.social,
+      this.notification,
+      this.message,
+      this.lang,
+      this.lat,
+      this.lng,
+      this.carNum,
+      this.debt,
+      this.currencyId,
+      this.password,
+      this.dateTime,
+      this.token});
 
   static UserData fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     UserData dataBean = UserData();
     dataBean.id = map['id'];
     dataBean.firstName = map['first_name'];
+    dataBean.password = map['password'];
     dataBean.lastName = map['last_name'];
     dataBean.image = map['image'];
     dataBean.fireBaseToken = map['fire_base_token'];
@@ -66,23 +101,25 @@ class UserData {
   }
 
   Map toJson() => {
-    "id": id,
-    "first_name": firstName,
-    "last_name": lastName,
-    "image": image,
-    "fire_base_token": fireBaseToken,
-    "phone": phone,
-    "email": email,
-    "status": status,
-    "social": social,
-    "notification": notification,
-    "message": message,
-    "lang": lang,
-    "lat": lat,
-    "lng": lng,
-    "car_num": carNum,
-    "debt": debt,
-    "currency_id": currencyId,
-    "token": token,
-  };
+        "id": id,
+        "first_name": firstName,
+        "last_name": lastName,
+        "image": image,
+        "fire_base_token": fireBaseToken,
+        "phone": phone,
+        "email": email,
+        "status": status,
+        "social": social,
+        "notification": notification,
+        "message": message,
+        "lang": lang,
+        "lat": lat,
+        "lng": lng,
+        "car_num": carNum,
+        "debt": debt,
+        "currency_id": currencyId,
+        "token": token,
+        "password": password,
+        "finger": md5.convert(utf8.encode(email ?? "test")).toString()
+      };
 }

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -9,19 +8,16 @@ import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:qimma/Bles/Model/Responses/login/LoginResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_localization.dart';
 
 class AppUtils {
-
   static String firebaseToken;
   static FirebaseMessaging firebaseMesseging = FirebaseMessaging();
 
   static UserData userData;
-
-
 
   // language
   static String language;
@@ -33,7 +29,7 @@ class AppUtils {
 
   static saveLanguage(String languag) async {
     print("saveLanguage  ---->>>> ${languag}");
-    language = languag ;
+    language = languag;
     (await SharedPreferences.getInstance()).setString('langCode', language);
   }
 
@@ -41,18 +37,15 @@ class AppUtils {
     return language;
   }
 
-
-
-
   static hideKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }
 
   static String translate(BuildContext context, String key) {
-    if(context == null ){
+    if (context == null) {
       log("nuuuuuuuuuuulll");
     }
-    return AppLocalization.of(context).translate(key) ?? 'no translation';
+    return AppLocalization.of(context)?.translate(key) ?? 'no translation';
   }
 
   // method to save last user login data
@@ -71,7 +64,7 @@ class AppUtils {
       return null;
     }
     Map<String, dynamic> currentUserData =
-    json.decode(pref.getString('currentUser'));
+        json.decode(pref.getString('currentUser'));
     currentUser = UserData.fromMap(currentUserData);
     return currentUser;
   }
@@ -84,7 +77,7 @@ class AppUtils {
   static showToast({@required msg, Color bgColor}) {
     Fluttertoast.showToast(
       msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
+      toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       backgroundColor: bgColor ?? Colors.red,
       textColor: Colors.white,
@@ -98,7 +91,7 @@ class AppUtils {
     await PermissionHandler().requestPermissions([
       PermissionGroup.photos,
     ]).then(
-          (Map<PermissionGroup, PermissionStatus> map) {
+      (Map<PermissionGroup, PermissionStatus> map) {
         if (map[PermissionGroup.photos] == PermissionStatus.granted) {
           permissionState = true;
         } else {
@@ -117,7 +110,7 @@ class AppUtils {
     await PermissionHandler().requestPermissions([
       PermissionGroup.camera,
     ]).then(
-          (Map<PermissionGroup, PermissionStatus> map) {
+      (Map<PermissionGroup, PermissionStatus> map) {
         if (map[PermissionGroup.camera] == PermissionStatus.granted) {
           permissionState = true;
         } else {
@@ -134,7 +127,7 @@ class AppUtils {
   static Future<bool> checkPermissionState(PermissionGroup permissions) async {
     bool permissionState = false;
     await PermissionHandler().checkPermissionStatus(permissions).then(
-          (state) {
+      (state) {
         if (state == PermissionStatus.granted) {
           permissionState = true;
         } else {
@@ -151,7 +144,7 @@ class AppUtils {
     await PermissionHandler().requestPermissions([
       PermissionGroup.location,
     ]).then(
-          (Map<PermissionGroup, PermissionStatus> map) {
+      (Map<PermissionGroup, PermissionStatus> map) {
         if (map[PermissionGroup.location] == PermissionStatus.granted) {
           permissionState = true;
         } else {
@@ -187,7 +180,7 @@ class AppUtils {
         if (selectedImage != null) {
           // print file path
           files = [];
-          for(int i = 0; i < selectedImage.length; i++) {
+          for (int i = 0; i < selectedImage.length; i++) {
             var path = await FlutterAbsolutePath.getAbsolutePath(
               selectedImage[0].identifier,
             );
@@ -199,7 +192,6 @@ class AppUtils {
         }
 
         return null;
-
       } catch (e) {
         print(e);
         return null;
@@ -209,21 +201,20 @@ class AppUtils {
       return null;
     }
   }
-  static String calcDate(BuildContext context, String date){
+
+  static String calcDate(BuildContext context, String date) {
     var res = DateTime.now().difference(DateTime.parse(date)).inMinutes;
-    if(res < 60)
-    {
-      return "${res.toString()}   ${AppUtils.translate(context, 'minutes')}" ;
+    if (res < 60) {
+      return "${res.toString()}   ${AppUtils.translate(context, 'minutes')}";
     }
     res = DateTime.now().difference(DateTime.parse(date)).inHours;
 
-    if(res < 24){
-      return "${res.toString()}   ${AppUtils.translate(context, 'hours')}" ;
+    if (res < 24) {
+      return "${res.toString()}   ${AppUtils.translate(context, 'hours')}";
     }
     res = DateTime.now().difference(DateTime.parse(date)).inDays;
 
-    return "${res.toString()}   ${AppUtils.translate(context, 'days')}" ;
-
+    return "${res.toString()}   ${AppUtils.translate(context, 'days')}";
   }
 
   static void exitFromApp() {

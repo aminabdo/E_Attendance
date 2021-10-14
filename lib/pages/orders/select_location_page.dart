@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
 
 class SelectLocationPage extends StatelessWidget {
   final String title;

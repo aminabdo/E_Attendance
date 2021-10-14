@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:qimma/utils/consts.dart';
+import 'package:E_Attendance/utils/consts.dart';
 
 class MyButton2 extends StatelessWidget {
   final Widget child;

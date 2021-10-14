@@ -3,24 +3,23 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/OrderBloc.dart';
-import 'package:qimma/Bles/Bloc/print/PrintBloc.dart';
-import 'package:qimma/Bles/Model/Requests/EditStatusRequest.dart';
-import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
-import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
-import 'package:qimma/pages/track_order_map/track_order_map_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:E_Attendance/Bles/Bloc/OrderBloc.dart';
+import 'package:E_Attendance/Bles/Bloc/print/PrintBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/EditStatusRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/AllpdOrderResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/SinglepdOrder.dart';
+import 'package:E_Attendance/pages/track_order_map/track_order_map_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
+import '../../E_Attendance_user/home_page.dart';
 import 'new_orders.dart';
 
 class EditOrder extends StatefulWidget {
-
   final int id;
   const EditOrder({Key key, @required this.id}) : super(key: key);
 
@@ -29,7 +28,6 @@ class EditOrder extends StatefulWidget {
 }
 
 class _EditOrderState extends State<EditOrder> {
-
   @override
   void initState() {
     super.initState();
@@ -44,7 +42,7 @@ class _EditOrderState extends State<EditOrder> {
       body: StreamBuilder<SinglepdOrderResponse>(
           stream: orderBloc.s_single_P_d_order.stream,
           builder: (context, snapshot) {
-            if(orderBloc.s_single_P_d_order.value.loading) {
+            if (orderBloc.s_single_P_d_order.value.loading) {
               return Loader();
             } else {
               var order = snapshot.data.AllpdOrder;
@@ -56,17 +54,21 @@ class _EditOrderState extends State<EditOrder> {
                     children: [
                       space(context),
                       MyAppBar(
-                        text: '${AppUtils.translate(context, 'id')}:  ${order.id}',
+                        text:
+                            '${AppUtils.translate(context, 'id')}:  ${order.id}',
                         actions: [
                           GestureDetector(
                             child: Image.asset('assets/images/location2.png'),
                             onTap: () async {
-                              String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
+                              String googleUrl =
+                                  'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}';
                               if (await canLaunch(googleUrl)) {
                                 await launch(googleUrl);
                               } else {
-                                print('https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
-                                AppUtils.showToast(msg: 'Could not open the map.');
+                                print(
+                                    'https://www.google.com/maps/search/?api=1&query=${order.lat},${order.lng}');
+                                AppUtils.showToast(
+                                    msg: 'Could not open the map.');
                               }
                               // Navigator.push(
                               //   context,
@@ -105,10 +107,12 @@ class _EditOrderState extends State<EditOrder> {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          AppUtils.translate(context, 'customer_number'),
+                                          AppUtils.translate(
+                                              context, 'customer_number'),
                                           style: TextStyle(color: Colors.grey),
                                         ),
                                         Text(
@@ -132,7 +136,11 @@ class _EditOrderState extends State<EditOrder> {
                                         width: 6,
                                       ),
                                       Icon(
-                                        Localizations.localeOf(context).languageCode == 'en' ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded,
+                                        Localizations.localeOf(context)
+                                                    .languageCode ==
+                                                'en'
+                                            ? Icons.arrow_forward_ios_rounded
+                                            : Icons.arrow_back_ios_rounded,
                                         color: Colors.black,
                                         size: 15,
                                       )
@@ -160,7 +168,8 @@ class _EditOrderState extends State<EditOrder> {
                                   ),
                                   child: Center(
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 5),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 5),
                                       child: Text(
                                         AppUtils.translate(context, 'delivery'),
                                         style: TextStyle(
@@ -182,10 +191,8 @@ class _EditOrderState extends State<EditOrder> {
                                   width: size.width / 4,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(
-                                        color:  mainColor
-                                    ),
-                                    color:  mainColor,
+                                    border: Border.all(color: mainColor),
+                                    color: mainColor,
                                   ),
                                   child: Center(
                                     child: Text(
@@ -236,7 +243,7 @@ class _EditOrderState extends State<EditOrder> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${ AppUtils.translate(context, 'items')}: ',
+                            '${AppUtils.translate(context, 'items')}: ',
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -262,7 +269,6 @@ class _EditOrderState extends State<EditOrder> {
                       SizedBox(
                         height: 18,
                       ),
-                      
                       DottedLine(
                         direction: Axis.horizontal,
                         lineLength: double.infinity,
@@ -276,22 +282,32 @@ class _EditOrderState extends State<EditOrder> {
                       ),
                       Center(
                         child: MaterialButton(
-                          onPressed: (){
-                            orderBloc.s_single_P_d_order.value.AllpdOrder.products.forEach((element) {
+                          onPressed: () {
+                            orderBloc
+                                .s_single_P_d_order.value.AllpdOrder.products
+                                .forEach((element) {
                               log(element.toString());
                             });
                             log("------->>>>><<<<<-------");
                             log("${orderBloc.s_single_P_d_order.value.AllpdOrder.toJson()}");
                             log("------->>>>><<<<<-------");
-                            orderBloc.editOrder(orderBloc.s_single_P_d_order.value.AllpdOrder);
-                            AppUtils.showToast(msg: "${AppUtils.translate(context, "order_updated_succes")}");
+                            orderBloc.editOrder(
+                                orderBloc.s_single_P_d_order.value.AllpdOrder);
+                            AppUtils.showToast(
+                                msg:
+                                    "${AppUtils.translate(context, "order_updated_succes")}");
 
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (_) => HomePage()),
+                                (route) => false);
                           },
                           color: mainColor,
-                          shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(15.0) ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
                           textColor: Colors.white,
-                          child: Text('${AppUtils.translate(context, "edit_order")}'),
+                          child: Text(
+                              '${AppUtils.translate(context, "edit_order")}'),
                         ),
                       ),
                     ],
@@ -299,8 +315,7 @@ class _EditOrderState extends State<EditOrder> {
                 ),
               );
             }
-          }
-      ),
+          }),
     );
   }
 
@@ -309,9 +324,7 @@ class _EditOrderState extends State<EditOrder> {
       height: MediaQuery.of(context).padding.top,
     );
   }
-
 }
-
 
 class ItemEdit extends StatefulWidget {
   final Products_Order_Bean item;
@@ -332,21 +345,24 @@ class _ItemEditState extends State<ItemEdit> {
             Expanded(
               child: Row(
                 children: [
-                  if (widget.item?.image == null) CachedNetworkImage(
-                    imageUrl: "",
-                    width: 35,
-                    errorWidget: (_, __, ___) {
-                      return Image.asset('assets/images/no_image.png');
-                    },
-                    height: 35,
-                  ) else CachedNetworkImage(
-                    imageUrl: widget.item?.image,
-                    width: 35,
-                    errorWidget: (_, __, ___) {
-                      return Image.asset('assets/images/no_image.png');
-                    },
-                    height: 35,
-                  ),
+                  if (widget.item?.image == null)
+                    CachedNetworkImage(
+                      imageUrl: "",
+                      width: 35,
+                      errorWidget: (_, __, ___) {
+                        return Image.asset('assets/images/no_image.png');
+                      },
+                      height: 35,
+                    )
+                  else
+                    CachedNetworkImage(
+                      imageUrl: widget.item?.image,
+                      width: 35,
+                      errorWidget: (_, __, ___) {
+                        return Image.asset('assets/images/no_image.png');
+                      },
+                      height: 35,
+                    ),
                   SizedBox(
                     width: 8,
                   ),
@@ -365,21 +381,21 @@ class _ItemEditState extends State<ItemEdit> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             MaterialButton(
-              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(25.0) ),
-              onPressed: (){
-                orderBloc.s_single_P_d_order.value.AllpdOrder.products.remove(widget.item);
-                widget.item.quantity ++;
-                orderBloc.s_single_P_d_order.value.AllpdOrder.products.add(widget.item);
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0)),
+              onPressed: () {
+                orderBloc.s_single_P_d_order.value.AllpdOrder.products
+                    .remove(widget.item);
+                widget.item.quantity++;
+                orderBloc.s_single_P_d_order.value.AllpdOrder.products
+                    .add(widget.item);
                 orderBloc.s_single_P_d_order.value.AllpdOrder.calctotal();
-                setState(() {
-
-                });
+                setState(() {});
               },
               color: mainColor,
               textColor: Colors.white,
               child: Text('${AppUtils.translate(context, "+")}'),
             ),
-
             SizedBox(
               width: 8,
             ),
@@ -396,18 +412,19 @@ class _ItemEditState extends State<ItemEdit> {
               width: 8,
             ),
             MaterialButton(
-              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(25.0) ),
-              onPressed: (){
-                if(widget.item.quantity == 0){
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0)),
+              onPressed: () {
+                if (widget.item.quantity == 0) {
                   return;
                 }
-                orderBloc.s_single_P_d_order.value.AllpdOrder.products.remove(widget.item);
-                widget.item.quantity --;
-                orderBloc.s_single_P_d_order.value.AllpdOrder.products.add(widget.item);
+                orderBloc.s_single_P_d_order.value.AllpdOrder.products
+                    .remove(widget.item);
+                widget.item.quantity--;
+                orderBloc.s_single_P_d_order.value.AllpdOrder.products
+                    .add(widget.item);
                 orderBloc.s_single_P_d_order.value.AllpdOrder.calctotal();
-                setState(() {
-
-                });
+                setState(() {});
               },
               color: mainColor,
               textColor: Colors.white,

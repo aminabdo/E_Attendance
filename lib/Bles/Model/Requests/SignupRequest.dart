@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:qimma/utils/base/BaseRequest.dart';
+import 'package:E_Attendance/utils/base/BaseRequest.dart';
 
 class SignupRequest extends BaseRequest 
 {
@@ -49,7 +49,7 @@ class SignupRequest extends BaseRequest
     return signupResponseBean;
   }
 
-  Future<Map<String, dynamic>> toJson() async {
+  Future<Map<dynamic, dynamic>> toJson() async {
     return {
       "phone": phone,
       "email": email,
@@ -60,7 +60,7 @@ class SignupRequest extends BaseRequest
       "password": password,
       "password_confirmation": passwordConfirmation,
       "verify_type": verifyType,
-      "image": await MultipartFile.fromFile(image.path),
+      // "image": await MultipartFile.fromFile(image.path),
       "fire_base_token": fireBaseToken,
     };
   }

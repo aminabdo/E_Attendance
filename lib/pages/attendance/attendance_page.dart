@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:qimma/Bles/Bloc/AttendanceBloc.dart';
-import 'package:qimma/Bles/Model/Requests/AddAttendanceRequest.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_loader.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
+import 'package:E_Attendance/Bles/Bloc/AttendanceBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddAttendanceRequest.dart';
+import 'package:E_Attendance/E_Attendance_user/home_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
 
 import 'my_history.dart';
 
@@ -48,27 +48,27 @@ class _AttendancePageState extends State<AttendancePage> {
                   padding: EdgeInsets.only(top: statusBarHeight),
                   child: MyAppBar(
                     text: "${AppUtils.translate(context, 'attend_and_leave')}",
-                      actions: [
-                        FloatingActionButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => MyHistory(),
-                              ),
-                            );
-                          },
-                          elevation: 0,
-                          focusElevation: 0,
-                          highlightElevation: 0,
-                          backgroundColor: secondColor,
-                          mini: true,
-                          child: Icon(
-                            Icons.history,
-                            color: Colors.black,
-                            size: 18,
-                          ),
-                        )
-                      ],
+                    actions: [
+                      FloatingActionButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => MyHistory(),
+                            ),
+                          );
+                        },
+                        elevation: 0,
+                        focusElevation: 0,
+                        highlightElevation: 0,
+                        backgroundColor: secondColor,
+                        mini: true,
+                        child: Icon(
+                          Icons.history,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -174,23 +174,21 @@ class _AttendancePageState extends State<AttendancePage> {
                 height: 60,
               ),
               GestureDetector(
-                onTap: () async{
+                onTap: () async {
                   _locationData == null;
-                  
+
                   if (attendanceStatus == null) {
                     AppUtils.showToast(
                         msg:
                             '${AppUtils.showToast(msg: 'attendance_page_msg')}',
                         bgColor: mainColor);
                   } else {
-
-
-
                     setState(() {
                       pickingLocation = true;
                     });
 
-                    var locationPermissionGranted = await AppUtils.askLocationPermission();
+                    var locationPermissionGranted =
+                        await AppUtils.askLocationPermission();
                     if (locationPermissionGranted) {
                       Location location = new Location();
 
@@ -201,7 +199,8 @@ class _AttendancePageState extends State<AttendancePage> {
                       if (!_serviceEnabled) {
                         _serviceEnabled = await location.requestService();
                         if (!_serviceEnabled) {
-                          AppUtils.showToast(msg: AppUtils.translate(context, 'open_gps'));
+                          AppUtils.showToast(
+                              msg: AppUtils.translate(context, 'open_gps'));
                           setState(() {
                             pickingLocation = false;
                           });
@@ -213,7 +212,9 @@ class _AttendancePageState extends State<AttendancePage> {
                       if (_permissionGranted == PermissionStatus.DENIED) {
                         _permissionGranted = await location.requestPermission();
                         if (_permissionGranted != PermissionStatus.GRANTED) {
-                          AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+                          AppUtils.showToast(
+                              msg: AppUtils.translate(
+                                  context, 'permission_denied'));
                           setState(() {
                             pickingLocation = false;
                           });
@@ -226,17 +227,18 @@ class _AttendancePageState extends State<AttendancePage> {
                         pickingLocation = false;
                       });
                     }
-                    attendanceBloc
-                        .addAttendance(AttendanceRequest(
-                            status: attendanceStatus ==
-                                    "${AppUtils.translate(context, 'attendance_page_attend')}"
-                                ? 1
-                                : 2,
-                            note: _noteController.text,
-                        lon: "${_locationData.longitude.toString()}" ,
+                    attendanceBloc.addAttendance(AttendanceRequest(
+                        status: attendanceStatus ==
+                                "${AppUtils.translate(context, 'attendance_page_attend')}"
+                            ? 1
+                            : 2,
+                        note: _noteController.text,
+                        lon: "${_locationData.longitude.toString()}",
                         lat: "${_locationData.latitude.toString()}"));
-                    _noteController.text= "";
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
+                    _noteController.text = "";
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (_) => HomePage()),
+                        (route) => false);
                   }
                 },
                 child: Container(

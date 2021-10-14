@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:qimma/Bles/Model/Responses/products/AllProductsResponse.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/hex_color.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
+import 'package:E_Attendance/Bles/Model/Responses/products/AllProductsResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/hex_color.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
 
 class ProductPage extends StatefulWidget {
   final DataBean productsResponse;

@@ -1,4 +1,4 @@
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
 
 class AddClientResponse extends BaseResponse{
   int status;

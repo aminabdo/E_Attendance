@@ -2,10 +2,10 @@
 
 import 'dart:developer';
 
-import 'package:qimma/Bles/Model/Responses/old/products/ProductByCat.dart';
-import 'package:qimma/Bles/Model/Responses/old/products/SingleProduct.dart';
-import 'package:qimma/Bles/Model/Responses/products/AllProductsResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/products/ProductByCat.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/products/SingleProduct.dart';
+import 'package:E_Attendance/Bles/Model/Responses/products/AllProductsResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../ApiRoute.dart';

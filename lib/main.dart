@@ -7,15 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:qimma/Bles/Model/Requests/EditStatusRequest.dart';
-import 'package:qimma/Bles/Model/Requests/LoginRequest.dart';
-import 'package:qimma/pages/client/client_info_page.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/pages/spalsh/spalsh_page.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
+import 'package:E_Attendance/pages/spalsh/spalsh_page.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'Bles/Model/Responses/login/LoginResponse.dart';
+import 'E_Attendance_user/local/Trans.dart';
 import 'pages/spalsh/spalsh_page.dart';
 import 'utils/app_localization.dart';
 import 'widgets/custom_scroll_behavior.dart';
@@ -23,20 +22,24 @@ import 'widgets/custom_scroll_behavior.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
   final FirebaseApp app = await Firebase.initializeApp();
 
   final FirebaseDatabase database = FirebaseDatabase(app: app);
-  database.reference().child('user').push().set(LoginRequest().toJson());
-
-  database.reference().child('user').limitToFirst(1000).onChildAdded.listen((event) {
-    log("1111->${LoginRequest.fromMap(event.snapshot.value).eamilOrPhone}");
-  });
-  database.reference().child('user').once().then((DataSnapshot snapshot) {
-
-    print(
-        'Connected to directly configured database and read ${LoginRequest.fromMap(snapshot.value).eamilOrPhone}');
-  });
+  AttendanceRepositoryImp repositoryImp = AttendanceRepositoryImp();
+  await repositoryImp.checkin(user: UserData());
+  await repositoryImp.checkout(user: UserData());
+  //
+  // database.reference().child('user').push().set(LoginRequest().toJson());
+  //
+  //
+  // database.reference().child('user').limitToFirst(1000).onChildAdded.listen((event) {
+  //   log("1111->${LoginRequest.fromMap(event.snapshot.value).eamilOrPhone}");
+  // });
+  // database.reference().child('user').once().then((DataSnapshot snapshot) {
+  //
+  //   print(
+  //       'Connected to directly configured database and read ${LoginRequest.fromMap(snapshot.value).eamilOrPhone}');
+  // });
   runApp(
     MyApp(
       languageCode:
@@ -48,7 +51,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   final String languageCode;
 
-  const MyApp({Key key, this.languageCode}) : super(key: key);
+  const MyApp({Key key, this.languageCode = 'ar'}) : super(key: key);
 
   static void setLocale(BuildContext context, Locale locale) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
@@ -65,7 +68,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale;
 
-
   bool _initialized = false;
   bool _error = false;
 
@@ -78,7 +80,7 @@ class _MyAppState extends State<MyApp> {
         log("_initialized = true");
         _initialized = true;
       });
-    } catch(e) {
+    } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
       setState(() {
         log("_error = true;  ${e}");
@@ -86,10 +88,6 @@ class _MyAppState extends State<MyApp> {
       });
     }
   }
-
-
-
-
 
   @override
   void initState() {
@@ -105,11 +103,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
-    return MaterialApp(
+    return GetMaterialApp(
       title: appName,
+      color: mainColor,
       debugShowCheckedModeBanner: false,
-      locale: _locale,
+      translations: LocalString(),
+      locale: Locale('ar'),
       localizationsDelegates: [
         AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -138,8 +137,8 @@ class _MyAppState extends State<MyApp> {
       home: Builder(
         builder: (context) {
           return Directionality(
-            child: HomePage(),
-           //  child: ClientInfoPage(),
+            child: SplashPage(),
+            //  child: ClientInfoPage(),
             textDirection: Localizations.localeOf(context).languageCode == 'ar'
                 ? TextDirection.rtl
                 : TextDirection.ltr,
@@ -150,9 +149,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class test{
-  test1() async {
-
-  }
+class test {
+  test1() async {}
 }
-

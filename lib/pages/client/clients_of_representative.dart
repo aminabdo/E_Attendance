@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/client_bloc.dart';
-import 'package:qimma/pages/client/set_dept_page.dart';
+import 'package:E_Attendance/Bles/Bloc/client_bloc.dart';
+import 'package:E_Attendance/pages/client/set_dept_page.dart';
 import 'client_info_page.dart';
-import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
-import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/AllClientsResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 
 class ClientsOfRepresentativePage extends StatefulWidget {
   @override

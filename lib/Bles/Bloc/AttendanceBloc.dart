@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:qimma/Bles/Model/Requests/AddAttendanceRequest.dart';
-import 'package:qimma/Bles/Model/Responses/Attendance/AddAttendanceResponse.dart';
-import 'package:qimma/Bles/Model/Responses/Attendance/MyAttendanceResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddAttendanceRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/Attendance/AddAttendanceResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/Attendance/MyAttendanceResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 import '../ApiRoute.dart';
 

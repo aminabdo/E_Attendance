@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/utils/consts.dart';
+import 'package:E_Attendance/utils/consts.dart';
 
 class MyAppBar extends StatelessWidget {
   final String text;
@@ -8,14 +8,14 @@ class MyAppBar extends StatelessWidget {
   final TextStyle textStyle;
   final Function onBackBtnPressed;
 
-  const MyAppBar(
-      {Key key,
-        @required this.text,
-        this.leading,
-        this.actions,
-        this.textStyle, this.onBackBtnPressed,
-      })
-      : super(key: key);
+  const MyAppBar({
+    Key key,
+    @required this.text,
+    this.leading,
+    this.actions,
+    this.textStyle,
+    this.onBackBtnPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +25,25 @@ class MyAppBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            leading ?? FloatingActionButton(
-              onPressed: onBackBtnPressed ?? () {
-                Navigator.pop(context,
-                );
-              },
-              elevation: 0,
-              focusElevation: 0,
-              highlightElevation: 0,
-              backgroundColor: secondColor,
-              mini: true,
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 18,
-              ),
-            ),
+            leading ??
+                FloatingActionButton(
+                  onPressed: onBackBtnPressed ??
+                      () {
+                        Navigator.pop(
+                          context,
+                        );
+                      },
+                  elevation: 0,
+                  focusElevation: 0,
+                  highlightElevation: 0,
+                  backgroundColor: mainColor,
+                  mini: true,
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 18,
+                  ),
+                ),
             SizedBox(
               width: 10,
             ),
@@ -51,9 +54,11 @@ class MyAppBar extends StatelessWidget {
             //trailing ?? Container()
           ].where((element) => element != null).toList(),
         ),
-        actions == null ? null : Row(
-          children: actions.where((element) => element != null).toList(),
-        )
+        actions == null
+            ? null
+            : Row(
+                children: actions.where((element) => element != null).toList(),
+              )
       ].where((element) => element != null).toList(),
     );
   }

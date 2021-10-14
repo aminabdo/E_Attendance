@@ -5,16 +5,17 @@
 // ignore_for_file: public_member_api_docs
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:location/location.dart';
-import 'package:qimma/utils/app_utils.dart';
-
+import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
+import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
 
 class FingPage extends StatefulWidget {
   @override
@@ -24,8 +25,6 @@ class FingPage extends StatefulWidget {
 class _FingPageState extends State<FingPage> {
   final LocalAuthentication auth = LocalAuthentication();
   _SupportState _supportState = _SupportState.unknown;
-  bool _canCheckBiometrics;
-  List<BiometricType> _availableBiometrics;
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
 
@@ -37,78 +36,12 @@ class _FingPageState extends State<FingPage> {
     super.initState();
     auth.isDeviceSupported().then(
           (isSupported) => setState(() => _supportState = isSupported
-          ? _SupportState.supported
-          : _SupportState.unsupported),
-    );
-
-
-    testFire();
-
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
   }
 
-  testFire()async{
-
-
-  }
-  Future<void> _checkBiometrics() async {
-    bool canCheckBiometrics;
-    try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      canCheckBiometrics = false;
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _canCheckBiometrics = canCheckBiometrics;
-    });
-  }
-
-  Future<void> _getAvailableBiometrics() async {
-    List<BiometricType> availableBiometrics;
-    try {
-      availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      availableBiometrics = <BiometricType>[];
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
-  }
-
-  Future<void> _authenticate() async {
-    bool authenticated = false;
-    try {
-      setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
-      });
-      authenticated = await auth.authenticate(
-          localizedReason: 'Let OS determine authentication method',
-          useErrorDialogs: true,
-          stickyAuth: true);
-      setState(() {
-        _isAuthenticating = false;
-      });
-    } on PlatformException catch (e) {
-      print(e);
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = "Error - ${e.message}";
-      });
-      return;
-    }
-    if (!mounted) return;
-
-    setState(
-            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
-  }
-
-  Future<void> _authenticateWithBiometrics() async {
+  Future<void> _authenticateWithBiometrics(bool checkin) async {
     bool authenticated = false;
     try {
       setState(() {
@@ -117,19 +50,20 @@ class _FingPageState extends State<FingPage> {
       });
       authenticated = await auth.authenticate(
           localizedReason:
-          'Scan your fingerprint (or face or whatever) to authenticate',
+              'Scan your fingerprint (or face or whatever) to authenticate',
           useErrorDialogs: true,
           stickyAuth: true,
           biometricOnly: true);
+      authenticated.toString();
       setState(() {
         _isAuthenticating = false;
         _authorized = 'Authenticating';
       });
 
-
-      await getLocation();
-
+      getLocation(checkin);
     } on PlatformException catch (e) {
+      AppUtils.showToast(msg: "feature_not_enable".tr);
+      log("erooooo -> ${e.message}");
       print(e);
       setState(() {
         _isAuthenticating = false;
@@ -159,65 +93,25 @@ class _FingPageState extends State<FingPage> {
           padding: const EdgeInsets.only(top: 30),
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (_supportState == _SupportState.unknown)
-                  CircularProgressIndicator()
-                else if (_supportState == _SupportState.supported)
-                  Text("This device is supported")
-                else
-                  Text("This device is not supported -> ${_supportState}"),
-                Divider(height: 100),
-                Text('Can check biometrics: $_canCheckBiometrics\n'),
-                ElevatedButton(
-                  child: const Text('Check biometrics'),
-                  onPressed: _checkBiometrics,
-                ),
-                Divider(height: 100),
-                Text('Available biometrics: $_availableBiometrics\n'),
-                ElevatedButton(
-                  child: const Text('Get available biometrics'),
-                  onPressed: _getAvailableBiometrics,
-                ),
-                Divider(height: 100),
-                Text('Current State: $_authorized\n'),
-                (_isAuthenticating)
-                    ? ElevatedButton(
-                  onPressed: _cancelAuthentication,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("Cancel Authentication"),
-                      Icon(Icons.cancel),
-                    ],
-                  ),
-                )
-                    : Column(
-                  children: [
-                    ElevatedButton(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('Authenticate'),
-                          Icon(Icons.perm_device_information),
-                        ],
-                      ),
-                      onPressed: _authenticate,
-                    ),
-                    ElevatedButton(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(_isAuthenticating
-                              ? 'Cancel'
-                              : 'Authenticate: biometrics only'),
-                          Icon(Icons.fingerprint),
-                        ],
-                      ),
-                      onPressed: _authenticateWithBiometrics,
-                    ),
-                  ],
-                ),
+                GestureDetector(
+                  onTap: () {
+                    _authenticateWithBiometrics(true);
+                  },
+                  child: Image.asset('assets/images/logoo.jpeg'),
+                ), // image logo
+                MaterialButton(
+                  onPressed: () {
+                    _authenticateWithBiometrics(true);
+                  },
+                  child: Text('check_in'.tr),
+                ),  // checkin
+                MaterialButton(
+                  onPressed: () {
+                    _authenticateWithBiometrics(false);
+                  },
+                  child: Text("check_out".tr),
+                ),  // checkout
               ],
             ),
           ],
@@ -226,7 +120,7 @@ class _FingPageState extends State<FingPage> {
     );
   }
 
-  void getLocation() async {
+  void getLocation(bool checkin) async {
     var locationPermissionGranted = await AppUtils.askLocationPermission();
     if (locationPermissionGranted) {
       Location location = new Location();
@@ -238,7 +132,7 @@ class _FingPageState extends State<FingPage> {
       if (!_serviceEnabled) {
         _serviceEnabled = await location.requestService();
         if (!_serviceEnabled) {
-          AppUtils.showToast(msg: AppUtils.translate(context, 'open_gps'));
+          AppUtils.showToast(msg: 'open_gps'.tr);
           setState(() {
             pickingLocation = false;
           });
@@ -250,7 +144,7 @@ class _FingPageState extends State<FingPage> {
       if (_permissionGranted == PermissionStatus.DENIED) {
         _permissionGranted = await location.requestPermission();
         if (_permissionGranted != PermissionStatus.GRANTED) {
-          AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+          AppUtils.showToast(msg: 'permission_denied'.tr);
           setState(() {
             pickingLocation = false;
           });
@@ -260,10 +154,25 @@ class _FingPageState extends State<FingPage> {
 
       _locationData = await location.getLocation();
 
-      if(Geolocator.distanceBetween(_locationData.latitude, _locationData.longitude, _locationData.latitude, _locationData.longitude) > 10){
+      if (Geolocator.distanceBetween(
+              _locationData.latitude,
+              _locationData.longitude,
+              _locationData.latitude,
+              _locationData.longitude) <
+          100) {
         AppUtils.showToast(msg: "location in range done");
-
-      }else{
+        AttendanceRepositoryImp repo = AttendanceRepositoryImp();
+        UserData user = (await AppUtils.getUserData()) ?? UserData();
+        user.lat = "${_locationData.latitude}";
+        user.lng = "${_locationData.longitude}";
+        if (checkin) {
+          log("1111111");
+          repo.checkin(user: user);
+        } else {
+          log("2222222");
+          repo.checkout(user: user);
+        }
+      } else {
         AppUtils.showToast(msg: "location is so far your comapny");
       }
       setState(() {
@@ -271,6 +180,7 @@ class _FingPageState extends State<FingPage> {
       });
     }
   }
+
 }
 
 enum _SupportState {

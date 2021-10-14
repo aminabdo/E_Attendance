@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:qimma/Bles/Bloc/old/NotificationBloc.dart';
-import 'package:qimma/Bles/Model/Responses/old/notification/MyNotificationResponse.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:E_Attendance/Bles/Bloc/old/NotificationBloc.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/notification/MyNotificationResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 
 class NotificationsPage extends StatefulWidget {
 

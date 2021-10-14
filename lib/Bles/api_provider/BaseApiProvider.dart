@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/base/BasePostResponse.dart';
-import 'package:qimma/utils/base/BaseRequest.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/base/BasePostResponse.dart';
+import 'package:E_Attendance/utils/base/BaseRequest.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

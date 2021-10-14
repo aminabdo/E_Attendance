@@ -1,5 +1,5 @@
-import 'package:qimma/Bles/Model/Responses/old/notification/MyNotificationResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/notification/MyNotificationResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../ApiRoute.dart';

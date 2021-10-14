@@ -1,4 +1,4 @@
-import 'package:qimma/utils/base/BaseRequest.dart';
+import 'package:E_Attendance/utils/base/BaseRequest.dart';
 
 class LoginRequest extends BaseRequest {
   String eamilOrPhone;

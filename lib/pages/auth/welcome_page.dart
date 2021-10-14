@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qimma/pages/auth/login_page.dart';
-import 'package:qimma/pages/auth/signup_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/welcome_background_image.dart';
-
+import 'package:get/get.dart';
+import 'package:E_Attendance/pages/auth/login_page.dart';
+import 'package:E_Attendance/pages/auth/signup_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/welcome_background_image.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -14,7 +14,6 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-
   ScreenUtil screenUtil = ScreenUtil();
 
   @override
@@ -27,13 +26,23 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Stack(
           children: [
             WelcomeBackgroundImage(),
+            FloatingActionButton(
+              onPressed: () {
+                Get.updateLocale(Locale('lang'.tr));
+                AppUtils.saveLanguage("lang".tr);
+                Locale('lang'.tr);
+              },
+              child: Text("lang".tr),
+              backgroundColor: mainColor,
+            ),
             Padding(
               padding: EdgeInsets.all(screenUtil.setWidth(8)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).padding.top * 2 + screenUtil.setHeight(25),
+                    height: MediaQuery.of(context).padding.top * 2 +
+                        screenUtil.setHeight(25),
                   ),
                   // Text(
                   //   AppUtils.translate(context, 'store_on_internet'),
@@ -44,7 +53,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   //   style: TextStyle(color: Colors.black, fontSize: screenUtil.setSp(17)),
                   // ),
                   SizedBox(
-                    height: MediaQuery.of(context).padding.top - screenUtil.setHeight(10),
+                    height: MediaQuery.of(context).padding.top -
+                        screenUtil.setHeight(10),
                   ),
                   Expanded(
                     child: Center(
@@ -62,7 +72,11 @@ class _WelcomePageState extends State<WelcomePage> {
                       AppUtils.translate(context, 'create_account'),
                       width: size.width * .5,
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => SingupPage(),),);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => SingupPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -73,7 +87,11 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: MyButton(
                       AppUtils.translate(context, 'login'),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPage(),),);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => LoginPage(),
+                          ),
+                        );
                       },
                       textStyle: TextStyle(color: mainColor),
                       width: size.width * .5,

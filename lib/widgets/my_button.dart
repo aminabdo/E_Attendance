@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qimma/utils/consts.dart';
+import 'package:E_Attendance/utils/consts.dart';
 
 class MyButton extends StatelessWidget {
   final String title;

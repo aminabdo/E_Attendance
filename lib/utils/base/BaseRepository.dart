@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:qimma/Bles/api_provider/BaseApiProvider.dart';
+import 'package:E_Attendance/Bles/api_provider/BaseApiProvider.dart';
 
 import 'BasePostResponse.dart';
 import 'BaseRequest.dart';

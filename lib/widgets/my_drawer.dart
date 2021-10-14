@@ -1,20 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/main.dart';
-import 'package:qimma/pages/add_client/add_client.dart';
-import 'package:qimma/pages/attendance/attendance_page.dart';
-import 'package:qimma/pages/client/clients_of_representative.dart';
-import 'package:qimma/pages/editProfile/edit_profile.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/pages/products/products_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
+import 'package:E_Attendance/main.dart';
+import 'package:E_Attendance/pages/add_client/add_client.dart';
+import 'package:E_Attendance/pages/attendance/attendance_page.dart';
+import 'package:E_Attendance/pages/client/clients_of_representative.dart';
+import 'package:E_Attendance/pages/editProfile/edit_profile.dart';
+import 'package:E_Attendance/E_Attendance_user/home_page.dart';
+import 'package:E_Attendance/pages/products/products_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
 
-Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
-
+Drawer buildDrawer(
+    BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey) {
   return Drawer(
     child: Padding(
-      padding: EdgeInsets.only(left: 10, right: 10 , bottom: 10),
+      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -25,61 +25,56 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
             ),
             AppUtils.userData?.image != null
                 ? Center(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => EditProfile(),
-                    ),
-                  );
-                },
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => EditProfile(),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => EditProfile(),
+                          ),
+                        );
+                      },
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => EditProfile(),
+                            ),
+                          );
+                        },
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: CachedNetworkImageProvider(
+                              AppUtils.userData?.image),
+                        ),
                       ),
-                    );
-                  },
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: CachedNetworkImageProvider(
-                        AppUtils.userData?.image),
-                  ),
-                ),
-              ),
-            )
+                    ),
+                  )
                 : Center(
-              child: GestureDetector(
-                onTap: () {
-                  _scaffoldKey.currentState.openDrawer();
-                },
-                child: Image.asset(
-                  'assets/images/avatar.jpg',
-                  width: 60,
-                  height: 60,
-                ),
-              ),
-            ),
+                    child: GestureDetector(
+                      onTap: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      child: Image.asset(
+                        'assets/images/avatar.jpg',
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
+                  ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-
-
-
             InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => HomePage(),
-                        ),
-                      );
-                    },
-
-
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => HomePage(),
+                  ),
+                );
+              },
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -97,17 +92,11 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                 ),
               ),
             ),
-
-
-
-
-
-
             SizedBox(
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 5 , right: 5),
+              padding: const EdgeInsets.only(left: 5, right: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -125,7 +114,7 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                           padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                           child: Center(
                             child: GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 MyApp.setLocale(context, Locale("ar"));
                                 AppUtils.saveLanguage("ar");
                               },
@@ -151,7 +140,7 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                             child: GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 MyApp.setLocale(context, Locale("en"));
                                 AppUtils.saveLanguage("en");
                               },
@@ -171,8 +160,6 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                 ],
               ),
             ),
-
-
             SizedBox(
               height: 5,
             ),
@@ -289,7 +276,6 @@ Drawer buildDrawer(BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey){
                 ),
               ),
             ),
-
           ],
         ),
       ),

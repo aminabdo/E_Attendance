@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mat;
-import 'package:qimma/Bles/Bloc/OrderBloc.dart';
-import 'package:qimma/Bles/Model/Requests/AddProductTopdOrder.dart';
-import 'package:qimma/Bles/Model/Responses/order/AllProductsResponse.dart';
-import 'package:qimma/pages/orders/orders_pointer.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_button2.dart';
-import 'package:qimma/widgets/my_loader.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
+import 'package:E_Attendance/Bles/Bloc/OrderBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddProductTopdOrder.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/AllProductsResponse.dart';
+import 'package:E_Attendance/pages/orders/orders_pointer.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/my_button2.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
 
 import 'bill_page.dart';
 

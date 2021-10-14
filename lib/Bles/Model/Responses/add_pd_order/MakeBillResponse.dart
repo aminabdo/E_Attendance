@@ -1,5 +1,5 @@
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
 
 class MakeBillResponse  extends BaseResponse{
   int status;

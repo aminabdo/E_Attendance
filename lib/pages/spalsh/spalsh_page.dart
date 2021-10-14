@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/pages/auth/welcome_page.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/widgets/welcome_background_image.dart';
+import 'package:E_Attendance/pages/auth/welcome_page.dart';
+import 'package:E_Attendance/E_Attendance_user/home_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/widgets/welcome_background_image.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -10,7 +10,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   @override
   void initState() {
     super.initState();
@@ -26,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
             builder: (_) => WelcomePage(),
           ),
         );
-        if(AppUtils.userData == null) {
+        if (AppUtils.userData == null) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (_) => WelcomePage(),
@@ -54,7 +53,7 @@ class _SplashPageState extends State<SplashPage> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-           WelcomeBackgroundImage(),
+            WelcomeBackgroundImage(),
             Image.asset(
               'assets/images/logo.jpeg',
             ),
@@ -63,5 +62,4 @@ class _SplashPageState extends State<SplashPage> {
       ),
     );
   }
-
 }

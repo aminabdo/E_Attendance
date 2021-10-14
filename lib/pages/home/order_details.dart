@@ -2,16 +2,16 @@ import 'dart:developer';
 
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/OrderBloc.dart';
-import 'package:qimma/Bles/Bloc/print/PrintBloc.dart';
-import 'package:qimma/Bles/Model/Requests/EditStatusRequest.dart';
-import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
-import 'package:qimma/pages/home/edit_order.dart';
-import 'package:qimma/pages/track_order_map/track_order_map_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:E_Attendance/Bles/Bloc/OrderBloc.dart';
+import 'package:E_Attendance/Bles/Bloc/print/PrintBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/EditStatusRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/SinglepdOrder.dart';
+import 'package:E_Attendance/pages/home/edit_order.dart';
+import 'package:E_Attendance/pages/track_order_map/track_order_map_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'new_orders.dart';

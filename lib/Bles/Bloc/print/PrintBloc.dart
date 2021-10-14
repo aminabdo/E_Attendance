@@ -5,8 +5,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:printing/printing.dart';
-import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
-import 'package:qimma/utils/app_utils.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/AllpdOrderResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:pdf/pdf.dart';
 
 class PrinterBloc{

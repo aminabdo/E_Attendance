@@ -1,12 +1,12 @@
 
-import 'package:qimma/Bles/Model/Requests/AddToCartRequest.dart';
-import 'package:qimma/Bles/Model/Requests/UpdateCartRequest.dart';
-import 'package:qimma/Bles/Model/Responses/old/cart/AddToCartResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/cart/CartDeleteResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/cart/CountOfCartResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/cart/MyCartResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/cart/UpdateCartResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddToCartRequest.dart';
+import 'package:E_Attendance/Bles/Model/Requests/UpdateCartRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/cart/AddToCartResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/cart/CartDeleteResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/cart/CountOfCartResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/cart/MyCartResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/cart/UpdateCartResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../ApiRoute.dart';

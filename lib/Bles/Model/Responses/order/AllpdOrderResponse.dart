@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:qimma/utils/base/BaseRequest.dart';
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/utils/base/BaseRequest.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
 
 class AllpdOrderResponse extends BaseResponse implements BaseRequest{
   int status;

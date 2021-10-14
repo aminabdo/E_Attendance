@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/client_bloc.dart';
-import 'package:qimma/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
-import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_loader.dart';
+import 'package:E_Attendance/Bles/Bloc/client_bloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/AllClientsResponse.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
 
 class ClientInfoPage extends StatefulWidget {
   @override

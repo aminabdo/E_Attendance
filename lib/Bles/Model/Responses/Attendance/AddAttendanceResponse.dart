@@ -1,4 +1,4 @@
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
 
 /// status : 1
 /// data : {"id":3,"status":"attend","notes":"9 ?????","created_at":"2021-03-24T17:34:34.000000Z","representative":{"id":326,"first_name":"mostafaaa","last_name":"hussieen","phone":"012165955777777","image":null,"status":"2","social":"0","email":"nknk656413212@n111n1.com","lat":"21654654","lng":"485445456","debt":"31216","currency_id":null,"code":null,"shop_id":"10","fire_base_token":"AppUtils.firebaseToken","created_at":"2021-02-20 02:15:03","updated_at":"2021-03-24 10:47:32","catr_price":"0","discount_id":null,"notification":"1","lang":null,"message":"1","is_active":"1"}}

@@ -1,6 +1,6 @@
-import 'package:qimma/Bles/Model/Responses/order/SinglepdOrder.dart';
-import 'package:qimma/utils/base/BaseResponse.dart';
-import 'package:qimma/Bles/Model/Responses/order/AllpdOrderResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/SinglepdOrder.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/AllpdOrderResponse.dart';
 
 class AddpdOrderResponse extends BaseResponse {
   int status;

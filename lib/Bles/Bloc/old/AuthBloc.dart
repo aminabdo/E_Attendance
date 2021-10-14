@@ -1,9 +1,9 @@
 
-import 'package:qimma/Bles/Model/Requests/LoginRequest.dart';
-import 'package:qimma/Bles/Model/Requests/SignupRequest.dart';
-import 'package:qimma/Bles/Model/Responses/old/auth/LoginResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/auth/SignupResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/LoginRequest.dart';
+import 'package:E_Attendance/Bles/Model/Requests/SignupRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/auth/LoginResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/auth/SignupResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:dio/dio.dart';
 import '../../ApiRoute.dart';

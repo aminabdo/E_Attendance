@@ -10,7 +10,7 @@ class WelcomeBackgroundImage extends StatelessWidget {
         alignment: Alignment.center,
         transform: Matrix4.rotationY(math.pi),
         child: Image.asset(
-          'assets/images/welcome_bg.png',
+          'assets/images/splash10.jpeg',
           fit: BoxFit.fill,
           scale: 1,
           width: size.width,
@@ -19,7 +19,7 @@ class WelcomeBackgroundImage extends StatelessWidget {
       );
     } else {
       return Image.asset(
-        'assets/images/welcome_bg.png',
+        'assets/images/splash10.jpeg',
         fit: BoxFit.fill,
         scale: 1,
         width: size.width,

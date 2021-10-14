@@ -1,4 +1,4 @@
-import 'package:qimma/utils/app_utils.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
 
 class ApiRoutes {
   static String generalGet(String urlExtention) {

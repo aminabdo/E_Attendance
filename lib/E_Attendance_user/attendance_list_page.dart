@@ -1,19 +1,20 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mat;
-import 'package:qimma/Bles/Bloc/OrderBloc.dart';
-import 'package:qimma/Bles/Model/Requests/AddProductTopdOrder.dart';
-import 'package:qimma/Bles/Model/Responses/order/AllProductsResponse.dart';
-import 'package:qimma/pages/orders/orders_pointer.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_button2.dart';
-import 'package:qimma/widgets/my_loader.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
-
+import 'package:E_Attendance/Bles/Bloc/OrderBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddProductTopdOrder.dart';
+import 'package:E_Attendance/Bles/Model/Responses/order/AllProductsResponse.dart';
+import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
+import 'package:E_Attendance/pages/orders/orders_pointer.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/my_button2.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
+import 'package:get/get.dart';
 
 class AttendanceListPage extends StatefulWidget {
   final dynamic orderId;
@@ -22,20 +23,16 @@ class AttendanceListPage extends StatefulWidget {
 
   @override
   _AttendanceListPageState createState() => _AttendanceListPageState();
-
-
 }
 
 class _AttendanceListPageState extends State<AttendanceListPage> {
-
   @override
   void initState() {
     super.initState();
-
+    AttendanceRepositoryImp().getAttendanceData();
   }
 
   bool isLoading = false;
-
 
   Widget space(BuildContext context) {
     return SizedBox(
@@ -59,17 +56,16 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppUtils.translate(context, 'next'),
+                  'next'.tr,
                   style: TextStyle(color: mat.Colors.white),
                 ),
                 SizedBox(
                   width: 5,
                 ),
-
                 Text(
                   OrdersPointer.selectedProducts.isEmpty
                       ? ''
-                      : '(${AppUtils.translate(context, 'items')}  ${OrdersPointer.selectedProducts.length})',
+                      : '${'items'.tr}  ${OrdersPointer.selectedProducts.length})',
                   style: TextStyle(color: mat.Colors.white),
                 )
               ],
@@ -77,11 +73,7 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
             btnColor: OrdersPointer.selectedProducts.isEmpty
                 ? mat.Colors.grey
                 : mainColor,
-            onTap: OrdersPointer.selectedProducts.isEmpty
-                ? null
-                : () async {
-
-              },
+            onTap: OrdersPointer.selectedProducts.isEmpty ? null : () async {},
           ),
         ),
         body: SingleChildScrollView(
@@ -100,7 +92,7 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                     children: [
                       space(context),
                       MyAppBar(
-                        text: AppUtils.translate(context, 'add_new_order'),
+                        text: 'add_new_order'.tr,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -109,22 +101,20 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                             Flexible(
                               child: MyTextFormField(
                                 borderWidth: 1,
-                                hintText: AppUtils.translate(context, 'search_by_name'),
-                                prefixIcon: Image.asset('assets/images/search.png'),
-                                onChanged: (txt) async{
-
-                                },
+                                hintText: 'search_by_name'.tr,
+                                prefixIcon:
+                                    Image.asset('assets/images/search.png'),
+                                onChanged: (txt) async {},
                               ),
                             ),
-
                           ],
                         ),
-
                       ),
                       StreamBuilder<AllProductsResponse>(
                         stream: orderBloc.search_products.stream,
                         builder: (context, snapshot) {
-                          if (orderBloc.search_products.value?.loading?? false) {
+                          if (orderBloc.search_products.value?.loading ??
+                              false) {
                             return Column(
                               children: [
                                 SizedBox(
@@ -136,21 +126,23 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                                 ),
                               ],
                             );
-                          }
-                          else {
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return ProductItem(
-                                  product: Products(difference: "test", quantity: "5"),
-                                  onCounterChange: () {
-                                    setState(() {});
-                                  },
-                                );
-                              },
-                              itemCount: 5,
-                            );
+                          } else {
+                            return ListView.separated(
+                              //change this too
+                                separatorBuilder: (BuildContext context, int index) => const Divider(),
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemCount: 9,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("تاريخ اليوم"),
+                                      Text("ميعاد الحضور"),
+                                      Text("ميعاد الانصراف"),
+                                    ],
+                                  );
+                                });
                           }
                         },
                       ),
@@ -166,34 +158,33 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
   }
 }
 
-class ProductItem extends StatefulWidget {
+class AttendanceListItem extends StatefulWidget {
   final Products product;
   final Function() onCounterChange;
 
-  const ProductItem({Key key, this.product, this.onCounterChange})
+  const AttendanceListItem({Key key, this.product, this.onCounterChange})
       : super(key: key);
 
   @override
-  _ProductItemState createState() => _ProductItemState();
+  _AttendanceListItemState createState() => _AttendanceListItemState();
 }
 
-class _ProductItemState extends State<ProductItem> {
+class _AttendanceListItemState extends State<AttendanceListItem> {
   int selectedColor = 0;
   int selectedSize = 0;
 
   int counter = 1;
 
-  double price , totalPrice = 0.0;
-
+  double price, totalPrice = 0.0;
 
   @override
   void initState() {
     super.initState();
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
   }
 
   @override
@@ -211,111 +202,101 @@ class _ProductItemState extends State<ProductItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(child: Text(widget.product.difference)),
-
                   Flexible(
-                    child: Text('$totalPrice ${AppUtils.translate(context, 'eg')}'),
+                    child: Text('$totalPrice ${'eg'.tr}'),
                   ),
                 ],
-              ),Row(
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Flexible(child: Text(
-                      "${AppUtils.translate(context, "show_products_quantity")}"
-                  )),
+                  Flexible(child: Text("${"show_products_quantity".tr}")),
                   SizedBox(
                     width: 25,
                   ),
-                  Flexible(child: Text(
-                      "${widget.product.quantity}"
-                  ))
+                  Flexible(child: Text("${widget.product.quantity}"))
                 ],
               ),
               SizedBox(
                 height: 25,
               ),
-              Text(AppUtils.translate(context, 'colors')),
+              Text('colors'.tr),
               SizedBox(
                 height: 10,
               ),
               widget?.product?.colors?.isEmpty ?? false
                   ? Text(
-                AppUtils.translate(
-                  context,
-                  'no_colors_available',
-                ),
-                style: TextStyle(fontSize: 12, color: mat.Colors.grey),
-              )
+                      'no_colors_available'.tr,
+                      style: TextStyle(fontSize: 12, color: mat.Colors.grey),
+                    )
                   : Wrap(
-                children: List.generate(
-                  widget?.product?.sizes?.length ?? 5,
-                      (index) => GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedColor = index;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      margin: EdgeInsets.symmetric(horizontal: 2),
-                      duration: Duration(milliseconds: 250),
-                      child: CircleAvatar(
-                        radius: 13,
-                        // backgroundColor: Color(int.parse(
-                        //     '${widget.product.colors[index]?.colorCode}'??'0xff000000')),
-                        child: index == selectedColor
-                            ? Icon(
-                          Icons.check,
-                          size: 12,
-                        )
-                            : SizedBox.shrink(),
-                      ),
+                      children: List.generate(
+                        widget?.product?.sizes?.length ?? 5,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedColor = index;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            margin: EdgeInsets.symmetric(horizontal: 2),
+                            duration: Duration(milliseconds: 250),
+                            child: CircleAvatar(
+                              radius: 13,
+                              // backgroundColor: Color(int.parse(
+                              //     '${widget.product.colors[index]?.colorCode}'??'0xff000000')),
+                              child: index == selectedColor
+                                  ? Icon(
+                                      Icons.check,
+                                      size: 12,
+                                    )
+                                  : SizedBox.shrink(),
+                            ),
+                          ),
+                        ),
+                      ).toList(),
                     ),
-                  ),
-                ).toList(),
-              ),
               SizedBox(
                 height: 25,
               ),
-              Text(AppUtils.translate(context, 'sizes')),
+              Text('sizes'.tr),
               SizedBox(
                 height: 5,
               ),
               widget?.product?.sizes?.isEmpty ?? true
                   ? Text(
-                AppUtils.translate(
-                  context,
-                  'no_sizes_available',
-                ),
-                style: TextStyle(fontSize: 12, color: mat.Colors.grey),
-              )
+                      'no_sizes_available'.tr,
+                      style: TextStyle(fontSize: 12, color: mat.Colors.grey),
+                    )
                   : Wrap(
-                children: List.generate(
-                  widget.product.sizes.length,
-                      (index) => GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedSize = index;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      duration: Duration(milliseconds: 250),
-                      child: Text(
-                        widget.product.sizes[index].name,
-                        style: TextStyle(
-                          fontSize: selectedSize == index ? 16 : 13,
-                          fontWeight: selectedSize == index
-                              ? FontWeight.bold
-                              : FontWeight.w300,
-                          decoration: selectedSize == index
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
+                      children: List.generate(
+                        widget.product.sizes.length,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedSize = index;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            duration: Duration(milliseconds: 250),
+                            child: Text(
+                              widget.product.sizes[index].name,
+                              style: TextStyle(
+                                fontSize: selectedSize == index ? 16 : 13,
+                                fontWeight: selectedSize == index
+                                    ? FontWeight.bold
+                                    : FontWeight.w300,
+                                decoration: selectedSize == index
+                                    ? TextDecoration.underline
+                                    : TextDecoration.none,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ).toList(),
                     ),
-                  ),
-                ).toList(),
-              ),
               SizedBox(
                 height: 25,
               ),
@@ -338,8 +319,7 @@ class _ProductItemState extends State<ProductItem> {
                         onTap: () {
                           if (counter > 1) {
                             counter--;
-                            totalPrice = price *counter;
-
+                            totalPrice = price * counter;
 
                             if (counter <= 1) {
                               OrdersPointer.selectedProducts.forEach((element) {
@@ -359,19 +339,6 @@ class _ProductItemState extends State<ProductItem> {
                             }
                             setState(() {});
                           } else {
-                            if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "whole_whole_sale")))
-                            {
-                              price = double.parse(widget.product.wholesaleWholesalePrice);
-                            }
-                            else if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "whole_sale")))
-                            {
-                              price = double.parse(widget.product.wholesalePrice);
-                            }
-                            else if(orderBloc.add_order.value.data.priceType.contains(AppUtils.translate(context, "sale")))
-                            {
-                              price = double.parse(widget.product.sellingPrice);
-                            }
-
                             setState(() {});
                           }
 
@@ -410,38 +377,35 @@ class _ProductItemState extends State<ProductItem> {
                     ],
                   ),
                   MyButton(
-                    AppUtils.translate(context, 'add'),
+                    'add'.tr,
                     width: MediaQuery.of(context).size.width / 4,
-
                     onTap: () {
-                      if(widget.product.quantity == "0"){
-                        AppUtils.showToast(msg: AppUtils.translate(context, "quantity_error"));
-                      }
-                      else if (OrdersPointer.selectedProducts.isEmpty) {
+                      if (widget.product.quantity == "0") {
+                        AppUtils.showToast(msg: "quantity_error".tr);
+                      } else if (OrdersPointer.selectedProducts.isEmpty) {
                         OrdersPointer.selectedProducts.add(
                           OrdersBean(
                             quantity: counter,
                             colorId: widget.product.colors.isEmpty
                                 ? null
                                 : widget.product.colors[selectedColor].id
-                                .toString(),
+                                    .toString(),
                             sizeId: widget.product.sizes.isEmpty
                                 ? null
                                 : widget.product.sizes[selectedSize].id
-                                .toString(),
+                                    .toString(),
                             productDetailId: widget.product.id.toString(),
                           ),
                         );
-                      }
-                      else {
+                      } else {
                         bool isExist = false;
                         int index = -1;
 
                         for (int i = 0;
-                        i < OrdersPointer.selectedProducts.length;
-                        i++) {
+                            i < OrdersPointer.selectedProducts.length;
+                            i++) {
                           if (OrdersPointer.selectedProducts[i].productDetailId
-                              .toString() ==
+                                  .toString() ==
                               widget.product.id.toString()) {
                             isExist = true;
                             index = i;
@@ -463,11 +427,11 @@ class _ProductItemState extends State<ProductItem> {
                               colorId: widget.product.colors.isEmpty
                                   ? null
                                   : widget.product.colors[selectedColor].id
-                                  .toString(),
+                                      .toString(),
                               sizeId: widget.product.sizes.isEmpty
                                   ? null
                                   : widget.product.sizes[selectedSize].id
-                                  .toString(),
+                                      .toString(),
                               productDetailId: widget.product.id.toString(),
                             ),
                           );
@@ -476,7 +440,6 @@ class _ProductItemState extends State<ProductItem> {
                       widget.onCounterChange();
                     },
                   ),
-
                 ],
               ),
               SizedBox(

@@ -3,20 +3,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:location/location.dart';
-import 'package:qimma/Bles/Bloc/AuthBloc.dart';
-import 'package:qimma/Bles/Model/Requests/SignupRequest.dart';
-import 'package:qimma/Bles/Model/Responses/old/auth/SignupResponse.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/utils/app_patterns.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_button2.dart';
-import 'package:qimma/widgets/my_loader.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
-import 'package:qimma/widgets/signup_background_image.dart';
-
+import 'package:E_Attendance/Bles/Bloc/AuthBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/SignupRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/auth/SignupResponse.dart';
+import 'package:E_Attendance/E_Attendance_user/home_page.dart';
+import 'package:E_Attendance/utils/app_patterns.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/my_button2.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
+import 'package:E_Attendance/widgets/signup_background_image.dart';
 
 class SingupPage extends StatefulWidget {
   @override
@@ -80,29 +79,31 @@ class _SingupPageState extends State<SingupPage> {
                                 height: screenUtil.setHeight(120),
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: Image.asset('assets/images/logo.jpeg')
-                                        .image,
+                                    image:
+                                        Image.asset('assets/images/logo.jpeg')
+                                            .image,
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).padding.top
-                        ),
+                        SizedBox(height: MediaQuery.of(context).padding.top),
                         GestureDetector(
                           onTap: () async {
-                            var permissionGranted = await AppUtils.askPhotosPermission();
-                            if(permissionGranted) {
+                            var permissionGranted =
+                                await AppUtils.askPhotosPermission();
+                            if (permissionGranted) {
                               var image = await AppUtils.getImage(1);
-                              if(image != null) {
+                              if (image != null) {
                                 setState(() {
                                   profileImage = image[0];
                                 });
                               }
                             } else {
-                              AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+                              AppUtils.showToast(
+                                  msg: AppUtils.translate(
+                                      context, 'permission_denied'));
                             }
                           },
                           child: CircleAvatar(
@@ -119,7 +120,8 @@ class _SingupPageState extends State<SingupPage> {
                               child: MyTextFormField(
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(context, 'required');
+                                    return AppUtils.translate(
+                                        context, 'required');
                                   } else {
                                     return null;
                                   }
@@ -137,14 +139,16 @@ class _SingupPageState extends State<SingupPage> {
                               child: MyTextFormField(
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(context, 'required');
+                                    return AppUtils.translate(
+                                        context, 'required');
                                   } else {
                                     return null;
                                   }
                                 },
                                 controller: lastNameController,
                                 keyboardType: TextInputType.text,
-                                hintText: AppUtils.translate(context, 'last_name'),
+                                hintText:
+                                    AppUtils.translate(context, 'last_name'),
                               ),
                             ),
                           ],
@@ -158,7 +162,8 @@ class _SingupPageState extends State<SingupPage> {
                               return AppUtils.translate(context, 'required');
                             } else if (!PatternUtils.phoneIsValid(
                                 phone: input)) {
-                              return AppUtils.translate(context, 'invalid_phone_number');
+                              return AppUtils.translate(
+                                  context, 'invalid_phone_number');
                             } else {
                               return null;
                             }
@@ -176,7 +181,8 @@ class _SingupPageState extends State<SingupPage> {
                               return AppUtils.translate(context, 'required');
                             } else if (!PatternUtils.emailIsValid(
                                 email: input)) {
-                              return AppUtils.translate(context, 'invalid_email_address');
+                              return AppUtils.translate(
+                                  context, 'invalid_email_address');
                             } else {
                               return null;
                             }
@@ -193,7 +199,8 @@ class _SingupPageState extends State<SingupPage> {
                             if (input.isEmpty) {
                               return AppUtils.translate(context, 'required');
                             } else if (input.length < 8) {
-                              return AppUtils.translate(context, 'weak_password');
+                              return AppUtils.translate(
+                                  context, 'weak_password');
                             } else {
                               return null;
                             }
@@ -228,7 +235,8 @@ class _SingupPageState extends State<SingupPage> {
                             }
                           },
                           keyboardType: TextInputType.text,
-                          hintText: AppUtils.translate(context, 'confirm_password'),
+                          hintText:
+                              AppUtils.translate(context, 'confirm_password'),
                           controller: confirmPasswordController,
                           obscureText: hideConfirmPassword,
                           suffixIcon: GestureDetector(
@@ -250,7 +258,10 @@ class _SingupPageState extends State<SingupPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(AppUtils.translate(context, 'location_coordinates'),),
+                                Text(
+                                  AppUtils.translate(
+                                      context, 'location_coordinates'),
+                                ),
                                 _locationData == null
                                     ? SizedBox.shrink()
                                     : Row(
@@ -264,10 +275,11 @@ class _SingupPageState extends State<SingupPage> {
                                             width: screenUtil.setWidth(3),
                                           ),
                                           Text(
-                                            AppUtils.translate(context, 'location_picked'),
+                                            AppUtils.translate(
+                                                context, 'location_picked'),
                                             style: TextStyle(
-                                                color: mainColor,
-                                                fontSize: screenUtil.setSp(12),
+                                              color: mainColor,
+                                              fontSize: screenUtil.setSp(12),
                                             ),
                                           ),
                                         ],
@@ -282,30 +294,35 @@ class _SingupPageState extends State<SingupPage> {
                                 pickingLocation
                                     ? CircularProgressIndicator()
                                     : Text(
-                                        AppUtils.translate(context, 'pick_location'),
+                                        AppUtils.translate(
+                                            context, 'pick_location'),
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
                                       ),
                                 btnColor: Colors.blueGrey,
                                 onTap: () async {
-
                                   setState(() {
                                     pickingLocation = true;
                                   });
 
-                                  var locationPermissionGranted = await AppUtils.askLocationPermission();
+                                  var locationPermissionGranted =
+                                      await AppUtils.askLocationPermission();
                                   if (locationPermissionGranted) {
                                     Location location = new Location();
 
                                     bool _serviceEnabled;
                                     PermissionStatus _permissionGranted;
 
-                                    _serviceEnabled = await location.serviceEnabled();
+                                    _serviceEnabled =
+                                        await location.serviceEnabled();
                                     if (!_serviceEnabled) {
-                                      _serviceEnabled = await location.requestService();
+                                      _serviceEnabled =
+                                          await location.requestService();
                                       if (!_serviceEnabled) {
-                                        AppUtils.showToast(msg: AppUtils.translate(context, 'open_gps'));
+                                        AppUtils.showToast(
+                                            msg: AppUtils.translate(
+                                                context, 'open_gps'));
                                         setState(() {
                                           pickingLocation = false;
                                         });
@@ -313,11 +330,17 @@ class _SingupPageState extends State<SingupPage> {
                                       }
                                     }
 
-                                    _permissionGranted = await location.hasPermission();
-                                    if (_permissionGranted == PermissionStatus.DENIED) {
-                                      _permissionGranted = await location.requestPermission();
-                                      if (_permissionGranted != PermissionStatus.GRANTED) {
-                                        AppUtils.showToast(msg: AppUtils.translate(context, 'permission_denied'));
+                                    _permissionGranted =
+                                        await location.hasPermission();
+                                    if (_permissionGranted ==
+                                        PermissionStatus.DENIED) {
+                                      _permissionGranted =
+                                          await location.requestPermission();
+                                      if (_permissionGranted !=
+                                          PermissionStatus.GRANTED) {
+                                        AppUtils.showToast(
+                                            msg: AppUtils.translate(
+                                                context, 'permission_denied'));
                                         setState(() {
                                           pickingLocation = false;
                                         });
@@ -325,9 +348,11 @@ class _SingupPageState extends State<SingupPage> {
                                       }
                                     }
 
-                                    _locationData = await location.getLocation();
-                                    if(_locationData != null){
-                                      AppUtils.showToast(msg: "تم اخذ الموقع بنجاح");
+                                    _locationData =
+                                        await location.getLocation();
+                                    if (_locationData != null) {
+                                      AppUtils.showToast(
+                                          msg: "تم اخذ الموقع بنجاح");
                                     }
                                     setState(() {
                                       pickingLocation = false;
@@ -365,60 +390,63 @@ class _SingupPageState extends State<SingupPage> {
   }
 
   void validateAndSignup(BuildContext context) async {
-    if(formKey.currentState.validate()) {
-    if (profileImage == null) {
-      AppUtils.showToast(msg: AppUtils.translate(context, 'choose_an_image'));
-      return;
-    }
+    if (formKey.currentState.validate()) {
+      if (profileImage == null) {
+        AppUtils.showToast(msg: AppUtils.translate(context, 'choose_an_image'));
+      }
 
-    if (_locationData == null) {
-      AppUtils.showToast(msg: AppUtils.translate(context, 'please_provide_the_location_coordinates'));
-      return;
-    }
+      if (_locationData == null) {
+        AppUtils.showToast(
+            msg: AppUtils.translate(
+                context, 'please_provide_the_location_coordinates'));
+        return;
+      }
 
-    setState(() {
-      loading = true;
-    });
-
-    SignupResponse response = await authBloc.signup(
-      SignupRequest(
-        fireBaseToken: 'jjjjjjjj', // AppUtils.firebaseToken,
-        password: passwordController.text,
-        passwordConfirmation: confirmPasswordController.text,
-        phone: phoneController.text,
-        email: emailController.text,
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        lat: _locationData.latitude.toString(),
-        lng: _locationData.longitude.toString(),
-        verifyType: '1',
-        image: profileImage,
-      ),
-    );
-
-    if (response.status == 1) {
       setState(() {
-        loading = false;
+        loading = true;
       });
 
-      AppUtils.userData = response.data;
-      await AppUtils.saveUserData(response.data);
+      SignupResponse response = await authBloc.signup(
+        SignupRequest(
+          fireBaseToken: 'jjjjjjjj', // AppUtils.firebaseToken,
+          password: passwordController.text,
+          passwordConfirmation: confirmPasswordController.text,
+          phone: phoneController.text,
+          email: emailController.text,
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
+          lat: _locationData.latitude.toString(),
+          lng: _locationData.longitude.toString(),
+          verifyType: '1',
+          image: profileImage,
+        ),
+      );
 
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
-          .then((value) {
-        passwordController.clear();
-        confirmPasswordController.clear();
-        emailController.clear();
-        phoneController.clear();
-        firstNameController.clear();
-        lastNameController.clear();
-      });
-    } else {
-      AppUtils.showToast(msg: response.message);
-      setState(() {
-        loading = false;
-      });
-     }
+      if (response.status == 1) {
+        setState(() {
+          loading = false;
+        });
+
+        AppUtils.userData = response.data;
+        await AppUtils.saveUserData(response.data);
+
+        Navigator.of(context)
+            .pushAndRemoveUntil(
+                MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
+            .then((value) {
+          passwordController.clear();
+          confirmPasswordController.clear();
+          emailController.clear();
+          phoneController.clear();
+          firstNameController.clear();
+          lastNameController.clear();
+        });
+      } else {
+        AppUtils.showToast(msg: response.message);
+        setState(() {
+          loading = false;
+        });
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 # qimma
 
-A new Flutter application.
+SE Attendance System.
 
 ## Getting Started
 

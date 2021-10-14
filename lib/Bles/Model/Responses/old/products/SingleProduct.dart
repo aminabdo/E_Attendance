@@ -1,6 +1,6 @@
-import 'package:qimma/Bles/Model/Responses/old/home/FilterWebSiteResponse.dart';
-import 'package:qimma/utils/base/BaseRequest.dart';
-import 'package:qimma/utils/base/BaseResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/home/FilterWebSiteResponse.dart';
+import 'package:E_Attendance/utils/base/BaseRequest.dart';
+import 'package:E_Attendance/utils/base/BaseResponse.dart';
 
 class SingleProductResponse extends BaseResponse {
   int status;

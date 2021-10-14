@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:qimma/pages/auth/reset_password_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/widgets/forget_password_background_image.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
+import 'package:E_Attendance/pages/auth/reset_password_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/widgets/forget_password_background_image.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
 
 class VerfyCodePage extends StatelessWidget {
 

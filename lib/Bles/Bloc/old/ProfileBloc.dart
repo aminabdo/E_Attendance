@@ -1,9 +1,9 @@
-import 'package:qimma/Bles/Model/Responses/old/products/SingleProduct.dart';
-import 'package:qimma/Bles/Model/Responses/old/profile/MyInfoResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/profile/MyOrderResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/profile/MyWishListResponse.dart';
-import 'package:qimma/Bles/Model/Responses/old/profile/UserAddressResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/products/SingleProduct.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/profile/MyInfoResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/profile/MyOrderResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/profile/MyWishListResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/profile/UserAddressResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../ApiRoute.dart';

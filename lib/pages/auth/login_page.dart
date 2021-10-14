@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qimma/Bles/Bloc/AuthBloc.dart';
-import 'package:qimma/Bles/Model/Requests/LoginRequest.dart';
-import 'package:qimma/pages/auth/forget_password_page.dart';
-import 'package:qimma/pages/home/home_page.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/widgets/clickable_text.dart';
-import 'package:qimma/widgets/login_background_image.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_button.dart';
-import 'package:qimma/widgets/my_loader.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
+import 'package:get/get.dart';
+import 'package:E_Attendance/Bles/Bloc/AuthBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/LoginRequest.dart';
+import 'package:E_Attendance/pages/auth/forget_password_page.dart';
+import 'package:E_Attendance/E_Attendance_user/home_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/widgets/clickable_text.dart';
+import 'package:E_Attendance/widgets/login_background_image.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_button.dart';
+import 'package:E_Attendance/widgets/my_loader.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
 
 import 'welcome_page.dart';
 
@@ -65,11 +66,16 @@ class _LoginPageState extends State<LoginPage> {
                                   fontSize: screenUtil.setSp(18),
                                 ),
                                 onBackBtnPressed: () {
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => WelcomePage()),
+                                      (route) => false);
                                 },
                               ),
                               SizedBox(
-                                height: screenUtil.setHeight(30) + screenUtil.setHeight(20),
+                                height: screenUtil.setHeight(30) +
+                                    screenUtil.setHeight(20),
                               ),
                               Center(
                                 child: Image.asset(
@@ -83,28 +89,33 @@ class _LoginPageState extends State<LoginPage> {
                               MyTextFormField(
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(context, 'required');
+                                    return AppUtils.translate(
+                                        context, 'required');
                                   }
                                 },
-
-                                hintText: AppUtils.translate(context, 'email_or_phone'),
+                                hintText: AppUtils.translate(
+                                    context, 'email_or_phone'),
                                 controller: phoneOrEmailController,
                               ),
                               SizedBox(
-                                height: screenUtil.setHeight(30) - screenUtil.setHeight(10),
+                                height: screenUtil.setHeight(30) -
+                                    screenUtil.setHeight(10),
                               ),
                               MyTextFormField(
                                 controller: passwordController,
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(context, 'required');
+                                    return AppUtils.translate(
+                                        context, 'required');
                                   }
                                 },
-                                hintText: AppUtils.translate(context, 'password'),
+                                hintText:
+                                    AppUtils.translate(context, 'password'),
                                 obscureText: true,
                               ),
                               SizedBox(
-                                height: screenUtil.setHeight(30) - screenUtil.setHeight(20),
+                                height: screenUtil.setHeight(30) -
+                                    screenUtil.setHeight(20),
                               ),
                               Center(
                                 child: MyButton(
@@ -120,14 +131,19 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Center(
                                 child: ClickableText(
-                                  text: AppUtils.translate(context, 'forget_password'),
+                                  text: AppUtils.translate(
+                                      context, 'forget_password'),
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => ForgetPasswordPage()));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                ForgetPasswordPage()));
                                   },
                                 ),
                               ),
                               SizedBox(
-                                height: screenUtil.setHeight(30) - screenUtil.setHeight(30),
+                                height: screenUtil.setHeight(30) -
+                                    screenUtil.setHeight(30),
                               ),
                             ],
                           ),
@@ -145,57 +161,56 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void validateAndLogin(BuildContext context) async {
-    if(formKey.currentState.validate()) {
-
+    if (formKey.currentState.validate()) {
       AppUtils.hideKeyboard(context);
 
-    setState(() {
-      loading = true;
-    });
+      setState(() {
+        loading = true;
+      });
 
-    var response = await authBloc.login(
-      LoginRequest(
+      var response = await authBloc.login(
+        LoginRequest(
           eamilOrPhone: phoneOrEmailController.text,
           fireBaseToken: AppUtils.firebaseToken,
           password: passwordController.text,
-              // eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
-              // fireBaseToken: "AppUtils.firebaseToken",
-              // password: "123456",//passwordController.text.toString(),
-      ),
-    );
+          // eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
+          // fireBaseToken: "AppUtils.firebaseToken",
+          // password: "123456",//passwordController.text.toString(),
+        ),
+      );
 
-
-
-    response.status = 1 ;
+      response.status = 1;
 
       // 0548900632
-    // var response = await authBloc.login(
-    //   LoginRequest(
-    //       eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
-    //       fireBaseToken: "AppUtils.firebaseToken",
-    //       password: "123456",//passwordController.text.toString(),
-    //   ),
-    // );
+      // var response = await authBloc.login(
+      //   LoginRequest(
+      //       eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
+      //       fireBaseToken: "AppUtils.firebaseToken",
+      //       password: "123456",//passwordController.text.toString(),
+      //   ),
+      // );
 
-    if (response.status == 1) {
-      setState(() {
-        loading = false;
-      });
+      if (response.status == 1) {
+        setState(() {
+          loading = false;
+        });
 
-      AppUtils.userData = response.data;
-      await AppUtils.saveUserData(response.data);
+        AppUtils.userData = response.data;
+        await AppUtils.saveUserData(response.data);
 
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => HomePage()), (route) => false).then((value) {
-        passwordController.clear();
-        phoneOrEmailController.clear();
-      });
-
-    } else {
-      AppUtils.showToast(msg: response.message);
-      setState(() {
-        loading = false;
-       });
-     }
+        Navigator.of(context)
+            .pushAndRemoveUntil(
+                MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
+            .then((value) {
+          passwordController.clear();
+          phoneOrEmailController.clear();
+        });
+      } else {
+        AppUtils.showToast(msg: response.message);
+        setState(() {
+          loading = false;
+        });
+      }
     }
   }
 }

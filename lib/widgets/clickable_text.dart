@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/utils/consts.dart';
+import 'package:E_Attendance/utils/consts.dart';
 
 class ClickableText extends StatelessWidget {
   final String text;

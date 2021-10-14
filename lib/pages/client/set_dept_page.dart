@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:qimma/Bles/Bloc/client_bloc.dart';
-import 'package:qimma/Bles/Model/Requests/SetDeptRequest.dart';
-import 'package:qimma/utils/app_utils.dart';
-import 'package:qimma/utils/consts.dart';
-import 'package:qimma/widgets/my_app_bar.dart';
-import 'package:qimma/widgets/my_text_form_field.dart';
+import 'package:E_Attendance/Bles/Bloc/client_bloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/SetDeptRequest.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:E_Attendance/utils/consts.dart';
+import 'package:E_Attendance/widgets/my_app_bar.dart';
+import 'package:E_Attendance/widgets/my_text_form_field.dart';
 
 class SetDeptPage extends StatefulWidget {
   final int clientId;

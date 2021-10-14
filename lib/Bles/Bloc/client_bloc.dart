@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:qimma/Bles/Model/Requests/AddClientRequest.dart';
-import 'package:qimma/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
-import 'package:qimma/Bles/Model/Requests/SetDeptRequest.dart';
-import 'package:qimma/Bles/Model/Responses/DeleteClientResponse.dart';
-import 'package:qimma/Bles/Model/Responses/client/AddClientResponse.dart';
-import 'package:qimma/Bles/Model/Responses/client/AddClientToRepresentativeResponse.dart';
-import 'package:qimma/Bles/Model/Responses/client/AllClientsResponse.dart';
-import 'package:qimma/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
-import 'package:qimma/Bles/Model/Responses/client/SetDeptResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddClientRequest.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddClientToRepresentativeRequest.dart';
+import 'package:E_Attendance/Bles/Model/Requests/SetDeptRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/DeleteClientResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/AddClientResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/AddClientToRepresentativeResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/AllClientsResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/ClientOfRepresentativeResponse.dart';
+import 'package:E_Attendance/Bles/Model/Responses/client/SetDeptResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../ApiRoute.dart';

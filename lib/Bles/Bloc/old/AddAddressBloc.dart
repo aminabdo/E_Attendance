@@ -1,6 +1,6 @@
-import 'package:qimma/Bles/Model/Requests/AddAddressRequest.dart';
-import 'package:qimma/Bles/Model/Responses/old/address/AddAddressResponse.dart';
-import 'package:qimma/utils/base/BaseBloc.dart';
+import 'package:E_Attendance/Bles/Model/Requests/AddAddressRequest.dart';
+import 'package:E_Attendance/Bles/Model/Responses/old/address/AddAddressResponse.dart';
+import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../ApiRoute.dart';

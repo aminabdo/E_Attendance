@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:qimma/utils/consts.dart';
+import 'package:E_Attendance/utils/consts.dart';
 
 class LoadingOverlay extends StatefulWidget {
   final bool isLoading;
