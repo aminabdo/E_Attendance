@@ -24,9 +24,6 @@ class FingPage extends StatefulWidget {
 
 class _FingPageState extends State<FingPage> {
   final LocalAuthentication auth = LocalAuthentication();
-  _SupportState _supportState = _SupportState.unknown;
-  String _authorized = 'Not Authorized';
-  bool _isAuthenticating = false;
 
   bool pickingLocation = false;
   LocationData _locationData;
@@ -35,19 +32,15 @@ class _FingPageState extends State<FingPage> {
   void initState() {
     super.initState();
     auth.isDeviceSupported().then(
-          (isSupported) => setState(() => _supportState = isSupported
+          (isSupported) => setState(() => isSupported
               ? _SupportState.supported
               : _SupportState.unsupported),
         );
   }
-
-  Future<void> _authenticateWithBiometrics(bool checkin) async {
+  // ()? -1 : -2;
+    Future<void> _authenticateWithBiometrics(bool checkin) async {
     bool authenticated = false;
     try {
-      setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
-      });
       authenticated = await auth.authenticate(
           localizedReason:
               'Scan your fingerprint (or face or whatever) to authenticate',
@@ -55,33 +48,77 @@ class _FingPageState extends State<FingPage> {
           stickyAuth: true,
           biometricOnly: true);
       authenticated.toString();
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Authenticating';
-      });
 
       getLocation(checkin);
     } on PlatformException catch (e) {
       AppUtils.showToast(msg: "feature_not_enable".tr);
-      log("erooooo -> ${e.message}");
-      print(e);
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = "Error - ${e.message}";
-      });
+
       return;
     }
     if (!mounted) return;
 
-    final String message = authenticated ? 'Authorized' : 'Not Authorized';
-    setState(() {
-      _authorized = message;
-    });
+
   }
 
-  void _cancelAuthentication() async {
-    await auth.stopAuthentication();
-    setState(() => _isAuthenticating = false);
+  void getLocation(bool checkin) async {
+    var locationPermissionGranted = await AppUtils.askLocationPermission();
+    if (locationPermissionGranted) {
+      Location location = new Location();
+
+      bool _serviceEnabled;
+      PermissionStatus _permissionGranted;
+
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          AppUtils.showToast(msg: 'open_gps'.tr);
+          setState(() {
+            pickingLocation = false;
+          });
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.DENIED) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.GRANTED) {
+          AppUtils.showToast(msg: 'permission_denied'.tr);
+          setState(() {
+            pickingLocation = false;
+          });
+          return;
+        }
+      }
+
+      _locationData = await location.getLocation();
+
+      if (Geolocator.distanceBetween(
+          _locationData.latitude,
+          _locationData.longitude,
+          _locationData.latitude,
+          _locationData.longitude) <
+          100) {
+        AppUtils.showToast(msg: "location in range done");
+        AttendanceRepositoryImp repo = AttendanceRepositoryImp();
+        UserData user = (await AppUtils.getUserData()) ?? UserData();
+        user.lat = "${_locationData.latitude}";
+        user.lng = "${_locationData.longitude}";
+        if (checkin) {
+          log("1111111");
+          repo.checkin(user: user);
+        } else {
+          log("2222222");
+          repo.checkout(user: user);
+        }
+      } else {
+        AppUtils.showToast(msg: "location is so far your comapny");
+      }
+      setState(() {
+        pickingLocation = false;
+      });
+    }
   }
 
   @override
@@ -120,66 +157,7 @@ class _FingPageState extends State<FingPage> {
     );
   }
 
-  void getLocation(bool checkin) async {
-    var locationPermissionGranted = await AppUtils.askLocationPermission();
-    if (locationPermissionGranted) {
-      Location location = new Location();
 
-      bool _serviceEnabled;
-      PermissionStatus _permissionGranted;
-
-      _serviceEnabled = await location.serviceEnabled();
-      if (!_serviceEnabled) {
-        _serviceEnabled = await location.requestService();
-        if (!_serviceEnabled) {
-          AppUtils.showToast(msg: 'open_gps'.tr);
-          setState(() {
-            pickingLocation = false;
-          });
-          return;
-        }
-      }
-
-      _permissionGranted = await location.hasPermission();
-      if (_permissionGranted == PermissionStatus.DENIED) {
-        _permissionGranted = await location.requestPermission();
-        if (_permissionGranted != PermissionStatus.GRANTED) {
-          AppUtils.showToast(msg: 'permission_denied'.tr);
-          setState(() {
-            pickingLocation = false;
-          });
-          return;
-        }
-      }
-
-      _locationData = await location.getLocation();
-
-      if (Geolocator.distanceBetween(
-              _locationData.latitude,
-              _locationData.longitude,
-              _locationData.latitude,
-              _locationData.longitude) <
-          100) {
-        AppUtils.showToast(msg: "location in range done");
-        AttendanceRepositoryImp repo = AttendanceRepositoryImp();
-        UserData user = (await AppUtils.getUserData()) ?? UserData();
-        user.lat = "${_locationData.latitude}";
-        user.lng = "${_locationData.longitude}";
-        if (checkin) {
-          log("1111111");
-          repo.checkin(user: user);
-        } else {
-          log("2222222");
-          repo.checkout(user: user);
-        }
-      } else {
-        AppUtils.showToast(msg: "location is so far your comapny");
-      }
-      setState(() {
-        pickingLocation = false;
-      });
-    }
-  }
 
 }
 
