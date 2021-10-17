@@ -23,17 +23,17 @@ class MyPagesState extends State<MyPages> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Container(
-      color: Colors.green,
+      color: mainColor,
       child: FingPage(),
       constraints: BoxConstraints.expand(),
     ), // fingure print page
     Container(
-      color: Colors.green,
+      color: mainColor,
       child: AttendanceListPage(),
       constraints: BoxConstraints.expand(),
     ), // attendance list page
     Container(
-      color: Colors.green,
+      color: mainColor,
       child: EditProfile(),
       constraints: BoxConstraints.expand(),
     ), // profile page

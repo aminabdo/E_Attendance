@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:E_Attendance/utils/app_utils.dart';
-import 'package:E_Attendance/utils/base/BaseRequest.dart';
 
 class BaseResponse {
   int status;

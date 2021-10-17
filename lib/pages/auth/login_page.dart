@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:E_Attendance/Bles/Bloc/AuthBloc.dart';
 import 'package:E_Attendance/Bles/Model/Requests/LoginRequest.dart';
 import 'package:E_Attendance/pages/auth/forget_password_page.dart';
@@ -160,6 +159,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
+  // check login validation
   void validateAndLogin(BuildContext context) async {
     if (formKey.currentState.validate()) {
       AppUtils.hideKeyboard(context);
@@ -173,22 +174,12 @@ class _LoginPageState extends State<LoginPage> {
           eamilOrPhone: phoneOrEmailController.text,
           fireBaseToken: AppUtils.firebaseToken,
           password: passwordController.text,
-          // eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
-          // fireBaseToken: "AppUtils.firebaseToken",
-          // password: "123456",//passwordController.text.toString(),
         ),
       );
 
-      response.status = 1;
+      // response.status = 1;
 
-      // 0548900632
-      // var response = await authBloc.login(
-      //   LoginRequest(
-      //       eamilOrPhone: "1091989539",//phoneOrEmailController.text.toString(),
-      //       fireBaseToken: "AppUtils.firebaseToken",
-      //       password: "123456",//passwordController.text.toString(),
-      //   ),
-      // );
+
 
       if (response.status == 1) {
         setState(() {

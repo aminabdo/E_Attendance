@@ -6,7 +6,6 @@ import 'package:E_Attendance/Bles/Bloc/OrderBloc.dart';
 import 'package:E_Attendance/Bles/Model/Requests/AddProductTopdOrder.dart';
 import 'package:E_Attendance/Bles/Model/Responses/order/AllProductsResponse.dart';
 import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
-import 'package:E_Attendance/pages/orders/orders_pointer.dart';
 import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:E_Attendance/utils/consts.dart';
 import 'package:E_Attendance/widgets/my_app_bar.dart';
@@ -62,18 +61,11 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                 SizedBox(
                   width: 5,
                 ),
-                Text(
-                  OrdersPointer.selectedProducts.isEmpty
-                      ? ''
-                      : '${'items'.tr}  ${OrdersPointer.selectedProducts.length})',
+                Text('TEST1',
                   style: TextStyle(color: mat.Colors.white),
                 )
               ],
             ),
-            btnColor: OrdersPointer.selectedProducts.isEmpty
-                ? mat.Colors.grey
-                : mainColor,
-            onTap: OrdersPointer.selectedProducts.isEmpty ? null : () async {},
           ),
         ),
         body: SingleChildScrollView(
@@ -317,32 +309,6 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                           ],
                         ),
                         onTap: () {
-                          if (counter > 1) {
-                            counter--;
-                            totalPrice = price * counter;
-
-                            if (counter <= 1) {
-                              OrdersPointer.selectedProducts.forEach((element) {
-                                if (element.productDetailId.toString() ==
-                                    widget.product.id.toString()) {
-                                  OrdersPointer.selectedProducts
-                                      .remove(element);
-                                }
-                              });
-                            } else {
-                              OrdersPointer.selectedProducts.forEach((element) {
-                                if (element.productDetailId.toString() ==
-                                    widget.product.id.toString()) {
-                                  element.quantity = counter;
-                                }
-                              });
-                            }
-                            setState(() {});
-                          } else {
-                            setState(() {});
-                          }
-
-                          widget.onCounterChange();
                         },
                         width: 40,
                         height: 30,
@@ -380,64 +346,6 @@ class _AttendanceListItemState extends State<AttendanceListItem> {
                     'add'.tr,
                     width: MediaQuery.of(context).size.width / 4,
                     onTap: () {
-                      if (widget.product.quantity == "0") {
-                        AppUtils.showToast(msg: "quantity_error".tr);
-                      } else if (OrdersPointer.selectedProducts.isEmpty) {
-                        OrdersPointer.selectedProducts.add(
-                          OrdersBean(
-                            quantity: counter,
-                            colorId: widget.product.colors.isEmpty
-                                ? null
-                                : widget.product.colors[selectedColor].id
-                                    .toString(),
-                            sizeId: widget.product.sizes.isEmpty
-                                ? null
-                                : widget.product.sizes[selectedSize].id
-                                    .toString(),
-                            productDetailId: widget.product.id.toString(),
-                          ),
-                        );
-                      } else {
-                        bool isExist = false;
-                        int index = -1;
-
-                        for (int i = 0;
-                            i < OrdersPointer.selectedProducts.length;
-                            i++) {
-                          if (OrdersPointer.selectedProducts[i].productDetailId
-                                  .toString() ==
-                              widget.product.id.toString()) {
-                            isExist = true;
-                            index = i;
-                          }
-                        }
-
-                        if (isExist) {
-                          OrdersPointer.selectedProducts[index].quantity =
-                              counter;
-                          OrdersPointer.selectedProducts[index].colorId = widget
-                              .product.colors[selectedColor].id
-                              .toString();
-                          OrdersPointer.selectedProducts[index].sizeId =
-                              widget.product.sizes[selectedSize].id.toString();
-                        } else {
-                          OrdersPointer.selectedProducts.add(
-                            OrdersBean(
-                              quantity: counter,
-                              colorId: widget.product.colors.isEmpty
-                                  ? null
-                                  : widget.product.colors[selectedColor].id
-                                      .toString(),
-                              sizeId: widget.product.sizes.isEmpty
-                                  ? null
-                                  : widget.product.sizes[selectedSize].id
-                                      .toString(),
-                              productDetailId: widget.product.id.toString(),
-                            ),
-                          );
-                        }
-                      }
-                      widget.onCounterChange();
                     },
                   ),
                 ],

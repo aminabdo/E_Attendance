@@ -1,4 +1,4 @@
-# qimma
+# se_attendance
 
 SE Attendance System.
 

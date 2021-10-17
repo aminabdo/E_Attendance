@@ -58,9 +58,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   Expanded(
                     child: Center(
-                      child: Image.asset(
-                        'assets/images/logo.jpeg',
-                        scale: 1.2,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).padding.top -
+                            screenUtil.setHeight(10),
                       ),
                     ),
                   ),

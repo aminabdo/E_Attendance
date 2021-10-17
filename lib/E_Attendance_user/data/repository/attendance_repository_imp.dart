@@ -10,7 +10,7 @@ class AttendanceRepositoryImp {
   Future checkin({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
-    user.dateTime = DateTime.now();
+    user.time = DateTime.now().toString();
 
     // for single attendance
     database
@@ -36,7 +36,7 @@ class AttendanceRepositoryImp {
   Future checkout({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
-    user.dateTime = DateTime.now();
+    user.time = DateTime.now().toString();
     database
         .reference()
         .child('attendance')

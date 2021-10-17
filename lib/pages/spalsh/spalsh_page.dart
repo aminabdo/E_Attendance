@@ -31,7 +31,8 @@ class _SplashPageState extends State<SplashPage> {
               builder: (_) => WelcomePage(),
             ),
           );
-        } else {
+        }
+        else {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (_) => HomePage(),
@@ -55,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             WelcomeBackgroundImage(),
             Image.asset(
-              'assets/images/logo.jpeg',
+              'assets/images/splash10.jpeg',
             ),
           ],
         ),

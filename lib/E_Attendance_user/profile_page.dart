@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:E_Attendance/Bles/Bloc/client_bloc.dart';
-import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:E_Attendance/utils/consts.dart';
-import 'package:E_Attendance/widgets/my_loader.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -15,7 +12,6 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
-    clientBloc.getAllClients();
   }
 
   @override

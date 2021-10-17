@@ -33,7 +33,7 @@ class AuthBloc extends BaseBloc {
                 phone: element.snapshot.value['phone'],
                 lat: element.snapshot.value['lat'],
                 lng: element.snapshot.value['lng'],
-                dateTime: DateTime.now()
+                time: DateTime.now().toString()
             ),
             message: "done"
         );
@@ -79,7 +79,7 @@ class AuthBloc extends BaseBloc {
         phone: user.phone,
         lat: user.lat,
         lng: user.lng,
-        dateTime: DateTime.now()
+        time: DateTime.now().toString()
       ),
       message: "done"
     );

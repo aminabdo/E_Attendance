@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:E_Attendance/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
@@ -28,7 +29,6 @@ class AppUtils {
   }
 
   static saveLanguage(String languag) async {
-    print("saveLanguage  ---->>>> ${languag}");
     language = languag;
     (await SharedPreferences.getInstance()).setString('langCode', language);
   }
@@ -49,10 +49,10 @@ class AppUtils {
   }
 
   // method to save last user login data
-  static saveUserData(UserData responseBody) {
-    SharedPreferences.getInstance().then((pref) {
-      String data = jsonEncode(responseBody);
-      pref.setString('currentUser', data);
+  static saveUserData(UserData userData) {
+    SharedPreferences.getInstance().then((test) {
+      String data = jsonEncode(userData);
+      test.setString('currentUser', data);
     });
   }
 
@@ -105,25 +105,6 @@ class AppUtils {
   }
 
   // true if granted : false if denied
-  static Future<bool> askCameraPermission() async {
-    bool permissionState = false;
-    await PermissionHandler().requestPermissions([
-      PermissionGroup.camera,
-    ]).then(
-      (Map<PermissionGroup, PermissionStatus> map) {
-        if (map[PermissionGroup.camera] == PermissionStatus.granted) {
-          permissionState = true;
-        } else {
-          permissionState = false;
-        }
-      },
-    );
-
-    print('state of permission >>>> $permissionState');
-    return permissionState;
-  }
-
-  // true if granted : false if denied
   static Future<bool> checkPermissionState(PermissionGroup permissions) async {
     bool permissionState = false;
     await PermissionHandler().checkPermissionStatus(permissions).then(
@@ -163,10 +144,10 @@ class AppUtils {
       try {
         var selectedImage = await MultiImagePicker.pickImages(
           maxImages: maxNumber,
-          cupertinoOptions: CupertinoOptions(takePhotoIcon: "Qimma"),
+          cupertinoOptions: CupertinoOptions(takePhotoIcon: "se_attendance"),
           materialOptions: MaterialOptions(
             actionBarColor: "#ff16135A",
-            actionBarTitle: 'Qimma',
+            actionBarTitle: 'se_attendance',
             allViewTitle: "All Photos",
             useDetailsView: false,
             autoCloseOnSelectionLimit: false,
@@ -202,22 +183,5 @@ class AppUtils {
     }
   }
 
-  static String calcDate(BuildContext context, String date) {
-    var res = DateTime.now().difference(DateTime.parse(date)).inMinutes;
-    if (res < 60) {
-      return "${res.toString()}   ${AppUtils.translate(context, 'minutes')}";
-    }
-    res = DateTime.now().difference(DateTime.parse(date)).inHours;
 
-    if (res < 24) {
-      return "${res.toString()}   ${AppUtils.translate(context, 'hours')}";
-    }
-    res = DateTime.now().difference(DateTime.parse(date)).inDays;
-
-    return "${res.toString()}   ${AppUtils.translate(context, 'days')}";
-  }
-
-  static void exitFromApp() {
-    exit(0);
-  }
 }

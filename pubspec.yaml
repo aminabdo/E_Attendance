@@ -48,6 +48,7 @@ dependencies:
   #firebase_auth:
 
 dev_dependencies:
+  dart_code_metrics: ^4.4.0
   flutter_test:
     sdk: flutter
 
@@ -55,7 +56,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/logo.jpeg"
 
 flutter:
 
