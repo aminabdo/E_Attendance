@@ -391,9 +391,7 @@ class _SingupPageState extends State<SingupPage> {
 
   void validateAndSignup(BuildContext context) async {
     if (formKey.currentState.validate()) {
-      if (profileImage == null) {
-        AppUtils.showToast(msg: AppUtils.translate(context, 'choose_an_image'));
-      }
+
 
       if (_locationData == null) {
         AppUtils.showToast(
@@ -408,7 +406,7 @@ class _SingupPageState extends State<SingupPage> {
 
       SignupResponse response = await authBloc.signup(
         SignupRequest(
-          fireBaseToken: 'jjjjjjjj', // AppUtils.firebaseToken,
+          fireBaseToken: AppUtils.firebaseToken,
           password: passwordController.text,
           passwordConfirmation: confirmPasswordController.text,
           phone: phoneController.text,

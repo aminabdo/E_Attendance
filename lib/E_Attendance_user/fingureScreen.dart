@@ -25,6 +25,7 @@ class FingPage extends StatefulWidget {
 class _FingPageState extends State<FingPage> {
   final LocalAuthentication auth = LocalAuthentication();
 
+  String fingerPrint = "";
   bool pickingLocation = false;
   LocationData _locationData;
 
@@ -47,8 +48,7 @@ class _FingPageState extends State<FingPage> {
           useErrorDialogs: true,
           stickyAuth: true,
           biometricOnly: true);
-      authenticated.toString();
-
+      fingerPrint = authenticated.toString();
       getLocation(checkin);
     } on PlatformException catch (e) {
       AppUtils.showToast(msg: "feature_not_enable".tr);

@@ -44,7 +44,8 @@ dependencies:
   firebase_core:
   firebase_database:
   geolocator:
-  get: #any version
+  get:
+  flutter_datetime_picker: ^1.5.1
   #firebase_auth:
 
 dev_dependencies:

@@ -125,7 +125,6 @@ class LocalString extends Translations {
           "all_clients_page_name": "Name",
           "all_clients_page_dept": "Dept",
           "all_clients_page_add": "Add",
-          "attendance_page": "============Attendance Page=============",
           "attendance_page_attend": "Attend",
           "attendance_page_leave": "Leave",
           "attendance_page_note": "Note",
@@ -175,7 +174,8 @@ class LocalString extends Translations {
           "edit_order": "edit order",
           "check_in": "check in",
           "check_out": "check out",
-          "order_updated_succes": "order updated succefully"
+          "order_updated_succes": "order updated succefully",
+          "attendance_page": "Attendance Report"
         },
         'ar': {
           "lang": "EN",
@@ -304,7 +304,6 @@ class LocalString extends Translations {
           "my_History_page_date": "التاريخ",
           "my_History_page_status": "الحالة",
           "my_History_page_notes": "ملاحظات",
-          "attendance_page": "============Attendance Page=============",
           "attendance_page_attend": "حضور",
           "attendance_page_leave": "انصراف",
           "attendance_page_note": "ملاحظة",
@@ -347,7 +346,8 @@ class LocalString extends Translations {
           "total": "الاجمالي",
           "sub_total": "المجموع الفرعي",
           "edit_order": "تعديل الطلب",
-          "order_updated_succes": "تم تعديل الطلب بنجاح"
+          "order_updated_succes": "تم تعديل الطلب بنجاح",
+          "attendance_page": "تقرير الحضور"
         }
       };
 }

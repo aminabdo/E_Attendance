@@ -13,7 +13,11 @@ import 'package:E_Attendance/widgets/my_button.dart';
 import 'package:E_Attendance/widgets/my_button2.dart';
 import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:E_Attendance/widgets/my_text_form_field.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
+
+import 'data/model/attendance.dart';
+
 
 class AttendanceListPage extends StatefulWidget {
   final dynamic orderId;
@@ -25,12 +29,25 @@ class AttendanceListPage extends StatefulWidget {
 }
 
 class _AttendanceListPageState extends State<AttendanceListPage> {
+
+  String startDate = "start date";
+  String endDate = "end date";
+  DateTime start, end ;
+  List<AttendanceModel> list = [];
+
   @override
   void initState() {
     super.initState();
-    AttendanceRepositoryImp().getAttendanceData();
+    init();
   }
 
+  init()async{
+
+    list = await AttendanceRepositoryImp().getAttendanceData(start: start, end: end);
+    setState(() {
+
+    });
+  }
   bool isLoading = false;
 
   Widget space(BuildContext context) {
@@ -38,6 +55,8 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
       height: MediaQuery.of(context).padding.top,
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,20 +103,64 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                     children: [
                       space(context),
                       MyAppBar(
-                        text: 'add_new_order'.tr,
+                        text: 'attendance_page'.tr,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           children: [
-                            Flexible(
-                              child: MyTextFormField(
-                                borderWidth: 1,
-                                hintText: 'search_by_name'.tr,
-                                prefixIcon:
-                                    Image.asset('assets/images/search.png'),
-                                onChanged: (txt) async {},
-                              ),
+                            Expanded(
+                                child: TextButton(
+                                    onPressed: () async {
+                                      DatePicker.showDatePicker(context,
+                                          showTitleActions: true,
+                                          minTime: DateTime(2020, 3, 5),
+                                          maxTime: DateTime(2025, 6, 7), onChanged: (date) {
+                                            print('change $date');
+
+                                          }, onConfirm: (date) async {
+                                            startDate = "${date.year}/${date.month}/${date.day}";
+                                            setState(() {
+
+                                            });
+                                            start = date;
+                                            list = await AttendanceRepositoryImp().getAttendanceData(start: start, end: end);
+
+                                            setState(() {
+
+                                            });
+                                            print('confirm $date');
+                                          }, currentTime: DateTime.now(), locale: LocaleType.ar);
+                                    },
+                                    child: Text(
+                                      '${startDate}',
+                                    )),
+                            ),
+                            Expanded(
+                                child: TextButton(
+                                    onPressed: () {
+                                      DatePicker.showDatePicker(context,
+                                          showTitleActions: true,
+                                          minTime: DateTime(2020, 3, 5),
+                                          maxTime: DateTime(2025, 6, 7), onChanged: (date) {
+
+                                          }, onConfirm: (date) async {
+                                            print('change $date');
+                                            endDate = "${date.year}/${date.month}/${date.day}";
+                                            setState(() {
+
+                                            });
+                                            end = date;
+                                            list = await AttendanceRepositoryImp().getAttendanceData(start: start, end: end);
+                                            setState(() {
+
+                                            });
+                                            print('confirm $date');
+                                          }, currentTime: DateTime.now(), locale: LocaleType.ar);
+                                    },
+                                    child: Text(
+                                      '${endDate}',
+                                    )),
                             ),
                           ],
                         ),
@@ -124,14 +187,14 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                                 separatorBuilder: (BuildContext context, int index) => const Divider(),
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
-                                itemCount: 9,
+                                itemCount: list.length,
                                 itemBuilder: (context, index) {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("تاريخ اليوم"),
-                                      Text("ميعاد الحضور"),
-                                      Text("ميعاد الانصراف"),
+                                      Text("${list[index].date}"),
+                                      Text("${list[index].attendDate}"),
+                                      Text("${list[index].leaveDate}"),
                                     ],
                                   );
                                 });

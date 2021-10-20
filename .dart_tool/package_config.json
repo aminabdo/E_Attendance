@@ -260,6 +260,12 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "flutter_datetime_picker",
+      "rootUri": "file:///Users/amin/Documents/work/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_datetime_picker-1.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_image_slideshow",
       "rootUri": "file:///Users/amin/Documents/work/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image_slideshow-0.0.3",
       "packageUri": "lib/",
@@ -758,7 +764,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-10-17T20:23:22.053666Z",
+  "generated": "2021-10-20T19:39:31.534613Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

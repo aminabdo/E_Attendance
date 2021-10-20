@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:E_Attendance/E_Attendance_user/data/model/attendance.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AttendanceRepositoryImp {
-  BehaviorSubject<List<String>> _attendance = BehaviorSubject<List<String>>();
+  BehaviorSubject<List<AttendanceModel>> _attendance = BehaviorSubject<List<AttendanceModel>>();
+  BehaviorSubject<List<AttendanceModel>> get attendance => _attendance;
   Future checkin({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
@@ -23,7 +27,6 @@ class AttendanceRepositoryImp {
 
     // for multi attendance
     //database.reference().child('attendance').push().set(user.toJson());
-
 
     // add user
     database
@@ -46,13 +49,13 @@ class AttendanceRepositoryImp {
     database
         .reference()
         .child('users')
-        .child("${user.phone}")
+        .child("${user.phone}_${user.password}")
         .set(user.toJson());
   }
 
-  Future<dynamic> getAttendanceData() async {
-    List<UserData> attendance;
+  Future<List<AttendanceModel>> getAttendanceData({DateTime start, DateTime end}) async {
 
+    List<AttendanceModel> att = [];
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = await FirebaseDatabase(app: app);
     await database
@@ -62,26 +65,23 @@ class AttendanceRepositoryImp {
         .onChildAdded
         .forEach((element) {
       var line = element.snapshot.key;
+      var value = element.snapshot.value;
+      String year = "${line.split("_")[2]}";
+      String month = "${line.split("_")[2]}";
+      String day = "${line.split("_")[2]}";
+      DateTime dateTime = DateTime(int.parse(year), int.parse(month), int.parse(day));
+
+      String date = DateFormat("yyyy-MM-dd").format(DateTime.now());
+      log("${date}");
+      if(dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now())){
+        att.add(AttendanceModel(dateTime.toString(), value['time'] ??'', value?.time ??''));
+      }
+
+      att.add(AttendanceModel(dateTime.toString(), value['time'] ??'', value['time'] ??''));
+
       log(" ->>> ${line}");
     });
 
+    return att;
   }
-}
-class Attendance{
-  String checkin;
-  String checkout;
-  String date;
-
-  Attendance(this.checkin, this.checkout, this.date);
-
-  Attendance.fromJson(Map<String, dynamic> json)
-      : checkin = json['checkin'],
-        checkout = json['checkout'],
-        date = json['date'];
-
-  Map<String, dynamic> toJson() => {
-        'checkin': checkin,
-        'checkout': checkout,
-        'date': date,
-      };
 }

@@ -51,7 +51,7 @@ class UserData {
   dynamic currencyId;
   String token;
   String time = DateTime.now().toString();
-  String finger = "";
+  String finger = "test";
 
   UserData(
       {this.id = 1,
@@ -73,6 +73,7 @@ class UserData {
       this.currencyId,
       this.password,
       this.time,
+      this.finger = "test",
       this.token});
 
   static UserData fromMap(Map<String, dynamic> map) {
@@ -98,6 +99,7 @@ class UserData {
     dataBean.currencyId = map['currency_id'];
     dataBean.token = map['token'];
     dataBean.time = map['time'];
+    dataBean.finger = map['finger'];
     return dataBean;
   }
 
@@ -122,6 +124,6 @@ class UserData {
         "time": DateTime.now().toString(),
         "token": token,
         "password": password,
-        "finger": md5.convert(utf8.encode(email ?? "test")).toString()
+        "finger": md5.convert(utf8.encode(finger ?? email)).toString()
       };
 }

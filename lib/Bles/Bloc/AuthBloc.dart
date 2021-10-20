@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:E_Attendance/Bles/Model/Requests/LoginRequest.dart';
@@ -20,10 +21,10 @@ class AuthBloc extends BaseBloc {
 
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
-    database.reference().child('users').limitToLast(100).onChildAdded.forEach((element) {
+    await database.reference().child('users').limitToLast(1000).onChildAdded.forEach((element) {
       if(element.snapshot.key.split("_")[0] == user.eamilOrPhone &&
       element.snapshot.key.split("_")[1] == user.password){
-        return LoginResponse(
+        var response = LoginResponse(
             status: 1,
             data: UserData(
                 firstName: element.snapshot.value['first_name'],
@@ -37,12 +38,14 @@ class AuthBloc extends BaseBloc {
             ),
             message: "done"
         );
+        AppUtils.saveUserData(response.data);
+        return response;
       }
 
     });
 
     return LoginResponse(
-        status: 1,
+        status: 0,
         data: UserData(),
         message: "done"
     );
@@ -61,34 +64,30 @@ class AuthBloc extends BaseBloc {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
     try {
-      await database.reference().child('users').child("${user.phone}").set(
+      await database.reference().child('users').child("${user.phone}ـ${user.password}").set(
           await user.toJson());
     }catch(e){
       log("eroooooo->>> ${e.toString()}");
       await database.reference().child('users').child("${user.phone}").set(
           await user.toJson());
     }
-
-    return SignupResponse(
-      status: 1,
-      data: UserData(
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        password: user.password,
-        phone: user.phone,
-        lat: user.lat,
-        lng: user.lng,
-        time: DateTime.now().toString()
-      ),
-      message: "done"
+    var userData = SignupResponse(
+        status: 1,
+        data: UserData(
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            password: user.password,
+            phone: user.phone,
+            lat: user.lat,
+            lng: user.lng,
+            time: DateTime.now().toString()
+        ),
+        message: "done"
     );
-    // _signup.value = SignupResponse();
-    // _signup.value.loading = true ;
-    // SignupResponse response = SignupResponse.fromMap(await (await (repository.post(ApiRoutes.register(), await request.toJson(), isForm: true))). data);
-    // _signup.value = response;
-    // _signup.value.loading = false ;
-    // return response;
+    AppUtils.saveUserData(userData.data);
+    return userData;
+
   }
 
   BehaviorSubject<LoginResponse> get s_login => _login;

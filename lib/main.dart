@@ -26,8 +26,6 @@ void main() async {
 
   final FirebaseDatabase database = FirebaseDatabase(app: app);
   AttendanceRepositoryImp repositoryImp = AttendanceRepositoryImp();
-  await repositoryImp.checkin(user: UserData());
-  await repositoryImp.checkout(user: UserData());
   //
   // database.reference().child('user').push().set(LoginRequest().toJson());
   //
