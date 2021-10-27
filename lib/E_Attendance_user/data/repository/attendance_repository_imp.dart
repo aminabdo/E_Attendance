@@ -7,6 +7,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:date_utils/date_utils.dart' as d1;
+
 
 class AttendanceRepositoryImp {
   BehaviorSubject<List<AttendanceModel>> _attendance = BehaviorSubject<List<AttendanceModel>>();
@@ -67,21 +69,28 @@ class AttendanceRepositoryImp {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
       String year = "${line.split("_")[2]}";
-      String month = "${line.split("_")[2]}";
-      String day = "${line.split("_")[2]}";
+      String month = "${line.split("_")[3]}";
+      String day = "${line.split("_")[4]}";
       DateTime dateTime = DateTime(int.parse(year), int.parse(month), int.parse(day));
 
       String date = DateFormat("yyyy-MM-dd").format(DateTime.now());
       log("${date}");
-      if(dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now())){
-        att.add(AttendanceModel(dateTime.toString(), value['time'] ??'', value?.time ??''));
+
+      String day1 = d1.DateUtils.formatDay(dateTime);
+      String dayName = d1.DateUtils.formatDay(dateTime);
+      log("-----000---> ${d1.DateUtils.formatDay(dateTime)}");
+
+      if(start == null || end == null ){
+        att.add(AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', value['time'] ??'', day1));
       }
-
-      att.add(AttendanceModel(dateTime.toString(), value['time'] ??'', value['time'] ??''));
-
+      if(dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now())){
+        att.add(AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', value['time'] ??'', day1));
+      }
+      _attendance.sink.add(att);
+      _attendance.value = att;
       log(" ->>> ${line}");
     });
-
     return att;
   }
 }
+var attRepo = AttendanceRepositoryImp();

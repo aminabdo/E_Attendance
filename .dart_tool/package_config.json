@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "date_utils",
+      "rootUri": "file:///Users/amin/Documents/work/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/date_utils-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dio",
       "rootUri": "file:///Users/amin/Documents/work/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/dio-3.0.10",
       "packageUri": "lib/",
@@ -764,7 +770,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-10-20T19:39:31.534613Z",
+  "generated": "2021-10-27T20:29:53.997635Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

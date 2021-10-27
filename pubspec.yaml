@@ -46,6 +46,7 @@ dependencies:
   geolocator:
   get:
   flutter_datetime_picker: ^1.5.1
+  date_utils: ^0.2.0
   #firebase_auth:
 
 dev_dependencies:
