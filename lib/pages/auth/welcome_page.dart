@@ -67,19 +67,19 @@ class _WelcomePageState extends State<WelcomePage> {
                   SizedBox(
                     height: MediaQuery.of(context).padding.top * 1.3,
                   ),
-                  Center(
-                    child: MyButton(
-                      AppUtils.translate(context, 'create_account'),
-                      width: size.width * .5,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => SingupPage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  // Center(
+                  //   child: MyButton(
+                  //     AppUtils.translate(context, 'create_account'),
+                  //     width: size.width * .5,
+                  //     onTap: () {
+                  //       Navigator.of(context).push(
+                  //         MaterialPageRoute(
+                  //           builder: (_) => SingupPage(),
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
                   SizedBox(
                     height: screenUtil.setHeight(10),
                   ),

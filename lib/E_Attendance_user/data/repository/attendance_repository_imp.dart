@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:E_Attendance/E_Attendance_user/data/model/attendance.dart';
@@ -13,6 +14,10 @@ import 'package:date_utils/date_utils.dart' as d1;
 class AttendanceRepositoryImp {
   BehaviorSubject<List<AttendanceModel>> _attendance = BehaviorSubject<List<AttendanceModel>>();
   BehaviorSubject<List<AttendanceModel>> get attendance => _attendance;
+
+  BehaviorSubject<List<UserData>> _users = BehaviorSubject<List<UserData>>();
+  BehaviorSubject<List<UserData>> get users => _users;
+
   Future checkin({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
@@ -56,7 +61,6 @@ class AttendanceRepositoryImp {
   }
 
   Future<List<AttendanceModel>> getAttendanceData({DateTime start, DateTime end}) async {
-
     List<AttendanceModel> att = [];
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = await FirebaseDatabase(app: app);
@@ -92,5 +96,27 @@ class AttendanceRepositoryImp {
     });
     return att;
   }
+
+  Future<List<UserData>> getUsers() async{
+    List<UserData> users_ = [];
+    final FirebaseApp app = await Firebase.initializeApp();
+    final FirebaseDatabase database = FirebaseDatabase(app: app);
+    await database
+        .reference()
+        .child('users')
+        .limitToLast(1000)
+        .onChildAdded
+        .forEach((element) {
+      var line = element.snapshot.key;
+      var value = element.snapshot.value;
+
+      users_.add(UserData.fromMap(json.decode(json.encode(value))));
+      _users.sink.add(users_);
+      _users.value = users_;
+      log(" ->>> ${line}");
+    });
+    return users_;
+  }
+
 }
 var attRepo = AttendanceRepositoryImp();

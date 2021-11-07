@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:location/location.dart';
 import 'package:E_Attendance/Bles/Bloc/AuthBloc.dart';
 import 'package:E_Attendance/Bles/Model/Requests/SignupRequest.dart';
@@ -71,8 +72,7 @@ class _SingupPageState extends State<SingupPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MyAppBar(
-                              text: AppUtils.translate(
-                                  context, 'register_new_account'),
+                              text: 'register_new_account'.tr,
                             ),
                             Expanded(
                               child: Container(
@@ -102,8 +102,7 @@ class _SingupPageState extends State<SingupPage> {
                               }
                             } else {
                               AppUtils.showToast(
-                                  msg: AppUtils.translate(
-                                      context, 'permission_denied'));
+                                  msg: 'permission_denied'.tr);
                             }
                           },
                           child: CircleAvatar(
@@ -120,8 +119,7 @@ class _SingupPageState extends State<SingupPage> {
                               child: MyTextFormField(
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(
-                                        context, 'required');
+                                    return 'required'.tr;
                                   } else {
                                     return null;
                                   }
@@ -129,7 +127,7 @@ class _SingupPageState extends State<SingupPage> {
                                 controller: firstNameController,
                                 keyboardType: TextInputType.text,
                                 hintText:
-                                    AppUtils.translate(context, 'first_name'),
+                                'first_name'.tr,
                               ),
                             ),
                             SizedBox(
@@ -139,8 +137,7 @@ class _SingupPageState extends State<SingupPage> {
                               child: MyTextFormField(
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(
-                                        context, 'required');
+                                    return 'required'.tr;
                                   } else {
                                     return null;
                                   }
@@ -148,7 +145,7 @@ class _SingupPageState extends State<SingupPage> {
                                 controller: lastNameController,
                                 keyboardType: TextInputType.text,
                                 hintText:
-                                    AppUtils.translate(context, 'last_name'),
+                                'last_name'.tr,
                               ),
                             ),
                           ],
@@ -159,18 +156,14 @@ class _SingupPageState extends State<SingupPage> {
                         MyTextFormField(
                           validator: (String input) {
                             if (input.isEmpty) {
-                              return AppUtils.translate(context, 'required');
-                            } else if (!PatternUtils.phoneIsValid(
-                                phone: input)) {
-                              return AppUtils.translate(
-                                  context, 'invalid_phone_number');
+                              return 'required'.tr;
                             } else {
                               return null;
                             }
                           },
                           controller: phoneController,
                           keyboardType: TextInputType.phone,
-                          hintText: AppUtils.translate(context, 'phone_number'),
+                          hintText: 'phone_number'.tr,
                         ),
                         SizedBox(
                           height: 10,
@@ -178,18 +171,17 @@ class _SingupPageState extends State<SingupPage> {
                         MyTextFormField(
                           validator: (String input) {
                             if (input.isEmpty) {
-                              return AppUtils.translate(context, 'required');
+                              return 'required'.tr;
                             } else if (!PatternUtils.emailIsValid(
                                 email: input)) {
-                              return AppUtils.translate(
-                                  context, 'invalid_email_address');
+                              return 'invalid_email_address'.tr;
                             } else {
                               return null;
                             }
                           },
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
-                          hintText: AppUtils.translate(context, 'email'),
+                          hintText: 'email'.tr,
                         ),
                         SizedBox(
                           height: 10,
@@ -197,17 +189,16 @@ class _SingupPageState extends State<SingupPage> {
                         MyTextFormField(
                           validator: (String input) {
                             if (input.isEmpty) {
-                              return AppUtils.translate(context, 'required');
+                              return  'required'.tr;
                             } else if (input.length < 8) {
-                              return AppUtils.translate(
-                                  context, 'weak_password');
+                              return 'weak_password'.tr;
                             } else {
                               return null;
                             }
                           },
                           controller: passwordController,
                           keyboardType: TextInputType.text,
-                          hintText: AppUtils.translate(context, 'password'),
+                          hintText:  'password'.tr,
                           obscureText: hidePassword,
                           suffixIcon: GestureDetector(
                             child: Icon(
@@ -227,16 +218,16 @@ class _SingupPageState extends State<SingupPage> {
                         MyTextFormField(
                           validator: (String input) {
                             if (input.isEmpty) {
-                              return AppUtils.translate(context, 'required');
+                              return  'required'.tr;
                             } else if (input != passwordController.text) {
-                              return AppUtils.translate(context, 'not_match');
+                              return  'not_match'.tr;
                             } else {
                               return null;
                             }
                           },
                           keyboardType: TextInputType.text,
                           hintText:
-                              AppUtils.translate(context, 'confirm_password'),
+                               'confirm_password'.tr,
                           controller: confirmPasswordController,
                           obscureText: hideConfirmPassword,
                           suffixIcon: GestureDetector(
@@ -259,8 +250,7 @@ class _SingupPageState extends State<SingupPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppUtils.translate(
-                                      context, 'location_coordinates'),
+                                  'location_coordinates'.tr,
                                 ),
                                 _locationData == null
                                     ? SizedBox.shrink()
@@ -275,8 +265,7 @@ class _SingupPageState extends State<SingupPage> {
                                             width: screenUtil.setWidth(3),
                                           ),
                                           Text(
-                                            AppUtils.translate(
-                                                context, 'location_picked'),
+                                            'location_picked'.tr,
                                             style: TextStyle(
                                               color: mainColor,
                                               fontSize: screenUtil.setSp(12),
@@ -294,8 +283,7 @@ class _SingupPageState extends State<SingupPage> {
                                 pickingLocation
                                     ? CircularProgressIndicator()
                                     : Text(
-                                        AppUtils.translate(
-                                            context, 'pick_location'),
+                                        'pick_location'.tr,
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
@@ -321,8 +309,7 @@ class _SingupPageState extends State<SingupPage> {
                                           await location.requestService();
                                       if (!_serviceEnabled) {
                                         AppUtils.showToast(
-                                            msg: AppUtils.translate(
-                                                context, 'open_gps'));
+                                            msg: 'open_gps'.tr);
                                         setState(() {
                                           pickingLocation = false;
                                         });
@@ -339,8 +326,7 @@ class _SingupPageState extends State<SingupPage> {
                                       if (_permissionGranted !=
                                           PermissionStatus.GRANTED) {
                                         AppUtils.showToast(
-                                            msg: AppUtils.translate(
-                                                context, 'permission_denied'));
+                                            msg: 'permission_denied'.tr);
                                         setState(() {
                                           pickingLocation = false;
                                         });
@@ -365,7 +351,7 @@ class _SingupPageState extends State<SingupPage> {
                         ),
                         space(),
                         MyButton(
-                          AppUtils.translate(context, 'register').toUpperCase(),
+                           'register'.tr.toUpperCase(),
                           onTap: () {
                             validateAndSignup(context);
                           },
@@ -395,8 +381,7 @@ class _SingupPageState extends State<SingupPage> {
 
       if (_locationData == null) {
         AppUtils.showToast(
-            msg: AppUtils.translate(
-                context, 'please_provide_the_location_coordinates'));
+            msg: 'please_provide_the_location_coordinates'.tr);
         return;
       }
 

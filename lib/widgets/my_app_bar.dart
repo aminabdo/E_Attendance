@@ -26,24 +26,7 @@ class MyAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             leading ??
-                FloatingActionButton(
-                  onPressed: onBackBtnPressed ??
-                      () {
-                        Navigator.pop(
-                          context,
-                        );
-                      },
-                  elevation: 0,
-                  focusElevation: 0,
-                  highlightElevation: 0,
-                  backgroundColor: mainColor,
-                  mini: true,
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                    size: 18,
-                  ),
-                ),
+                Container(),
             SizedBox(
               width: 10,
             ),

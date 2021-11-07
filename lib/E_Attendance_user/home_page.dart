@@ -1,3 +1,4 @@
+import 'package:E_Attendance/E_Attendance_user/users_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:E_Attendance/E_Attendance_user/attendance_list_page.dart';
 import 'package:E_Attendance/E_Attendance_user/fingureScreen.dart';
@@ -37,6 +38,11 @@ class MyPagesState extends State<MyPages> {
       child: EditProfile(),
       constraints: BoxConstraints.expand(),
     ), // profile page
+    Container(
+      color: mainColor,
+      child: UsersListPage(),
+      constraints: BoxConstraints.expand(),
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -68,6 +74,10 @@ class MyPagesState extends State<MyPages> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "users",
           ),
         ],
         currentIndex: _selectedIndex,
