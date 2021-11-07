@@ -21,9 +21,10 @@ class AuthBloc extends BaseBloc {
 
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
-    await database.reference().child('users').limitToLast(1000).onChildAdded.forEach((element) {
-      if(element.snapshot.key.split("_")[0] == user.eamilOrPhone &&
-      element.snapshot.key.split("_")[1] == user.password){
+    await database?.reference()?.child('users')?.limitToLast(1000)?.onChildAdded?.forEach((element) {
+      if(element.snapshot.value["phone"].toString() == user.eamilOrPhone &&
+      element.snapshot.value["active"].toString() == "1" &&
+      element.snapshot.value["password"].toString() == user.password){
         var response = LoginResponse(
             status: 1,
             data: UserData(
@@ -81,7 +82,8 @@ class AuthBloc extends BaseBloc {
             phone: user.phone,
             lat: user.lat,
             lng: user.lng,
-            time: DateTime.now().toString()
+            time: DateTime.now().toString(),
+            active : "1"
         ),
         message: "done"
     );

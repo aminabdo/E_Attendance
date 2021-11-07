@@ -54,6 +54,7 @@ class UserData {
   String token;
   String time = DateTime.now().toString();
   String finger = "test";
+  String active = "1";
 
   UserData(
       {this.id = 1,
@@ -76,6 +77,7 @@ class UserData {
       this.password,
       this.time,
       this.finger = "test",
+      this.active = "1",
       this.token});
 
   static UserData fromMap(Map<String, dynamic> map) {
@@ -102,6 +104,7 @@ class UserData {
     dataBean.token = map['token'];
     dataBean.time = map['time'];
     dataBean.finger = map['finger'];
+    dataBean.active = map['active'];
     return dataBean;
   }
 
@@ -126,6 +129,7 @@ class UserData {
         "time": DateFormat.Hms().format(DateTime.now()).toString(),
         "token": token,
         "password": password,
-        "finger": md5.convert(utf8.encode("${finger} ${email}")).toString()
+        "finger": md5.convert(utf8.encode("${finger} ${email}")).toString(),
+        "active": active,
       };
 }
