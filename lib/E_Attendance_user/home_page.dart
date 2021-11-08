@@ -33,11 +33,11 @@ class MyPagesState extends State<MyPages> {
       child: AttendanceListPage(),
       constraints: BoxConstraints.expand(),
     ), // attendance list page
-    Container(
-      color: mainColor,
-      child: EditProfile(),
-      constraints: BoxConstraints.expand(),
-    ), // profile page
+    // Container(
+    //   color: mainColor,
+    //   child: EditProfile(),
+    //   constraints: BoxConstraints.expand(),
+    // ), // profile page
     Container(
       color: mainColor,
       child: UsersListPage(),
