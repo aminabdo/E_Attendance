@@ -4,17 +4,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
 import 'package:E_Attendance/pages/spalsh/spalsh_page.dart';
 import 'package:E_Attendance/utils/consts.dart';
-import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Bles/Model/Responses/login/LoginResponse.dart';
 import 'E_Attendance_user/local/Trans.dart';
+import 'admin/users_list.dart';
 import 'pages/spalsh/spalsh_page.dart';
 import 'utils/app_localization.dart';
 import 'widgets/custom_scroll_behavior.dart';
@@ -26,18 +24,7 @@ void main() async {
 
   final FirebaseDatabase database = FirebaseDatabase(app: app);
   AttendanceRepositoryImp repositoryImp = AttendanceRepositoryImp();
-  //
-  // database.reference().child('user').push().set(LoginRequest().toJson());
-  //
-  //
-  // database.reference().child('user').limitToFirst(1000).onChildAdded.listen((event) {
-  //   log("1111->${LoginRequest.fromMap(event.snapshot.value).eamilOrPhone}");
-  // });
-  // database.reference().child('user').once().then((DataSnapshot snapshot) {
-  //
-  //   print(
-  //       'Connected to directly configured database and read ${LoginRequest.fromMap(snapshot.value).eamilOrPhone}');
-  // });
+
   runApp(
     MyApp(
       languageCode:

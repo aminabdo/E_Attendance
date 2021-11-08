@@ -33,28 +33,28 @@ class Attendance {
 }
 
 class UserData {
-  int id = 1;
-  String firstName = "amin";
-  String lastName = "amin";
-  String image = "";
+  dynamic id = 1;
+  dynamic firstName = "amin";
+  dynamic lastName = "amin";
+  dynamic image = "";
   dynamic fireBaseToken;
-  String phone = "01099020814";
-  String email = "aminabdo43@gmail.com";
+  dynamic phone = "01099020814";
+  dynamic email = "aminabdo43@gmail.com";
   dynamic status;
   dynamic social;
-  String password;
+  dynamic password;
   dynamic notification;
   dynamic message;
-  String lang;
-  String lat = "123";
-  String lng = "123";
-  String carNum;
+  dynamic lang;
+  dynamic lat = "123";
+  dynamic lng = "123";
+  dynamic carNum;
   dynamic debt;
   dynamic currencyId;
-  String token;
-  String time = DateTime.now().toString();
-  String finger = "test";
-  String active = "1";
+  dynamic token;
+  dynamic time = DateTime.now().toString();
+  dynamic finger = "test";
+  dynamic active = "1";
 
   UserData(
       {this.id = 1,
@@ -83,26 +83,26 @@ class UserData {
   static UserData fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     UserData dataBean = UserData();
-    dataBean.id = map['id'];
-    dataBean.firstName = map['first_name'];
-    dataBean.password = map['password'];
+    dataBean.id = map['id'] ?? 1;
+    dataBean.firstName = map['first_name'] ;
+    dataBean.password = map['password'] ;
     dataBean.lastName = map['last_name'];
     dataBean.image = map['image'];
-    dataBean.fireBaseToken = map['fire_base_token'];
-    dataBean.phone = map['phone'];
-    dataBean.email = map['email'];
-    dataBean.status = map['status'];
-    dataBean.social = map['social'];
-    dataBean.notification = map['notification'];
-    dataBean.message = map['message'];
-    dataBean.lang = map['lang'];
-    dataBean.lat = map['lat'];
-    dataBean.lng = map['lng'];
-    dataBean.carNum = map['car_num'];
-    dataBean.debt = map['debt'];
+    dataBean.fireBaseToken = map['fire_base_token'] ;
+    dataBean.phone = map['phone'] ;
+    dataBean.email = map['email'] ;
+    dataBean.status = map['status'] ;
+    dataBean.social = map['social'] ;
+    dataBean.notification = map['notification'] ;
+    dataBean.message = map['message'] ;
+    dataBean.lang = map['lang'] ;
+    dataBean.lat = map['lat'] ;
+    dataBean.lng = map['lng'] ;
+    dataBean.carNum = map['car_num'] ;
+    dataBean.debt = map['debt'] ;
     dataBean.currencyId = map['currency_id'];
-    dataBean.token = map['token'];
-    dataBean.time = map['time'];
+    dataBean.token = map['token'] ;
+    dataBean.time = map['time'] ;
     dataBean.finger = map['finger'];
     dataBean.active = map['active'];
     return dataBean;

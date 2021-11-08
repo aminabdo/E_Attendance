@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,8 +40,9 @@ class AuthBloc extends BaseBloc {
             ),
             message: "done"
         );
-        AppUtils.saveUserData(response.data);
-        return response;
+        //AppUtils.saveUserData(response.data);
+        _login.sink.add(response);
+
       }
 
     });
@@ -50,20 +52,13 @@ class AuthBloc extends BaseBloc {
         data: UserData(),
         message: "done"
     );
-    // _login.value = LoginResponse();
-    // _login.value.loading = true ;
-    // log("AuthBloc -> login ");
-    // LoginResponse response = LoginResponse.fromMap((await repository.post(ApiRoutes.login(),request.toJson()))?.data);
-    // _login.value = response;
-    // _login.value.loading = false ;
-    //
-    // return response;
   }
 
   Future<SignupResponse> signup(SignupRequest user) async {
 
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
+
     try {
       await database.reference().child('users').child("${user.phone}ـ${user.password}").set(
           await user.toJson());

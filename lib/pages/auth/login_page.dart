@@ -169,7 +169,30 @@ class _LoginPageState extends State<LoginPage> {
         loading = true;
       });
 
-      var response = await authBloc.login(
+      authBloc.s_login.listen((value) async {
+        if (value?.status == 1) {
+          setState(() {
+            loading = false;
+          });
+
+          AppUtils.userData = value.data;
+          await AppUtils.saveUserData(value.data);
+
+          Navigator.of(context)
+              .pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
+              .then((value) {
+            passwordController.clear();
+            phoneOrEmailController.clear();
+          });
+        } else if (value?.status == 0) {
+          AppUtils.showToast(msg: value.message);
+          setState(() {
+            loading = false;
+          });
+        }
+      });
+      authBloc.login(
         LoginRequest(
           eamilOrPhone: phoneOrEmailController.text,
           fireBaseToken: AppUtils.firebaseToken,
@@ -181,27 +204,8 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-      if (response.status == 1) {
-        setState(() {
-          loading = false;
-        });
 
-        AppUtils.userData = response.data;
-        await AppUtils.saveUserData(response.data);
 
-        Navigator.of(context)
-            .pushAndRemoveUntil(
-                MaterialPageRoute(builder: (_) => HomePage()), (route) => false)
-            .then((value) {
-          passwordController.clear();
-          phoneOrEmailController.clear();
-        });
-      } else {
-        AppUtils.showToast(msg: response.message);
-        setState(() {
-          loading = false;
-        });
-      }
     }
   }
 }

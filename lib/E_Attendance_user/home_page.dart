@@ -73,10 +73,6 @@ class MyPagesState extends State<MyPages> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
             label: "users",
           ),
         ],
