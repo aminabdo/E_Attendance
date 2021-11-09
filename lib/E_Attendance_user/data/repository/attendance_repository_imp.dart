@@ -60,7 +60,7 @@ class AttendanceRepositoryImp {
         .set(user.toJson());
   }
 
-  Future<List<AttendanceModel>> getAttendanceData({DateTime start, DateTime end}) async {
+  Future<List<AttendanceModel>> getAttendanceData({DateTime start, DateTime end,}) async {
     List<AttendanceModel> att = [];
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = await FirebaseDatabase(app: app);

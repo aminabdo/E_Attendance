@@ -1,4 +1,5 @@
 import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
+import 'package:E_Attendance/E_Attendance_user/attendance_list_page.dart';
 import 'package:E_Attendance/pages/auth/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mat;
@@ -8,9 +9,9 @@ import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:get/get.dart';
 
 class UsersListPage extends StatefulWidget {
-  final dynamic orderId;
+  final dynamic userID;
 
-  const UsersListPage({Key key, @required this.orderId}) : super(key: key);
+  const UsersListPage({Key key, @required this.userID}) : super(key: key);
 
   @override
   _UsersListPageState createState() => _UsersListPageState();
@@ -85,24 +86,51 @@ class _UsersListPageState extends State<UsersListPage> {
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: (){
-
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
                                       },
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Text("${snapshot.data[index].firstName}"),
-                                            flex: 10,
-                                          ),
-                                          Expanded(
-                                            child: Text("${snapshot.data[index].lastName}"),
-                                            flex: 10,
-                                          ),
-                                          Expanded(
-                                            child: Text("${snapshot.data[index].phone}"),
-                                            flex: 10,
-                                          ),
-                                        ],
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(10, 30, 10, 30),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GestureDetector(
+                                            onTap: (){
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                              },
+                                              child: Expanded(
+                                                child: Text("${snapshot.data[index].firstName}"),
+                                                flex: 10,
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: (){
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                              },
+                                              child: Expanded(
+                                                child: Text("${snapshot.data[index].lastName}"),
+                                                flex: 10,
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: (){
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                              },
+                                              child: Expanded(
+                                                child: Text("${snapshot.data[index].phone}"),
+                                                flex: 10,
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: (){
+                                                snapshot?.data?.removeAt(index);
+                                              },
+                                              child: Expanded(
+                                                child: Icon(Icons.delete, color: Colors.red,),
+                                                flex: 10,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   });
