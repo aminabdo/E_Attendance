@@ -77,6 +77,7 @@ class AttendanceRepositoryImp {
         .forEach((element) {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
+      String checkin = "${line.split("_")[2]}";
       String year = "${line.split("_")[2]}";
       String month = "${line.split("_")[3]}";
       String day = "${line.split("_")[4]}";
@@ -95,6 +96,9 @@ class AttendanceRepositoryImp {
       if(dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now())){
         att.add(AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', value['time'] ??'', day1));
       }
+
+
+
       _attendance.sink.add(att);
       _attendance.value = att;
       log(" ->>> ${line}");
