@@ -103,8 +103,8 @@ class _FingPageState extends State<FingPage> {
       await repo.getLocation();
 
       if (Geolocator.distanceBetween(
-          _locationData.latitude,
-          _locationData.longitude,
+          locationData.latitude,
+          locationData.longitude,
           _locationData.latitude,
           _locationData.longitude) <
           100) {
