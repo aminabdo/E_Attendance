@@ -95,6 +95,13 @@ class _FingPageState extends State<FingPage> {
 
       _locationData = await location.getLocation();
 
+      AttendanceRepositoryImp repo = AttendanceRepositoryImp();
+
+      LocationData locationData = LocationData.fromMap(
+          {"latitude":3.2,
+            "longitude":2.1});
+      await repo.getLocation();
+
       if (Geolocator.distanceBetween(
           _locationData.latitude,
           _locationData.longitude,
@@ -102,7 +109,7 @@ class _FingPageState extends State<FingPage> {
           _locationData.longitude) <
           100) {
         AppUtils.showToast(msg: "location in range done");
-        AttendanceRepositoryImp repo = AttendanceRepositoryImp();
+
         UserData user = (await AppUtils.getUserData()) ?? UserData();
         user.lat = "${_locationData.latitude}";
         user.lng = "${_locationData.longitude}";

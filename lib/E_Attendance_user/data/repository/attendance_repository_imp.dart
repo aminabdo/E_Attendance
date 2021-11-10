@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:E_Attendance/E_Attendance_user/data/model/attendance.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:date_utils/date_utils.dart' as d1;
 
@@ -17,6 +19,9 @@ class AttendanceRepositoryImp {
 
   BehaviorSubject<List<UserData>> _users = BehaviorSubject<List<UserData>>();
   BehaviorSubject<List<UserData>> get users => _users;
+
+  BehaviorSubject<LocationData> _locations = BehaviorSubject<LocationData>();
+  BehaviorSubject<LocationData> get locations => _locations;
 
   Future checkin({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
@@ -117,6 +122,79 @@ class AttendanceRepositoryImp {
     });
     return users_;
   }
+  Future<LocationData> getLocation() async{
+    LocationData location = null;
+    final FirebaseApp app = await Firebase.initializeApp();
+    final FirebaseDatabase database = FirebaseDatabase(app: app);
+    await database
+        .reference()
+        .child('location')
+        .limitToLast(1000)
+        .onChildAdded
+        .forEach((element) {
+      var line = element.snapshot.key;
+      var value = element.snapshot.value;
 
+      location = LocationData.fromMap(json.decode(json.encode(value)));
+      _locations.sink.add(location);
+      _locations.value = location;
+      log(" ->>> ${line}");
+    });
+    return location;
+  }
+
+  Future saveLocation({double latitude, double longitude}) async {
+    final FirebaseApp app = await Firebase.initializeApp();
+    final FirebaseDatabase database = FirebaseDatabase(app: app);
+
+
+
+    bool pickingLocation = true;
+
+    LocationData locationData;
+    var locationPermissionGranted = await AppUtils.askLocationPermission();
+    if (locationPermissionGranted) {
+      Location location = new Location();
+
+      bool _serviceEnabled;
+      PermissionStatus _permissionGranted;
+
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          AppUtils.showToast(msg: 'open_gps'.tr);
+
+          pickingLocation = false;
+
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.DENIED) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.GRANTED) {
+          AppUtils.showToast(msg: 'permission_denied'.tr);
+
+          pickingLocation = false;
+
+          return;
+        }
+      }
+
+      LocationData locationData = await location.getLocation();
+      database
+          .reference()
+          .child('location')
+          .child(
+          "1")
+          .set({"latitude":locationData.latitude, "longitude":locationData.longitude});
+    }
+
+
+
+
+  }
 }
 var attRepo = AttendanceRepositoryImp();

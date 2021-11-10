@@ -7,6 +7,7 @@ import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_reposi
 import 'package:E_Attendance/widgets/my_app_bar.dart';
 import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
 
 class UsersListPage extends StatefulWidget {
   final dynamic userID;
@@ -74,6 +75,10 @@ class _UsersListPageState extends State<UsersListPage> {
                           MyAppBar(
                             text: 'attendance_page'.tr,
                           ),
+                          TextButton(onPressed: ()async{
+
+                            attRepo.saveLocation();
+                          }, child: Text("add_company_location")),
                           StreamBuilder<List<UserData>>(
                             stream: attRepo.users.stream,
                             builder: (context, snapshot) {
