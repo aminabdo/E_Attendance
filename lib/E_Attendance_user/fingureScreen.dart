@@ -40,8 +40,7 @@ class _FingPageState extends State<FingPage> {
   }
   // ()? -1 : -2;
     Future<void> _authenticateWithBiometrics(bool checkin) async {
-      getLocation(checkin);
-      return;
+
     bool authenticated = false;
     try {
       authenticated = await auth.authenticate(

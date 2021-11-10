@@ -25,20 +25,25 @@ class _SplashPageState extends State<SplashPage> {
             builder: (_) => WelcomePage(),
           ),
         );
-        if (AppUtils.userData == null) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (_) => WelcomePage(),
-            ),
-          );
-        }
-        else {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (_) => HomePage(),
-            ),
-          );
-        }
+        // if (AppUtils.userData == null) {
+        //   Navigator.of(context).pushReplacement(
+        //     MaterialPageRoute(
+        //       builder: (_) => WelcomePage(),
+        //     ),
+        //   );
+        // }
+        // else {
+        //   Navigator.of(context).pushReplacement(
+        //     MaterialPageRoute(
+        //       builder: (_) => HomePage(),
+        //     ),
+        //   );
+        // }
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => WelcomePage(),
+          ),
+        );
       },
     );
   }
