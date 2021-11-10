@@ -139,7 +139,7 @@ class AttendanceRepositoryImp {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
 
-      location = LocationData.fromMap(json.decode(json.encode(value)));
+      location = LocationData.fromMap({"latitude":value['latitude'],"longitude":value['longitude']});
       _locations.sink.add(location);
       _locations.value = location;
       log(" ->>> ${line}");
