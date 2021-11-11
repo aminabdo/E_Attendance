@@ -85,7 +85,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   Center(
                     child: MyButton(
-                      AppUtils.translate(context, 'login'),
+                      'login'.tr,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

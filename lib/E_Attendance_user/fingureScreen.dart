@@ -97,14 +97,12 @@ class _FingPageState extends State<FingPage> {
 
       AttendanceRepositoryImp repo = AttendanceRepositoryImp();
 
-      LocationData locationData = LocationData.fromMap(
-          {"latitude":3.2,
-            "longitude":2.1});
-      await repo.getLocation();
+
+      LocationData location1 =await repo.getLocation();
 
       if (Geolocator.distanceBetween(
-          _locationData.latitude,
-          _locationData.longitude,
+          location1.latitude,
+          location1.longitude,
           _locationData.latitude,
           _locationData.longitude) <
           100) {

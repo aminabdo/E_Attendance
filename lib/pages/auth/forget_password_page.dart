@@ -6,6 +6,7 @@ import 'package:E_Attendance/widgets/forget_password_background_image.dart';
 import 'package:E_Attendance/widgets/my_app_bar.dart';
 import 'package:E_Attendance/widgets/my_button.dart';
 import 'package:E_Attendance/widgets/my_text_form_field.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
 
@@ -34,13 +35,13 @@ class ForgetPasswordPage extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).padding.top + screenUtil.setHeight(50),
                     ),
-                    Text(AppUtils.translate(context, 'are_you_forget_your_password'),
+                    Text('are_you_forget_your_password'.tr,
                       style: TextStyle(fontSize: screenUtil.setSp(24)),
                       textAlign: TextAlign.center,
                     ),
                     Padding(
                       padding: EdgeInsets.all(screenUtil.setWidth(8.0)),
-                      child: Text(AppUtils.translate(context, 'forget_password_msg'),
+                      child: Text('forget_password_msg'.tr,
                         style: TextStyle(fontSize: screenUtil.setSp(14),
                         ), textAlign: TextAlign.center,
                       ),
@@ -49,14 +50,14 @@ class ForgetPasswordPage extends StatelessWidget {
                       height: MediaQuery.of(context).padding.top * 2,
                     ),
                     MyTextFormField(
-                      hintText: AppUtils.translate(context, 'phone_number'),
+                      hintText: 'phone_number'.tr,
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).padding.top * 2.2,
                     ),
                     Center(
                       child: MyButton(
-                        AppUtils.translate(context, 'next'),
+                        'next'.tr,
                         width: size.width * .5,
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(builder: (_) => VerfyCodePage(),),);

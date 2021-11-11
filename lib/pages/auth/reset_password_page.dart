@@ -7,6 +7,7 @@ import 'package:E_Attendance/widgets/forget_password_background_image.dart';
 import 'package:E_Attendance/widgets/my_app_bar.dart';
 import 'package:E_Attendance/widgets/my_button.dart';
 import 'package:E_Attendance/widgets/my_text_form_field.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   @override
@@ -43,12 +44,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       height: MediaQuery.of(context).padding.top + screenUtil.setHeight(50),
                     ),
                     Text(
-                      AppUtils.translate(context, 'create_new_password'),
+                      'create_new_password'.tr,
                       style: TextStyle(fontSize: screenUtil.setSp(24)),
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      AppUtils.translate(context, 'reset_password_msg'),
+                      'reset_password_msg'.tr,
                       style: TextStyle(fontSize: screenUtil.setSp(14)),
                       textAlign: TextAlign.center,
                     ),
@@ -56,7 +57,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       height: MediaQuery.of(context).padding.top * 2,
                     ),
                     MyTextFormField(
-                      hintText: AppUtils.translate(context, 'new_password'),
+                      hintText: 'new_password'.tr,
                       obscureText: hidePassword,
                       suffixIcon: GestureDetector(
                         child: Icon(
@@ -75,7 +76,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                     MyTextFormField(
                       obscureText: hideConfirmPassword,
-                      hintText: AppUtils.translate(context, 'confirm_password'),
+                      hintText: 'confirm_password'.tr,
                       suffixIcon: GestureDetector(
                         child: Icon(
                           hideConfirmPassword
@@ -93,7 +94,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                     Center(
                       child: MyButton(
-                        AppUtils.translate(context, 'submit'),
+                        'submit'.tr,
                         width: size.width * .5,
                         onTap: () {
                           Navigator.pushAndRemoveUntil(

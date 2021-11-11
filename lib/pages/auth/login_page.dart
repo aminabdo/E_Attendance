@@ -11,6 +11,7 @@ import 'package:E_Attendance/widgets/my_app_bar.dart';
 import 'package:E_Attendance/widgets/my_button.dart';
 import 'package:E_Attendance/widgets/my_loader.dart';
 import 'package:E_Attendance/widgets/my_text_form_field.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import 'welcome_page.dart';
 
@@ -59,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: screenUtil.setHeight(30) * 2,
                               ),
                               MyAppBar(
-                                text: AppUtils.translate(context, 'login'),
+                                text: 'login'.tr,
                                 textStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: screenUtil.setSp(18),
@@ -88,12 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                               MyTextFormField(
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(
-                                        context, 'required');
+                                    return 'required'.tr;
                                   }
                                 },
-                                hintText: AppUtils.translate(
-                                    context, 'email_or_phone'),
+                                hintText: 'email_or_phone'.tr,
                                 controller: phoneOrEmailController,
                               ),
                               SizedBox(
@@ -104,12 +103,11 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: passwordController,
                                 validator: (String input) {
                                   if (input.isEmpty) {
-                                    return AppUtils.translate(
-                                        context, 'required');
+                                    return 'required'.tr;
                                   }
                                 },
                                 hintText:
-                                    AppUtils.translate(context, 'password'),
+                                    'password'.tr,
                                 obscureText: true,
                               ),
                               SizedBox(
@@ -118,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Center(
                                 child: MyButton(
-                                  AppUtils.translate(context, 'login'),
+                                  'login'.tr,
                                   width: size.width * .5,
                                   onTap: () {
                                     validateAndLogin(context);
@@ -130,8 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Center(
                                 child: ClickableText(
-                                  text: AppUtils.translate(
-                                      context, 'forget_password'),
+                                  text: 'forget_password'.tr,
                                   onTap: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
