@@ -104,7 +104,7 @@ class UserData {
     dataBean.token = map['token'] ;
     dataBean.time = map['time'] ;
     dataBean.finger = map['finger'];
-    dataBean.active = map['active'];
+    dataBean.active = map['active'].toString();
     return dataBean;
   }
 

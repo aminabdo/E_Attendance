@@ -7,6 +7,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:E_Attendance/Bles/Bloc/AuthBloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -37,6 +38,7 @@ class _FingPageState extends State<FingPage> {
               ? _SupportState.supported
               : _SupportState.unsupported),
         );
+    attRepo.getLocation();
   }
   // ()? -1 : -2;
     Future<void> _authenticateWithBiometrics(bool checkin) async {
@@ -98,32 +100,34 @@ class _FingPageState extends State<FingPage> {
       AttendanceRepositoryImp repo = AttendanceRepositoryImp();
 
 
-      LocationData location1 =await repo.getLocation();
+      attRepo.locations.listen((locationData)async{
+        if (Geolocator.distanceBetween(
+            locationData.latitude,
+            locationData.longitude,
+            _locationData.latitude,
+            _locationData.longitude) <
+            100) {
+          AppUtils.showToast(msg: "location in range done");
 
-      if (Geolocator.distanceBetween(
-          location1.latitude,
-          location1.longitude,
-          _locationData.latitude,
-          _locationData.longitude) <
-          100) {
-        AppUtils.showToast(msg: "location in range done");
-
-        UserData user = (await AppUtils.getUserData()) ?? UserData();
+          UserData user = (await AppUtils.getUserData()) ?? UserData();
         user.lat = "${_locationData.latitude}";
         user.lng = "${_locationData.longitude}";
         if (checkin) {
-          log("1111111");
-          repo.checkin(user: user);
+        log("1111111");
+        repo.checkin(user: user);
         } else {
-          log("2222222");
-          repo.checkout(user: user);
+        log("2222222");
+        repo.checkout(user: user);
         }
-      } else {
+        } else {
         AppUtils.showToast(msg: "location is so far your comapny");
-      }
-      setState(() {
+        }
+        setState(() {
         pickingLocation = false;
+        });
       });
+
+
     }
   }
 
