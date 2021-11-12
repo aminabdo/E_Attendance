@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:E_Attendance/Bles/Bloc/AuthBloc.dart';
 import 'package:E_Attendance/Bles/Model/Requests/LoginRequest.dart';
-import 'package:E_Attendance/pages/auth/forget_password_page.dart';
 import 'package:E_Attendance/E_Attendance_user/home_page.dart';
 import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:E_Attendance/widgets/clickable_text.dart';
@@ -130,10 +129,6 @@ class _LoginPageState extends State<LoginPage> {
                                 child: ClickableText(
                                   text: 'forget_password'.tr,
                                   onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                ForgetPasswordPage()));
                                   },
                                 ),
                               ),

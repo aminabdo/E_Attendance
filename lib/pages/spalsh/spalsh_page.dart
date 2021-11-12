@@ -61,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             WelcomeBackgroundImage(),
             Image.asset(
-              'assets/images/splash10.jpeg',
+              'assets/images/a3.png',
             ),
           ],
         ),

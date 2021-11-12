@@ -7,7 +7,7 @@ class WelcomeBackgroundImage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     if(Localizations.localeOf(context).languageCode == 'en') {
       return Image.asset(
-        'assets/images/splash10.jpeg',
+        'assets/images/a2.jpeg',
         fit: BoxFit.fill,
         scale: 1,
         width: size.width,
@@ -15,7 +15,7 @@ class WelcomeBackgroundImage extends StatelessWidget {
       );
     } else {
       return Image.asset(
-        'assets/images/splash10.jpeg',
+        'assets/images/a2.jpeg',
         fit: BoxFit.fill,
         scale: 1,
         width: size.width,

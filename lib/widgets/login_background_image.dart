@@ -11,7 +11,7 @@ class LoginBackgroundImage extends StatelessWidget {
         alignment: Alignment.center,
         transform: Matrix4.rotationY(math.pi),
         child: Image.asset(
-          'assets/images/login_bg.png',
+          'assets/images/a1.png',
           fit: BoxFit.fill,
           scale: 1,
           width: size.width,
@@ -20,7 +20,7 @@ class LoginBackgroundImage extends StatelessWidget {
       );
     } else {
       return Image.asset(
-        'assets/images/login_bg.png',
+        'assets/images/a1.png',
         fit: BoxFit.fill,
         scale: 1,
         width: size.width,
