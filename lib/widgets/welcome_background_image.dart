@@ -15,7 +15,7 @@ class WelcomeBackgroundImage extends StatelessWidget {
       );
     } else {
       return Image.asset(
-        'assets/images/a2.jpeg',
+        'assets/images/a2.png',
         fit: BoxFit.fill,
         scale: 1,
         width: size.width,

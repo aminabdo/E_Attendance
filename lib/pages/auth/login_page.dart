@@ -77,9 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                                     screenUtil.setHeight(20),
                               ),
                               Center(
-                                child: Image.asset(
-                                  'assets/images/login_image.png',
-                                  scale: 1.2,
+                                child: SizedBox(
+                                  height: screenUtil.uiSize.height / 2,
                                 ),
                               ),
                               SizedBox(
