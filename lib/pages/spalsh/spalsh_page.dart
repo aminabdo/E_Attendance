@@ -59,7 +59,7 @@ class _SplashPageState extends State<SplashPage> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            WelcomeBackgroundImage(),
+            // WelcomeBackgroundImage(),
             Image.asset(
               'assets/images/a3.png',
             ),

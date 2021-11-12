@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Center(
                                 child: SizedBox(
-                                  height: screenUtil.uiSize.height / 2,
+                                  height: screenUtil.uiSize.height / 3,
                                 ),
                               ),
                               SizedBox(
