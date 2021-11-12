@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
       translations: LocalString(),
       locale: Locale('ar'),
       localizationsDelegates: [
-        AppLocalizationsDelegate(),
+        // AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],

@@ -41,12 +41,12 @@ class AppUtils {
     FocusScope.of(context).requestFocus(FocusNode());
   }
 
-  static String translate(BuildContext context, String key) {
-    if (context == null) {
-      log("nuuuuuuuuuuulll");
-    }
-    return AppLocalization.of(context)?.translate(key) ?? 'no translation';
-  }
+  // static String translate(BuildContext context, String key) {
+  //   if (context == null) {
+  //     log("nuuuuuuuuuuulll");
+  //   }
+  //   return AppLocalization.of(context)?.translate(key) ?? 'no translation';
+  // }
 
   // method to save last user login data
   static saveUserData(UserData userData) {

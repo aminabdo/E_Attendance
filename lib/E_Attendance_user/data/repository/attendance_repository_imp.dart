@@ -151,8 +151,6 @@ class AttendanceRepositoryImp {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
 
-
-
     bool pickingLocation = true;
 
     LocationData locationData;
