@@ -77,7 +77,7 @@ class AttendanceRepositoryImp {
         .forEach((element) {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
-      String checkin = "${line.split("_")[2]}";
+      String checkin = "${line.split("_")[0]}";
       String year = "${line.split("_")[2]}";
       String month = "${line.split("_")[3]}";
       String day = "${line.split("_")[4]}";
@@ -88,13 +88,41 @@ class AttendanceRepositoryImp {
 
       String day1 = d1.DateUtils.formatDay(dateTime);
       String dayName = d1.DateUtils.formatDay(dateTime);
-      log("-----000---> ${d1.DateUtils.formatDay(dateTime)}");
 
-      if(start == null || end == null ){
-        att.add(AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', value['time'] ??'', day1));
+      AttendanceModel attendanceModel = null;
+      if(checkin == "1"){
+        attendanceModel = AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', 'missing checkout', day1);
       }
-      if(dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now())){
-        att.add(AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', value['time'] ??'', day1));
+      else{
+        attendanceModel = AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), 'missing checkin', value['time'] ??'', day1);
+      }
+
+      if((start == null || end == null) ||  (dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now()))){
+        try{
+          //var i = att?.firstWhere((element) => element?.date ??'' == attendanceModel?.date ?? '');
+
+          att.forEach((element) async{
+            log("${element.date} -> ${element.date == attendanceModel.date} <- ${attendanceModel.date}");
+            if(element.date == attendanceModel.date){
+              log("firstWhere -> ${element.date}");
+              await att.remove(element);
+              await att.removeWhere((element1) => element1.date == element.date);
+
+              if(checkin == "1"){
+                attendanceModel.leaveDate = element.leaveDate;
+                att.add(attendanceModel);
+              }else{
+                attendanceModel.attendDate = element.attendDate;
+                att.add(attendanceModel);
+              }
+
+            }
+          });
+
+        }catch(e){
+          log("exception -> firstWhere -> ${e}");
+        }
+        att.add(attendanceModel);
       }
 
 
@@ -150,6 +178,8 @@ class AttendanceRepositoryImp {
   Future saveLocation({double latitude, double longitude}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
+
+
 
     bool pickingLocation = true;
 
