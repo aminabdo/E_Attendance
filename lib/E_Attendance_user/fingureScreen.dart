@@ -110,7 +110,7 @@ class _FingPageState extends State<FingPage> {
             _locationData.latitude,
             _locationData.longitude) <
             100) {
-          AppUtils.showToast(msg: "location in range done");
+
 
           UserData user = (await AppUtils.getUserData()) ?? UserData();
         user.lat = "${_locationData.latitude}";
@@ -118,9 +118,11 @@ class _FingPageState extends State<FingPage> {
         if (checkin) {
         log("1111111");
         repo.checkin(user: user);
+        AppUtils.showToast(msg: "location in range done");
         } else {
         log("2222222");
         repo.checkout(user: user);
+        AppUtils.showToast(msg: "location in range done");
         }
         } else {
         AppUtils.showToast(msg: "location is so far your comapny");
