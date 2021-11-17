@@ -13,7 +13,6 @@ import 'package:E_Attendance/utils/consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'E_Attendance_user/local/Trans.dart';
 import 'pages/spalsh/spalsh_page.dart';
-import 'utils/app_localization.dart';
 import 'widgets/custom_scroll_behavior.dart';
 
 void main() async {
@@ -94,7 +93,6 @@ class _MyAppState extends State<MyApp> {
       translations: LocalString(),
       locale: Locale('ar'),
       localizationsDelegates: [
-        AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
