@@ -5,6 +5,7 @@ class LocalString extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en': {
           "lang": "ع",
+          "lango": "ar",
           "feature_not_enable": "this device not support finger print",
           "welcome_page": "============Welcome Page=============",
           "store_on_internet": "Store on internet",
@@ -179,6 +180,7 @@ class LocalString extends Translations {
         },
         'ar': {
           "lang": "EN",
+          "lango": "en",
           "feature_not_enable": "هذا الجهاز لا يدعم البصمة",
           "check_in": "دخول",
           "check_out": "خروج",
