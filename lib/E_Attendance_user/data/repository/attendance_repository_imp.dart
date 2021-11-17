@@ -126,7 +126,7 @@ class AttendanceRepositoryImp {
       }
 
 
-
+      att.sort((a,b) => a.attendDate.compareTo(b.attendDate));
       _attendance.sink.add(att);
       _attendance.value = att;
       log(" ->>> ${line}");
