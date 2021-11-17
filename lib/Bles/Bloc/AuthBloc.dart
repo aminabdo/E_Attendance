@@ -36,7 +36,9 @@ class AuthBloc extends BaseBloc {
                 phone: element.snapshot.value['phone'],
                 lat: element.snapshot.value['lat'],
                 lng: element.snapshot.value['lng'],
-                time: DateTime.now().toString()
+                time: DateTime.now().toString(),
+                type: element.snapshot.value['type'],
+                active: element.snapshot.value['active'],
             ),
             message: "done"
         );

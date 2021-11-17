@@ -1,6 +1,7 @@
 import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:E_Attendance/E_Attendance_user/attendance_list_page.dart';
 import 'package:E_Attendance/pages/auth/signup_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
@@ -46,6 +47,62 @@ class _UsersListPageState extends State<UsersListPage> {
 
   @override
   Widget build(BuildContext context) {
+    
+    if(AppUtils.userData.type != 2){
+      return LoadingOverlay(
+        isLoading: false,
+        progressIndicator: Loader(),
+        color: mat.Colors.white,
+        opacity: .5,
+        child: Scaffold(
+
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Material(
+                      color: mat.Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                      ),
+                      elevation: 4,
+                      child: Padding(
+                        padding: EdgeInsets.all(14.0),
+                        child: Column(
+                          children: [
+                            space(context),
+
+                            MyAppBar(
+                              text: 'attendance_page'.tr,
+                            ),
+                            Text("you don't have apermission")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  onPressed: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => SingupPage(),
+                      ),
+                    );
+                  },
+                  child: Text("add".tr),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
     Size size = MediaQuery.of(context).size;
     return LoadingOverlay(
       isLoading: false,

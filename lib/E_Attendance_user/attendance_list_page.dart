@@ -52,6 +52,8 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+
     return LoadingOverlay(
       isLoading: false,
       progressIndicator: Loader(),

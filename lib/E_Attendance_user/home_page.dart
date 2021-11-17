@@ -22,6 +22,7 @@ class MyPages extends StatefulWidget {
 
 class MyPagesState extends State<MyPages> {
   int _selectedIndex = 0;
+
   List<Widget> _widgetOptions = <Widget>[
     Container(
       color: mainColor,

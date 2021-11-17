@@ -55,6 +55,7 @@ class UserData {
   dynamic time = DateTime.now().toString();
   dynamic finger = "test";
   dynamic active = "1";
+  dynamic type = "1";
 
   UserData(
       {this.id = 1,
@@ -78,6 +79,7 @@ class UserData {
       this.time,
       this.finger = "test",
       this.active = "1",
+      this.type = "1",
       this.token});
 
   static UserData fromMap(Map<String, dynamic> map) {
@@ -105,6 +107,7 @@ class UserData {
     dataBean.time = map['time'] ;
     dataBean.finger = map['finger'];
     dataBean.active = map['active'].toString();
+    dataBean.type = map['type'].toString();
     return dataBean;
   }
 
@@ -131,5 +134,6 @@ class UserData {
         "password": password,
         "finger": md5.convert(utf8.encode("${finger} ${email}")).toString(),
         "active": active,
+        "type": type,
       };
 }
