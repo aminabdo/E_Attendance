@@ -58,26 +58,26 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
       color: mat.Colors.white,
       opacity: .5,
       child: Scaffold(
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(18.0),
-          child: MyButton2(
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'next'.tr,
-                  style: TextStyle(color: mat.Colors.white),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text('TEST1',
-                  style: TextStyle(color: mat.Colors.white),
-                )
-              ],
-            ),
-          ),
-        ),
+        // bottomNavigationBar: Padding(
+        //   padding: EdgeInsets.all(18.0),
+        //   child: MyButton2(
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text(
+        //           'next'.tr,
+        //           style: TextStyle(color: mat.Colors.white),
+        //         ),
+        //         SizedBox(
+        //           width: 5,
+        //         ),
+        //         Text('TEST1',
+        //           style: TextStyle(color: mat.Colors.white),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
         body: SingleChildScrollView(
           child: Column(
             children: [
