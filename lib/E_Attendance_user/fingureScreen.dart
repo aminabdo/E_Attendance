@@ -47,7 +47,7 @@ class _FingPageState extends State<FingPage> {
     try {
       authenticated = await auth.authenticate(
           localizedReason:
-              'Scan your fingerprint (or face or whatever) to authenticate',
+              'Scan your fingerprint to authenticate',
           useErrorDialogs: true,
           stickyAuth: true,
           biometricOnly: true);
