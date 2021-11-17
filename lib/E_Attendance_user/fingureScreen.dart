@@ -52,7 +52,10 @@ class _FingPageState extends State<FingPage> {
           stickyAuth: true,
           biometricOnly: true);
       fingerPrint = authenticated.toString();
-      getLocation(checkin);
+      if(authenticated){
+        getLocation(checkin);
+      }
+
     } on PlatformException catch (e) {
       AppUtils.showToast(msg: "feature_not_enable".tr);
 
