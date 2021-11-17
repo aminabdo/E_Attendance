@@ -47,8 +47,6 @@ dependencies:
   get:
   flutter_datetime_picker: ^1.5.1
   date_utils: ^0.2.0
-#  firebase_storage: ^3.0.3
-  #firebase_auth:
 
 dev_dependencies:
   dart_code_metrics: ^4.4.0
