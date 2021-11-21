@@ -124,9 +124,7 @@ class AttendanceRepositoryImp {
         }
         att.add(attendanceModel);
       }
-
-
-      att.sort((a,b) => a.attendDate.compareTo(b.attendDate));
+      att.sort((a,b) => DateFormat("dd-MM-yyyy").parse(a.date).isAfter(DateFormat("dd-MM-yyyy").parse(b.date)) ? 1:-1);
       _attendance.sink.add(att);
       _attendance.value = att;
       log(" ->>> ${line}");

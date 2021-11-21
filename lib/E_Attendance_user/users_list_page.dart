@@ -85,19 +85,7 @@ class _UsersListPageState extends State<UsersListPage> {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: FloatingActionButton(
-                  onPressed: (){
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => SingupPage(),
-                      ),
-                    );
-                  },
-                  child: Text("add".tr),
-                ),
-              )
+
             ],
           ),
         ),
