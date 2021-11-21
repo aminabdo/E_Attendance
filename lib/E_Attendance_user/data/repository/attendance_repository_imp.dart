@@ -124,7 +124,7 @@ class AttendanceRepositoryImp {
         }
         att.add(attendanceModel);
       }
-      att.sort((a,b) => DateFormat("dd-MM-yyyy").parse(a.date).isAfter(DateFormat("dd-MM-yyyy").parse(b.date)) ? 1:-1);
+      att.sort((a,b) => DateFormat("dd-MM-yyyy").parse(a.date).isAfter(DateFormat("dd-MM-yyyy").parse(b.date)) ? -1:1);
       _attendance.sink.add(att);
       _attendance.value = att;
       log(" ->>> ${line}");
@@ -147,7 +147,7 @@ class AttendanceRepositoryImp {
 
       users_.add(UserData.fromMap(json.decode(json.encode(value))));
       _users.sink.add(users_);
-      _users.value = users_;
+
       log(" ->>> ${line}");
     });
     return users_;

@@ -2,6 +2,8 @@ import 'package:E_Attendance/Bles/Model/Responses/login/LoginResponse.dart';
 import 'package:E_Attendance/E_Attendance_user/attendance_list_page.dart';
 import 'package:E_Attendance/pages/auth/signup_page.dart';
 import 'package:E_Attendance/utils/app_utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:E_Attendance/E_Attendance_user/data/repository/attendance_repository_imp.dart';
@@ -171,8 +173,16 @@ class _UsersListPageState extends State<UsersListPage> {
                                               ),
                                             ),
                                             GestureDetector(
-                                              onTap: (){
+                                              onTap: ()async{
                                                 snapshot?.data?.removeAt(index);
+                                                final FirebaseApp app = await Firebase.initializeApp();
+                                                final FirebaseDatabase database = FirebaseDatabase(app: app);
+
+                                                await database
+                                                    .reference()
+                                                    .child('users')
+                                                    .child("${snapshot.data[index].phone}_${snapshot.data[index].password}")
+                                                    .remove();
                                               },
                                               child: Expanded(
                                                 child: Icon(Icons.delete, color: Colors.red,),
