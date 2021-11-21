@@ -50,7 +50,7 @@ class _UsersListPageState extends State<UsersListPage> {
   @override
   Widget build(BuildContext context) {
     
-    if(AppUtils.userData.type != 2){
+    if(AppUtils.userData.type.toString() != "2"){
       return LoadingOverlay(
         isLoading: false,
         progressIndicator: Loader(),
@@ -174,7 +174,7 @@ class _UsersListPageState extends State<UsersListPage> {
                                             ),
                                             GestureDetector(
                                               onTap: ()async{
-                                                snapshot?.data?.removeAt(index);
+
                                                 final FirebaseApp app = await Firebase.initializeApp();
                                                 final FirebaseDatabase database = FirebaseDatabase(app: app);
 
@@ -183,6 +183,9 @@ class _UsersListPageState extends State<UsersListPage> {
                                                     .child('users')
                                                     .child("${snapshot.data[index].phone}_${snapshot.data[index].password}")
                                                     .remove();
+                                                setState(() {
+
+                                                });
                                               },
                                               child: Expanded(
                                                 child: Icon(Icons.delete, color: Colors.red,),
