@@ -28,9 +28,9 @@ class _WelcomePageState extends State<WelcomePage> {
             WelcomeBackgroundImage(),
             FloatingActionButton(
               onPressed: () {
-                Get.updateLocale(Locale('lang'.tr));
-                AppUtils.saveLanguage("lang".tr);
-                Locale('lang'.tr);
+                Get.updateLocale(Locale('lango'.tr));
+                AppUtils.saveLanguage("lango".tr);
+                Locale('lango'.tr);
               },
               child: Text("lang".tr),
               backgroundColor: mainColor,

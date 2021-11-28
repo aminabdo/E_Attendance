@@ -47,12 +47,15 @@ class _FingPageState extends State<FingPage> {
     try {
       authenticated = await auth.authenticate(
           localizedReason:
-              'Scan your fingerprint (or face or whatever) to authenticate',
+              'Scan your fingerprint to authenticate',
           useErrorDialogs: true,
           stickyAuth: true,
           biometricOnly: true);
       fingerPrint = authenticated.toString();
-      getLocation(checkin);
+      if(authenticated){
+        getLocation(checkin);
+      }
+
     } on PlatformException catch (e) {
       AppUtils.showToast(msg: "feature_not_enable".tr);
 
@@ -107,7 +110,7 @@ class _FingPageState extends State<FingPage> {
             _locationData.latitude,
             _locationData.longitude) <
             100) {
-          AppUtils.showToast(msg: "location in range done");
+
 
           UserData user = (await AppUtils.getUserData()) ?? UserData();
         user.lat = "${_locationData.latitude}";
@@ -115,9 +118,11 @@ class _FingPageState extends State<FingPage> {
         if (checkin) {
         log("1111111");
         repo.checkin(user: user);
+        AppUtils.showToast(msg: "location in range done");
         } else {
         log("2222222");
         repo.checkout(user: user);
+        AppUtils.showToast(msg: "location in range done");
         }
         } else {
         AppUtils.showToast(msg: "location is so far your comapny");

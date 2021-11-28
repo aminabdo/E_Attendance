@@ -33,7 +33,6 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
   }
 
   init()async{
-
     await attRepo.getAttendanceData(start: start, end: end);
     setState(() {
 
