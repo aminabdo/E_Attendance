@@ -176,13 +176,21 @@ class _LoginPageState extends State<LoginPage> {
             passwordController.clear();
             phoneOrEmailController.clear();
           });
-        } else if (value?.status == 0) {
+        }
+        else if (value?.status == 0) {
           AppUtils.showToast(msg: value.message);
           setState(() {
             loading = false;
           });
         }
+        else{
+          setState(() {
+            loading = false;
+          });
+        }
+        authBloc.s_login.close();
       });
+
       authBloc.login(
         LoginRequest(
           eamilOrPhone: phoneOrEmailController.text,
@@ -192,11 +200,6 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       // response.status = 1;
-
-
-
-
-
     }
   }
 }

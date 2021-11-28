@@ -11,8 +11,6 @@ import 'package:E_Attendance/Bles/Model/Responses/old/auth/SignupResponse.dart';
 import 'package:E_Attendance/utils/base/BaseBloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../ApiRoute.dart';
-
 class AuthBloc extends BaseBloc {
 
   BehaviorSubject<LoginResponse> _login = BehaviorSubject<LoginResponse>();
@@ -22,39 +20,40 @@ class AuthBloc extends BaseBloc {
 
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
-    await database?.reference()?.child('users')?.limitToLast(1000)?.onChildAdded?.forEach((element) {
-      if((element.snapshot.value["phone"].toString() == user.eamilOrPhone
-      ||element.snapshot.value["email"].toString() == user.eamilOrPhone) &&
-      element.snapshot.value["active"].toString() == "1" &&
-      element.snapshot.value["password"].toString() == user.password){
-        var response = LoginResponse(
-            status: 1,
-            data: UserData(
-                firstName: element.snapshot.value['first_name'],
-                lastName: element.snapshot.value['last_name'],
-                email: element.snapshot.value['email'],
-                password: element.snapshot.value['password'],
-                phone: element.snapshot.value['phone'],
-                lat: element.snapshot.value['lat'],
-                lng: element.snapshot.value['lng'],
+    await database?.reference()?.child('users').once().then((snapshot) async {
+      Map<String, dynamic> element = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
+      await element.forEach((key, element) {
+        log("log ---> ${element}");
+        if((element["phone"].toString() == user.eamilOrPhone
+            ||element["email"].toString() == user.eamilOrPhone) &&
+            element["password"].toString() == user.password){
+          var response = LoginResponse(
+              status: 1,
+              data: UserData(
+                firstName: element['first_name'],
+                lastName: element['last_name'],
+                email: element['email'],
+                password: element['password'],
+                phone: element['phone'],
+                lat: element['lat'],
+                lng: element['lng'],
                 time: DateTime.now().toString(),
-                type: element.snapshot.value['type'],
-                active: element.snapshot.value['active'],
-            ),
-            message: "done"
-        );
-        //AppUtils.saveUserData(response.data);
-        _login.sink.add(response);
+                type: element['type'],
+                active: element['active'],
+              ),
+              message: "done"
+          );
+          //AppUtils.saveUserData(response.data);
+          _login.sink.add(response);
+        }
+      });
 
-      }
-
+      _login.sink.add(LoginResponse(
+          status: 0,
+          data: UserData(),
+          message: "error username or password"
+      ));
     });
-
-    return LoginResponse(
-        status: 0,
-        data: UserData(),
-        message: "done"
-    );
   }
 
   Future<SignupResponse> signup(SignupRequest user) async {
@@ -87,9 +86,7 @@ class AuthBloc extends BaseBloc {
     );
     AppUtils.saveUserData(userData.data);
     return userData;
-
   }
-
   BehaviorSubject<LoginResponse> get s_login => _login;
 }
 
