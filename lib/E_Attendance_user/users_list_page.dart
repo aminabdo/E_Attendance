@@ -174,25 +174,20 @@ class _UsersListPageState extends State<UsersListPage> {
                                               ),
                                             ),
                                             GestureDetector(
-                                              onTap: ()async{
+                                                onTap: ()async{
 
-                                                final FirebaseApp app = await Firebase.initializeApp();
-                                                final FirebaseDatabase database = FirebaseDatabase(app: app);
+                                                  final FirebaseApp app = await Firebase.initializeApp();
+                                                  final FirebaseDatabase database = FirebaseDatabase(app: app);
 
-                                                await database
-                                                    .reference()
-                                                    .child('users')
-                                                    .child("${snapshot.data[index].phone}_${snapshot.data[index].password}")
-                                                    .remove();
-                                                setState(() {
+                                                  await database
+                                                      .reference()
+                                                      .child('users')
+                                                      .child("${snapshot.data[index].phone}_${snapshot.data[index].password}")
+                                                      .remove();
 
-                                                });
-                                              },
-                                              child: Expanded(
+                                                },
                                                 child: Icon(Icons.delete, color: Colors.red,),
-                                                flex: 10,
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),

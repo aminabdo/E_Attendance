@@ -154,6 +154,7 @@ class AttendanceRepositoryImp {
     });
     return users_;
   }
+
   Future<LocationData> getLocation() async{
     LocationData location = null;
     final FirebaseApp app = await Firebase.initializeApp();
