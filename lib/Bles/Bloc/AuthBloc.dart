@@ -17,7 +17,7 @@ class AuthBloc extends BaseBloc {
   BehaviorSubject<SignupResponse> _signup = BehaviorSubject<SignupResponse>();
 
   Future<LoginResponse> login(LoginRequest user) async {
-
+    bool logined = false ;
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
     await database?.reference()?.child('users').once().then((snapshot) async {
@@ -27,6 +27,7 @@ class AuthBloc extends BaseBloc {
         if((element["phone"].toString() == user.eamilOrPhone
             ||element["email"].toString() == user.eamilOrPhone) &&
             element["password"].toString() == user.password){
+          logined = true ;
           var response = LoginResponse(
               status: 1,
               data: UserData(
@@ -48,11 +49,13 @@ class AuthBloc extends BaseBloc {
         }
       });
 
-      _login.sink.add(LoginResponse(
-          status: 0,
-          data: UserData(),
-          message: "error username or password"
-      ));
+      if(!logined){
+        _login.sink.add(LoginResponse(
+            status: 0,
+            data: UserData(),
+            message: "error username or password"
+        ));
+      }
     });
   }
 
