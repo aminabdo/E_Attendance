@@ -54,7 +54,7 @@ class AttendanceRepositoryImp {
         .set(user.toJson());
   }
 
-  Future<List<AttendanceModel>> getAttendanceData(String userID,{DateTime start, DateTime end,}) async {
+  Future<List<AttendanceModel>> getAttendanceData(String userPhone,{DateTime start, DateTime end,}) async {
     List<AttendanceModel> att = [];
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = await FirebaseDatabase(app: app);
@@ -67,7 +67,7 @@ class AttendanceRepositoryImp {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
 
-      if(userID == "1"){
+      if(userPhone == value['phone'].toString() ){
         String checkin = "${line.split("_")[0]}";
         String year = "${line.split("_")[2]}";
         String month = "${line.split("_")[3]}";
