@@ -338,7 +338,7 @@ class _SingupPageState extends State<SingupPage> {
                                         await location.getLocation();
                                     if (_locationData != null) {
                                       AppUtils.showToast(
-                                          msg: "تم اخذ الموقع بنجاح");
+                                          msg: "".tr);
                                     }
                                     setState(() {
                                       pickingLocation = false;

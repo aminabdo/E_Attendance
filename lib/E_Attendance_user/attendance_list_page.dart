@@ -11,9 +11,9 @@ import 'data/model/attendance.dart';
 
 
 class AttendanceListPage extends StatefulWidget {
-  final dynamic userID;
+  final String userPhone;
 
-  const AttendanceListPage({Key key, @required this.userID}) : super(key: key);
+  const AttendanceListPage({Key key, @required this.userPhone}) : super(key: key);
 
   @override
   _AttendanceListPageState createState() => _AttendanceListPageState();
@@ -33,7 +33,7 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
   }
 
   init()async{
-    await attRepo.getAttendanceData(start: start, end: end);
+    await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
     setState(() {
 
     });
@@ -116,7 +116,7 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
 
                                             });
                                             start = date;
-                                            await attRepo.getAttendanceData(start: start, end: end);
+                                            await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
 
                                             setState(() {
 
@@ -143,7 +143,7 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
 
                                             });
                                             end = date;
-                                            await attRepo.getAttendanceData(start: start, end: end);
+                                            await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
                                             setState(() {
 
                                             });

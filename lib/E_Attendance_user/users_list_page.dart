@@ -136,9 +136,10 @@ class _UsersListPageState extends State<UsersListPage> {
                                   physics: ClampingScrollPhysics(),
                                   itemCount: snapshot?.data?.length ?? 0,
                                   itemBuilder: (context, index) {
+                                    String userPhone = snapshot?.data?.toList()[index].phone;
                                     return GestureDetector(
                                       onTap: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(10, 30, 10, 30),
@@ -147,7 +148,7 @@ class _UsersListPageState extends State<UsersListPage> {
                                           children: [
                                             GestureDetector(
                                             onTap: (){
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
                                               },
                                               child: Expanded(
                                                 child: Text("${snapshot.data[index].firstName}"),
@@ -156,7 +157,7 @@ class _UsersListPageState extends State<UsersListPage> {
                                             ),
                                             GestureDetector(
                                               onTap: (){
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
                                               },
                                               child: Expanded(
                                                 child: Text("${snapshot.data[index].lastName}"),
@@ -165,7 +166,7 @@ class _UsersListPageState extends State<UsersListPage> {
                                             ),
                                             GestureDetector(
                                               onTap: (){
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userID: 0),),);
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
                                               },
                                               child: Expanded(
                                                 child: Text("${snapshot.data[index].phone}"),

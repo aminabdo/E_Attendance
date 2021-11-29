@@ -53,7 +53,10 @@ class _FingPageState extends State<FingPage> {
           biometricOnly: true);
       fingerPrint = authenticated.toString();
       if(authenticated){
+        AppUtils.showToast(msg: "successful matching");
         getLocation(checkin);
+      }else{
+        AppUtils.showToast(msg: "no match");
       }
 
     } on PlatformException catch (e) {
@@ -116,20 +119,19 @@ class _FingPageState extends State<FingPage> {
         user.lat = "${_locationData.latitude}";
         user.lng = "${_locationData.longitude}";
         if (checkin) {
-        log("1111111");
-        repo.checkin(user: user);
-        AppUtils.showToast(msg: "location in range done");
+          repo.checkin(user: user);
+          AppUtils.showToast(msg: "location in range done");
         } else {
-        log("2222222");
-        repo.checkout(user: user);
-        AppUtils.showToast(msg: "location in range done");
+          repo.checkout(user: user);
+          AppUtils.showToast(msg: "location in range done");
         }
         } else {
-        AppUtils.showToast(msg: "location is so far your comapny");
+          AppUtils.showToast(msg: "location is so far your comapny");
         }
         setState(() {
         pickingLocation = false;
         });
+        attRepo.locations.close();
       });
 
 

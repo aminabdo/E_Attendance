@@ -40,12 +40,6 @@ class AttendanceRepositoryImp {
     // for multi attendance
     //database.reference().child('attendance').push().set(user.toJson());
 
-    // add user
-    database
-        .reference()
-        .child('users')
-        .child("${user.phone}_${user.password}")
-        .set(user.toJson());
   }
 
   Future checkout({UserData user}) async {
@@ -58,14 +52,9 @@ class AttendanceRepositoryImp {
         .child(
             "2_${user.id}_${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day}")
         .set(user.toJson());
-    database
-        .reference()
-        .child('users')
-        .child("${user.phone}_${user.password}")
-        .set(user.toJson());
   }
 
-  Future<List<AttendanceModel>> getAttendanceData({DateTime start, DateTime end,}) async {
+  Future<List<AttendanceModel>> getAttendanceData(String userID,{DateTime start, DateTime end,}) async {
     List<AttendanceModel> att = [];
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = await FirebaseDatabase(app: app);
@@ -77,57 +66,63 @@ class AttendanceRepositoryImp {
         .forEach((element) {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
-      String checkin = "${line.split("_")[0]}";
-      String year = "${line.split("_")[2]}";
-      String month = "${line.split("_")[3]}";
-      String day = "${line.split("_")[4]}";
-      DateTime dateTime = DateTime(int.parse(year), int.parse(month), int.parse(day));
 
-      String date = DateFormat("yyyy-MM-dd").format(DateTime.now());
-      log("${date}");
+      if(userID == "1"){
+        String checkin = "${line.split("_")[0]}";
+        String year = "${line.split("_")[2]}";
+        String month = "${line.split("_")[3]}";
+        String day = "${line.split("_")[4]}";
+        DateTime dateTime = DateTime(int.parse(year), int.parse(month), int.parse(day));
 
-      String day1 = d1.DateUtils.formatDay(dateTime);
-      String dayName = d1.DateUtils.formatDay(dateTime);
+        String date = DateFormat("yyyy-MM-dd").format(DateTime.now());
+        log("${date}");
 
-      AttendanceModel attendanceModel = null;
-      if(checkin == "1"){
-        attendanceModel = AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', 'missing checkout', day1);
-      }
-      else{
-        attendanceModel = AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), 'missing checkin', value['time'] ??'', day1);
-      }
+        String day1 = d1.DateUtils.formatDay(dateTime);
+        String dayName = d1.DateUtils.formatDay(dateTime);
 
-      if((start == null || end == null) ||  (dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now()))){
-        try{
-          //var i = att?.firstWhere((element) => element?.date ??'' == attendanceModel?.date ?? '');
-
-          att.forEach((element) async{
-            log("${element.date} -> ${element.date == attendanceModel.date} <- ${attendanceModel.date}");
-            if(element.date == attendanceModel.date){
-              log("firstWhere -> ${element.date}");
-              await att.remove(element);
-              await att.removeWhere((element1) => element1.date == element.date);
-
-              if(checkin == "1"){
-                attendanceModel.leaveDate = element.leaveDate;
-                att.add(attendanceModel);
-              }else{
-                attendanceModel.attendDate = element.attendDate;
-                att.add(attendanceModel);
-              }
-
-            }
-          });
-
-        }catch(e){
-          log("exception -> firstWhere -> ${e}");
+        AttendanceModel attendanceModel = null;
+        if(checkin == "1"){
+          attendanceModel = AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), value['time'] ??'', 'missing checkout', day1);
         }
-        att.add(attendanceModel);
+        else{
+          attendanceModel = AttendanceModel(DateFormat("dd-MM-yyyy").format(dateTime), 'missing checkin', value['time'] ??'', day1);
+        }
+
+        if((start == null || end == null) ||  (dateTime?.isAfter(start?? DateTime.now()) && dateTime?.isBefore(end ?? DateTime.now()))){
+          try{
+            //var i = att?.firstWhere((element) => element?.date ??'' == attendanceModel?.date ?? '');
+
+            att.forEach((element) async{
+              log("${element.date} -> ${element.date == attendanceModel.date} <- ${attendanceModel.date}");
+              if(element.date == attendanceModel.date){
+                log("firstWhere -> ${element.date}");
+                await att.remove(element);
+                await att.removeWhere((element1) => element1.date == element.date);
+
+                if(checkin == "1"){
+                  attendanceModel.leaveDate = element.leaveDate;
+                  att.add(attendanceModel);
+                }else{
+                  attendanceModel.attendDate = element.attendDate;
+                  att.add(attendanceModel);
+                }
+
+              }
+            });
+
+          }catch(e){
+            log("exception -> firstWhere -> ${e}");
+          }
+          att.add(attendanceModel);
+        }
+        att.sort((a,b) => DateFormat("dd-MM-yyyy").parse(a.date).isAfter(DateFormat("dd-MM-yyyy").parse(b.date)) ? -1:1);
+
+        att = att.reversed.toList();
+        _attendance.sink.add(att);
+        _attendance.value = att;
+        log(" ->>> ${line}");
       }
-      att.sort((a,b) => DateFormat("dd-MM-yyyy").parse(a.date).isAfter(DateFormat("dd-MM-yyyy").parse(b.date)) ? -1:1);
-      _attendance.sink.add(att);
-      _attendance.value = att;
-      log(" ->>> ${line}");
+
     });
     return att;
   }

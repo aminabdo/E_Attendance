@@ -1,4 +1,5 @@
 import 'package:E_Attendance/E_Attendance_user/users_list_page.dart';
+import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:E_Attendance/E_Attendance_user/attendance_list_page.dart';
 import 'package:E_Attendance/E_Attendance_user/fingureScreen.dart';
@@ -31,7 +32,7 @@ class MyPagesState extends State<MyPages> {
     ), // fingure print page
     Container(
       color: mainColor,
-      child: AttendanceListPage(),
+      child: AttendanceListPage(userPhone: AppUtils.userData.phone,),
       constraints: BoxConstraints.expand(),
     ), // attendance list page
     // Container(
