@@ -74,44 +74,16 @@ class _SingupPageState extends State<SingupPage> {
                             MyAppBar(
                               text: 'register_new_account'.tr,
                             ),
-                            Expanded(
-                              child: Container(
-                                height: screenUtil.setHeight(120),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image:
-                                        Image.asset('assets/images/logo.jpeg')
-                                            .image,
-                                  ),
-                                ),
-                              ),
-                            ),
+
                           ],
                         ),
                         SizedBox(height: MediaQuery.of(context).padding.top),
-                        GestureDetector(
-                          onTap: () async {
-                            var permissionGranted =
-                                await AppUtils.askPhotosPermission();
-                            if (permissionGranted) {
-                              var image = await AppUtils.getImage(1);
-                              if (image != null) {
-                                setState(() {
-                                  profileImage = image[0];
-                                });
-                              }
-                            } else {
-                              AppUtils.showToast(
-                                  msg: 'permission_denied'.tr);
-                            }
-                          },
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: profileImage == null
-                                ? Image.asset('assets/images/avatar.jpg').image
-                                : Image.file(profileImage).image,
-                          ),
-                        ),
+                        //
+                        space(),
+                        space(),
+                        space(),
+                        space(),
+                        space(),
                         space(),
                         Row(
                           children: [

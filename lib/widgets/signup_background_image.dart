@@ -5,12 +5,19 @@ class SignupBackgroundImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    return Image.asset(
+      'assets/images/signup_ep.jpeg',
+      fit: BoxFit.fill,
+      scale: 1,
+      width: size.width,
+      height: size.height,
+    );
     if(Localizations.localeOf(context).languageCode == 'en') {
       return Transform(
         alignment: Alignment.center,
         transform: Matrix4.rotationY(math.pi),
         child: Image.asset(
-          'assets/images/signup_bg.png',
+          'assets/images/signup_ep.jpeg',
           fit: BoxFit.fill,
           scale: 1,
           width: size.width,
@@ -19,7 +26,7 @@ class SignupBackgroundImage extends StatelessWidget {
       );
     } else {
       return Image.asset(
-        'assets/images/signup_bg.png',
+        'assets/images/signup_ep.jpeg',
         fit: BoxFit.fill,
         scale: 1,
         width: size.width,
