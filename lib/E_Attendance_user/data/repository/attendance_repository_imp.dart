@@ -55,6 +55,10 @@ class AttendanceRepositoryImp {
   }
 
   Future<List<AttendanceModel>> getAttendanceData(String userPhone,{DateTime start, DateTime end,}) async {
+
+    _attendance.sink.add([]);
+    _attendance.value = [];
+
     List<AttendanceModel> att = [];
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = await FirebaseDatabase(app: app);
@@ -67,8 +71,9 @@ class AttendanceRepositoryImp {
       var line = element.snapshot.key;
       var value = element.snapshot.value;
 
-      _attendance.sink.add([]);
-      _attendance.value = [];
+
+
+      log("${userPhone} == ${value['phone'].toString()} == ${userPhone == value['phone'].toString()}");
       if(userPhone == value['phone'].toString() ){
         String checkin = "${line.split("_")[0]}";
         String year = "${line.split("_")[2]}";
