@@ -33,7 +33,7 @@ class AttendanceRepositoryImp {
         .reference()
         .child('attendance')
         .child(
-            "1_${user.id}_${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day}")
+            "1_${user.id}_${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day}_${user.phone}")
         .set(user.toJson());
 
 
@@ -50,7 +50,7 @@ class AttendanceRepositoryImp {
         .reference()
         .child('attendance')
         .child(
-            "2_${user.id}_${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day}")
+            "2_${user.id}_${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day}_${user.phone}")
         .set(user.toJson());
   }
 
