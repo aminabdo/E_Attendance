@@ -106,33 +106,35 @@ class _FingPageState extends State<FingPage> {
       AttendanceRepositoryImp repo = AttendanceRepositoryImp();
 
 
-      attRepo.locations.listen((locationData)async{
+      LocationData locationData = attRepo.locations.value;
+
         if (Geolocator.distanceBetween(
             locationData.latitude,
             locationData.longitude,
             _locationData.latitude,
-            _locationData.longitude) <
-            100) {
+            _locationData.longitude) < 100)
+          {
 
 
           UserData user = (await AppUtils.getUserData()) ?? UserData();
-        user.lat = "${_locationData.latitude}";
-        user.lng = "${_locationData.longitude}";
-        if (checkin) {
-          repo.checkin(user: user);
-          AppUtils.showToast(msg: "location in range done");
-        } else {
-          repo.checkout(user: user);
-          AppUtils.showToast(msg: "location in range done");
-        }
-        } else {
-          AppUtils.showToast(msg: "location is so far your comapny");
-        }
-        setState(() {
-        pickingLocation = false;
-        });
-        attRepo.locations.close();
-      });
+          user.lat = "${_locationData.latitude}";
+          user.lng = "${_locationData.longitude}";
+          if (checkin) {
+            repo.checkin(user: user);
+            AppUtils.showToast(msg: "location in range done");
+          } else {
+            repo.checkout(user: user);
+            AppUtils.showToast(msg: "location in range done");
+          }
+          }
+        else
+          {
+            AppUtils.showToast(msg: "location is so far your comapny");
+          }
+          setState(() {
+          pickingLocation = false;
+          });
+
 
 
     }
