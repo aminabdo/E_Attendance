@@ -1,7 +1,6 @@
 import 'package:E_Attendance/utils/base/BaseResponse.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
-
 import 'package:easy_localization/easy_localization.dart';
 
 class LoginResponse extends BaseResponse {
@@ -132,7 +131,7 @@ class UserData {
         "time": DateFormat.Hms().format(DateTime.now()).toString(),
         "token": token,
         "password": password,
-        "finger": md5.convert(utf8.encode("${finger}")).toString(),
+        "finger": finger,//md5.convert(utf8.encode("${finger}")).toString(),
         "active": active,
         "type": type,
       };
