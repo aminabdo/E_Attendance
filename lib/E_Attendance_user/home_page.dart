@@ -3,7 +3,6 @@ import 'package:E_Attendance/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:E_Attendance/E_Attendance_user/attendance_list_page.dart';
 import 'package:E_Attendance/E_Attendance_user/fingureScreen.dart';
-import 'package:E_Attendance/E_Attendance_user/profile_page.dart';
 import 'package:E_Attendance/utils/consts.dart';
 
 //class needs to extend StatefulWidget since we need to make changes to the bottom app bar according to the user clicks
