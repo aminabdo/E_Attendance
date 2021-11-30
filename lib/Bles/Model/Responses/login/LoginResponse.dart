@@ -34,12 +34,12 @@ class Attendance {
 
 class UserData {
   dynamic id = 1;
-  dynamic firstName = "amin";
-  dynamic lastName = "amin";
+  dynamic firstName = "ahlam";
+  dynamic lastName = "ahlam";
   dynamic image = "";
   dynamic fireBaseToken;
   dynamic phone = "01099020814";
-  dynamic email = "aminabdo43@gmail.com";
+  dynamic email = "ahlam@gmail.com";
   dynamic status;
   dynamic social;
   dynamic password;
@@ -59,12 +59,12 @@ class UserData {
 
   UserData(
       {this.id = 1,
-      this.firstName = "abdo",
-      this.lastName = "amin",
+      this.firstName = "ahlam",
+      this.lastName = "ahlam",
       this.image = "",
       this.fireBaseToken,
       this.phone = "01099020814",
-      this.email = "aminabdo43@gmail.com",
+      this.email = "ahlam@gmail.com",
       this.status,
       this.social,
       this.notification,

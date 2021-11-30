@@ -24,7 +24,7 @@ class FingPage extends StatefulWidget {
 }
 
 class _FingPageState extends State<FingPage> {
-  final LocalAuthentication auth = LocalAuthentication();
+  final LocalAuthentication localAuthentication = LocalAuthentication();
 
   String fingerPrint = "";
   bool pickingLocation = false;
@@ -33,7 +33,7 @@ class _FingPageState extends State<FingPage> {
   @override
   void initState() {
     super.initState();
-    auth.isDeviceSupported().then(
+    localAuthentication.isDeviceSupported().then(
           (isSupported) => setState(() => isSupported
               ? _SupportState.supported
               : _SupportState.unsupported),
@@ -41,17 +41,17 @@ class _FingPageState extends State<FingPage> {
     attRepo.getLocation();
   }
   // ()? -1 : -2;
-    Future<void> _authenticateWithBiometrics(bool checkin) async {
+  Future<void> _authenticateWithBiometrics(bool checkin) async {
 
     bool authenticated = false;
     try {
-      authenticated = await auth.authenticate(
+      authenticated = await localAuthentication.authenticate(
           localizedReason:
               'Scan your fingerprint to authenticate',
           useErrorDialogs: true,
           stickyAuth: true,
           biometricOnly: true);
-      fingerPrint = authenticated.toString();
+      fingerPrint = localAuthentication.toString();
       if(authenticated){
         AppUtils.showToast(msg: "successful matching");
         getLocation(checkin);
@@ -114,18 +114,17 @@ class _FingPageState extends State<FingPage> {
             _locationData.latitude,
             _locationData.longitude) < 100)
           {
-
-
-          UserData user = (await AppUtils.getUserData()) ?? UserData();
-          user.lat = "${_locationData.latitude}";
-          user.lng = "${_locationData.longitude}";
-          if (checkin) {
-            repo.checkin(user: user);
-            AppUtils.showToast(msg: "location in range done");
-          } else {
-            repo.checkout(user: user);
-            AppUtils.showToast(msg: "location in range done");
-          }
+            UserData user = (await AppUtils.getUserData()) ?? UserData();
+            user.lat = "${_locationData.latitude}";
+            user.lng = "${_locationData.longitude}";
+            user.finger = fingerPrint;
+            if (checkin) {
+              repo.checkin(user: user);
+              AppUtils.showToast(msg: "location in range done");
+            } else {
+              repo.checkout(user: user);
+              AppUtils.showToast(msg: "location in range done");
+            }
           }
         else
           {

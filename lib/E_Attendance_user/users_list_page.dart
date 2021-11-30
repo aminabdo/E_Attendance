@@ -123,7 +123,6 @@ class _UsersListPageState extends State<UsersListPage> {
                             text: 'attendance_page'.tr,
                           ),
                           TextButton(onPressed: ()async{
-
                             attRepo.saveLocation();
                           }, child: Text("add_company_location")),
                           StreamBuilder<List<UserData>>(
@@ -186,7 +185,7 @@ class _UsersListPageState extends State<UsersListPage> {
                                                       .remove();
 
                                                 },
-                                                child: Icon(Icons.delete, color: Colors.red,),
+                                                child: Icon(Icons.delete, color: Colors.amberAccent,),
                                               ),
                                           ],
                                         ),

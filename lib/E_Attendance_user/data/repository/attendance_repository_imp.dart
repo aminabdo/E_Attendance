@@ -54,6 +54,7 @@ class AttendanceRepositoryImp {
         .set(user.toJson());
   }
 
+  // get attendance data for user
   Future<List<AttendanceModel>> getAttendanceData(String userPhone,{DateTime start, DateTime end,}) async {
 
     _attendance.sink.add([]);
@@ -124,7 +125,7 @@ class AttendanceRepositoryImp {
         }
         att.sort((a,b) => DateFormat("dd-MM-yyyy").parse(a.date).isAfter(DateFormat("dd-MM-yyyy").parse(b.date)) ? -1:1);
 
-        att = att.reversed.toList();
+        att = att.toList();
         _attendance.sink.add(att);
         _attendance.value = att;
         log(" ->>> ${line}");
@@ -134,6 +135,7 @@ class AttendanceRepositoryImp {
     return att;
   }
 
+  // get all users
   Future<List<UserData>> getUsers() async{
     List<UserData> users_ = [];
     final FirebaseApp app = await Firebase.initializeApp();
@@ -155,6 +157,7 @@ class AttendanceRepositoryImp {
     return users_;
   }
 
+  // get company location
   Future<LocationData> getLocation() async{
     LocationData location = null;
     final FirebaseApp app = await Firebase.initializeApp();
@@ -176,6 +179,7 @@ class AttendanceRepositoryImp {
     return location;
   }
 
+  // save new location for company
   Future saveLocation({double latitude, double longitude}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
