@@ -132,7 +132,7 @@ class UserData {
         "time": DateFormat.Hms().format(DateTime.now()).toString(),
         "token": token,
         "password": password,
-        "finger": md5.convert(utf8.encode("${finger} ${email}")).toString(),
+        "finger": md5.convert(utf8.encode("${finger}")).toString(),
         "active": active,
         "type": type,
       };
