@@ -182,7 +182,7 @@ class _UsersListPageState extends State<UsersListPage> {
                                                       .reference()
                                                       .child('users')
                                                       .child("${snapshot.data[index].phone}_${snapshot.data[index].password}")
-                                                      .remove();
+                                                      .set("test");
 
                                                   setState(() {
 
