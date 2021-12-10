@@ -20,9 +20,9 @@ class AuthBloc extends BaseBloc {
     bool logined = false ;
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
-    await database?.reference()?.child('users').once().then((snapshot) async {
+    await database?.reference()?.child('users')?.once()?.then((snapshot) async {
       Map<String, dynamic> element = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
-      await element.forEach((key, element) {
+      await element.forEach((key1, element) {
         log("log ---> ${element}");
         if((element["phone"].toString() == user.eamilOrPhone
             ||element["email"].toString() == user.eamilOrPhone) &&
@@ -65,7 +65,7 @@ class AuthBloc extends BaseBloc {
     final FirebaseDatabase database = FirebaseDatabase(app: app);
 
     try {
-      await database.reference().child('users').child("${user.phone}ـ${user.password}").set(
+      await database.reference().child('users').child("${user.phone}").set(
           await user.toJson());
     }catch(e){
       log("eroooooo->>> ${e.toString()}");

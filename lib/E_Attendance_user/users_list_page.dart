@@ -181,8 +181,8 @@ class _UsersListPageState extends State<UsersListPage> {
                                                   await database
                                                       .reference()
                                                       .child('users')
-                                                      .child("${snapshot.data[index].phone}_${snapshot.data[index].password}")
-                                                      .set("test");
+                                                      .child("${snapshot.data[index].phone}")
+                                                      .remove();
 
                                                   setState(() {
 
