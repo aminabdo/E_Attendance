@@ -146,13 +146,13 @@ class AttendanceRepositoryImp {
         .limitToLast(1000)
         .onChildAdded
         .forEach((element) {
-      var line = element.snapshot.key;
+      var key = element.snapshot.key;
       var value = element.snapshot.value;
 
       users_.add(UserData.fromMap(json.decode(json.encode(value))));
       _users.sink.add(users_);
 
-      log(" ->>> ${line}");
+
     });
     return users_;
   }

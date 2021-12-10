@@ -22,7 +22,7 @@ class AuthBloc extends BaseBloc {
     final FirebaseDatabase database = FirebaseDatabase(app: app);
     await database?.reference()?.child('users')?.once()?.then((snapshot) async {
       Map<String, dynamic> element = Map<String, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
-      await element.forEach((key1, element) {
+      await element.forEach((key, element) {
         log("log ---> ${element}");
         if((element["phone"].toString() == user.eamilOrPhone
             ||element["email"].toString() == user.eamilOrPhone) &&
@@ -87,7 +87,6 @@ class AuthBloc extends BaseBloc {
         ),
         message: "done"
     );
-    AppUtils.saveUserData(userData.data);
     return userData;
   }
   BehaviorSubject<LoginResponse> get s_login => _login;

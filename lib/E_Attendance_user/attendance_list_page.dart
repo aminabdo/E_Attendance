@@ -101,58 +101,66 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           children: [
-                            Expanded(
-                                child: TextButton(
-                                    onPressed: () async {
-                                      DatePicker.showDatePicker(context,
-                                          showTitleActions: true,
-                                          minTime: DateTime(2020, 3, 5),
-                                          maxTime: DateTime(2025, 6, 7), onChanged: (date) {
-                                            print('change $date');
+                            Flex(
+                              direction: Axis.horizontal,
+                              children:
+                              [Expanded(
+                                  child: TextButton(
+                                      onPressed: () async {
+                                        DatePicker.showDatePicker(context,
+                                            showTitleActions: true,
+                                            minTime: DateTime(2020, 3, 5),
+                                            maxTime: DateTime(2025, 6, 7), onChanged: (date) {
+                                              print('change $date');
 
-                                          }, onConfirm: (date) async {
-                                            startDate = "${date.year}/${date.month}/${date.day}";
-                                            setState(() {
+                                            }, onConfirm: (date) async {
+                                              startDate = "${date.year}/${date.month}/${date.day}";
+                                              setState(() {
 
-                                            });
-                                            start = date;
-                                            await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
+                                              });
+                                              start = date;
+                                              await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
 
-                                            setState(() {
+                                              setState(() {
 
-                                            });
-                                            print('confirm $date');
-                                          }, currentTime: DateTime.now(), locale: LocaleType.ar);
-                                    },
-                                    child: Text(
-                                      '${startDate}',
-                                    )),
+                                              });
+                                              print('confirm $date');
+                                            }, currentTime: DateTime.now(), locale: LocaleType.ar);
+                                      },
+                                      child: Text(
+                                        '${startDate}',
+                                      )),
+                              )],
                             ),
-                            Expanded(
-                                child: TextButton(
-                                    onPressed: () {
-                                      DatePicker.showDatePicker(context,
-                                          showTitleActions: true,
-                                          minTime: DateTime(2020, 3, 5),
-                                          maxTime: DateTime(2025, 6, 7), onChanged: (date) {
+                            Flex(
+                              direction: Axis.horizontal,
+                              children:
+                              [Expanded(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        DatePicker.showDatePicker(context,
+                                            showTitleActions: true,
+                                            minTime: DateTime(2020, 3, 5),
+                                            maxTime: DateTime(2025, 6, 7), onChanged: (date) {
 
-                                          }, onConfirm: (date) async {
-                                            print('change $date');
-                                            endDate = "${date.year}/${date.month}/${date.day}";
-                                            setState(() {
+                                            }, onConfirm: (date) async {
+                                              print('change $date');
+                                              endDate = "${date.year}/${date.month}/${date.day}";
+                                              setState(() {
 
-                                            });
-                                            end = date;
-                                            await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
-                                            setState(() {
+                                              });
+                                              end = date;
+                                              await attRepo.getAttendanceData(widget.userPhone, start: start, end: end);
+                                              setState(() {
 
-                                            });
-                                            print('confirm $date');
-                                          }, currentTime: DateTime.now(), locale: LocaleType.ar);
-                                    },
-                                    child: Text(
-                                      '${endDate}',
-                                    )),
+                                              });
+                                              print('confirm $date');
+                                            }, currentTime: DateTime.now(), locale: LocaleType.ar);
+                                      },
+                                      child: Text(
+                                        '${endDate}',
+                                      )),
+                              )],
                             ),
                           ],
                         ),
@@ -171,17 +179,28 @@ class _AttendanceListPageState extends State<AttendanceListPage> {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Expanded(
-                                          child: Text("${snapshot.data[index].date}"),
-                                        flex: 10,
+                                      Flex(
+                                        direction: Axis.horizontal,
+                                        children:
+                                        [Expanded(
+                                            child: Text("${snapshot.data[index].date}"),
+                                          flex: 10,
+                                        )],
                                       ),
-                                      Expanded(
-                                        child: Text("${snapshot.data[index].attendDate}"),
-                                        flex: 10,
+
+                                      Flex(
+                                        direction: Axis.horizontal,
+                                        children:
+                                        [Expanded(
+                                          child: Text("${snapshot.data[index].attendDate}"),
+                                          flex: 10,
+                                        )],
                                       ),
-                                      Expanded(
-                                        child: Text("${snapshot.data[index].leaveDate}"),
-                                        flex: 10,
+                                      Flex(
+                                        children: [Expanded(
+                                          child: Text("${snapshot.data[index].leaveDate}"),
+                                          flex: 10,
+                                        )],
                                       ),
                                     ],
                                   );
