@@ -82,7 +82,7 @@ class UserData {
       this.token});
 
   static UserData fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    if (map == null || map.toString() =="test") return null;
     UserData dataBean = UserData();
     dataBean.id = map['id'] ?? 1;
     dataBean.firstName = map['first_name'] ;

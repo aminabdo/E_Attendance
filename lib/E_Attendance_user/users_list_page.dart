@@ -175,20 +175,9 @@ class _UsersListPageState extends State<UsersListPage> {
                                             GestureDetector(
                                                 onTap: ()async{
 
-                                                  final FirebaseApp app = await Firebase.initializeApp();
-                                                  final FirebaseDatabase database = FirebaseDatabase(app: app);
-
-                                                  await database
-                                                      .reference()
-                                                      .child('users')
-                                                      .child("${snapshot.data[index].phone}")
-                                                      .remove();
-
-                                                  setState(() {
-
-                                                  });
-                                                },
-                                                child: Icon(Icons.delete, color: Colors.amberAccent,),
+                                                  attRepo.delet(snapshot.data[index].phone ,snapshot.data[index].password);
+                                                                                                  },
+                                                child: Flex(children: [Expanded(child: Icon(Icons.delete, color: Colors.amberAccent,))]),
                                               ),
                                           ],
                                         ),

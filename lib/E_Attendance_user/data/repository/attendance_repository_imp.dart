@@ -42,6 +42,14 @@ class AttendanceRepositoryImp {
 
   }
 
+  Future delet(String phone, String password)async{
+
+    FirebaseDatabase.instance.reference()
+        .child('users')
+        .child("${phone}")
+        .remove()
+        .whenComplete(() => null);
+  }
   Future checkout({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
     final FirebaseDatabase database = FirebaseDatabase(app: app);
