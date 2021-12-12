@@ -145,40 +145,29 @@ class _UsersListPageState extends State<UsersListPage> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            GestureDetector(
-                                            onTap: (){
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
-                                              },
-                                              child: Expanded(
-                                                child: Text("${snapshot.data[index].firstName}"),
-                                                flex: 10,
-                                              ),
+                                            Expanded(
+                                              child: Text("${snapshot.data[index].firstName}"),
+                                              flex: 10,
                                             ),
-                                            GestureDetector(
-                                              onTap: (){
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
-                                              },
-                                              child: Expanded(
-                                                child: Text("${snapshot.data[index].lastName}"),
-                                                flex: 10,
-                                              ),
+                                            Expanded(
+                                              child: Text("${snapshot.data[index].lastName}"),
+                                              flex: 10,
                                             ),
-                                            GestureDetector(
-                                              onTap: (){
-                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => AttendanceListPage(userPhone: userPhone),),);
-                                              },
-                                              child: Expanded(
-                                                child: Text("${snapshot.data[index].phone}"),
-                                                flex: 10,
-                                              ),
+                                            Expanded(
+                                              child: Text("${snapshot.data[index].phone}"),
+                                              flex: 10,
                                             ),
-                                            GestureDetector(
-                                                onTap: ()async{
+                                            Expanded(
+                                              child: GestureDetector(
+                                                  onTap: ()async{
+                                                    await attRepo.delet(snapshot.data[index].phone ,snapshot.data[index].password);
 
-                                                  attRepo.delet(snapshot.data[index].phone ,snapshot.data[index].password);
-                                                                                                  },
-                                                child: Flex(children: [Expanded(child: Icon(Icons.delete, color: Colors.amberAccent,))]),
-                                              ),
+                                                    setState(() {});
+                                                  },
+                                                  child: Icon(Icons.delete, color: Colors.amberAccent,),
+                                                ),
+                                              flex: 2,
+                                            ),
                                           ],
                                         ),
                                       ),

@@ -382,8 +382,8 @@ class _SingupPageState extends State<SingupPage> {
           loading = false;
         });
 
-        AppUtils.userData = response.data;
-        await AppUtils.saveUserData(response.data);
+        //AppUtils.userData = response.data;
+        //await AppUtils.saveUserData(response.data);
 
         Navigator.of(context)
             .pushAndRemoveUntil(

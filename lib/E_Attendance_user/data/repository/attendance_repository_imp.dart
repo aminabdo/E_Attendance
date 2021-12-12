@@ -49,6 +49,8 @@ class AttendanceRepositoryImp {
         .child("${phone}")
         .remove()
         .whenComplete(() => null);
+    await _users.value.removeWhere((element) => element.phone == phone);
+    _users.sink.add(_users.value);
   }
   Future checkout({UserData user}) async {
     final FirebaseApp app = await Firebase.initializeApp();
